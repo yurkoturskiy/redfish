@@ -1,0 +1,987 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"def",
+				"default"
+			],
+			[
+				"limit_orde",
+				"limit_order_result"
+			],
+			[
+				"limi",
+				"limit_order_result"
+			],
+			[
+				"ma",
+				"market_order_result"
+			],
+			[
+				"S",
+				"ShuttleLimitLimit"
+			],
+			[
+				"round",
+				"round_price"
+			],
+			[
+				"limit",
+				"limit_order_price"
+			],
+			[
+				"lo",
+				"limit_order_result"
+			],
+			[
+				"li",
+				"limit_order_params"
+			],
+			[
+				"mar",
+				"market_order"
+			],
+			[
+				"ms",
+				"msg_handler"
+			],
+			[
+				"or",
+				"orderQty"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"cl",
+				"client"
+			],
+			[
+				"sesi",
+				"session"
+			],
+			[
+				"ses",
+				"session"
+			],
+			[
+				"ar",
+				"args"
+			],
+			[
+				"Se",
+				"Session"
+			],
+			[
+				"ex",
+				"execute"
+			],
+			[
+				"win",
+				"windows"
+			],
+			[
+				"req",
+				"request_msg_handler"
+			],
+			[
+				"sig",
+				"signature"
+			],
+			[
+				"ap",
+				"api_key"
+			],
+			[
+				"sub",
+				"subsctiptions"
+			],
+			[
+				"time",
+				"timestamp"
+			],
+			[
+				"times",
+				"timestamp"
+			],
+			[
+				"live",
+				"live_timestamp"
+			],
+			[
+				"curre",
+				"current_time"
+			],
+			[
+				"Ca",
+				"Candle"
+			],
+			[
+				"cu",
+				"current_time"
+			],
+			[
+				"ti",
+				"timescales"
+			],
+			[
+				"ope",
+				"openPrice"
+			],
+			[
+				"current",
+				"current_candles"
+			],
+			[
+				"obj",
+				"object"
+			],
+			[
+				"trade",
+				"trade_id"
+			],
+			[
+				"genera",
+				"generate_timestamp"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"gene",
+				"generate_timestamp"
+			],
+			[
+				"cre",
+				"create_redis"
+			],
+			[
+				"pu",
+				"publisher"
+			],
+			[
+				"rea",
+				"reader_task"
+			],
+			[
+				"fil",
+				"filler_task"
+			],
+			[
+				"bla",
+				"blanks_generator_task"
+			],
+			[
+				"Ti",
+				"TimescaleManager"
+			],
+			[
+				"asy",
+				"asyncio"
+			],
+			[
+				"valu",
+				"values"
+			],
+			[
+				"futu",
+				"future_key"
+			],
+			[
+				"curr",
+				"current_time"
+			],
+			[
+				"ke",
+				"keys"
+			],
+			[
+				"pa",
+				"pair"
+			],
+			[
+				"pair",
+				"pair__avaliable"
+			],
+			[
+				"cha",
+				"chart"
+			],
+			[
+				"current_t",
+				"current_time"
+			],
+			[
+				"cur",
+				"currentTime"
+			],
+			[
+				"timesca",
+				"timescale"
+			],
+			[
+				"Cha",
+				"Chart"
+			],
+			[
+				"pla",
+				"platform"
+			],
+			[
+				"ava",
+				"avaliable"
+			],
+			[
+				"resi",
+				"revisorTask"
+			],
+			[
+				"candle",
+				"candlesTask"
+			],
+			[
+				"create",
+				"create_task"
+			],
+			[
+				"nex",
+				"nextTimestamp"
+			],
+			[
+				"print",
+				"printing"
+			],
+			[
+				"co",
+				"count"
+			],
+			[
+				"next",
+				"nextUpdate"
+			],
+			[
+				"can",
+				"candleValues"
+			],
+			[
+				"tim",
+				"timescales"
+			],
+			[
+				"cand",
+				"candlesTask"
+			],
+			[
+				"objec",
+				"objects"
+			],
+			[
+				"revision",
+				"revision_delay"
+			],
+			[
+				"ne",
+				"nextCandlesRevise"
+			],
+			[
+				"n",
+				"nextTickerUpdate"
+			],
+			[
+				"ref",
+				"refresh_time"
+			],
+			[
+				"revi",
+				"revise_time"
+			],
+			[
+				"obje",
+				"objects"
+			],
+			[
+				"ha",
+				"handle_message"
+			],
+			[
+				"threa",
+				"threads_num"
+			],
+			[
+				"thre",
+				"threads_num"
+			],
+			[
+				"Con",
+				"Controller"
+			],
+			[
+				"trades",
+				"trades_listener"
+			],
+			[
+				"mo",
+				"month"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "django_server/snippets/models.py",
+			"settings":
+			{
+				"buffer_size": 1605,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "react-app/src/actions/snippets.js",
+			"settings":
+			{
+				"buffer_size": 0,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "django_server/snippets/serializers.py",
+			"settings":
+			{
+				"buffer_size": 790,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "django_server/snippets/views.py",
+			"settings":
+			{
+				"buffer_size": 1287,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "django_server/snippets/urls.py",
+			"settings":
+			{
+				"buffer_size": 407,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "django_server/django_server/settings.py",
+			"settings":
+			{
+				"buffer_size": 3497,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "django_server/django_server/urls.py",
+			"settings":
+			{
+				"buffer_size": 651,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "django_server/snippets/permissions.py",
+			"settings":
+			{
+				"buffer_size": 548,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Remove Package"
+			],
+			[
+				"color",
+				"Colorsublime: Uninstall Theme"
+			],
+			[
+				"colors",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control:",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 157.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/code/blank-django-react-auth/react-app/src",
+		"/C/code/blank-django-react-auth/react-app/src/actions",
+		"/C/code/blank-django-react-auth/react-app/src/store"
+	],
+	"file_history":
+	[
+		"/C/code/Sebucur/sebucur/server/tasks.py",
+		"/C/code/Sebucur/sebucur/ws_server.py",
+		"/C/code/Sebucur/sebucur/test.py",
+		"/C/code/Sebucur/sebucur/fabfile.py",
+		"/C/code/Sebucur/venv/lib/python3.7/site-packages/django/contrib/auth/views.py",
+		"/C/code/Sebucur/venv/lib/python3.7/site-packages/django/contrib/auth/urls.py",
+		"/C/code/Sebucur/sebucur/sebucur/urls.py",
+		"/C/code/Sebucur/sebucur/sebucur/settings.py",
+		"/C/code/Sebucur/sebucur/client.py",
+		"/C/code/Sebucur/sebucur/client/old_models.py",
+		"/C/code/Sebucur/sebucur/client/redis_model.py",
+		"/C/code/Sebucur/sebucur/market/models.py",
+		"/C/code/Sebucur/sebucur/client/models/controller.py",
+		"/C/code/Sebucur/sebucur/client/models/_base.py",
+		"/C/code/Sebucur/sebucur/client/models/__init__.py",
+		"/C/code/tutorials/aiohttp-security/demo/database_auth/db.py",
+		"/C/code/tutorials/aiohttp-security/demo/database_auth/db_auth.py",
+		"/C/code/Sebucur/frontend/build/login.html",
+		"/C/code/tutorials/aiohttp-security/demo/database_auth/handlers.py",
+		"/C/code/tutorials/aiohttp-security/demo/database_auth/main.py",
+		"/C/code/Sebucur/sebucur/server/msg_handler.py",
+		"/C/code/Sebucur/sebucur/client/models/bitmex.py",
+		"/C/code/temp/temp/temp/settings.py",
+		"/C/code/Sebucur/sebucur/server/msgHandler.js",
+		"/C/code/Sebucur/sebucur/data_consumer.py",
+		"/C/code/Sebucur/sebucur/client/models/middleware.py",
+		"/C/code/Sebucur/venv/lib/python3.7/site-packages/aiohttp/client_proto.py",
+		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Installed Packages/Color Scheme - Legacy.sublime-package"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"list",
+			"url",
+			"counter",
+			"Trade",
+			"database",
+			"sub",
+			"frontend"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"redis"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "django_server/snippets/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1605,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								438,
+								438
+							]
+						],
+						"settings":
+						{
+							"SL.13.region_keys":
+							[
+								"sublime_linter.protected_regions"
+							],
+							"SL.44.region_keys":
+							[
+							],
+							"SL.49.region_keys":
+							[
+								"sublime_linter.protected_regions"
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "react-app/src/actions/snippets.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "django_server/snippets/serializers.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 790,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								790,
+								790
+							]
+						],
+						"settings":
+						{
+							"SL.14.region_keys":
+							[
+								"sublime_linter.protected_regions"
+							],
+							"SL.50.region_keys":
+							[
+								"sublime_linter.protected_regions",
+								"SL.pyflakes.Highlights.|e731cac9048f78831bd0a8e44b503ff0e695ce893d04bb159d895dac281535a5|region.redish markup.error.sublime_linter|32",
+								"SL.pyflakes.Gutter.|region.redish markup.error.sublime_linter|dot",
+								"SL.pyflakes.Highlights.|472281c16ed2940f7f00afa98a2ec1a6e2f9a6c64367ef508e60a2c2b19597e1|region.redish markup.error.sublime_linter|32"
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "django_server/snippets/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1287,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								605,
+								605
+							]
+						],
+						"settings":
+						{
+							"SL.15.region_keys":
+							[
+								"SL.pyflakes.Highlights.|f22b92bc00d8fff191d4f44df641c7a9c8f3a0cbc0d879e07ea661b7c712c933|region.redish markup.error.sublime_linter|32",
+								"SL.pyflakes.Gutter.|region.redish markup.error.sublime_linter|dot",
+								"sublime_linter.protected_regions",
+								"SL.pyflakes.Highlights.|fb89d4be3d37bc71cc6b1aaa49606be71e603397d64ebcd62ec363f721a4b6ab|region.redish markup.error.sublime_linter|32"
+							],
+							"SL.51.region_keys":
+							[
+								"sublime_linter.protected_regions",
+								"SL.pyflakes.Gutter.|region.redish markup.error.sublime_linter|dot",
+								"SL.pyflakes.Highlights.|79f60e83386568288d75dffeee28c56985786206f9ca976121ea15e907f4e3d0|region.redish markup.error.sublime_linter|32",
+								"SL.pyflakes.Highlights.|0005d4ebc597b492f279aa02a3d1831ed3cee8bfd99872b0a90299657287fe2d|region.redish markup.error.sublime_linter|32"
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "django_server/snippets/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 407,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								407,
+								407
+							]
+						],
+						"settings":
+						{
+							"SL.16.region_keys":
+							[
+								"sublime_linter.protected_regions"
+							],
+							"SL.52.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "django_server/django_server/settings.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3497,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"SL.23.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 344.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "django_server/django_server/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 651,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								349,
+								349
+							]
+						],
+						"settings":
+						{
+							"SL.17.region_keys":
+							[
+								"sublime_linter.protected_regions"
+							],
+							"SL.18.region_keys":
+							[
+							],
+							"SL.53.region_keys":
+							[
+								"sublime_linter.protected_regions"
+							],
+							"SL.56.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "django_server/snippets/permissions.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 548,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								548,
+								548
+							]
+						],
+						"settings":
+						{
+							"SL.22.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 37.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 155.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "blank-django-react-auth.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 274.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"folders":
+	[
+		{
+			"path": "django_server"
+		},
+		{
+			"path": "react-app\\src"
+		}
+	]
+}

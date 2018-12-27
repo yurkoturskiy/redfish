@@ -1,28 +1,37 @@
+import {connect} from 'react-redux'
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {snippets, users} from './actions/snippets'
+import {withRouter} from 'react-router'
+
+import Content from './containers/ContentContainer'
+import Navigation from './containers/NavigationContainer'
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Navigation />
+        <Content />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    token: state.snippets.token,
+    snippets: state.snippets.snippets,
+    users: state.snippets.users,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    putSnippets: (payload) => dispatch(snippets(payload)),
+    putUsers: (payload) => dispatch(users(payload)),
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
+
