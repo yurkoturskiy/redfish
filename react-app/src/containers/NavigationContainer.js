@@ -1,16 +1,50 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 
-const Navigation = () => {
-	return (
-		<nav>
-			<Link to="/"><div>sebucur</div></Link>
-			<ul className="menu">
-				<li><Link to="/login">Login</Link></li>
-				<li><Link to="/registration">Registration</Link></li>
-			</ul>
-		</nav>
-	)
+import {logout} from '../actions/restAuth'
+
+class Navigation extends React.Component {
+	render() {
+		if (this.props.isAuth == true) {
+			var bar = (
+				<nav>
+					<Link to="/"><div>redject</div></Link>
+					<ul className="menu">
+						<li>
+							<Link to="/">
+								<button onClick={this.props.logout}>Logout</button>
+							</Link>
+						</li>
+					</ul>
+				</nav>
+			)
+		} else {
+			var bar = (
+				<nav>
+					<Link to="/"><div>redject</div></Link>
+					<ul className="menu">
+						<li><Link to="/login">Login</Link></li>
+						<li><Link to="/registration">Registration</Link></li>
+					</ul>
+				</nav>
+			)
+		}
+		return bar
+	}
 }
 
-export default Navigation
+const mapStateToProps = state => {
+	return {
+		isAuth: state.restAuth.isAuth,
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(logout()),
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation))

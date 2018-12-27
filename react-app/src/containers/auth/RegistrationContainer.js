@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react';
 import RegistrationForm from '../../components/auth/RegistrationForm'
-import {registration} from '../../actions/snippets'
+import {registration} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
 
 class Registration extends Component {

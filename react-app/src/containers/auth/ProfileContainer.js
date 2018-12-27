@@ -1,10 +1,10 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react';
 import PasswordResetForm from '../../components/auth/PasswordResetForm'
-import {passwordReset} from '../../actions/restAuth'
+import {passwordReset} from '../../actions/snippets'
 import {withRouter} from 'react-router'
 
-class PasswordReset extends Component {
+class Profile extends Component {
   render() {
     return (
       <div className="App">
@@ -20,4 +20,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(undefined, mapDispatchToProps)(PasswordReset))
+export default withRouter(connect(undefined, mapDispatchToProps)(Profile))

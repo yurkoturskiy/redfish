@@ -1,16 +1,25 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react';
-import {snippets, users} from './actions/snippets'
+import {snippets} from '../actions/snippets'
+import {user} from '../actions/restAuth'
 import {withRouter} from 'react-router'
 
-import Content from './containers/ContentContainer'
-import Navigation from './containers/NavigationContainer'
+import Content from './ContentContainer'
+import Navigation from './NavigationContainer'
+
 
 
 class App extends Component {
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.props.getUser()
+    }
+  }
   render() {
     return (
       <div>
+        <p>auth: {((this.props.isAuth) ? 'true' : 'false')}</p>
+        <p>token: {this.props.token}</p>
         <Navigation />
         <Content />
       </div>
@@ -20,7 +29,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.snippets.token,
+    isAuth: state.restAuth.isAuth,
+    token: localStorage.getItem('token'),
     snippets: state.snippets.snippets,
     users: state.snippets.users,
   }
@@ -29,7 +39,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     putSnippets: (payload) => dispatch(snippets(payload)),
-    putUsers: (payload) => dispatch(users(payload)),
+    getUser: (payload) => dispatch(user(payload)),
   }
 }
 

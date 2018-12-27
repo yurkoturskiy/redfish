@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react';
 import PasswordResetConfirmForm from '../../components/auth/PasswordResetConfirmForm'
-import {passwordResetConfirm} from '../../actions/snippets'
+import {passwordResetConfirm} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
 
 class PasswordResetConfirm extends Component {
