@@ -11,7 +11,7 @@ import {
 const initState = {
 	isAuth: false,
 	token: undefined,
-	user: undefined
+	user: {}
 }
 
 const checkAuth = (state) => {
@@ -34,7 +34,6 @@ const restAuth = (state = initState, action) => {
 			case USER_SUCCESS:
 				state.user = action.payload
 				state = checkAuth(state)
-				console.log(action.payload)
 				return {...state}
 		}
 		return state

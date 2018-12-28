@@ -9,12 +9,7 @@ import Navigation from './NavigationContainer'
 
 
 
-class App extends Component {
-  componentDidMount() {
-    if (localStorage.getItem('token')) {
-      this.props.getUser()
-    }
-  }
+class General extends Component {
   render() {
     return (
       <div>
@@ -43,5 +38,5 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(General))
 

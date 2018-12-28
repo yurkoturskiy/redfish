@@ -10,8 +10,9 @@ class Navigation extends React.Component {
 		if (this.props.isAuth == true) {
 			var bar = (
 				<nav>
-					<Link to="/"><div>redject</div></Link>
+					<Link to="/app">redject</Link>
 					<ul className="menu">
+						<li><Link to="/profile">Profile</Link></li>
 						<li>
 							<Link to="/">
 								<button onClick={this.props.logout}>Logout</button>
@@ -23,7 +24,7 @@ class Navigation extends React.Component {
 		} else {
 			var bar = (
 				<nav>
-					<Link to="/"><div>redject</div></Link>
+					<Link to="/">redject</Link>
 					<ul className="menu">
 						<li><Link to="/login">Login</Link></li>
 						<li><Link to="/registration">Registration</Link></li>

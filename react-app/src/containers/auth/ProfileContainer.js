@@ -1,23 +1,36 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react';
-import PasswordResetForm from '../../components/auth/PasswordResetForm'
-import {passwordReset} from '../../actions/snippets'
+import ProfileForm from '../../components/auth/ProfileForm'
 import {withRouter} from 'react-router'
+import {user} from '../../actions/restAuth'
 
 class Profile extends Component {
+  componentDidMount() {
+    if (!this.props.user.pk) {
+      console.log(this.props.user)
+      console.log('fetching')
+      this.props.getUser()
+    }
+  }
   render() {
     return (
       <div className="App">
-        <PasswordResetForm onSubmit={this.props.passwordReset} />
+        <ProfileForm user={this.props.user} />
       </div>
-    );
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.restAuth.user,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    passwordReset: (email) => dispatch(passwordReset(email)),
+    getUser: () => dispatch(user()),
   }
 }
 
-export default withRouter(connect(undefined, mapDispatchToProps)(Profile))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile))

@@ -1,4 +1,5 @@
-isAuth = false
-c = (isAuth) ? 'true' : 'false'
-
-console.log(c)
+a = {}
+if (!a.username) {
+	console.log('true')
+}
+// console.log(c)

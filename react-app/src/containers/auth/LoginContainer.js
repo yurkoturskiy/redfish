@@ -4,13 +4,22 @@ import LoginForm from '../../components/auth/LoginForm'
 import {snippets} from '../../actions/snippets'
 import {login, logout} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
+import history from '../../history'
 
 class Login extends Component {
-  // componentDidMount() {
-  //   fetch('https://api.mydomain.com')
-  //     .then(response => response.json())
-  //     .then(data => this.setState({ data }));
-  // }
+  componentDidMount() {
+    if (this.props.isAuth) {
+      // is already logged in
+      history.push('/')
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.isAuth && (this.props.isAuth !== prevProps.isAuth)) {
+      // redirecting after valid login
+      console.log('login successfully')
+      history.push('/')
+    }
+  }
   render() {
     return (
       <div className="App">
@@ -28,6 +37,7 @@ const mapStateToProps = state => {
     isAuth: state.restAuth.isAuth,
     snippets: state.snippets.snippets,
     users: state.snippets.users,
+    history: state.history,
   }
 }
 

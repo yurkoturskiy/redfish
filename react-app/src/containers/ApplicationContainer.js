@@ -7,7 +7,7 @@ class Main extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-			    <h1>Main</h1>
+		    	<h1>Application</h1>
 			</React.Fragment>
 		)
 	}
@@ -15,7 +15,7 @@ class Main extends React.Component {
 
 // const mapStateToProps = state => {
 //   return {
-    
+//     history: state.history
 //   }
 // }
 
