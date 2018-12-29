@@ -8,6 +8,9 @@ import {
 	PASSWORD_RESET_REQUEST,
 	PASSWORD_RESET_SUCCESS,
 	PASSWORD_RESET_FAILURE,
+	PASSWORD_RESET_CONFIRM_REQUEST,
+	PASSWORD_RESET_CONFIRM_SUCCESS,
+	PASSWORD_RESET_CONFIRM_FAILURE,
 	LOGOUT_SUCCESS,
 	USER_REQUEST, 
 	USER_SUCCESS, 
@@ -25,8 +28,9 @@ const initState = {
 	uiFreeze: false,
 	// passResetRequesting: false,
 	// regRequesting: false,
-	numPassResetSucceed: 0,
 	numRegsSucceed: 0,
+	numPassResetSucceed: 0,
+	numPassResetConfirmSucceed: 0,
 }
 const emptyState = initState
 
@@ -46,6 +50,9 @@ const restAuth = (state = initState, action) => {
 			case PASSWORD_RESET_REQUEST:
 				state.uiFreeze = true
 				return {...state}
+			case PASSWORD_RESET_CONFIRM_REQUEST:
+				state.uiFreeze = true
+				return {...state}
 		}
 	}
 	if (action.type.indexOf('SUCCESS') !== -1) {
@@ -61,6 +68,10 @@ const restAuth = (state = initState, action) => {
 			case PASSWORD_RESET_SUCCESS:
 				state.uiFreeze = false
 				state.numPassResetSucceed += 1
+				return {...state}
+			case PASSWORD_RESET_CONFIRM_SUCCESS:
+				state.uiFreeze = false
+				state.numPassResetConfirmSucceed += 1
 				return {...state}
 			case LOGOUT_SUCCESS:
 				localStorage.removeItem('token')
@@ -82,6 +93,9 @@ const restAuth = (state = initState, action) => {
 				state.uiFreeze = false
 				return {...state}
 			case PASSWORD_RESET_FAILURE:
+				state.uiFreeze = false
+				return {...state}
+			case PASSWORD_RESET_CONFIRM_FAILURE:
 				state.uiFreeze = false
 				return {...state}
 		}
