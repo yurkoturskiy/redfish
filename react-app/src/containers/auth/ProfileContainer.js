@@ -5,13 +5,6 @@ import {withRouter} from 'react-router'
 import {user} from '../../actions/restAuth'
 
 class Profile extends Component {
-  componentDidMount() {
-    if (!this.props.user.pk) {
-      console.log(this.props.user)
-      console.log('fetching')
-      this.props.getUser()
-    }
-  }
   render() {
     return (
       <div className="App">

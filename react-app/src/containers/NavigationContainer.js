@@ -14,9 +14,7 @@ class Navigation extends React.Component {
 					<ul className="menu">
 						<li><Link to="/profile">Profile</Link></li>
 						<li>
-							<Link to="/">
-								<button onClick={this.props.logout}>Logout</button>
-							</Link>
+							<div onClick={this.props.logout}>Logout</div>
 						</li>
 					</ul>
 				</nav>
@@ -39,6 +37,7 @@ class Navigation extends React.Component {
 const mapStateToProps = state => {
 	return {
 		isAuth: state.restAuth.isAuth,
+		username: state.restAuth.user.username
 	}
 }
 

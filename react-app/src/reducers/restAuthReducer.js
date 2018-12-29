@@ -7,12 +7,17 @@ import {
 	USER_SUCCESS, 
 	USER_FAILURE,
 } from '../actions/restAuth'
-
 const initState = {
-	isAuth: false,
-	token: undefined,
-	user: {}
+	isAuth: (localStorage.getItem('token')) ? true : false,
+	user: {
+		pk: undefined, 
+		username: undefined, 
+		email: undefined,
+		first_name: undefined,
+		last_name: undefined,
+	},
 }
+const emptyState = initState
 
 const checkAuth = (state) => {
 	if (state.isAuth === false) {
@@ -30,17 +35,19 @@ const restAuth = (state = initState, action) => {
 				return {...state}
 			case LOGOUT_SUCCESS:
 				localStorage.removeItem('token')
-				return {...undefined}
+				state = emptyState
+				state.isAuth = false
+				return {...emptyState}
 			case USER_SUCCESS:
 				state.user = action.payload
-				state = checkAuth(state)
 				return {...state}
 		}
 		return state
 	} else if (action.type.indexOf('FAILURE') !== -1) {
 		if (action.payload.message == '401 - Unauthorized') {
+			state.isAuth = false
 			localStorage.removeItem('token')
-			return {...undefined}
+			return {...state}
 		}
 	}
 	return state

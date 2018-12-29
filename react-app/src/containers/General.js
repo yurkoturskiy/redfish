@@ -4,7 +4,7 @@ import {snippets} from '../actions/snippets'
 import {user} from '../actions/restAuth'
 import {withRouter} from 'react-router'
 
-import Content from './ContentContainer'
+import AutoRouter from './AutoRouterContainer'
 import Navigation from './NavigationContainer'
 
 
@@ -16,7 +16,7 @@ class General extends Component {
         <p>auth: {((this.props.isAuth) ? 'true' : 'false')}</p>
         <p>token: {this.props.token}</p>
         <Navigation />
-        <Content />
+        <AutoRouter />
       </div>
     )
   }

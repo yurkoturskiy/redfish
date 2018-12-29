@@ -1,28 +1,36 @@
 import React from "react"
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
+import {user} from '../actions/restAuth'
 
 
-class Main extends React.Component {
+class Application extends React.Component {
+	componentDidMount() {
+		if (this.props.isAuth) {
+			this.props.getUser()	
+		}
+	}
 	render() {
 		return (
 			<React.Fragment>
 		    	<h1>Application</h1>
+		    	<h5>{this.props.user.pk}</h5>
 			</React.Fragment>
 		)
 	}
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     history: state.history
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+  	isAuth: state.restAuth.isAuth,
+    user: state.restAuth.user,
+  }
+}
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		wsSend: (msg) => (dispatch(send(msg)))
-// 	}
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    getUser: () => dispatch(user()),
+  }
+}
 
-export default withRouter(connect(undefined, undefined)(Main))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Application))

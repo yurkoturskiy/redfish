@@ -1,9 +1,15 @@
 import React from "react"
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
+import history from '../history'
 
 
 class Main extends React.Component {
+	componentDidMount() {
+		if (this.props.isAuth) {
+			history.push('/app')
+		}
+	}
 	render() {
 		return (
 			<React.Fragment>
@@ -13,11 +19,11 @@ class Main extends React.Component {
 	}
 }
 
-// const mapStateToProps = state => {
-//   return {
-    
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+    	isAuth: state.restAuth.isAuth,
+  }
+}
 
 // const mapDispatchToProps = dispatch => {
 // 	return {
@@ -25,4 +31,4 @@ class Main extends React.Component {
 // 	}
 // }
 
-export default withRouter(connect(undefined, undefined)(Main))
+export default withRouter(connect(mapStateToProps, undefined)(Main))

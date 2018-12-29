@@ -1,5 +1,4 @@
-a = {}
-if (!a.username) {
-	console.log('true')
-}
-// console.log(c)
+var a = 'a'
+const temp = a
+a = 'b'
+console.log(temp)
