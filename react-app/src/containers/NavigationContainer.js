@@ -8,7 +8,7 @@ import {logout} from '../actions/restAuth'
 class Navigation extends React.Component {
 	render() {
 		if (this.props.isAuth == true) {
-			var bar = (
+			return (
 				<nav>
 					<Link to="/app">redject</Link>
 					<ul className="menu">
@@ -20,7 +20,7 @@ class Navigation extends React.Component {
 				</nav>
 			)
 		} else {
-			var bar = (
+			return (
 				<nav>
 					<Link to="/">redject</Link>
 					<ul className="menu">
@@ -30,7 +30,6 @@ class Navigation extends React.Component {
 				</nav>
 			)
 		}
-		return bar
 	}
 }
 
