@@ -5,9 +5,10 @@ import {user} from '../actions/restAuth'
 
 
 class Application extends React.Component {
-	componentDidMount() {
+	constructor(props) {
+		super(props)
 		if (this.props.isAuth) {
-			this.props.getUser()	
+			this.props.getUser()
 		}
 	}
 	render() {

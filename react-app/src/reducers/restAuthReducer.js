@@ -12,38 +12,38 @@ import {
 	PASSWORD_RESET_CONFIRM_SUCCESS,
 	PASSWORD_RESET_CONFIRM_FAILURE,
 	LOGOUT_SUCCESS,
+	LOGOUT_REQUEST,
 	USER_REQUEST, 
 	USER_SUCCESS, 
 	USER_FAILURE,
 } from '../actions/restAuth'
-const initState = {
-	isAuth: (localStorage.getItem('token')) ? true : false,
-	user: {
-		pk: undefined, 
-		username: undefined, 
-		email: undefined,
-		first_name: undefined,
-		last_name: undefined,
-	},
-	uiFreeze: false,
-	// passResetRequesting: false,
-	// regRequesting: false,
-	numRegsSucceed: 0,
-	numPassResetSucceed: 0,
-	numPassResetConfirmSucceed: 0,
-}
-const emptyState = initState
 
-const checkAuth = (state) => {
-	if (state.isAuth === false) {
-		state.isAuth = true
-		return state
+
+const initState = () => {
+	return {
+		isAuth: (localStorage.getItem('token')) ? true : false,
+		user: {
+			pk: undefined, 
+			username: undefined, 
+			email: undefined,
+			first_name: undefined,
+			last_name: undefined,
+		},
+		uiFreeze: false,
+		// passResetRequesting: false,
+		// regRequesting: false,
+		numRegsSucceed: 0,
+		numPassResetSucceed: 0,
+		numPassResetConfirmSucceed: 0,
 	}
 }
 
-const restAuth = (state = initState, action) => {
+const restAuth = (state = initState(), action) => {
 	if (action.type.indexOf('REQUEST') !== -1) {
 		switch(action.type) {
+			case LOGOUT_REQUEST:
+				localStorage.removeItem('token')
+				return initState()
 			case REGISTRATION_REQUEST:
 				state.uiFreeze = true
 				return {...state}
@@ -73,33 +73,30 @@ const restAuth = (state = initState, action) => {
 				state.uiFreeze = false
 				state.numPassResetConfirmSucceed += 1
 				return {...state}
-			case LOGOUT_SUCCESS:
-				localStorage.removeItem('token')
-				state = emptyState
-				state.isAuth = false
-				return {...emptyState}
 			case USER_SUCCESS:
 				state.user = action.payload
 				return {...state}
 		}
 		return state
 	} else if (action.type.indexOf('FAILURE') !== -1) {
-		if (action.payload.message == '401 - Unauthorized') {
-			state.isAuth = false
-			localStorage.removeItem('token')
+		switch(action.payload.message) {
+			// changing state acording to failure response messages
+			case '401 - Unauthorized':
+				localStorage.removeItem('token')
+				state = initState()	
+				break
 		}
 		switch(action.type) {
 			case REGISTRATION_FAILURE:
 				state.uiFreeze = false
-				return {...state}
+				break
 			case PASSWORD_RESET_FAILURE:
 				state.uiFreeze = false
-				return {...state}
+				break
 			case PASSWORD_RESET_CONFIRM_FAILURE:
 				state.uiFreeze = false
-				return {...state}
+				break
 		}
-
 		return {...state}
 	}
 	return state

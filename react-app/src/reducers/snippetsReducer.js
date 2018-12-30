@@ -3,11 +3,15 @@ import {
 	SNIPPETS_SUCCESS,
 	SNIPPETS_FAILURE} from '../actions/snippets'
 
-const initState = {
-	snippets: 'none',
+
+const initState = () => {
+	return {
+		snippets: 'none',	
+	}
+	
 }
 
-const snippets = (state = initState, action) => {
+const snippets = (state = initState(), action) => {
 	switch(action.type) {
 		
 		case SNIPPETS_SUCCESS:

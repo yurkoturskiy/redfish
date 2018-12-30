@@ -26,6 +26,13 @@ const notAuthEndpoints = [
 
 
 class AutoRouter extends React.Component {
+	constructor(props) {
+		super(props)
+		this.checkPermission()
+	}
+	componentDidUpdate() {
+		this.checkPermission()
+	}
 	checkPermission() {
 		if (this.props.isAuth) {
 			for (var i in notAuthEndpoints) {
@@ -41,12 +48,6 @@ class AutoRouter extends React.Component {
 				}
 			}
 		}	
-	}
-	componentDidMount() {
-		this.checkPermission()
-	}
-	componentDidUpdate() {
-		this.checkPermission()
 	}
 	render() {
 		return (
