@@ -2,90 +2,118 @@ import { RSAA } from 'redux-api-middleware'
 
 const url = 'http://127.0.0.1:9000/'
 
-
-export const LOGIN_REQUEST = '@@login/LOGIN_REQUEST'
-export const LOGIN_SUCCESS = '@@login/LOGIN_SUCCESS'
-export const LOGIN_FAILURE = '@@login/LOGIN_FAILURE'
-export const login = (values) => ({
-	[RSAA]: {
-		endpoint: url + 'rest-auth/login/',
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(values),
-		types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE],
-	}
-})
-
-
-export const LOGOUT_REQUEST = '@@logout/LOGOUT_REQUEST'
-export const LOGOUT_SUCCESS = '@@logout/LOGOUT_SUCCESS'
-export const LOGOUT_FAILURE = '@@logout/LOGOUT_FAILURE'
-export const logout = () => ({
-	[RSAA]: {
-		endpoint: url + 'rest-auth/logout/',
-		method: 'POST',
-	    headers: { 
-	    	'Content-Type': 'application/json',
-	    	'Authorization': 'Token ' + localStorage.getItem('token')
-	    },
-		types: [LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE],
-	}
-})
-
-export const REGISTRATION_REQUEST = '@@registration/REGISTRATION_REQUEST'
-export const REGISTRATION_SUCCESS = '@@registration/REGISTRATION_SUCCESS'
-export const REGISTRATION_FAILURE = '@@registration/REGISTRATION_FAILURE'
-export const registration = (values) => ({
-	[RSAA]: {
-		endpoint: url + 'rest-auth/registration/',
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(values),
-		types: [REGISTRATION_REQUEST, REGISTRATION_SUCCESS, REGISTRATION_FAILURE],
-	}
-})
-
-export const PASSWORD_RESET_REQUEST = '@@password_reset/PASSWORD_RESET_REQUEST'
-export const PASSWORD_RESET_SUCCESS = '@@password_reset/PASSWORD_RESET_SUCCESS'
-export const PASSWORD_RESET_FAILURE = '@@password_reset/PASSWORD_RESET_FAILURE'
-export const passwordReset = (email) => ({
-	[RSAA]: {
-		endpoint: url + 'rest-auth/password/reset/',
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(email),
-		types: [PASSWORD_RESET_REQUEST, PASSWORD_RESET_SUCCESS, PASSWORD_RESET_FAILURE],
-	}
-})
-
-export const PASSWORD_RESET_CONFIRM_REQUEST = '@@password_reset_confirm/PASSWORD_RESET_CONFIRM_REQUEST'
-export const PASSWORD_RESET_CONFIRM_SUCCESS = '@@password_reset_confirm/PASSWORD_RESET_CONFIRM_SUCCESS'
-export const PASSWORD_RESET_CONFIRM_FAILURE = '@@password_reset_confirm/PASSWORD_RESET_CONFIRM_FAILURE'
-export const passwordResetConfirm = (values) => ({
-	[RSAA]: {
-		endpoint: url + 'rest-auth/password/reset/confirm/',
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(values),
-		types: [
-			PASSWORD_RESET_CONFIRM_REQUEST, 
-			PASSWORD_RESET_CONFIRM_SUCCESS, 
-			PASSWORD_RESET_CONFIRM_FAILURE
-		],
-	}
-})
-
-export const USER_REQUEST = '@@user/USER_REQUEST'
-export const USER_SUCCESS = '@@user/USER_SUCCESS'
-export const USER_FAILURE = '@@user/USER_FAILURE'
-export const user = payload => ({
-  [RSAA]: {
-    endpoint: url + 'rest-auth/user/',
-    method: 'GET',
-    headers: { 
-    	'Content-Type': 'application/json',
-    	'Authorization': 'Token ' + localStorage.getItem('token')
+export const REST_AUTH = {
+    REQUEST: {
+        LOGIN: '@@login/LOGIN_REQUEST',
+        LOGOUT: '@@logout/LOGOUT_REQUEST',
+        REGISTRATION: '@@registration/REGISTRATION_REQUEST',
+        PASSWORD_RESET: '@@password_reset/PASSWORD_RESET_REQUEST',
+        PASSWORD_RESET_CONFIRM: '@@password_reset_confirm/PASSWORD_RESET_CONFIRM_REQUEST',
+        USER: '@@user/USER_REQUEST',
     },
-    types: [USER_REQUEST, USER_SUCCESS, USER_FAILURE]
-  }
+    SUCCESS: {
+        LOGIN: '@@login/LOGIN_SUCCESS',
+        LOGOUT: '@@logout/LOGOUT_SUCCESS',
+        REGISTRATION: '@@registration/REGISTRATION_SUCCESS',
+        PASSWORD_RESET: '@@password_reset/PASSWORD_RESET_SUCCESS',
+        PASSWORD_RESET_CONFIRM: '@@password_reset_confirm/PASSWORD_RESET_CONFIRM_SUCCESS',
+        USER: '@@user/USER_SUCCESS',
+    },
+    FAILURE: {
+        LOGIN: '@@login/LOGIN_FAILURE',
+        LOGOUT: '@@logout/LOGOUT_FAILURE',
+        REGISTRATION: '@@registration/REGISTRATION_FAILURE',
+        PASSWORD_RESET: '@@password_reset/PASSWORD_RESET_FAILURE',
+        PASSWORD_RESET_CONFIRM: '@@password_reset_confirm/PASSWORD_RESET_CONFIRM_FAILURE',
+        USER: '@@user/USER_FAILURE',
+    }
+}
+
+
+export const login = (values) => ({
+    [RSAA]: {
+        endpoint: url + 'rest-auth/login/',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+        types: [
+            REST_AUTH.REQUEST.LOGIN,
+            REST_AUTH.SUCCESS.LOGIN,
+            REST_AUTH.FAILURE.LOGIN,
+        ],
+    }
+})
+
+export const logout = () => ({
+    [RSAA]: {
+        endpoint: url + 'rest-auth/logout/',
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')
+        },
+        types: [
+            REST_AUTH.REQUEST.LOGOUT,
+            REST_AUTH.SUCCESS.LOGOUT,
+            REST_AUTH.FAILURE.LOGOUT,
+        ],
+    }
+})
+
+export const registration = (values) => ({
+    [RSAA]: {
+        endpoint: url + 'rest-auth/registration/',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+        types: [
+            REST_AUTH.REQUEST.REGISTRATION,
+            REST_AUTH.SUCCESS.REGISTRATION,
+            REST_AUTH.FAILURE.REGISTRATION,
+        ],
+    }
+})
+
+export const passwordReset = (email) => ({
+    [RSAA]: {
+        endpoint: url + 'rest-auth/password/reset/',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(email),
+        types: [
+            REST_AUTH.REQUEST.PASSWORD_RESET,
+            REST_AUTH.SUCCESS.PASSWORD_RESET,
+            REST_AUTH.FAILURE.PASSWORD_RESET,
+        ],
+    }
+})
+
+export const passwordResetConfirm = (values) => ({
+    [RSAA]: {
+        endpoint: url + 'rest-auth/password/reset/confirm/',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+        types: [
+            REST_AUTH.REQUEST.PASSWORD_RESET_CONFIRM,
+            REST_AUTH.SUCCESS.PASSWORD_RESET_CONFIRM,
+            REST_AUTH.FAILURE.PASSWORD_RESET_CONFIRM,
+        ],
+    }
+})
+
+export const user = payload => ({
+    [RSAA]: {
+        endpoint: url + 'rest-auth/user/',
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')
+        },
+        types: [
+                REST_AUTH.REQUEST.USER,
+                REST_AUTH.SUCCESS.USER,
+                REST_AUTH.FAILURE.USER,
+        ],
+    }
 })

@@ -1,22 +1,7 @@
 import rootReducer from './rootReducer'
 
-import {
-	REGISTRATION_REQUEST,
-	REGISTRATION_SUCCESS,
-	REGISTRATION_FAILURE,
-	LOGIN_SUCCESS,
-	PASSWORD_RESET_REQUEST,
-	PASSWORD_RESET_SUCCESS,
-	PASSWORD_RESET_FAILURE,
-	PASSWORD_RESET_CONFIRM_REQUEST,
-	PASSWORD_RESET_CONFIRM_SUCCESS,
-	PASSWORD_RESET_CONFIRM_FAILURE,
-	LOGOUT_SUCCESS,
-	LOGOUT_REQUEST,
-	USER_REQUEST, 
-	USER_SUCCESS, 
-	USER_FAILURE,
-} from '../actions/restAuth'
+
+import {REST_AUTH} from '../actions/restAuth'
 
 
 const initState = () => {
@@ -41,39 +26,39 @@ const initState = () => {
 const restAuth = (state = initState(), action) => {
 	if (action.type.indexOf('REQUEST') !== -1) {
 		switch(action.type) {
-			case LOGOUT_REQUEST:
+			case REST_AUTH.REQUEST.LOGOUT:
 				localStorage.removeItem('token')
 				return initState()
-			case REGISTRATION_REQUEST:
+			case REST_AUTH.REQUEST.REGISTRATION:
 				state.uiFreeze = true
 				return {...state}
-			case PASSWORD_RESET_REQUEST:
+			case REST_AUTH.REQUEST.PASSWORD_RESET:
 				state.uiFreeze = true
 				return {...state}
-			case PASSWORD_RESET_CONFIRM_REQUEST:
+			case REST_AUTH.REQUEST.PASSWORD_RESET_CONFIRM:
 				state.uiFreeze = true
 				return {...state}
 		}
 	}
 	if (action.type.indexOf('SUCCESS') !== -1) {
 		switch(action.type) {
-			case REGISTRATION_SUCCESS:
+			case REST_AUTH.SUCCESS.REGISTRATION:
 				state.uiFreeze = false
 				state.numRegsSucceed += 1
 				return {...state}
-			case LOGIN_SUCCESS:
+			case REST_AUTH.SUCCESS.LOGIN:
 				localStorage.setItem('token', action.payload.key)
 				state.isAuth = true
 				return {...state}
-			case PASSWORD_RESET_SUCCESS:
+			case REST_AUTH.SUCCESS.PASSWORD_RESET:
 				state.uiFreeze = false
 				state.numPassResetSucceed += 1
 				return {...state}
-			case PASSWORD_RESET_CONFIRM_SUCCESS:
+			case REST_AUTH.SUCCESS.PASSWORD_RESET_CONFIRM:
 				state.uiFreeze = false
 				state.numPassResetConfirmSucceed += 1
 				return {...state}
-			case USER_SUCCESS:
+			case REST_AUTH.SUCCESS.USER:
 				state.user = action.payload
 				return {...state}
 		}
@@ -87,13 +72,13 @@ const restAuth = (state = initState(), action) => {
 				break
 		}
 		switch(action.type) {
-			case REGISTRATION_FAILURE:
+			case REST_AUTH.FAILURE.REGISTRATION:
 				state.uiFreeze = false
 				break
-			case PASSWORD_RESET_FAILURE:
+			case REST_AUTH.FAILURE.PASSWORD_RESET:
 				state.uiFreeze = false
 				break
-			case PASSWORD_RESET_CONFIRM_FAILURE:
+			case REST_AUTH.FAILURE.PASSWORD_RESET_CONFIRM:
 				state.uiFreeze = false
 				break
 		}
