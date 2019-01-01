@@ -2,18 +2,26 @@ import React from "react"
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import history from '../history'
+import styled from 'styled-components'
 
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
+
+const Wrapper = styled.section`
+  padding: 4em;
+  background: papayawhip;
+`;
 
 class Main extends React.Component {
-	componentDidMount() {
-		if (this.props.isAuth) {
-			history.push('/app')
-		}
-	}
 	render() {
 		return (
 			<React.Fragment>
-			    <h1>Main</h1>
+			<Wrapper>
+			    <Title>Blank React-Django project</Title>
+			</Wrapper>
 			</React.Fragment>
 		)
 	}

@@ -62,6 +62,8 @@ class AutoRouter extends React.Component {
 				{/* auth required */}
 					<Route path="/profile" component={Profile}/>
 					<Route path="/app" component={Application}/>
+				{/* neutral */}
+					<Route path="/product" component={Main}/>
 				</Switch>
 			</React.Fragment>
 		)
