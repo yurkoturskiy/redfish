@@ -5,13 +5,17 @@ import history from '../history'
 import styled from 'styled-components'
 
 const Title = styled.h1`
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   font-size: 1.5em;
-  text-align: center;
   color: palevioletred;
 `;
 
 const Wrapper = styled.section`
-  padding: 4em;
+  height:65vh;
   background: papayawhip;
 `;
 

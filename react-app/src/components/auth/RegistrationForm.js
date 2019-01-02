@@ -1,26 +1,42 @@
 import React from "react"
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+
+const RegistrationFormWrapper = styled.div`
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+`;
+
+const Title = styled.h3`
+  font-size: 1.5em;
+  text-align: center;
+`;
 
 let RegistrationForm = props => {
   const { handleSubmit } = props
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Registration</h3>
-      <label>
-        username:
-        <Field name="username" component="input" type="text" /><br/>
-        email:
-        <Field name="email" component="input" type="text" /><br/>
-        password:
-        <Field name="password1" component="input" type="password" /><br/>
-        repeat password:
-        <Field name="password2" component="input" type="password" /><br/>
-      </label>
-      <button type="submit">
-        Submit
-      </button>
-    </form>
+    <RegistrationFormWrapper>
+      <form onSubmit={handleSubmit}>
+        <Title>Registration</Title>
+        <label>
+          username:<br/>
+          <Field name="username" component="input" type="text" /><br/>
+          email:<br/>
+          <Field name="email" component="input" type="text" /><br/>
+          password:<br/>
+          <Field name="password1" component="input" type="password" /><br/>
+          repeat password:<br/>
+          <Field name="password2" component="input" type="password" /><br/>
+        </label>
+        <button type="submit">
+          Submit
+        </button>
+      </form>
+    </RegistrationFormWrapper>
   )
 }
 
