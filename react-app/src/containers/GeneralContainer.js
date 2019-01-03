@@ -5,19 +5,20 @@ import {user} from '../actions/restAuth'
 import {withRouter} from 'react-router'
 
 import AutoRouter from './AutoRouterContainer'
-import Navigation from './NavigationContainer'
+import NavigationContainer from './NavigationContainer'
+import General from '../components/General'
 
 
 
-class General extends Component {
+class GeneralContainer extends Component {
   render() {
     return (
-      <div>
-        <p>auth: {((this.props.isAuth) ? 'true' : 'false')}</p>
-        <p>token: {this.props.token}</p>
-        <Navigation />
-        <AutoRouter />
-      </div>
+      <AutoRouter>
+        <NavigationContainer>
+          <p>auth: {((this.props.isAuth) ? 'true' : 'false')}</p>
+          <p>token: {this.props.token}</p>
+        </NavigationContainer>
+      </AutoRouter>
     )
   }
 }
@@ -38,5 +39,5 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(General))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GeneralContainer))
 

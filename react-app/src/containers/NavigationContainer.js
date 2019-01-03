@@ -5,29 +5,37 @@ import {withRouter} from 'react-router'
 
 import {logout} from '../actions/restAuth'
 
-class Navigation extends React.Component {
+import Navigation from '../components/Navigation'
+
+
+class NavigationContainer extends React.Component {
 	render() {
+		console.log(this.props.children)
 		if (this.props.isAuth == true) {
 			return (
-				<nav>
-					<Link to="/app">redject</Link>
-					<ul className="menu">
-						<li><Link to="/profile">Profile</Link></li>
-						<li>
-							<div onClick={this.props.logout}>Logout</div>
-						</li>
+				<Navigation>
+					<ul className='elements'>
+						<Link to="/app"><li className='element'>redject</li></Link>
+						<Link to="/profile"><li className='element'>Profile</li></Link>
+						<div onClick={this.props.logout}>
+							<li className='element'>
+								Logout
+							</li>
+						</div>
 					</ul>
-				</nav>
+					{this.props.children}
+				</Navigation>
 			)
 		} else {
 			return (
-				<nav>
-					<Link to="/">redject</Link>
-					<ul className="menu">
-						<li><Link to="/login">Login</Link></li>
-						<li><Link to="/registration">Registration</Link></li>
+				<Navigation>
+					<ul className='elements'>
+						<Link to="/"><li className='element'>redject</li></Link>
+						<Link to="/login"><li className='element'>Login</li></Link>
+						<Link to="/registration"><li className='element'>Registration</li></Link>
 					</ul>
-				</nav>
+					{this.props.children}
+				</Navigation>
 			)
 		}
 	}
@@ -46,4 +54,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationContainer))

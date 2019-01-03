@@ -52,16 +52,17 @@ class AutoRouter extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
+				{this.props.children}
 				<Switch>
 				{/* for not loged in users */}
-					<Route exact path="/" component={Main}/>
+					<Route exact path="/" component={Main} />
 					<Route path="/login" component={Login}/>
 					<Route path="/registration" component={Registration}/>
 					<Route exact path="/password-reset" component={PasswordReset}/>
 					<Route path="/password-reset/confirm/:uid/:token" component={PasswordResetConfirm}/>
 				{/* auth required */}
 					<Route path="/profile" component={Profile}/>
-					<Route path="/app" component={Application}/>
+					<Route path="/app" component={Application} />
 				{/* neutral */}
 					<Route path="/product" component={Main}/>
 				</Switch>

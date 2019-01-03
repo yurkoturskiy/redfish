@@ -14,4 +14,8 @@ let ProfileForm = props => {
   )
 }
 
+ProfileForm.propTypes = {
+  user: PropTypes.object
+}
+
 export default ProfileForm

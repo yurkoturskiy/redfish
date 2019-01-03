@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {user} from '../actions/restAuth'
 
+import NavigationContainer from './NavigationContainer'
+
 
 class Application extends React.Component {
 	constructor(props) {

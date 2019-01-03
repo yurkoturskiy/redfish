@@ -4,6 +4,9 @@ import {withRouter} from 'react-router'
 import history from '../history'
 import styled from 'styled-components'
 
+import NavigationContainer from './NavigationContainer'
+import Hero from '../components/Hero'
+
 const Title = styled.h1`
   position: absolute;
   top: 45%;
@@ -14,19 +17,12 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
-const Wrapper = styled.section`
-  height:65vh;
-  background: papayawhip;
-`;
-
 class Main extends React.Component {
 	render() {
 		return (
-			<React.Fragment>
-			<Wrapper>
+			<Hero>
 			    <Title>Blank React-Django project</Title>
-			</Wrapper>
-			</React.Fragment>
+			</Hero>
 		)
 	}
 }
