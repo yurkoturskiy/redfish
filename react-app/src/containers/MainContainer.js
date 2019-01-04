@@ -20,9 +20,14 @@ const Title = styled.h1`
 class Main extends React.Component {
 	render() {
 		return (
-			<Hero>
-			    <Title>Blank React-Django project</Title>
-			</Hero>
+			<React.Fragment>
+				<Hero>
+				    <Title>Blank React-Django project</Title>
+				</Hero>
+				<Hero>
+					<h1>Second view</h1>
+				</Hero>
+			</React.Fragment>
 		)
 	}
 }

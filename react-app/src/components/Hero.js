@@ -10,8 +10,8 @@ const Hero = props => {
 }
 
 export default styled(Hero)`
-  position: absolute;
+  position: relative;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   background: papayawhip;
 `;

@@ -106,14 +106,14 @@ export const user = payload => ({
     [RSAA]: {
         endpoint: url + 'rest-auth/user/',
         method: 'GET',
-        headers: { 
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Token ' + localStorage.getItem('token')
         },
         types: [
-                REST_AUTH.REQUEST.USER,
-                REST_AUTH.SUCCESS.USER,
-                REST_AUTH.FAILURE.USER,
+            REST_AUTH.REQUEST.USER,
+            REST_AUTH.SUCCESS.USER,
+            REST_AUTH.FAILURE.USER,
         ],
     }
 })

@@ -2,7 +2,7 @@ import React from "react"
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
+import FormWrapper from '../FormWrapper'
 
 const RegistrationFormWrapper = styled.div`
   position: absolute;
@@ -19,9 +19,9 @@ const Title = styled.h3`
 let RegistrationForm = props => {
   const { handleSubmit } = props
   return (
-    <RegistrationFormWrapper>
-      <form onSubmit={handleSubmit}>
-        <Title>Registration</Title>
+    <FormWrapper>
+      <form onSubmit={handleSubmit} className='form'>
+        <h1 className='title'>Registration</h1>
         <label>
           username:<br/>
           <Field name="username" component="input" type="text" /><br/>
@@ -36,7 +36,7 @@ let RegistrationForm = props => {
           Submit
         </button>
       </form>
-    </RegistrationFormWrapper>
+    </FormWrapper>
   )
 }
 

@@ -3,27 +3,18 @@ import { Field, reduxForm } from 'redux-form'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import FormWrapper from '../FormWrapper'
 
-const LoginFormWrapper = styled.div`
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%);
-  
-`;
-
-const Title = styled.h3`
-  font-size: 1.5em;
-  text-align: center;
-`;
-
+const theme = {
+  background: '#f0f0f0',
+};
 
 let LoginForm = props => {
   const { handleSubmit } = props
   return (
-    <LoginFormWrapper>
-      <form onSubmit={handleSubmit}>
-        <Title>Login</Title>
+    <FormWrapper theme={theme}>
+      <form onSubmit={handleSubmit} className='form'>
+        <h1 className='title'>Login</h1>
         <label>
           username:<br/>
           <Field name="username" component="input" type="text" /><br/>
@@ -35,7 +26,7 @@ let LoginForm = props => {
         </button>
         <Link to="/password-reset">Forgot password?</Link>
       </form>
-    </LoginFormWrapper>
+    </FormWrapper>
   )
 }
 

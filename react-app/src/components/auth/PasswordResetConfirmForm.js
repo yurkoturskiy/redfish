@@ -1,6 +1,7 @@
 import React from "react"
 import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
+import FormWrapper from '../FormWrapper'
 
 
 const validate = values => {
@@ -19,18 +20,20 @@ const validate = values => {
 let PasswordResetConfirmForm = props => {
   const { handleSubmit } = props
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Password reset</h3>
-      <label>
-        New password:
-        <Field name="new_password1" component="input" type="password" /><br/>
-        Repeat password:
-        <Field name="new_password2" component="input" type="password" /><br/>
-      </label>
-      <button type="submit">
-        Set new password
-      </button>
-    </form>
+    <FormWrapper>
+      <form onSubmit={handleSubmit} className='form'>
+        <h3 className='title'>Password reset</h3>
+        <label>
+          New password:
+          <Field name="new_password1" component="input" type="password" /><br/>
+          Repeat password:
+          <Field name="new_password2" component="input" type="password" /><br/>
+        </label>
+        <button type="submit">
+          Set new password
+        </button>
+      </form>
+    </FormWrapper>
   )
 }
 
