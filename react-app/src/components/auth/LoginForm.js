@@ -13,17 +13,13 @@ let LoginForm = props => {
   const { handleSubmit } = props
   return (
     <FormWrapper theme={theme}>
-      <form onSubmit={handleSubmit} className='form'>
-        <h1 className='title'>Login</h1>
-        <label>
-          username:<br/>
-          <Field name="username" component="input" type="text" /><br/>
-          password:<br/>
-          <Field name="password" component="input" type="password" />
-        </label><br/>
-        <button type="submit">
-          Submit
-        </button>
+      <form onSubmit={handleSubmit}>
+        <h3>Login</h3>
+        <label for="uname">username</label>
+        <Field id="uname" name="username" component="input" type="text" />
+        <label for="password">password</label>
+        <Field id="password" name="password" component="input" type="password" />
+        <input type="submit" value="Login"/>
         <Link to="/password-reset">Forgot password?</Link>
       </form>
     </FormWrapper>

@@ -21,17 +21,13 @@ let PasswordResetConfirmForm = props => {
   const { handleSubmit } = props
   return (
     <FormWrapper>
-      <form onSubmit={handleSubmit} className='form'>
-        <h3 className='title'>Password reset</h3>
-        <label>
-          New password:
-          <Field name="new_password1" component="input" type="password" /><br/>
-          Repeat password:
-          <Field name="new_password2" component="input" type="password" /><br/>
-        </label>
-        <button type="submit">
-          Set new password
-        </button>
+      <form onSubmit={handleSubmit}>
+        <h3>Password reset</h3>
+        <label for="new_pass">New password</label>
+        <Field id="new_pass" name="new_password1" component="input" type="password" />
+        <label for="rep_pass">Repeat password</label>
+        <Field id="rep_pass" name="new_password2" component="input" type="password" />
+        <input type="submit" value="Set new password"/>
       </form>
     </FormWrapper>
   )

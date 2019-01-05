@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const General = props => {
-	return (
-		<div className={props.className}>
-			{props.children}
-		</div>
-	)
+  return (
+    <div className={props.className}>
+      {props.children}
+    </div>
+  )
 }
 
 export default styled(General)`

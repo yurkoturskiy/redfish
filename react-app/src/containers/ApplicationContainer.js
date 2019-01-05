@@ -7,25 +7,25 @@ import NavigationContainer from './NavigationContainer'
 
 
 class Application extends React.Component {
-	constructor(props) {
-		super(props)
-		if (this.props.isAuth) {
-			this.props.getUser()
-		}
-	}
-	render() {
-		return (
-			<React.Fragment>
-		    	<h1>Application</h1>
-		    	<h5>{this.props.user.pk}</h5>
-			</React.Fragment>
-		)
-	}
+  constructor(props) {
+    super(props)
+    if (this.props.isAuth) {
+      this.props.getUser()
+    }
+  }
+  render() {
+    return (
+      <React.Fragment>
+          <h1>Application</h1>
+          <h5>{this.props.user.pk}</h5>
+      </React.Fragment>
+    )
+  }
 }
 
 const mapStateToProps = state => {
   return {
-  	isAuth: state.restAuth.isAuth,
+    isAuth: state.restAuth.isAuth,
     user: state.restAuth.user,
   }
 }

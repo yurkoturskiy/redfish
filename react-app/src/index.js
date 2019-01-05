@@ -10,12 +10,12 @@ import store from './store/configureStore'
 
 
 ReactDOM.render(
-	<Router history={history}>
-		<Provider store={store}>
-			<GeneralContainer />
-		</Provider>
-	</Router>, document.getElementById('root'));
-	
+  <Router history={history}>
+    <Provider store={store}>
+      <GeneralContainer />
+    </Provider>
+  </Router>, document.getElementById('root'));
+  
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -20,21 +20,17 @@ let RegistrationForm = props => {
   const { handleSubmit } = props
   return (
     <FormWrapper>
-      <form onSubmit={handleSubmit} className='form'>
-        <h1 className='title'>Registration</h1>
-        <label>
-          username:<br/>
-          <Field name="username" component="input" type="text" /><br/>
-          email:<br/>
-          <Field name="email" component="input" type="text" /><br/>
-          password:<br/>
-          <Field name="password1" component="input" type="password" /><br/>
-          repeat password:<br/>
-          <Field name="password2" component="input" type="password" /><br/>
-        </label>
-        <button type="submit">
-          Submit
-        </button>
+      <form onSubmit={handleSubmit}>
+        <h3>Registration</h3>
+        <label for="uname">username</label>
+        <Field id="uname" name="username" component="input" type="text" />
+        <label for="email">email</label>
+        <Field id="email" name="email" component="input" type="text" />
+        <label for="pass">password</label>
+        <Field id="pass" name="password1" component="input" type="password" />
+        <label for="rep_pass">repeat password</label>
+        <Field id="rep_pass" name="password2" component="input" type="password" />
+        <input type="submit" value="Submit"/>
       </form>
     </FormWrapper>
   )

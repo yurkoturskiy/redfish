@@ -18,30 +18,30 @@ const Title = styled.h1`
 `;
 
 class Main extends React.Component {
-	render() {
-		return (
-			<React.Fragment>
-				<Hero>
-				    <Title>Blank React-Django project</Title>
-				</Hero>
-				<Hero>
-					<h1>Second view</h1>
-				</Hero>
-			</React.Fragment>
-		)
-	}
+  render() {
+    return (
+      <React.Fragment>
+        <Hero>
+            <Title>Blank React-Django project</Title>
+        </Hero>
+        <Hero>
+          <h1>Second view</h1>
+        </Hero>
+      </React.Fragment>
+    )
+  }
 }
 
 const mapStateToProps = state => {
   return {
-    	isAuth: state.restAuth.isAuth,
+      isAuth: state.restAuth.isAuth,
   }
 }
 
 // const mapDispatchToProps = dispatch => {
-// 	return {
-// 		wsSend: (msg) => (dispatch(send(msg)))
-// 	}
+//  return {
+//    wsSend: (msg) => (dispatch(send(msg)))
+//  }
 // }
 
 export default withRouter(connect(mapStateToProps, undefined)(Main))

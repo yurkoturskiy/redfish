@@ -13,69 +13,69 @@ import history from '../history'
 import Application from './ApplicationContainer'
 
 const authEndpoints = [
-	'/profile',
-	'/app',
+  '/profile',
+  '/app',
 ]
 
 const notAuthEndpoints = [
-	'/',
-	'/login',
-	'/registration',
-	'/password-reset',
+  '/',
+  '/login',
+  '/registration',
+  '/password-reset',
 ]
 
 
 class AutoRouter extends React.Component {
-	constructor(props) {
-		super(props)
-		this.checkPermission()
-	}
-	componentDidUpdate() {
-		this.checkPermission()
-	}
-	checkPermission() {
-		if (this.props.isAuth) {
-			for (var i in notAuthEndpoints) {
-				if (this.props.location.pathname === notAuthEndpoints[i]) {
-					console.log('you already logged in')
-					history.push('/app')
-				}
-			}	
-		} else {
-			for (var i in authEndpoints) {
-				if (this.props.location.pathname === authEndpoints[i]) {
-					history.push('/login')
-				}
-			}
-		}	
-	}
-	render() {
-		return (
-			<React.Fragment>
-				{this.props.children}
-				<Switch>
-				{/* for not loged in users */}
-					<Route exact path="/" component={Main} />
-					<Route path="/login" component={Login}/>
-					<Route path="/registration" component={Registration}/>
-					<Route exact path="/password-reset" component={PasswordReset}/>
-					<Route path="/password-reset/confirm/:uid/:token" component={PasswordResetConfirm}/>
-				{/* auth required */}
-					<Route path="/profile" component={Profile}/>
-					<Route path="/app" component={Application} />
-				{/* neutral */}
-					<Route path="/product" component={Main}/>
-				</Switch>
-			</React.Fragment>
-		)
-	}
+  constructor(props) {
+    super(props)
+    this.checkPermission()
+  }
+  componentDidUpdate() {
+    this.checkPermission()
+  }
+  checkPermission() {
+    if (this.props.isAuth) {
+      for (var i in notAuthEndpoints) {
+        if (this.props.location.pathname === notAuthEndpoints[i]) {
+          console.log('you already logged in')
+          history.push('/app')
+        }
+      } 
+    } else {
+      for (var i in authEndpoints) {
+        if (this.props.location.pathname === authEndpoints[i]) {
+          history.push('/login')
+        }
+      }
+    } 
+  }
+  render() {
+    return (
+      <React.Fragment>
+        {this.props.children}
+        <Switch>
+        {/* for not loged in users */}
+          <Route exact path="/" component={Main} />
+          <Route path="/login" component={Login}/>
+          <Route path="/registration" component={Registration}/>
+          <Route exact path="/password-reset" component={PasswordReset}/>
+          <Route path="/password-reset/confirm/:uid/:token" component={PasswordResetConfirm}/>
+        {/* auth required */}
+          <Route path="/profile" component={Profile}/>
+          <Route path="/app" component={Application} />
+        {/* neutral */}
+          <Route path="/product" component={Main}/>
+        </Switch>
+      </React.Fragment>
+    )
+  }
 }
 
 const mapStateToProps = state => {
-	return {
-		token: localStorage.getItem('token'),
-		isAuth: state.restAuth.isAuth,
-	}
+  return {
+    token: localStorage.getItem('token'),
+    isAuth: state.restAuth.isAuth,
+  }
 }
 
 export default withRouter(connect(mapStateToProps, undefined)(AutoRouter))

@@ -7,15 +7,11 @@ let PasswordResetForm = props => {
   const { handleSubmit } = props
   return (
     <FormWrapper>
-      <form onSubmit={handleSubmit} className='form'>
-        <h3 className='title'>Password reset</h3>
-        <label>
-          Email address:
-          <Field name="email" component="input" type="text" /><br/>
-        </label>
-        <button type="submit">
-          Reset password
-        </button>
+      <form onSubmit={handleSubmit}>
+        <h3>Password reset</h3>
+        <label for="email">Email address</label>
+        <Field id="email" name="email" component="input" type="text" />
+        <input type="submit" value="Reset password"/>
       </form>
     </FormWrapper>
   )
