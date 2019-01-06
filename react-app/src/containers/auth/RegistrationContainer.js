@@ -14,13 +14,17 @@ class Registration extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(values) {
-    values.password2 = values.password1
-    return this.props.registration(values).then(res => {
-      if (res.payload.status == 400) {
-        res.payload.response._error = 'Failed to register'
-        console.log(res.payload.response)
-        throw new SubmissionError(res.payload.response)  
-      }
+    // prepare values
+    values.password2 = values.password1 
+    // submit values to the server
+    return this.props.registration(values)
+      .then(res => {
+        // server-side validation
+        if (res.payload.status === 400) {
+          res.payload.response._error = res.payload.response.non_field_errors
+          console.log(res.payload.response)
+          throw new SubmissionError(res.payload.response)  
+        }
     })
   }
   componentWillUpdate(prevProps) {
