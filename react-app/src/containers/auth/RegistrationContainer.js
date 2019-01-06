@@ -9,6 +9,16 @@ const email = value =>
     ? 'Invalid email address'
     : undefined
 
+const validate = values => {
+  const errors = {}
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+  return errors
+}
+
 class Registration extends Component {
   constructor(props) {
     super(props)
@@ -30,7 +40,9 @@ class Registration extends Component {
     } else if (this.isSent) {
       return <p>Confirm your email address</p>
     } else {
-      return <RegistrationForm onSubmit={this.handleSubmit} />
+      return <RegistrationForm 
+                onSubmit={this.handleSubmit}
+                validate={validate} />
     }
   }
 }

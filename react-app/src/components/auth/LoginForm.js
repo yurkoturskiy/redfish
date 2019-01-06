@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import FormWrapper from '../FormWrapper'
+import FormField from '../FormField'
 
 const theme = {
   background: '#f0f0f0',
@@ -15,10 +16,18 @@ let LoginForm = props => {
     <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>
         <h3>Login</h3>
-        <label>username or email</label>
-        <Field id="uname" name="username" component="input" type="text" />
-        <label>password</label>
-        <Field id="password" name="password" component="input" type="password" />
+        <Field 
+          name="username" 
+          type="text"
+          label="Username or email"
+          component={FormField}
+        />
+        <Field 
+          name="password" 
+          type="password"
+          label="Password"
+          component={FormField} 
+        />
         <input type="submit" value="Login"/>
         <Link to="/password-reset">Forgot password?</Link>
       </form>
