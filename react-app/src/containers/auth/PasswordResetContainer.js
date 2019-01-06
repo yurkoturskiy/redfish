@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PasswordResetForm from '../../components/auth/PasswordResetForm'
 import {passwordReset} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
+import {SubmissionError} from 'redux-form'
 
 class PasswordReset extends Component {
   constructor(props) {
@@ -11,7 +12,14 @@ class PasswordReset extends Component {
     this.isSent = false
   }
   handleSubmit(values) {
-    this.props.passwordReset(values)
+    return this.props.passwordReset(values)
+      .then(res => {
+        // server-side validation
+        if (res.payload.status === 400) {
+          res.payload.response._error = res.payload.response.non_field_errors
+          throw new SubmissionError(res.payload.response)
+        }
+    })
   }
   componentWillUpdate(prevProps) {
     // set isSent to true after success sending email
