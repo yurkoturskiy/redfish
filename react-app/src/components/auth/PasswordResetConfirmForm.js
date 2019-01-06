@@ -17,10 +17,14 @@ const validate = values => {
   }
 }
 
+const theme = {
+  background: '#f0f0f0',
+};
+
 let PasswordResetConfirmForm = props => {
   const { handleSubmit } = props
   return (
-    <FormWrapper>
+    <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>
         <h3>Password reset</h3>
         <label for="new_pass">New password</label>

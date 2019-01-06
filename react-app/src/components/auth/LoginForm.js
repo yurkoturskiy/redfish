@@ -15,9 +15,9 @@ let LoginForm = props => {
     <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>
         <h3>Login</h3>
-        <label for="uname">username</label>
+        <label>username or email</label>
         <Field id="uname" name="username" component="input" type="text" />
-        <label for="password">password</label>
+        <label>password</label>
         <Field id="password" name="password" component="input" type="password" />
         <input type="submit" value="Login"/>
         <Link to="/password-reset">Forgot password?</Link>
@@ -26,10 +26,8 @@ let LoginForm = props => {
   )
 }
 
-
 LoginForm = reduxForm({
   form: 'loginForm'
 })(LoginForm)
-
 
 export default LoginForm

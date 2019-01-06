@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-const FormWrapper = styled.form`
+const FormWrapper = styled.div`
   height: 100vh;
   width: 100%;
   background: ${props => props.theme.background};
@@ -50,6 +50,12 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #45a049;
 }
+
+input[type=submit]:disabled {
+  background-color: #45a049;
+  color: #93D098;
+}
+
 `;
 
 FormWrapper.defaultProps =  {

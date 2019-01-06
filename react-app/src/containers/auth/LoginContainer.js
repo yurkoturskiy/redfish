@@ -4,6 +4,10 @@ import LoginForm from '../../components/auth/LoginForm'
 import {login} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
 
+const handleSubmit = values => {
+
+}
+
 class Login extends Component {
   render() {
     return (

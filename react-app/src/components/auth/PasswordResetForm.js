@@ -3,10 +3,14 @@ import { Field, reduxForm } from 'redux-form'
 import PropTypes from 'prop-types'
 import FormWrapper from '../FormWrapper'
 
+const theme = {
+  background: '#f0f0f0',
+};
+
 let PasswordResetForm = props => {
   const { handleSubmit } = props
   return (
-    <FormWrapper>
+    <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>
         <h3>Password reset</h3>
         <label for="email">Email address</label>
@@ -17,10 +21,8 @@ let PasswordResetForm = props => {
   )
 }
 
-
 PasswordResetForm = reduxForm({
   form: 'passwordResetForm'
 })(PasswordResetForm)
-
 
 export default PasswordResetForm
