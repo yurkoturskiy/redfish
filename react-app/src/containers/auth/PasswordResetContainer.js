@@ -20,7 +20,6 @@ class PasswordReset extends Component {
     }
   }
   render() {
-    console.log(this.isSent)
     if (this.props.uiFreeze) {
       return <p>requesting</p>
     } else if (this.isSent) {

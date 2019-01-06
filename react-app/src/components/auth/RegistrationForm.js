@@ -12,13 +12,13 @@ const theme = {
 var validation = undefined
 
 let RegistrationForm = props => {
-  const {handleSubmit, validate} = props
-  validation = validate
+  const {error, handleSubmit} = props
+  // validation = validate
   return (
     <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>
         <h3>Registration</h3>
-        <Field 
+        <Field
           name="username" 
           type="text"
           label="Username"
@@ -37,6 +37,7 @@ let RegistrationForm = props => {
           component={FormField}
         />
         <input type="submit" value="Submit" />
+        {error && <strong>{error}</strong>}
       </form>
     </FormWrapper>
   )
@@ -44,7 +45,6 @@ let RegistrationForm = props => {
 
 RegistrationForm = reduxForm({
   form: 'registrationForm',
-  validation,
 })(RegistrationForm)
 
 export default RegistrationForm

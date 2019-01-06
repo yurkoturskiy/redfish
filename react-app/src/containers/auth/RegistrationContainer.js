@@ -4,29 +4,24 @@ import RegistrationForm from '../../components/auth/RegistrationForm'
 import {registration} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
 
-const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email address'
-    : undefined
+import { SubmissionError } from 'redux-form'
 
-const validate = values => {
-  const errors = {}
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-  return errors
-}
 
 class Registration extends Component {
   constructor(props) {
     super(props)
     this.isSent = false
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(values) {
     values.password2 = values.password1
-    this.props.registration(values)
+    return this.props.registration(values).then(res => {
+      if (res.payload.status == 400) {
+        res.payload.response._error = 'Failed to register'
+        console.log(res.payload.response)
+        throw new SubmissionError(res.payload.response)  
+      }
+    })
   }
   componentWillUpdate(prevProps) {
     if (this.props.numRegsSucceed !== prevProps.numRegsSucceed) {
@@ -41,8 +36,7 @@ class Registration extends Component {
       return <p>Confirm your email address</p>
     } else {
       return <RegistrationForm 
-                onSubmit={this.handleSubmit}
-                validate={validate} />
+                onSubmit={this.handleSubmit} />
     }
   }
 }

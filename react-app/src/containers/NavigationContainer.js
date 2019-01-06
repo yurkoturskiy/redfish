@@ -10,15 +10,14 @@ import Navigation from '../components/Navigation'
 
 class NavigationContainer extends React.Component {
   render() {
-    console.log(this.props.children)
-    if (this.props.isAuth == true) {
+    if (this.props.isAuth === true) {
       return (
         <Navigation>
-          <ul className='elements'>
-            <Link to="/app"><li className='element'>redject</li></Link>
-            <Link to="/profile"><li className='element'>Profile</li></Link>
+          <ul>
+            <Link to="/app"><li>redject</li></Link>
+            <Link to="/profile"><li>Profile</li></Link>
             <div onClick={this.props.logout}>
-              <li className='element'>
+              <li>
                 Logout
               </li>
             </div>
@@ -29,10 +28,10 @@ class NavigationContainer extends React.Component {
     } else {
       return (
         <Navigation>
-          <ul className='elements'>
-            <Link to="/"><li className='element'>redject</li></Link>
-            <Link to="/login"><li className='element'>Login</li></Link>
-            <Link to="/registration"><li className='element'>Registration</li></Link>
+          <ul>
+            <Link to="/"><li>redject</li></Link>
+            <Link to="/login"><li>Login</li></Link>
+            <Link to="/registration"><li>Registration</li></Link>
           </ul>
           {this.props.children}
         </Navigation>

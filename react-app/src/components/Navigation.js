@@ -17,14 +17,14 @@ export default styled(Navigation)`
   height: 100px;
   z-index: 1;
 
-  .elements {
+  ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
   }
 
-  .element {
+  li {
     float: left;
     display: block;
     color: black;
@@ -33,7 +33,7 @@ export default styled(Navigation)`
     text-decoration: none;
   }
 
-  .element:hover {
+  li:hover {
     background-color: #f0f0f0
   }
 `;
