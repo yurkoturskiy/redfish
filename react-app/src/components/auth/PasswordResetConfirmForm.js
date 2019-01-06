@@ -4,23 +4,9 @@ import PropTypes from 'prop-types'
 import FormWrapper from '../FormWrapper'
 import FormField from '../FormField'
 
-
-const validate = values => {
-  const errors = {}
-  if (!values.new_password1) {
-    errors.new_password1 = 'Required'
-  }
-  if (!values.new_password2) {
-    errors.new_password2 = 'Required'
-  }
-  if (values.new_password1 != values.new_password2) {
-    errors.match = 'give passwords should be the same'
-  }
-}
-
 const theme = {
   background: '#f0f0f0',
-};
+}
 
 let PasswordResetConfirmForm = props => {
   const { handleSubmit } = props
@@ -48,7 +34,7 @@ let PasswordResetConfirmForm = props => {
 
 
 PasswordResetConfirmForm = reduxForm({
-  form: 'passwordResetConfirmForm', validate
+  form: 'passwordResetConfirmForm'
 })(PasswordResetConfirmForm)
 
 
