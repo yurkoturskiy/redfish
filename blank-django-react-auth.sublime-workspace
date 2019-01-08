@@ -4,6 +4,62 @@
 		"selected_items":
 		[
 			[
+				"val",
+				"values"
+			],
+			[
+				"RES",
+				"REST_AUTH"
+			],
+			[
+				"ac",
+				"action"
+			],
+			[
+				"S",
+				"SubmissionError"
+			],
+			[
+				"va",
+				"validation"
+			],
+			[
+				"op",
+				"opts〔variable〕"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"pa",
+				"payload"
+			],
+			[
+				"th",
+				"throw"
+			],
+			[
+				"value",
+				"values"
+			],
+			[
+				"Fo",
+				"FormField"
+			],
+			[
+				"For",
+				"FormWrapper"
+			],
+			[
+				"vali",
+				"validation"
+			],
+			[
+				"vale",
+				"values〔variable〕"
+			],
+			[
 				"pass",
 				"password"
 			],
@@ -22,10 +78,6 @@
 			[
 				"api",
 				"api_root"
-			],
-			[
-				"res",
-				"rest_auth_router〔variable〕"
 			],
 			[
 				"rest",
@@ -100,10 +152,6 @@
 				"authEndpoints"
 			],
 			[
-				"pa",
-				"pathname"
-			],
-			[
 				"no",
 				"notAuthEndpoints"
 			],
@@ -138,10 +186,6 @@
 			[
 				"con",
 				"console"
-			],
-			[
-				"val",
-				"validate〔function〕"
 			],
 			[
 				"new",
@@ -206,10 +250,6 @@
 			[
 				"ma",
 				"market_order_result"
-			],
-			[
-				"S",
-				"ShuttleLimitLimit"
 			],
 			[
 				"round",
@@ -474,58 +514,61 @@
 			[
 				"obje",
 				"objects"
-			],
-			[
-				"ha",
-				"handle_message"
-			],
-			[
-				"threa",
-				"threads_num"
-			],
-			[
-				"thre",
-				"threads_num"
-			],
-			[
-				"Con",
-				"Controller"
-			],
-			[
-				"trades",
-				"trades_listener"
-			],
-			[
-				"mo",
-				"month"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "react-app/src/containers/auth/ProfileContainer.js",
-			"settings":
-			{
-				"buffer_size": 644,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "react-app/src/components/auth/ProfileForm.js",
-			"settings":
-			{
-				"buffer_size": 375,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "react-app/src/components/auth/PasswordResetForm.js",
 			"settings":
 			{
-				"buffer_size": 707,
+				"buffer_size": 758,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "react-app/src/containers/auth/RegistrationContainer.js",
+			"settings":
+			{
+				"buffer_size": 1451,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "react-app/src/containers/auth/PasswordResetContainer.js",
+			"settings":
+			{
+				"buffer_size": 1374,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "react-app/src/containers/auth/ProfileContainer.js",
+			"settings":
+			{
+				"buffer_size": 703,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "react-app/src/containers/auth/LoginContainer.js",
+			"settings":
+			{
+				"buffer_size": 864,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "react-app/src/components/FormField.js",
+			"settings":
+			{
+				"buffer_size": 379,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -534,7 +577,16 @@
 			"file": "react-app/src/components/auth/PasswordResetConfirmForm.js",
 			"settings":
 			{
-				"buffer_size": 1224,
+				"buffer_size": 959,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "react-app/src/components/Navigation.js",
+			"settings":
+			{
+				"buffer_size": 610,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -552,7 +604,7 @@
 			"file": "react-app/src/components/FormWrapper.js",
 			"settings":
 			{
-				"buffer_size": 946,
+				"buffer_size": 1000,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -606,16 +658,7 @@
 			"file": "react-app/src/reducers/snippetsReducer.js",
 			"settings":
 			{
-				"buffer_size": 547,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "react-app/src/containers/auth/PasswordResetContainer.js",
-			"settings":
-			{
-				"buffer_size": 1292,
+				"buffer_size": 441,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -624,16 +667,7 @@
 			"file": "react-app/src/containers/auth/PasswordResetConfirmContainer.js",
 			"settings":
 			{
-				"buffer_size": 1514,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "react-app/src/containers/auth/RegistrationContainer.js",
-			"settings":
-			{
-				"buffer_size": 1113,
+				"buffer_size": 1625,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -642,25 +676,7 @@
 			"file": "react-app/src/containers/NavigationContainer.js",
 			"settings":
 			{
-				"buffer_size": 1545,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "react-app/src/components/Navigation.js",
-			"settings":
-			{
-				"buffer_size": 629,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "react-app/src/containers/auth/EmailVerifyContainer.js",
-			"settings":
-			{
-				"buffer_size": 0,
+				"buffer_size": 1347,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -684,28 +700,11 @@
 			}
 		},
 		{
-			"file": "react-app/src/containers/auth/LoginContainer.js",
-			"settings":
-			{
-				"buffer_size": 562,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "react-app/src/components/auth/LoginForm.js",
 			"settings":
 			{
-				"buffer_size": 915,
+				"buffer_size": 1039,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "react-app/src/components/auth/PasswordChangeForm.js",
-			"settings":
-			{
-				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		},
@@ -713,7 +712,7 @@
 			"file": "react-app/src/components/auth/RegistrationForm.js",
 			"settings":
 			{
-				"buffer_size": 1101,
+				"buffer_size": 1157,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -722,7 +721,7 @@
 			"file": "django_server/django_server/urls.py",
 			"settings":
 			{
-				"buffer_size": 1521,
+				"buffer_size": 1505,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -758,9 +757,45 @@
 			"file": "django_server/django_server/settings.py",
 			"settings":
 			{
-				"buffer_size": 4401,
+				"buffer_size": 4799,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "django_server/custom_django_rest_auth/templates/account/email/email_confirmation_message.txt",
+			"settings":
+			{
+				"buffer_size": 568,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "django_server/custom_django_rest_auth/serializers.py",
+			"settings":
+			{
+				"buffer_size": 1242,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 185,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "django_server/custom_django_rest_auth/templates/password_reset_email.html",
+			"settings":
+			{
+				"buffer_size": 588,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -784,7 +819,7 @@
 			"file": "react-app/src/reducers/restAuthReducer.js",
 			"settings":
 			{
-				"buffer_size": 2487,
+				"buffer_size": 3133,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -793,8 +828,16 @@
 			"file": "react-app/src/actions/restAuth.js",
 			"settings":
 			{
-				"buffer_size": 3241,
+				"buffer_size": 3388,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "react-app/src/store/configureStore.js",
+			"settings":
+			{
+				"buffer_size": 307,
 				"line_ending": "Windows"
 			}
 		},
@@ -802,7 +845,7 @@
 			"file": "react-app/src/test.js",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 142,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -835,6 +878,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
 			[
 				"Package Control: ",
 				"Package Control: Install Package"
@@ -889,22 +936,29 @@
 	},
 	"expanded_folders":
 	[
+		"/C/code/blank-django-react-auth",
 		"/C/code/blank-django-react-auth/django_server",
 		"/C/code/blank-django-react-auth/django_server/custom_django_rest_auth",
+		"/C/code/blank-django-react-auth/django_server/custom_django_rest_auth/templates",
 		"/C/code/blank-django-react-auth/django_server/django_server",
-		"/C/code/blank-django-react-auth/django_server/snippets",
+		"/C/code/blank-django-react-auth/react-app",
 		"/C/code/blank-django-react-auth/react-app/src",
 		"/C/code/blank-django-react-auth/react-app/src/actions",
 		"/C/code/blank-django-react-auth/react-app/src/components",
 		"/C/code/blank-django-react-auth/react-app/src/components/auth",
 		"/C/code/blank-django-react-auth/react-app/src/containers",
 		"/C/code/blank-django-react-auth/react-app/src/containers/auth",
-		"/C/code/blank-django-react-auth/react-app/src/middleware",
 		"/C/code/blank-django-react-auth/react-app/src/reducers",
 		"/C/code/blank-django-react-auth/react-app/src/store"
 	],
 	"file_history":
 	[
+		"/C/code/blank-django-react-auth/react-app/src/containers/auth/EmailVerifyContainer.js",
+		"/C/code/blank-django-react-auth/react-app/email_templates/password_reset_email.html",
+		"/C/code/blank-django-react-auth/react-app/src/custom_email.txt",
+		"/C/code/blank-django-react-auth/react-app/src/registration/password_reset_email.html",
+		"/C/code/blank-django-react-auth/react-app/src/containers/auth/ProfileContainer.js",
+		"/C/code/blank-django-react-auth/react-app/src/components/auth/ProfileForm.js",
 		"/C/code/blank-django-react-auth/react-app/src/history.js",
 		"/C/code/blank-django-react-auth/react-app/src/store/initStates.js",
 		"/C/code/blank-django-react-auth/react-app/src/containers/auth/PasswordResetConfirmContainer.js",
@@ -922,7 +976,6 @@
 		"/C/code/blank-django-react-auth/django_server/django_server/urls.py",
 		"/C/code/blank-django-react-auth/django_server/snippets/models.py",
 		"/C/code/blank-django-react-auth/react-app/src/components/auth/RegistrationForm.js",
-		"/C/code/blank-django-react-auth/react-app/src/containers/auth/EmailVerifyContainer.js",
 		"/C/code/blank-django-react-auth/django_server/snippets/serializers.py",
 		"/C/code/blank-django-react-auth/django_server/snippets/views.py",
 		"/C/code/blank-django-react-auth/django_server/snippets/urls.py",
@@ -989,6 +1042,11 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"SITE_",
+			"build",
+			"reset_form",
+			"getattr",
+			"AUTHENTICATION_BACKENDS",
 			"PASSWORD_RESET_CONFIRM_REQUEST",
 			"PASSWORD_RESET_REQUEST",
 			"REGISTRATION_REQUEST",
@@ -1035,34 +1093,33 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "react-app/src/containers/auth/ProfileContainer.js",
+					"file": "react-app/src/components/auth/PasswordResetForm.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 644,
+						"buffer_size": 758,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								466,
-								466
+								548,
+								548
 							]
 						],
 						"settings":
 						{
-							"SL.352.region_keys":
+							"SL.18.region_keys":
 							[
 							],
 							"auto_complete": false,
 							"git_gutter_is_enabled": true,
-							"open_with_edit": true,
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
@@ -1071,31 +1128,36 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 19,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "react-app/src/components/auth/ProfileForm.js",
+					"file": "react-app/src/containers/auth/RegistrationContainer.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 375,
+						"buffer_size": 1451,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								136,
-								136
+								960,
+								960
 							]
 						],
 						"settings":
 						{
+							"SL.30.region_keys":
+							[
+							],
+							"SL.369.region_keys":
+							[
+							],
 							"auto_complete": false,
 							"git_gutter_is_enabled": true,
-							"open_with_edit": true,
 							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
@@ -1109,19 +1171,54 @@
 				},
 				{
 					"buffer": 2,
-					"file": "react-app/src/components/auth/PasswordResetForm.js",
+					"file": "react-app/src/containers/auth/PasswordResetContainer.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 707,
+						"buffer_size": 1374,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								304,
-								304
+								527,
+								527
+							]
+						],
+						"settings":
+						{
+							"SL.367.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "react-app/src/containers/auth/ProfileContainer.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 703,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								233,
+								233
 							]
 						],
 						"settings":
@@ -1136,28 +1233,105 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "react-app/src/components/auth/PasswordResetConfirmForm.js",
+					"buffer": 4,
+					"file": "react-app/src/containers/auth/LoginContainer.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1224,
+						"buffer_size": 864,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								623,
-								596
+								633,
+								633
 							]
 						],
 						"settings":
 						{
+							"SL.357.region_keys":
+							[
+							],
+							"SL.36.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "react-app/src/components/FormField.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 379,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								379,
+								379
+							]
+						],
+						"settings":
+						{
+							"SL.57.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 28,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "react-app/src/components/auth/PasswordResetConfirmForm.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 959,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								550,
+								550
+							]
+						],
+						"settings":
+						{
+							"SL.19.region_keys":
+							[
+							],
 							"SL.393.region_keys":
 							[
 							],
@@ -1171,11 +1345,47 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 7,
+					"file": "react-app/src/components/Navigation.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 610,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								375,
+								375
+							]
+						],
+						"settings":
+						{
+							"SL.414.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 31,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
 					"file": "react-app/src/containers/GeneralContainer.js",
 					"semi_transient": false,
 					"settings":
@@ -1206,28 +1416,31 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 16,
+					"stack_index": 34,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 9,
 					"file": "react-app/src/components/FormWrapper.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 946,
+						"buffer_size": 1000,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4,
-								4
+								493,
+								493
 							]
 						],
 						"settings":
 						{
+							"SL.21.region_keys":
+							[
+							],
 							"SL.418.region_keys":
 							[
 							],
@@ -1239,14 +1452,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 432.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 26,
+					"stack_index": 29,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 10,
 					"file": "react-app/src/components/General.js",
 					"semi_transient": false,
 					"settings":
@@ -1278,17 +1491,17 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 25,
+					"stack_index": 32,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 14,
+			"selected": 5,
 			"sheets":
 			[
 				{
-					"buffer": 7,
+					"buffer": 11,
 					"file": "react-app/src/index.js",
 					"semi_transient": false,
 					"settings":
@@ -1300,8 +1513,8 @@
 						"selection":
 						[
 							[
-								747,
-								747
+								344,
+								344
 							]
 						],
 						"settings":
@@ -1316,11 +1529,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 12,
 					"file": "react-app/src/containers/ApplicationContainer.js",
 					"semi_transient": false,
 					"settings":
@@ -1352,11 +1565,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 18,
+					"stack_index": 36,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 13,
 					"file": "react-app/src/containers/MainContainer.js",
 					"semi_transient": false,
 					"settings":
@@ -1368,8 +1581,8 @@
 						"selection":
 						[
 							[
-								0,
-								1008
+								679,
+								679
 							]
 						],
 						"settings":
@@ -1384,14 +1597,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 176.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 15,
+					"stack_index": 33,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 14,
 					"file": "react-app/src/components/Hero.js",
 					"semi_transient": false,
 					"settings":
@@ -1403,8 +1616,8 @@
 						"selection":
 						[
 							[
-								195,
-								195
+								179,
+								179
 							]
 						],
 						"settings":
@@ -1423,24 +1636,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 24,
+					"stack_index": 30,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 15,
 					"file": "react-app/src/reducers/snippetsReducer.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 547,
+						"buffer_size": 441,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								243,
-								243
+								326,
+								326
 							]
 						],
 						"settings":
@@ -1458,63 +1671,31 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 24,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
-					"file": "react-app/src/containers/auth/PasswordResetContainer.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1292,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								924,
-								924
-							]
-						],
-						"settings":
-						{
-							"SL.367.region_keys":
-							[
-							],
-							"auto_complete": false,
-							"git_gutter_is_enabled": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 20,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
+					"buffer": 16,
 					"file": "react-app/src/containers/auth/PasswordResetConfirmContainer.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1514,
+						"buffer_size": 1625,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								858,
-								858
+								665,
+								665
 							]
 						],
 						"settings":
 						{
+							"SL.29.region_keys":
+							[
+							],
 							"SL.368.region_keys":
 							[
 							],
@@ -1528,63 +1709,31 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 21,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 14,
-					"file": "react-app/src/containers/auth/RegistrationContainer.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1113,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								506,
-								506
-							]
-						],
-						"settings":
-						{
-							"SL.369.region_keys":
-							[
-							],
-							"auto_complete": false,
-							"git_gutter_is_enabled": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 15,
+					"buffer": 17,
 					"file": "react-app/src/containers/NavigationContainer.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1545,
+						"buffer_size": 1347,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								703,
-								703
+								606,
+								606
 							]
 						],
 						"settings":
 						{
+							"SL.31.region_keys":
+							[
+							],
 							"SL.376.region_keys":
 							[
 							],
@@ -1595,78 +1744,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 336.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "react-app/src/components/Navigation.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 629,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								517,
-								517
-							]
-						],
-						"settings":
-						{
-							"SL.414.region_keys":
-							[
-							],
-							"auto_complete": false,
-							"git_gutter_is_enabled": true,
-							"open_with_edit": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 23,
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "react-app/src/containers/auth/EmailVerifyContainer.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"git_gutter_is_enabled": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 22,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
@@ -1698,10 +1779,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 528.0,
+						"translation.y": 864.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 17,
+					"stack_index": 35,
 					"type": "text"
 				},
 				{
@@ -1717,8 +1798,8 @@
 						"selection":
 						[
 							[
-								446,
-								446
+								449,
+								449
 							]
 						],
 						"settings":
@@ -1739,54 +1820,19 @@
 				},
 				{
 					"buffer": 20,
-					"file": "react-app/src/containers/auth/LoginContainer.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 562,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								562,
-								562
-							]
-						],
-						"settings":
-						{
-							"SL.357.region_keys":
-							[
-							],
-							"auto_complete": false,
-							"git_gutter_is_enabled": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 21,
 					"file": "react-app/src/components/auth/LoginForm.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 915,
+						"buffer_size": 1039,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								333,
-								333
+								952,
+								952
 							]
 						],
 						"settings":
@@ -1801,60 +1847,34 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 240.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 25,
 					"type": "text"
 				},
 				{
-					"buffer": 22,
-					"file": "react-app/src/components/auth/PasswordChangeForm.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"git_gutter_is_enabled": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 23,
+					"buffer": 21,
 					"file": "react-app/src/components/auth/RegistrationForm.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1101,
+						"buffer_size": 1157,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								299,
-								299
+								1003,
+								1003
 							]
 						],
 						"settings":
 						{
+							"SL.39.region_keys":
+							[
+							],
 							"SL.413.region_keys":
 							[
 							],
@@ -1865,33 +1885,33 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 240.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 26,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 8,
+			"selected": 11,
 			"sheets":
 			[
 				{
-					"buffer": 24,
+					"buffer": 22,
 					"file": "django_server/django_server/urls.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1521,
+						"buffer_size": 1505,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								532,
-								532
+								1475,
+								1475
 							]
 						],
 						"settings":
@@ -1902,6 +1922,10 @@
 								"SL.pyflakes.Highlights.|84da0deb9eef650178dd17c5d364742d860d3dd5f2e58050aaa5a2723a206aaa|region.redish markup.error.sublime_linter|32",
 								"SL.pyflakes.Gutter.|region.redish markup.error.sublime_linter|dot"
 							],
+							"SL.40.region_keys":
+							[
+								"sublime_linter.protected_regions"
+							],
 							"auto_complete": false,
 							"git_gutter_is_enabled": true,
 							"syntax": "Packages/Python/Python.sublime-syntax",
@@ -1909,14 +1933,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 96.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 28,
+					"stack_index": 16,
 					"type": "text"
 				},
 				{
-					"buffer": 25,
+					"buffer": 23,
 					"file": "django_server/django_server/views.py",
 					"semi_transient": false,
 					"settings":
@@ -1934,6 +1958,9 @@
 						],
 						"settings":
 						{
+							"SL.41.region_keys":
+							[
+							],
 							"SL.412.region_keys":
 							[
 								"sublime_linter.protected_regions"
@@ -1948,11 +1975,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 29,
+					"stack_index": 22,
 					"type": "text"
 				},
 				{
-					"buffer": 26,
+					"buffer": 24,
 					"file": "django_server/custom_django_rest_auth/urls.py",
 					"semi_transient": false,
 					"settings":
@@ -1964,8 +1991,8 @@
 						"selection":
 						[
 							[
-								329,
-								304
+								319,
+								319
 							]
 						],
 						"settings":
@@ -1973,6 +2000,9 @@
 							"SL.402.region_keys":
 							[
 								"sublime_linter.protected_regions"
+							],
+							"SL.42.region_keys":
+							[
 							],
 							"auto_complete": false,
 							"git_gutter_is_enabled": true,
@@ -1985,11 +2015,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 30,
+					"stack_index": 18,
 					"type": "text"
 				},
 				{
-					"buffer": 27,
+					"buffer": 25,
 					"file": "django_server/custom_django_rest_auth/views.py",
 					"semi_transient": false,
 					"settings":
@@ -2011,6 +2041,9 @@
 							[
 								"sublime_linter.protected_regions"
 							],
+							"SL.43.region_keys":
+							[
+							],
 							"auto_complete": false,
 							"git_gutter_is_enabled": true,
 							"syntax": "Packages/Python/Python.sublime-syntax"
@@ -2019,30 +2052,34 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 31,
+					"stack_index": 21,
 					"type": "text"
 				},
 				{
-					"buffer": 28,
+					"buffer": 26,
 					"file": "django_server/django_server/settings.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4401,
+						"buffer_size": 4799,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1001,
-								1001
+								3001,
+								3001
 							]
 						],
 						"settings":
 						{
 							"SL.404.region_keys":
 							[
+							],
+							"SL.44.region_keys":
+							[
+								"sublime_linter.protected_regions"
 							],
 							"auto_complete": false,
 							"git_gutter_is_enabled": true,
@@ -2051,14 +2088,143 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 288.0,
+						"translation.y": 1595.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 32,
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "django_server/custom_django_rest_auth/templates/account/email/email_confirmation_message.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								364,
+								376
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 19,
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "django_server/custom_django_rest_auth/serializers.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1242,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								534,
+								534
+							]
+						],
+						"settings":
+						{
+							"SL.66.region_keys":
+							[
+								"sublime_linter.protected_regions"
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
 					"type": "text"
 				},
 				{
 					"buffer": 29,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 185,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								185,
+								185
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 20,
+					"type": "text"
+				},
+				{
+					"buffer": 30,
+					"file": "django_server/custom_django_rest_auth/templates/password_reset_email.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 588,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								276,
+								276
+							]
+						],
+						"settings":
+						{
+							"SL.74.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 31,
 					"file": "django_server/test.py",
 					"semi_transient": false,
 					"settings":
@@ -2079,6 +2245,9 @@
 							"SL.398.region_keys":
 							[
 							],
+							"SL.45.region_keys":
+							[
+							],
 							"git_gutter_is_enabled": true,
 							"open_with_edit": true,
 							"syntax": "Packages/Python/Python.sublime-syntax"
@@ -2087,11 +2256,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 33,
+					"stack_index": 23,
 					"type": "text"
 				},
 				{
-					"buffer": 30,
+					"buffer": 32,
 					"file": "react-app/src/reducers/rootReducer.js",
 					"semi_transient": false,
 					"settings":
@@ -2103,8 +2272,8 @@
 						"selection":
 						[
 							[
-								401,
-								401
+								128,
+								128
 							]
 						],
 						"settings":
@@ -2120,24 +2289,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 31,
+					"buffer": 33,
 					"file": "react-app/src/reducers/restAuthReducer.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2487,
+						"buffer_size": 3133,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								220,
-								220
+								2586,
+								2586
 							]
 						],
 						"settings":
@@ -2145,40 +2314,7 @@
 							"SL.364.region_keys":
 							[
 							],
-							"auto_complete": false,
-							"git_gutter_is_enabled": true,
-							"open_with_edit": true,
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 32,
-					"file": "react-app/src/actions/restAuth.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3241,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2892,
-								2892
-							]
-						],
-						"settings":
-						{
-							"SL.365.region_keys":
+							"SL.47.region_keys":
 							[
 							],
 							"auto_complete": false,
@@ -2189,10 +2325,78 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+						"translation.y": 1336.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 34,
+					"file": "react-app/src/actions/restAuth.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3388,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3373,
+								3373
+							]
+						],
+						"settings":
+						{
+							"SL.365.region_keys":
+							[
+							],
+							"SL.48.region_keys":
+							[
+							],
+							"auto_complete": false,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1680.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 35,
+					"file": "react-app/src/store/configureStore.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 307,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -2202,20 +2406,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 33,
+					"buffer": 36,
 					"file": "react-app/src/test.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 142,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								50,
+								50
 							]
 						],
 						"settings":
@@ -2234,7 +2438,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 11,
 					"type": "text"
 				}
 			]
@@ -2242,11 +2446,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 27.0
 	},
 	"input":
 	{
-		"height": 37.0
+		"height": 39.0
 	},
 	"layout":
 	{
@@ -2286,7 +2490,7 @@
 		"rows":
 		[
 			0.0,
-			0.624327212669,
+			0.534838152096,
 			1.0
 		]
 	},
@@ -2311,7 +2515,7 @@
 	"project": "blank-django-react-auth.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -2341,7 +2545,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

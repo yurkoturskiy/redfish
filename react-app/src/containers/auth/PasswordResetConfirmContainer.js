@@ -12,13 +12,9 @@ class PasswordResetConfirm extends Component {
     this.isSent = false
   }
   handleSubmit(values) {
-    let params = {
-      'uid': this.props.match.params.uid,
-      'token': this.props.match.params.token,
-      'new_password1': values.new_password1,
-      'new_password2': values.new_password2,
-    }
-    return this.props.passwordResetConfirm(params)
+    values['uid'] = this.props.match.params.uid
+    values['token'] = this.props.match.params.token
+    return this.props.passwordResetConfirm(values)
       .then(res => this.props.validate(res))
   }
   componentWillUpdate(prevProps) {

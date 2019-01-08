@@ -2,13 +2,7 @@
 	"folders":
 	[
 		{
-			"path": "django_server"
-		},
-		{
-			"path": "react-app\\src"
-		},
-		{
-			"path": "react-app\\email_templates"
+			"path": "."
 		}
 	]
 }
