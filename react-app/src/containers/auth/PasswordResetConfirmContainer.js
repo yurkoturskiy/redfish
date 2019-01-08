@@ -1,9 +1,9 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react';
 import PasswordResetConfirmForm from '../../components/auth/PasswordResetConfirmForm'
-import {passwordResetConfirm} from '../../actions/restAuth'
+import {passwordResetConfirm, validate} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
-import {SubmissionError} from 'redux-form'
+
 
 class PasswordResetConfirm extends Component {
   constructor(props) {
@@ -19,13 +19,7 @@ class PasswordResetConfirm extends Component {
       'new_password2': values.new_password2,
     }
     return this.props.passwordResetConfirm(params)
-      .then(res => {
-        // server-side validation
-        if (res.payload.status === 400) {
-          res.payload.response._error = res.payload.response.non_field_errors
-          throw new SubmissionError(res.payload.response)
-        }
-    })
+      .then(res => this.props.validate(res))
   }
   componentWillUpdate(prevProps) {
     if (this.props.numPassResetConfirmSucceed !== prevProps.numPassResetConfirmSucceed) {
@@ -53,6 +47,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     passwordResetConfirm: (values) => dispatch(passwordResetConfirm(values)),
+    validate: (res) => dispatch(validate(res)),
   }
 }
 

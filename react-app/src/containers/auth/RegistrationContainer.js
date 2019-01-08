@@ -1,10 +1,8 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react';
 import RegistrationForm from '../../components/auth/RegistrationForm'
-import {registration} from '../../actions/restAuth'
+import {registration, validate} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
-
-import { SubmissionError } from 'redux-form'
 
 
 class Registration extends Component {
@@ -18,14 +16,7 @@ class Registration extends Component {
     values.password2 = values.password1 
     // submit values to the server
     return this.props.registration(values)
-      .then(res => {
-        // server-side validation
-        if (res.payload.status === 400) {
-          res.payload.response._error = res.payload.response.non_field_errors
-          console.log(res.payload.response)
-          throw new SubmissionError(res.payload.response)  
-        }
-    })
+      .then(res => this.props.validate(res))
   }
   componentWillUpdate(prevProps) {
     if (this.props.numRegsSucceed !== prevProps.numRegsSucceed) {
@@ -55,6 +46,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     registration: (values) => dispatch(registration(values)),
+    validate: (res) => dispatch(validate(res)),
   }
 }
 

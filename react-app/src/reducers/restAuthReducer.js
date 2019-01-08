@@ -1,4 +1,6 @@
 import rootReducer from './rootReducer'
+import store from '../store/configureStore';
+import {SubmissionError} from 'redux-form'
 
 
 import {REST_AUTH} from '../actions/restAuth'
@@ -83,6 +85,19 @@ const restAuth = (state = initState(), action) => {
         break
     }
     return {...state}
+  }
+  switch(action.type) {
+    case REST_AUTH.VALIDATE:
+      if (action.response.payload.status && action.response.payload.status !== 200) {
+        if (action.response.payload.response.non_field_errors) {
+          action.response.payload.response._error = action.response.payload.response.non_field_errors  
+        }
+        throw new SubmissionError(action.response.payload.response)
+      } else if (action.response.error) {
+        throw new SubmissionError({
+          _error: 'Something wrong with our server. Please try again.'
+        })
+      }
   }
   return state
 }

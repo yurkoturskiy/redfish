@@ -2,7 +2,8 @@ import {connect} from 'react-redux'
 import React, { Component } from 'react';
 import ProfileForm from '../../components/auth/ProfileForm'
 import {withRouter} from 'react-router'
-import {user} from '../../actions/restAuth'
+import {user, validate} from '../../actions/restAuth'
+
 
 class Profile extends Component {
   render() {
@@ -23,6 +24,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getUser: () => dispatch(user()),
+    validate: (res) => dispatch(validate(res)),
   }
 }
 

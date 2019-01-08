@@ -1,13 +1,9 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react';
 import LoginForm from '../../components/auth/LoginForm'
-import {login} from '../../actions/restAuth'
+import {login, validate} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
-import {SubmissionError} from 'redux-form'
 
-const handleSubmit = values => {
-
-}
 
 class Login extends Component {
   constructor(props) {
@@ -17,14 +13,7 @@ class Login extends Component {
   handleSubmit(values) {
     // submit values to the server
     return this.props.login(values)
-      .then(res => {
-        // server-side validation
-        if (res.payload.status === 400) {
-          res.payload.response._error = res.payload.response.non_field_errors
-          console.log(res.payload.response)
-          throw new SubmissionError(res.payload.response)
-        }
-    })
+      .then(res => this.props.validate(res))
   }
   render() {
     return (
@@ -38,6 +27,7 @@ class Login extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     login: (values) => dispatch(login(values)),
+    validate: (res) => dispatch(validate(res)),
   }
 }
 

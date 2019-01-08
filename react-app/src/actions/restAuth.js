@@ -26,7 +26,8 @@ export const REST_AUTH = {
     PASSWORD_RESET: '@@password_reset/PASSWORD_RESET_FAILURE',
     PASSWORD_RESET_CONFIRM: '@@password_reset_confirm/PASSWORD_RESET_CONFIRM_FAILURE',
     USER: '@@user/USER_FAILURE',
-  }
+  },
+  VALIDATE: '@@validate/RESPONSE_VALIDATE'
 }
 
 
@@ -116,4 +117,10 @@ export const user = payload => ({
       REST_AUTH.FAILURE.USER,
     ],
   }
+})
+
+export const validate = (response, values) => ({
+  type: REST_AUTH.VALIDATE,
+  values,
+  response,
 })

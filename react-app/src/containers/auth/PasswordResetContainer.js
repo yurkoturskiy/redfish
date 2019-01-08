@@ -1,9 +1,9 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react';
 import PasswordResetForm from '../../components/auth/PasswordResetForm'
-import {passwordReset} from '../../actions/restAuth'
+import {passwordReset, validate} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
-import {SubmissionError} from 'redux-form'
+
 
 class PasswordReset extends Component {
   constructor(props) {
@@ -13,13 +13,7 @@ class PasswordReset extends Component {
   }
   handleSubmit(values) {
     return this.props.passwordReset(values)
-      .then(res => {
-        // server-side validation
-        if (res.payload.status === 400) {
-          res.payload.response._error = res.payload.response.non_field_errors
-          throw new SubmissionError(res.payload.response)
-        }
-    })
+      .then(res => this.props.validate(res))
   }
   componentWillUpdate(prevProps) {
     // set isSent to true after success sending email
@@ -48,6 +42,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     passwordReset: (email) => dispatch(passwordReset(email)),
+    validate: (res) => dispatch(validate(res)),
   }
 }
 
