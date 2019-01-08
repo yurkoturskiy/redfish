@@ -4,7 +4,6 @@ import LoginForm from '../../components/auth/LoginForm'
 import {login, validate} from '../../actions/restAuth'
 import {withRouter} from 'react-router'
 
-
 class Login extends Component {
   constructor(props) {
     super(props)

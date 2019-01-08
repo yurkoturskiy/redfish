@@ -6,14 +6,14 @@ import {withRouter} from 'react-router'
 
 import AutoRouter from './AutoRouterContainer'
 import NavigationContainer from './NavigationContainer'
-import General from '../components/General'
+import GlobalStyle from '../components/GlobalStyle'
 
 
-
-class GeneralContainer extends Component {
+class GlobalContainer extends Component {
   render() {
     return (
       <AutoRouter>
+        <GlobalStyle/>
         <NavigationContainer>
           <p>auth: {((this.props.isAuth) ? 'true' : 'false')}</p>
           <p>token: {this.props.token}</p>
@@ -39,5 +39,5 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GeneralContainer))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GlobalContainer))
 

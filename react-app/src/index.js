@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import GeneralContainer from './containers/GeneralContainer'
+import GlobalContainer from './containers/GlobalContainer'
 import * as serviceWorker from './serviceWorker'
 import { Router } from 'react-router-dom'
 import history from './history'
@@ -12,7 +12,7 @@ import store from './store/configureStore'
 ReactDOM.render(
   <Router history={history}>
     <Provider store={store}>
-      <GeneralContainer />
+      <GlobalContainer />
     </Provider>
   </Router>, document.getElementById('root'));
   
