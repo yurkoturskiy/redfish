@@ -6,6 +6,9 @@
 		},
 		{
 			"path": "react-app\\src"
+		},
+		{
+			"path": "react-app\\email_templates"
 		}
 	]
 }

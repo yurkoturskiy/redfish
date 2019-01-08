@@ -15,7 +15,7 @@ API_DESCRIPTION = 'A Web API for creating and viewing highlighted code snippets.
 schema_view = get_schema_view(title=API_TITLE)
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html'), name='index'),
+    path('', TemplateView.as_view(template_name='build/index.html'), name='index'),
     path('schema/', schema_view),
     path('rest/', include('snippets.urls')),
     path('admin/', admin.site.urls),
