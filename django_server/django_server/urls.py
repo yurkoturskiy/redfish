@@ -7,7 +7,7 @@ from rest_framework.schemas import get_schema_view
 from rest_framework.documentation import include_docs_urls
 
 from .views import confirm_email
-from rest_auth.registration.views import VerifyEmailView, RegisterView
+from rest_auth.registration.views import VerifyEmailView
 
 
 API_TITLE = 'Pastebin API'
@@ -15,7 +15,6 @@ API_DESCRIPTION = 'A Web API for creating and viewing highlighted code snippets.
 schema_view = get_schema_view(title=API_TITLE)
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='build/index.html'), name='index'),
     path('schema/', schema_view),
     path('rest/', include('snippets.urls')),
     path('admin/', admin.site.urls),
@@ -29,5 +28,6 @@ urlpatterns = [
     url(r'^rest-auth/', include('custom_django_rest_auth.urls')),
     url(r'^password-reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         TemplateView.as_view(template_name="index.html"),
-        name='password_reset_confirm'),    
+        name='password_reset_confirm'),
+    url(r'.*', TemplateView.as_view(template_name='index.html'), name='index'),
 ]

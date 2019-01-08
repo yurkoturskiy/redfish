@@ -10,14 +10,10 @@ class PasswordResetSerializer(serializers.Serializer):
 
     password_reset_form_class = PasswordResetForm
 
-    def get_email_options(self):
+    def get_email_options(self, request):
         """Override this method to change default e-mail options"""
         return {
-            'email_template_name': 'email_templates/password_reset_email.html',
-            'extra_email_context': {
-                'domain': 'localhost:3006',
-                'site_name': 'Sebucur',
-            },
+            'email_template_name': 'password_reset_email.html',
         }
 
     def validate_email(self, value):
@@ -36,7 +32,5 @@ class PasswordResetSerializer(serializers.Serializer):
             'from_email': getattr(settings, 'DEFAULT_FROM_EMAIL'),
             'request': request,
         }
-        opts.update(self.get_email_options())
-        print(dir(opts))
-        print(opts.values)
+        opts.update(self.get_email_options(request))
         self.reset_form.save(**opts)
