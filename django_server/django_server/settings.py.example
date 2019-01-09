@@ -61,16 +61,21 @@ EMAIL_HOST_PASSWORD = 'YOUR GMAIL APP PASSWORD. 2-step verification should be ac
 
 
 # LOGIN_REDIRECT_URL='/'
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'
-# ACCOUNT_EMAIL_REQUIRED = True   
-# ACCOUNT_USERNAME_REQUIRED = False
-# # ACCOUNT_USERNAME_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
 
 
 # ACCOUNT_CONFIRM_EMAIL_ON_GET=False
 # ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -84,9 +89,6 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ORIGIN_WHITELIST = (
-#     'http//:localhost:3006',
-# )
 
 ROOT_URLCONF = 'django_server.urls'
 
