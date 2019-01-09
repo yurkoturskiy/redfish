@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux'
+// presentational components
 import LoginForm from '../../components/auth/LoginForm'
-import {login, validate} from '../../actions/restAuth'
-import {withRouter} from 'react-router'
+// actions
+import { login, validate } from '../../actions/restAuth'
 
-class Login extends Component {
+class Login extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -15,19 +16,9 @@ class Login extends Component {
       .then(res => this.props.validate(res))
   }
   render() {
-    return (
-      <LoginForm 
-        onSubmit={this.handleSubmit} 
-      />
-    );
+    return <LoginForm onSubmit={this.handleSubmit} />
   }
 }
-
-// const mapStatetoProps = state => {
-//   return {
-//     showPass: state.ui.showPass,
-//   }
-// }
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -36,4 +27,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(undefined, mapDispatchToProps)(Login))
+export default connect(undefined, mapDispatchToProps)(Login)

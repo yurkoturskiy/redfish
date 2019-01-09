@@ -6,7 +6,7 @@ import FormField from '../FormField'
 
 const theme = {
   background: '#f0f0f0',
-};
+}
 
 let PasswordResetForm = props => {
   const { error, handleSubmit } = props

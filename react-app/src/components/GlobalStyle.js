@@ -6,4 +6,4 @@ export default createGlobalStyle`
   body {
     font-family: 'Fira Sans', sans-serif;
   }
-`;
+`

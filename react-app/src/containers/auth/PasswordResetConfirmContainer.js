@@ -1,11 +1,12 @@
+import React from 'react';
 import {connect} from 'react-redux'
-import React, { Component } from 'react';
+// presentational components
 import PasswordResetConfirmForm from '../../components/auth/PasswordResetConfirmForm'
+// actions
 import {passwordResetConfirm, validate} from '../../actions/restAuth'
-import {withRouter} from 'react-router'
 
 
-class PasswordResetConfirm extends Component {
+class PasswordResetConfirm extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -52,4 +53,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PasswordResetConfirm))
+export default connect(mapStateToProps, mapDispatchToProps)(PasswordResetConfirm)

@@ -1,11 +1,12 @@
-import {connect} from 'react-redux'
-import React, { Component } from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
+// presentational components
 import RegistrationForm from '../../components/auth/RegistrationForm'
+// actions
 import {registration, validate} from '../../actions/restAuth'
-import {withRouter} from 'react-router'
 
 
-class Registration extends Component {
+class Registration extends React.Component {
   constructor(props) {
     super(props)
     this.isSent = false
@@ -53,4 +54,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(Registration))
+export default connect(mapStatetoProps, mapDispatchToProps)(Registration)

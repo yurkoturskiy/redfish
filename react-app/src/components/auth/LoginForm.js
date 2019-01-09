@@ -8,13 +8,10 @@ import FormField from '../FormField'
 
 const theme = {
   background: '#f0f0f0',
-};
+}
 
 let LoginForm = props => {
-  const { 
-    error, 
-    handleSubmit,
-  } = props
+  const { error, handleSubmit } = props
   return (
     <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>

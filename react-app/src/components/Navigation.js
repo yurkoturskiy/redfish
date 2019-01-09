@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 
@@ -36,4 +35,4 @@ export default styled(Navigation)`
   li:hover {
     background-color: #f0f0f0
   }
-`;
+`

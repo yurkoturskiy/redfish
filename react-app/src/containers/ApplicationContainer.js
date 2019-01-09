@@ -1,9 +1,9 @@
 import React from "react"
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
-import {user} from '../actions/restAuth'
-
+import { connect } from 'react-redux'
+// container components
 import NavigationContainer from './NavigationContainer'
+// actions
+import { user } from '../actions/restAuth'
 
 
 class Application extends React.Component {
@@ -36,4 +36,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Application))
+export default connect(mapStateToProps, mapDispatchToProps)(Application)

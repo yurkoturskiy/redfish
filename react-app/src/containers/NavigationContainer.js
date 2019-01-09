@@ -1,11 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
-
-import {logout} from '../actions/restAuth'
-
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+// presentational components
 import Navigation from '../components/Navigation'
+// actions
+import { logout } from '../actions/restAuth'
 
 
 class NavigationContainer extends React.Component {
@@ -53,4 +52,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationContainer))
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationContainer)

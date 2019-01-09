@@ -1,11 +1,12 @@
-import {connect} from 'react-redux'
-import React, { Component } from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
+// presentational components
 import ProfileForm from '../../components/auth/ProfileForm'
-import {withRouter} from 'react-router'
-import {user, validate} from '../../actions/restAuth'
+// actions
+import { user, validate } from '../../actions/restAuth'
 
 
-class Profile extends Component {
+class Profile extends React.Component {
   render() {
     return (
       <div className="App">
@@ -28,4 +29,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile))
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

@@ -1,15 +1,17 @@
-import {connect} from 'react-redux'
-import React, { Component } from 'react';
-import {snippets} from '../actions/snippets'
-import {user} from '../actions/restAuth'
-import {withRouter} from 'react-router'
-
+import React from 'react'
+import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
+// container components
 import AutoRouter from './AutoRouterContainer'
 import NavigationContainer from './NavigationContainer'
+// styled components
 import GlobalStyle from '../components/GlobalStyle'
+// actions
+import { user } from '../actions/restAuth'
+import { snippets } from '../actions/snippets'
 
 
-class GlobalContainer extends Component {
+class GlobalContainer extends React.Component {
   render() {
     return (
       <AutoRouter>

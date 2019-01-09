@@ -1,6 +1,8 @@
 import React from "react"
-import {connect} from 'react-redux'
-import {showHidePass} from '../actions/ui'
+import { connect } from 'react-redux'
+// actions
+import { showHidePass } from '../actions/ui'
+
 
 class FormField extends React.Component {
   constructor(props) {
@@ -36,10 +38,10 @@ class FormField extends React.Component {
             </i>
           )}
           <input {...input} placeholder={label} type={dynamicType} className='input-field' />
+        </div>
           {touched &&
             ((error && <span>{error}</span>) ||
               (warning && <span>{warning}</span>))}
-        </div>
       </div>
     )
   }

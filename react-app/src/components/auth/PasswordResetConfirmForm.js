@@ -9,10 +9,7 @@ const theme = {
 }
 
 let PasswordResetConfirmForm = props => {
-  const { 
-    error, 
-    handleSubmit,
-  } = props
+  const { error, handleSubmit } = props
   return (
     <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>

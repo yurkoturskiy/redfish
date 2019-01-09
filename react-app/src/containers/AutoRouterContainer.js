@@ -1,16 +1,15 @@
 import React from 'react'
-import {Route, Switch, Prompt} from 'react-router-dom'
+import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
+import { Route, Switch, Prompt } from 'react-router-dom'
+// container components
 import Main from './MainContainer'
+import Application from './ApplicationContainer'
 import Login from './auth/LoginContainer'
 import Registration from './auth/RegistrationContainer'
 import Profile from './auth/ProfileContainer'
 import PasswordReset from './auth/PasswordResetContainer'
 import PasswordResetConfirm from './auth/PasswordResetConfirmContainer'
-import {withRouter} from 'react-router'
-import {connect} from 'react-redux'
-import history from '../history'
-
-import Application from './ApplicationContainer'
 
 const authEndpoints = [
   '/profile',
@@ -38,13 +37,13 @@ class AutoRouter extends React.Component {
       for (var i in notAuthEndpoints) {
         if (this.props.location.pathname === notAuthEndpoints[i]) {
           console.log('you already logged in')
-          history.push('/app')
+          this.props.history.push('/app')
         }
       } 
     } else {
       for (var i in authEndpoints) {
         if (this.props.location.pathname === authEndpoints[i]) {
-          history.push('/login')
+          this.props.history.push('/login')
         }
       }
     } 

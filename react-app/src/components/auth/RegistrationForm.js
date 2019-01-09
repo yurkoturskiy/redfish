@@ -7,16 +7,10 @@ import FormField from '../FormField'
 
 const theme = {
   background: '#f0f0f0',
-};
-
-var validation = undefined
+}
 
 let RegistrationForm = props => {
-  const { 
-    error, 
-    handleSubmit,
-  } = props
-  // validation = validate
+  const { error, handleSubmit } = props
   return (
     <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>

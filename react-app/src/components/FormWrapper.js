@@ -70,8 +70,7 @@ const FormWrapper = styled.div`
     margin-top: -16px;
     right: 8px;
   }
-
-`;
+`
 
 FormWrapper.defaultProps =  {
   theme: {

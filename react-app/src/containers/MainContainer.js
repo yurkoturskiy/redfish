@@ -1,10 +1,9 @@
 import React from "react"
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router'
-import history from '../history'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
-
+// container components
 import NavigationContainer from './NavigationContainer'
+// styled components
 import Hero from '../components/Hero'
 
 const Title = styled.h1`
@@ -16,6 +15,7 @@ const Title = styled.h1`
   font-size: 1.5em;
   color: palevioletred;
 `;
+
 
 class Main extends React.Component {
   render() {
@@ -38,10 +38,4 @@ const mapStateToProps = state => {
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//  return {
-//    wsSend: (msg) => (dispatch(send(msg)))
-//  }
-// }
-
-export default withRouter(connect(mapStateToProps, undefined)(Main))
+export default connect(mapStateToProps, undefined)(Main)

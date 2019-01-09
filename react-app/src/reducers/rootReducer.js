@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
+// reducers
 import snippets from './snippetsReducer'
 import restAuth from './restAuthReducer'
 import ui from './uiReducer'

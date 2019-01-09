@@ -1,10 +1,8 @@
 import rootReducer from './rootReducer'
 import store from '../store/configureStore';
-import {SubmissionError} from 'redux-form'
-
-
-import {REST_AUTH} from '../actions/restAuth'
-
+import { SubmissionError } from 'redux-form'
+// actions
+import { REST_AUTH } from '../actions/restAuth'
 
 const initState = () => {
   return {
@@ -17,8 +15,6 @@ const initState = () => {
       last_name: undefined,
     },
     uiFreeze: false,
-    // passResetRequesting: false,
-    // regRequesting: false,
     numRegsSucceed: 0,
     numPassResetSucceed: 0,
     numPassResetConfirmSucceed: 0,

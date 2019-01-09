@@ -1,14 +1,14 @@
+// actions
 import {
   SNIPPETS_REQUEST,
   SNIPPETS_SUCCESS,
-  SNIPPETS_FAILURE} from '../actions/snippets'
-
+  SNIPPETS_FAILURE
+} from '../actions/snippets'
 
 const initState = () => {
   return {
     snippets: 'none', 
-  }
-  
+  }  
 }
 
 const snippets = (state = initState(), action) => {

@@ -1,12 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+// container components
 import GlobalContainer from './containers/GlobalContainer'
-import * as serviceWorker from './serviceWorker'
 import { Router } from 'react-router-dom'
+import { Provider } from 'react-redux'
+// others
+import * as serviceWorker from './serviceWorker'
 import history from './history'
-import {Provider} from 'react-redux'
 import store from './store/configureStore'
+
 
 
 ReactDOM.render(

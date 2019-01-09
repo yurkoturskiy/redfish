@@ -1,5 +1,5 @@
+// actions
 import { SHOW_HIDE_PASSWORD } from '../actions/ui'
-
 
 const initState = () => {
   return {
