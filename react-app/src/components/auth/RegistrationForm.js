@@ -12,7 +12,10 @@ const theme = {
 var validation = undefined
 
 let RegistrationForm = props => {
-  const {error, handleSubmit} = props
+  const { 
+    error, 
+    handleSubmit,
+  } = props
   // validation = validate
   return (
     <FormWrapper theme={theme}>
@@ -32,9 +35,10 @@ let RegistrationForm = props => {
         />
         <Field 
           name="password1" 
-          type="password"
           label="Password"
+          type="password"
           component={FormField}
+          showPassIcon={true}
         />
         <input type="submit" value="Submit" />
         {error && <strong>{error}</strong>}

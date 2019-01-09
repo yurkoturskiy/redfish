@@ -14,6 +14,7 @@ class PasswordResetConfirm extends Component {
   handleSubmit(values) {
     values['uid'] = this.props.match.params.uid
     values['token'] = this.props.match.params.token
+    values['new_password2'] = values.new_password1
     return this.props.passwordResetConfirm(values)
       .then(res => this.props.validate(res))
   }
@@ -28,7 +29,11 @@ class PasswordResetConfirm extends Component {
     } else if (this.isSent) {
       return <p>password reset is succeed</p>
     } else {
-      return <PasswordResetConfirmForm onSubmit={this.handleSubmit} />
+      return (
+        <PasswordResetConfirmForm 
+          onSubmit={this.handleSubmit} 
+        />
+      )
     }
   }
 }

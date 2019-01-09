@@ -1,6 +1,5 @@
-var q = {
-  somekey: 'somevalue',
-  opt: 'someee',
-}
-q['uid'] = 'aaa'
-console.log(q)
+var a = true
+var result = false && 'hello'
+console.log(result)
+result = true && 'hello'
+console.log(result)

@@ -9,7 +9,7 @@ const theme = {
 };
 
 let PasswordResetForm = props => {
-  const { handleSubmit } = props
+  const { error, handleSubmit } = props
   return (
     <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>
@@ -21,6 +21,7 @@ let PasswordResetForm = props => {
           component={FormField} 
         />
         <input type="submit" value="Reset password"/>
+        {error && <strong>{error}</strong>}
       </form>
     </FormWrapper>
   )

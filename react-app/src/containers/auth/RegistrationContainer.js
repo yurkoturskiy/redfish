@@ -30,8 +30,11 @@ class Registration extends Component {
     } else if (this.isSent) {
       return <p>Confirm your email address</p>
     } else {
-      return <RegistrationForm 
-                onSubmit={this.handleSubmit} />
+      return (
+        <RegistrationForm 
+          onSubmit={this.handleSubmit} 
+        />
+      )
     }
   }
 }

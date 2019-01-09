@@ -11,7 +11,10 @@ const theme = {
 };
 
 let LoginForm = props => {
-  const {error, handleSubmit} = props
+  const { 
+    error, 
+    handleSubmit,
+  } = props
   return (
     <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>
@@ -24,9 +27,10 @@ let LoginForm = props => {
         />
         <Field 
           name="password" 
-          type="password"
           label="Password"
-          component={FormField} 
+          type="password"
+          component={FormField}
+          showPassIcon={true}
         />
         <input type="submit" value="Login"/>
         {error && <strong>{error}</strong>}<br/>

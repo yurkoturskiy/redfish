@@ -9,24 +9,23 @@ const theme = {
 }
 
 let PasswordResetConfirmForm = props => {
-  const { handleSubmit } = props
+  const { 
+    error, 
+    handleSubmit,
+  } = props
   return (
     <FormWrapper theme={theme}>
       <form onSubmit={handleSubmit}>
         <h3>Password reset</h3>
         <Field 
           name="new_password1" 
-          type="password"
           label="New password"
-          component={FormField}
-        />
-        <Field 
-          name="new_password2" 
           type="password"
-          label="Repeat password"
-          component={FormField} 
+          component={FormField}
+          showPassIcon={true}
         />
         <input type="submit" value="Set new password"/>
+        {error && <strong>{error}</strong>}
       </form>
     </FormWrapper>
   )
