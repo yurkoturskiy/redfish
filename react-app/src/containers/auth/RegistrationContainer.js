@@ -15,7 +15,7 @@ class Registration extends React.Component {
   handleSubmit(values) {
     // prepare values
     values.password2 = values.password1 
-    // submit values to the server
+    // submit values to the api
     return this.props.registration(values)
       .then(res => this.props.validate(res))
   }
@@ -34,26 +34,24 @@ class Registration extends React.Component {
       return (
         <RegistrationForm 
           onSubmit={this.handleSubmit} 
-          passValidate={this.props.passValidate}
         />
       )
     }
   }
 }
 
-const mapStatetoProps = state => {
-  return {
-    uiFreeze: state.restAuth.uiFreeze,
-    numRegsSucceed: state.restAuth.numRegsSucceed,
-  }
-}
+const mapStatetoProps = state => ({
+  uiFreeze: state.restAuth.uiFreeze,
+  numRegsSucceed: state.restAuth.numRegsSucceed,
+  passwordScore: state.ui.passwordValidation.score,
+  passwordSuggestions: state.ui.passwordValidation.feedback.suggestions,
+  warning: state.ui.passwordValidation.feedback.warning,
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    registration: (values) => dispatch(registration(values)),
-    validate: (res) => dispatch(validate(res)),
-    passValidate: (payload) => dispatch(passValidate(payload)),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  registration: (values) => dispatch(registration(values)),
+  validate: (res) => dispatch(validate(res)),
+  passValidate: (payload) => dispatch(passValidate(payload)),
+})
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Registration)

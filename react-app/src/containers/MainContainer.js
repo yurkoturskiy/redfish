@@ -1,8 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-// container components
-import NavigationContainer from './NavigationContainer'
 // styled components
 import Hero from '../components/Hero'
 

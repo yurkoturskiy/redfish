@@ -1,5 +1,3 @@
-import rootReducer from './rootReducer'
-import store from '../store/configureStore';
 import { SubmissionError } from 'redux-form'
 // actions
 import { REST_AUTH } from '../actions/restAuth'
@@ -36,6 +34,8 @@ const restAuth = (state = initState(), action) => {
       case REST_AUTH.REQUEST.PASSWORD_RESET_CONFIRM:
         state.uiFreeze = true
         return {...state}
+      default: 
+        return state
     }
   }
   if (action.type.indexOf('SUCCESS') !== -1) {
@@ -59,8 +59,9 @@ const restAuth = (state = initState(), action) => {
       case REST_AUTH.SUCCESS.USER:
         state.user = action.payload
         return {...state}
+      default:
+        return state
     }
-    return state
   } else if (action.type.indexOf('FAILURE') !== -1) {
     switch(action.payload.message) {
       // changing state acording to failure response messages
@@ -79,6 +80,8 @@ const restAuth = (state = initState(), action) => {
       case REST_AUTH.FAILURE.PASSWORD_RESET_CONFIRM:
         state.uiFreeze = false
         break
+      default:
+        return state
     }
     return {...state}
   }
@@ -94,6 +97,9 @@ const restAuth = (state = initState(), action) => {
           _error: 'Something wrong with our server. Please try again.'
         })
       }
+      break
+    default:
+      return state
   }
   return state
 }

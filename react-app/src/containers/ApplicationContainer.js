@@ -1,7 +1,5 @@
 import React from "react"
 import { connect } from 'react-redux'
-// container components
-import NavigationContainer from './NavigationContainer'
 // actions
 import { user } from '../actions/restAuth'
 

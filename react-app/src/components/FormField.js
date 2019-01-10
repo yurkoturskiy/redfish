@@ -17,41 +17,44 @@ class FormField extends React.Component {
       input,
       label,
       type,
-      passVal,
       showPassIcon,
       meta: { touched, error, warning }
     } = this.props
-
+    var dynamicType = undefined
     // type setup
     if (showPassIcon) {
-      var dynamicType = (this.props.showPassState === false ? "password" : "text")
+      dynamicType = (this.props.showPassState ? "text" : "password")
     } else {
-      var dynamicType = type
+      dynamicType = type
     }
     
     return (
-      <div>
-        <label>{label}</label>
-        <div className='input-container'>
-          {showPassIcon && (
-            <i className='icon' onClick={this.props.showHidePass}>
-              {this.props.showPassState ? 'hide' : 'show'}
-            </i>
-          )}
-          <input 
-            {...input} 
-            placeholder={label} 
-            type={dynamicType} 
-            className='input-field'
-            onChange={(event) => {
-              input.onChange(event)
-            }}
-          />
+      <React.Fragment>
+        <div>
+          <label>{label}</label>
+          <div className='input-container'>
+            {showPassIcon && (
+              <i className='material-icons input-icons' onClick={this.props.showHidePass}>
+                {this.props.showPassState ? 'visibility' : 'visibility_off'}
+              </i>
+            )}
+            <input 
+              {...input} 
+              placeholder={label} 
+              type={dynamicType} 
+              className='input-field'
+              onChange={(event) => {
+                input.onChange(event)
+              }}
+            />
+          </div>
+            {touched &&
+              ((error && <span>{error}</span>) ||
+                (warning && <span>{warning}</span>))}
         </div>
-          {touched &&
-            ((error && <span>{error}</span>) ||
-              (warning && <span>{warning}</span>))}
-      </div>
+
+
+      </React.Fragment>
     )
   }
 }

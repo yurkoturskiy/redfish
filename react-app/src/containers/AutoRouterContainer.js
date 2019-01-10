@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { Route, Switch, Prompt } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 // container components
 import Main from './MainContainer'
 import Application from './ApplicationContainer'
@@ -34,14 +34,14 @@ class AutoRouter extends React.Component {
   }
   checkPermission() {
     if (this.props.isAuth) {
-      for (var i in notAuthEndpoints) {
+      for (let i in notAuthEndpoints) {
         if (this.props.location.pathname === notAuthEndpoints[i]) {
           console.log('you already logged in')
           this.props.history.push('/app')
         }
       } 
     } else {
-      for (var i in authEndpoints) {
+      for (let i in authEndpoints) {
         if (this.props.location.pathname === authEndpoints[i]) {
           this.props.history.push('/login')
         }

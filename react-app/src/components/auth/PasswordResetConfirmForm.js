@@ -1,6 +1,5 @@
 import React from "react"
 import { Field, reduxForm } from 'redux-form'
-import PropTypes from 'prop-types'
 import FormWrapper from '../FormWrapper'
 import FormField from '../FormField'
 

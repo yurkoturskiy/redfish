@@ -1,5 +1,4 @@
 import zxcvbn from 'zxcvbn'
-import { passValidate } from '../actions/restAuth'
 import { REST_AUTH } from '../actions/restAuth'
 
 const passValidation = store => next => action => {
@@ -9,8 +8,9 @@ const passValidation = store => next => action => {
       const evaluate = zxcvbn(password)
       action.payload = evaluate
       return next(action)
+    default:
+      return next(action)
   }
-  return next(action)
 }
 
 export default passValidation

@@ -27,11 +27,7 @@ const FormWrapper = styled.div`
 
   input, select {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     box-sizing: border-box;
   }
 
@@ -56,15 +52,15 @@ const FormWrapper = styled.div`
   }
 
   .input-container {
-    position: relative;
-    border: 1px solid red;
+    width: 100%;
   }
 
-  .icon {
+  .input-icons {
     cursor: pointer;
+    color: #555555;
     position: absolute;
     line-height: 32px;
-    width: 48px
+    width: 32px
     text-align: center;
     top: 50%;
     margin-top: -16px;

@@ -1,8 +1,6 @@
 // actions
 import {
-  SNIPPETS_REQUEST,
   SNIPPETS_SUCCESS,
-  SNIPPETS_FAILURE
 } from '../actions/snippets'
 
 const initState = () => {

@@ -1,8 +1,6 @@
 import React from "react"
 import { Field, reduxForm } from 'redux-form'
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import FormWrapper from '../FormWrapper'
 import FormField from '../FormField'
 
