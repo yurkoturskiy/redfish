@@ -5,5 +5,7 @@ export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
   body {
     font-family: 'Fira Sans', sans-serif;
+    margin: 0;
+    padding: 0;
   }
 `

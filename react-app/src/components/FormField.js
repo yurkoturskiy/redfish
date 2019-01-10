@@ -17,6 +17,7 @@ class FormField extends React.Component {
       input,
       label,
       type,
+      passVal,
       showPassIcon,
       meta: { touched, error, warning }
     } = this.props
@@ -27,7 +28,7 @@ class FormField extends React.Component {
     } else {
       var dynamicType = type
     }
-
+    
     return (
       <div>
         <label>{label}</label>
@@ -37,7 +38,15 @@ class FormField extends React.Component {
               {this.props.showPassState ? 'hide' : 'show'}
             </i>
           )}
-          <input {...input} placeholder={label} type={dynamicType} className='input-field' />
+          <input 
+            {...input} 
+            placeholder={label} 
+            type={dynamicType} 
+            className='input-field'
+            onChange={(event) => {
+              input.onChange(event)
+            }}
+          />
         </div>
           {touched &&
             ((error && <span>{error}</span>) ||

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 // presentational components
 import RegistrationForm from '../../components/auth/RegistrationForm'
 // actions
-import {registration, validate} from '../../actions/restAuth'
+import { registration, validate, passValidate } from '../../actions/restAuth'
 
 
 class Registration extends React.Component {
@@ -34,6 +34,7 @@ class Registration extends React.Component {
       return (
         <RegistrationForm 
           onSubmit={this.handleSubmit} 
+          passValidate={this.props.passValidate}
         />
       )
     }
@@ -51,6 +52,7 @@ const mapDispatchToProps = dispatch => {
   return {
     registration: (values) => dispatch(registration(values)),
     validate: (res) => dispatch(validate(res)),
+    passValidate: (payload) => dispatch(passValidate(payload)),
   }
 }
 
