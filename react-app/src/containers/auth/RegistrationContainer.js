@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import RegistrationForm from '../../components/auth/RegistrationForm'
 // actions
 import { registration, validate, passValidate } from '../../actions/restAuth'
+import { showHidePass } from '../../actions/ui'
 
 
 class Registration extends React.Component {
@@ -11,6 +12,9 @@ class Registration extends React.Component {
     super(props)
     this.isSent = false
     this.handleSubmit = this.handleSubmit.bind(this)
+    if (this.props.showPassState) {
+      this.props.showHidePass()
+    }
   }
   handleSubmit(values) {
     // prepare values
@@ -34,6 +38,10 @@ class Registration extends React.Component {
       return (
         <RegistrationForm 
           onSubmit={this.handleSubmit} 
+          showPassState={this.props.showPassState}
+          passwordHelperText={this.props.passwordScore}
+          passwordTralingIconOnClick={this.props.showHidePass}
+          passwordOnChange={this.props.passValidate}
         />
       )
     }
@@ -43,15 +51,16 @@ class Registration extends React.Component {
 const mapStatetoProps = state => ({
   uiFreeze: state.restAuth.uiFreeze,
   numRegsSucceed: state.restAuth.numRegsSucceed,
+  // password field
+  showPassState: state.ui.showPassState,
   passwordScore: state.ui.passwordValidation.score,
-  passwordSuggestions: state.ui.passwordValidation.feedback.suggestions,
-  warning: state.ui.passwordValidation.feedback.warning,
 })
 
 const mapDispatchToProps = dispatch => ({
   registration: (values) => dispatch(registration(values)),
   validate: (res) => dispatch(validate(res)),
   passValidate: (payload) => dispatch(passValidate(payload)),
+  showHidePass: () => dispatch(showHidePass()),
 })
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Registration)

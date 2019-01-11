@@ -10,7 +10,7 @@ const initState = () => {
         suggestions: [],
         warning: "",
       },
-      score: 'too guessable',
+      score: undefined,
     },
   }
 }
@@ -22,6 +22,7 @@ const ui = (state = initState(), action) => {
       return {...state}
     case REST_AUTH.PASSWORD_VALIDATE:
       state.passwordValidation.feedback = action.payload.feedback
+      console.log(action.payload.password)
       state.passwordValidation.score = (
         (action.payload.score === 0 && 'too guessable') ||
         (action.payload.score === 1 && 'very guessable') ||
@@ -29,6 +30,8 @@ const ui = (state = initState(), action) => {
         (action.payload.score === 3 && 'safely unguessable') ||
         (action.payload.score === 4 && 'very unguessable')
       )
+      state.passwordValidation.score = (
+        action.payload.password === "" ? undefined : state.passwordValidation.score)
       return {...state}
     default:
       return state

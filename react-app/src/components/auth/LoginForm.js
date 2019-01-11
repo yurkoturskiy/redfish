@@ -1,39 +1,52 @@
 import React from "react"
 import { Field, reduxForm } from 'redux-form'
 import { Link } from "react-router-dom";
-import FormWrapper from '../FormWrapper'
-import FormField from '../FormField'
+// presentational components
+import FormWrapper from '../../components/FormWrapper'
+import MaterialTextField from '../../components/MaterialTextField'
+import Button from '@material/react-button';
 
 const theme = {
   background: '#f0f0f0',
 }
 
-let LoginForm = props => {
-  const { error, handleSubmit } = props
-  return (
-    <FormWrapper theme={theme}>
-      <form onSubmit={handleSubmit}>
-        <h3>Login</h3>
-        <Field 
-          name="username" 
-          type="text"
-          label="Username or email"
-          component={FormField}
-        />
-        <Field 
-          name="password" 
-          label="Password"
-          type="password"
-          component={FormField}
-          showPassIcon={true}
-        />
-        <input type="submit" value="Login"/>
-        {error && <strong>{error}</strong>}<br/>
-        <Link to="/password-reset">Forgot password?</Link>
-      </form>
-    </FormWrapper>
-  )
-}
+let LoginForm = ({
+  // general props
+  error, // state
+  handleSubmit, // actions
+
+  // Password field props
+  showPassState, // state
+  passwordTralingIconOnClick, //actions
+
+  // 'Forgot password?' password props
+  forgotPasswordEndpoint, //state
+}) => (
+  <FormWrapper theme={theme}>
+    <form onSubmit={handleSubmit}>
+      <h3>Login</h3>
+      <Field 
+        id="username"
+        name="username" 
+        type="text"
+        label="Username or email"
+        component={MaterialTextField}
+      />
+      <Field 
+        id="password"
+        name="password" 
+        label="Password"
+        type={showPassState ? 'text' : 'password'}
+        tralingIcon={showPassState ? 'visibility' : 'visibility_off'}
+        tralingIconOnClick={passwordTralingIconOnClick}
+        component={MaterialTextField}
+      />
+      <Button type="submit" className="form-button">Login</Button>
+      {error && <strong>{error}</strong>}<br/>
+      <Link to={forgotPasswordEndpoint}>Forgot password?</Link>
+    </form>
+  </FormWrapper>
+)
 
 LoginForm = reduxForm({
   form: 'loginForm'

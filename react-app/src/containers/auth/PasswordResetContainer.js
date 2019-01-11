@@ -33,18 +33,14 @@ class PasswordReset extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    uiFreeze: state.restAuth.uiFreeze,
-    numPassResetSucceed: state.restAuth.numPassResetSucceed,
-  }
-}
+const mapStateToProps = state => ({
+  uiFreeze: state.restAuth.uiFreeze,
+  numPassResetSucceed: state.restAuth.numPassResetSucceed,
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    passwordReset: (email) => dispatch(passwordReset(email)),
-    validate: (res) => dispatch(validate(res)),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  passwordReset: (email) => dispatch(passwordReset(email)),
+  validate: (res) => dispatch(validate(res)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(PasswordReset)

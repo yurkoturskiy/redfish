@@ -15,7 +15,6 @@ const MaterialTextField = ({
       }
     </HelperText>
   )
-
   const tralingIconTag = (
     <Icon>
       <i 
@@ -34,7 +33,7 @@ const MaterialTextField = ({
       <TextField
         label={label}
         className='input-container'
-        outlined='true'
+        outlined={false}
         helperText={helperTextTag}
         trailingIcon={tralingIconTag}
       >

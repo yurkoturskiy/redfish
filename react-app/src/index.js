@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 // container components
-import '@material/react-text-field/dist/text-field.css';
 import GlobalContainer from './containers/GlobalContainer'
 import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'

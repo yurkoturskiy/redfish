@@ -55,16 +55,8 @@ const FormWrapper = styled.div`
     width: 100%;
   }
 
-  .input-icons {
-    cursor: pointer;
-    color: #555555;
-    position: absolute;
-    line-height: 32px;
-    width: 32px
-    text-align: center;
-    top: 50%;
-    margin-top: -16px;
-    right: 8px;
+  .form-button {
+    float: right;
   }
 `
 

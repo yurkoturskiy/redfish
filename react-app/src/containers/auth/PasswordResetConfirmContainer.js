@@ -1,9 +1,10 @@
-import React from 'react';
+import React from 'react'
 import {connect} from 'react-redux'
 // presentational components
 import PasswordResetConfirmForm from '../../components/auth/PasswordResetConfirmForm'
 // actions
-import {passwordResetConfirm, validate} from '../../actions/restAuth'
+import {passwordResetConfirm, validate, passValidate} from '../../actions/restAuth'
+import {showHidePass} from '../../actions/ui'
 
 
 class PasswordResetConfirm extends React.Component {
@@ -32,25 +33,35 @@ class PasswordResetConfirm extends React.Component {
     } else {
       return (
         <PasswordResetConfirmForm 
-          onSubmit={this.handleSubmit} 
+          // form submit handling method
+          onSubmit={this.handleSubmit}
+          // state of the show/hide password button
+          showPassState={this.props.showPassState}
+          // zxcvbn password strength
+          passwordHelperText={this.props.passwordScore}
+          // show/hide password button method
+          passwordTralingIconOnClick={this.props.showHidePass}
+          // zxcvbn validation method
+          passwordOnChange={this.props.passValidate}
         />
       )
     }
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    uiFreeze: state.restAuth.uiFreeze,
-    numPassResetConfirmSucceed: state.restAuth.numPassResetConfirmSucceed,
-  }
-}
+const mapStateToProps = state => ({
+  uiFreeze: state.restAuth.uiFreeze,
+  numPassResetConfirmSucceed: state.restAuth.numPassResetConfirmSucceed,
+  // password field
+  showPassState: state.ui.showPassState,
+  passwordScore: state.ui.passwordValidation.score,
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    passwordResetConfirm: (values) => dispatch(passwordResetConfirm(values)),
-    validate: (res) => dispatch(validate(res)),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  passwordResetConfirm: (values) => dispatch(passwordResetConfirm(values)),
+  validate: (res) => dispatch(validate(res)),
+  passValidate: (payload) => dispatch(passValidate(payload)),
+  showHidePass: () => dispatch(showHidePass()),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(PasswordResetConfirm)
