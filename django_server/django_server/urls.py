@@ -6,7 +6,6 @@ from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
 from rest_framework.documentation import include_docs_urls
 
-from .views import confirm_email
 from rest_auth.registration.views import VerifyEmailView
 
 
@@ -20,8 +19,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
+    # confirm email
     url(r'^rest-auth/registration/account-confirm-email/(?P<key>[-:\w]+)/$', 
-        confirm_email, name="account_confirm_email"),
+        TemplateView.as_view(template_name='index.html'), name="account_confirm_email"),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     re_path(r'^account-confirm-email/', VerifyEmailView.as_view(),
          name='account_email_verification_sent'),

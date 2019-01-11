@@ -7,6 +7,7 @@ import Main from './MainContainer'
 import Application from './ApplicationContainer'
 import Login from './auth/LoginContainer'
 import Registration from './auth/RegistrationContainer'
+import ConfirmEmail from './auth/ConfirmEmailContainer'
 import Profile from './auth/ProfileContainer'
 import PasswordReset from './auth/PasswordResetContainer'
 import PasswordResetConfirm from './auth/PasswordResetConfirmContainer'
@@ -57,6 +58,7 @@ class AutoRouter extends React.Component {
           <Route exact path="/" component={Main} />
           <Route path="/login" component={Login}/>
           <Route path="/registration" component={Registration}/>
+          <Route path="/rest-auth/registration/account-confirm-email/:key/" component={ConfirmEmail}/>
           <Route exact path="/password-reset" component={PasswordReset}/>
           <Route path="/password-reset/confirm/:uid/:token" component={PasswordResetConfirm}/>
         {/* auth required */}
