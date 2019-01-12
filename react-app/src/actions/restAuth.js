@@ -86,9 +86,9 @@ export const confirmEmail = (values) => ({
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(values),
     types: [
-      REST_AUTH.REQUEST.REGISTRATION,
-      REST_AUTH.SUCCESS.REGISTRATION,
-      REST_AUTH.FAILURE.REGISTRATION,
+      REST_AUTH.REQUEST.CONFIRM_EMAIL,
+      REST_AUTH.SUCCESS.CONFIRM_EMAIL,
+      REST_AUTH.FAILURE.CONFIRM_EMAIL,
     ],
   }
 })

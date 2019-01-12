@@ -11,7 +11,7 @@ const theme = {
 
 let PasswordResetForm = ({
   // general props
-  error, // state
+  error, requestCondition, // state
   handleSubmit, // actions
 }) => (
   <FormWrapper theme={theme}>
@@ -23,7 +23,13 @@ let PasswordResetForm = ({
         label="Email address"
         component={MaterialTextField} 
       />
-      <Button type="submit" className="form-button">Reset password</Button>
+      <Button 
+        type="submit" 
+        className="form-button"
+        disabled={requestCondition === 1}
+      >
+        Reset password
+      </Button>
       {error && <strong>{error}</strong>}
     </form>
   </FormWrapper>

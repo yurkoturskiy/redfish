@@ -11,11 +11,11 @@ const theme = {
 
 let PasswordResetConfirmForm = ({
   // general props
-  error, // state
+  error, requestCondition, // state
   handleSubmit, // actions
 
   // Password field props
-  showPassState, passwordHelperText, // state
+  passwordVisibilityCondition, passwordHelperText, // state
   passwordTralingIconOnClick, passwordOnChange, //actions
 }) => (
   <FormWrapper theme={theme}>
@@ -24,14 +24,20 @@ let PasswordResetConfirmForm = ({
       <Field 
         name="new_password1" 
         label="New password"
-        type={showPassState ? 'text' : 'password'}
+        type={passwordVisibilityCondition ? 'text' : 'password'}
         helperText={passwordHelperText}
-        tralingIcon={showPassState ? 'visibility' : 'visibility_off'}
+        tralingIcon={passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
         tralingIconOnClick={passwordTralingIconOnClick}
         onChange={passwordOnChange}
         component={MaterialTextField}
       />
-      <Button type="submit" className="form-button">Set new password</Button>
+      <Button 
+        type="submit" 
+        className="form-button"
+        disabled={requestCondition === 1}
+      >
+        Set new password
+      </Button>
       {error && <strong>{error}</strong>}
     </form>
   </FormWrapper>

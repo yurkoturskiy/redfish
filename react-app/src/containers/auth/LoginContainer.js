@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 import LoginForm from '../../components/auth/LoginForm'
 // actions
 import { login, validate } from '../../actions/restAuth'
-import { showHidePass } from '../../actions/ui'
+import { switchPasswordVisibility } from '../../actions/conditions'
 
 class Login extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.forgotPasswordEndpoint = '/password-reset'
-    if (this.props.showPassState) {
-      this.props.showHidePass()
+    if (this.props.passwordVisibilityCondition) {
+      this.props.switchPasswordVisibility()
     }
   }
   handleSubmit(values) {
@@ -24,9 +24,10 @@ class Login extends React.Component {
     return (
       <LoginForm 
         onSubmit={this.handleSubmit}
-        showPassState={this.props.showPassState}
-        passwordTralingIconOnClick={this.props.showHidePass}
+        passwordVisibilityCondition={this.props.passwordVisibilityCondition}
+        passwordTralingIconOnClick={this.props.switchPasswordVisibility}
         forgotPasswordEndpoint={this.forgotPasswordEndpoint}
+        requestCondition={this.props.requestCondition}
        />
     )
   }
@@ -34,7 +35,8 @@ class Login extends React.Component {
 
 const mapStatetoProps = state => {
   return {
-    showPassState: state.ui.showPassState,
+    passwordVisibilityCondition: state.ui.passwordVisibilityCondition,
+    requestCondition: state.requestCondition.LOGIN,
   }
 }
 
@@ -42,7 +44,7 @@ const mapDispatchToProps = dispatch => {
   return {
     login: (values) => dispatch(login(values)),
     validate: (res) => dispatch(validate(res)),
-    showHidePass: () => dispatch(showHidePass()),
+    switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
   }
 }
 

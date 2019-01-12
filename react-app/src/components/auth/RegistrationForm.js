@@ -11,11 +11,11 @@ const theme = {
 
 let RegistrationForm = ({
   // general props
-  error, // state
+  error, requestCondition, // state
   handleSubmit, // actions
 
   // Password field props
-  showPassState, passwordHelperText, // state
+  passwordVisibilityCondition, passwordHelperText, // state
   passwordTralingIconOnClick, passwordOnChange, //actions
 }) => (
   <FormWrapper theme={theme}>
@@ -39,14 +39,20 @@ let RegistrationForm = ({
         id="password"
         name="password1" 
         label="Password"
-        type={showPassState ? 'text' : 'password'}
+        type={passwordVisibilityCondition ? 'text' : 'password'}
         helperText={passwordHelperText}
-        tralingIcon={showPassState ? 'visibility' : 'visibility_off'}
+        tralingIcon={passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
         tralingIconOnClick={passwordTralingIconOnClick}
         onChange={passwordOnChange}
         component={MaterialTextField}
       />
-      <Button type="submit" className="form-button">Submit</Button>
+      <Button 
+        type="submit" 
+        className="form-button" 
+        disabled={requestCondition === 1} 
+      >
+        Submit
+      </Button>
       {error && <strong>{error}</strong>}
     </form>
   </FormWrapper>

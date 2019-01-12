@@ -1,10 +1,10 @@
 // actions
 import { REST_AUTH } from '../actions/restAuth'
-import { SHOW_HIDE_PASSWORD } from '../actions/ui'
+import { SWITCH_PASSWORD_VISIBILITY } from '../actions/conditions'
 
 const initState = () => {
   return {
-    showPassState: false,
+    passwordVisibilityCondition: false,
     passwordValidation: {
       feedback: {
         suggestions: [],
@@ -17,8 +17,8 @@ const initState = () => {
 
 const ui = (state = initState(), action) => {
   switch(action.type) {
-    case SHOW_HIDE_PASSWORD:
-      state.showPassState = state.showPassState === false ? true : false
+    case SWITCH_PASSWORD_VISIBILITY:
+      state.passwordVisibilityCondition = state.passwordVisibilityCondition ? false : true
       return {...state}
     case REST_AUTH.PASSWORD_VALIDATE:
       state.passwordValidation.feedback = action.payload.feedback

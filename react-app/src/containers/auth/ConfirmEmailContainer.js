@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 // presentational components
-import RegistrationForm from '../../components/auth/RegistrationForm'
 // actions
-import { confirmEmail } from '../../actions/restAuth'
+import { confirmEmail, validate } from '../../actions/restAuth'
 
 
 class ConfirmEmail extends React.Component {
@@ -13,22 +12,28 @@ class ConfirmEmail extends React.Component {
       key: this.props.match.params.key,
     }
     this.props.confirmEmail(values)
+      .then(res => console.log(res))
   }
   render() {
-    return <p>email confirmed</p>
+    console.log('confirm email')
+    if (this.props.requestCondition === 1 || this.props.requestCondition === 0) {
+      return <p>confirming</p>
+    } else if (this.props.requestCondition === 2) {
+      return <p>confirmed</p>
+    } else if (this.props.requestCondition === -1) {
+      return <p>Something went wrong</p>
+    }
   }
 }
 
 const mapStatetoProps = state => ({
-  uiFreeze: state.restAuth.uiFreeze,
-  numRegsSucceed: state.restAuth.numRegsSucceed,
   // password field
-  showPassState: state.ui.showPassState,
-  passwordScore: state.ui.passwordValidation.score,
+  requestCondition: state.requestCondition.CONFIRM_EMAIL,
 })
 
 const mapDispatchToProps = dispatch => ({
   confirmEmail: (values) => dispatch(confirmEmail(values)),
+  validate: (res) => dispatch(validate(res)),
 })
 
 export default connect(mapStatetoProps, mapDispatchToProps)(ConfirmEmail)

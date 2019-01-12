@@ -4,16 +4,16 @@ import { connect } from 'react-redux'
 import RegistrationForm from '../../components/auth/RegistrationForm'
 // actions
 import { registration, validate, passValidate } from '../../actions/restAuth'
-import { showHidePass } from '../../actions/ui'
+import { switchPasswordVisibility } from '../../actions/conditions'
+import { resetRequestCondition } from '../../actions/conditions'
 
 
 class Registration extends React.Component {
   constructor(props) {
     super(props)
-    this.isSent = false
     this.handleSubmit = this.handleSubmit.bind(this)
-    if (this.props.showPassState) {
-      this.props.showHidePass()
+    if (this.props.passwordVisibilityCondition) {
+      this.props.switchPasswordVisibility()
     }
   }
   handleSubmit(values) {
@@ -23,44 +23,40 @@ class Registration extends React.Component {
     return this.props.registration(values)
       .then(res => this.props.validate(res))
   }
-  componentWillUpdate(prevProps) {
-    if (this.props.numRegsSucceed !== prevProps.numRegsSucceed) {
-      // if registration succeed
-      this.isSent = true
-    }
-  }
   render() {
-    if (this.props.uiFreeze) {
-      return <p>Requesting</p>
-    } else if (this.isSent) {
+    if (this.props.requestCondition === 2) {
       return <p>Confirm your email address</p>
-    } else {
+    } else { 
       return (
         <RegistrationForm 
           onSubmit={this.handleSubmit} 
-          showPassState={this.props.showPassState}
+          passwordVisibilityCondition={this.props.passwordVisibilityCondition}
           passwordHelperText={this.props.passwordScore}
-          passwordTralingIconOnClick={this.props.showHidePass}
+          passwordTralingIconOnClick={this.props.switchPasswordVisibility}
           passwordOnChange={this.props.passValidate}
+          requestCondition={this.props.requestCondition}
         />
       )
     }
   }
+  componentWillUnmount() {
+    this.props.resetRequestCondition('REGISTRATION')
+  }
 }
 
 const mapStatetoProps = state => ({
-  uiFreeze: state.restAuth.uiFreeze,
-  numRegsSucceed: state.restAuth.numRegsSucceed,
+  requestCondition: state.requestCondition.REGISTRATION,
   // password field
-  showPassState: state.ui.showPassState,
+  passwordVisibilityCondition: state.ui.passwordVisibilityCondition,
   passwordScore: state.ui.passwordValidation.score,
 })
 
 const mapDispatchToProps = dispatch => ({
   registration: (values) => dispatch(registration(values)),
+  resetRequestCondition: (payload) => dispatch(resetRequestCondition(payload)),
   validate: (res) => dispatch(validate(res)),
   passValidate: (payload) => dispatch(passValidate(payload)),
-  showHidePass: () => dispatch(showHidePass()),
+  switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
 })
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Registration)

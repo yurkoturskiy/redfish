@@ -4,14 +4,17 @@ import {connect} from 'react-redux'
 import PasswordResetConfirmForm from '../../components/auth/PasswordResetConfirmForm'
 // actions
 import {passwordResetConfirm, validate, passValidate} from '../../actions/restAuth'
-import {showHidePass} from '../../actions/ui'
+import {switchPasswordVisibility} from '../../actions/conditions'
+import { resetRequestCondition } from '../../actions/conditions'
 
 
 class PasswordResetConfirm extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.isSent = false
+    if (this.props.passwordVisibilityCondition) {
+      this.props.switchPasswordVisibility()
+    }
   }
   handleSubmit(values) {
     values['uid'] = this.props.match.params.uid
@@ -20,15 +23,8 @@ class PasswordResetConfirm extends React.Component {
     return this.props.passwordResetConfirm(values)
       .then(res => this.props.validate(res))
   }
-  componentWillUpdate(prevProps) {
-    if (this.props.numPassResetConfirmSucceed !== prevProps.numPassResetConfirmSucceed) {
-      this.isSent = true
-    }
-  }
   render() {
-    if (this.props.uiFreeze) {
-      return <p>requesting</p>
-    } else if (this.isSent) {
+    if (this.props.requestCondition === 2) {
       return <p>password reset is succeed</p>
     } else {
       return (
@@ -36,13 +32,15 @@ class PasswordResetConfirm extends React.Component {
           // form submit handling method
           onSubmit={this.handleSubmit}
           // state of the show/hide password button
-          showPassState={this.props.showPassState}
+          passwordVisibilityCondition={this.props.passwordVisibilityCondition}
           // zxcvbn password strength
           passwordHelperText={this.props.passwordScore}
           // show/hide password button method
-          passwordTralingIconOnClick={this.props.showHidePass}
+          passwordTralingIconOnClick={this.props.switchPasswordVisibility}
           // zxcvbn validation method
           passwordOnChange={this.props.passValidate}
+          // request condition for freezing UI while requesting
+          requestCondition={this.props.requestCondition}
         />
       )
     }
@@ -50,10 +48,9 @@ class PasswordResetConfirm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  uiFreeze: state.restAuth.uiFreeze,
-  numPassResetConfirmSucceed: state.restAuth.numPassResetConfirmSucceed,
+  requestCondition: state.requestCondition.PASSWORD_RESET_CONFIRM,
   // password field
-  showPassState: state.ui.showPassState,
+  passwordVisibilityCondition: state.ui.passwordVisibilityCondition,
   passwordScore: state.ui.passwordValidation.score,
 })
 
@@ -61,7 +58,8 @@ const mapDispatchToProps = dispatch => ({
   passwordResetConfirm: (values) => dispatch(passwordResetConfirm(values)),
   validate: (res) => dispatch(validate(res)),
   passValidate: (payload) => dispatch(passValidate(payload)),
-  showHidePass: () => dispatch(showHidePass()),
+  switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
+  resetRequestCondition: (payload) => dispatch(resetRequestCondition(payload)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PasswordResetConfirm)

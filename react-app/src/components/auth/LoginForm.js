@@ -12,11 +12,11 @@ const theme = {
 
 let LoginForm = ({
   // general props
-  error, // state
+  error, requestCondition, // state
   handleSubmit, // actions
 
   // Password field props
-  showPassState, // state
+  passwordVisibilityCondition, // state
   passwordTralingIconOnClick, //actions
 
   // 'Forgot password?' password props
@@ -36,12 +36,18 @@ let LoginForm = ({
         id="password"
         name="password" 
         label="Password"
-        type={showPassState ? 'text' : 'password'}
-        tralingIcon={showPassState ? 'visibility' : 'visibility_off'}
+        type={passwordVisibilityCondition ? 'text' : 'password'}
+        tralingIcon={passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
         tralingIconOnClick={passwordTralingIconOnClick}
         component={MaterialTextField}
       />
-      <Button type="submit" className="form-button">Login</Button>
+      <Button 
+        type="submit" 
+        className="form-button"
+        disabled={requestCondition === 1}
+      >
+        Login
+      </Button>
       {error && <strong>{error}</strong>}<br/>
       <Link to={forgotPasswordEndpoint}>Forgot password?</Link>
     </form>

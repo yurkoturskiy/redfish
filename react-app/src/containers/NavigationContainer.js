@@ -39,17 +39,13 @@ class NavigationContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isAuth: state.restAuth.isAuth,
-    username: state.restAuth.user.username
-  }
-}
+const mapStateToProps = state => ({
+  isAuth: state.restAuth.isAuth,
+  username: state.restAuth.user.username
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: () => dispatch(logout()),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout()),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationContainer)
