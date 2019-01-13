@@ -7,7 +7,7 @@ import Main from './MainContainer'
 import Application from './ApplicationContainer'
 import Login from './auth/LoginContainer'
 import Registration from './auth/RegistrationContainer'
-import ConfirmEmail from './auth/ConfirmEmailContainer'
+import VerifyEmail from './auth/VerifyEmailContainer'
 import Profile from './auth/ProfileContainer'
 import PasswordReset from './auth/PasswordResetContainer'
 import PasswordResetConfirm from './auth/PasswordResetConfirmContainer'
@@ -37,7 +37,7 @@ class AutoRouter extends React.Component {
     if (this.props.isAuth) {
       for (let i in notAuthEndpoints) {
         if (this.props.location.pathname === notAuthEndpoints[i]) {
-          console.log('you already logged in')
+          console.log('you logged in')
           this.props.history.push('/app')
         }
       } 
@@ -58,7 +58,7 @@ class AutoRouter extends React.Component {
           <Route exact path="/" component={Main} />
           <Route path="/login" component={Login}/>
           <Route path="/registration" component={Registration}/>
-          <Route path="/rest-auth/registration/account-confirm-email/:key/" component={ConfirmEmail}/>
+          <Route path="/rest-auth/registration/account-confirm-email/:key/" component={VerifyEmail}/>
           <Route exact path="/password-reset" component={PasswordReset}/>
           <Route path="/password-reset/confirm/:uid/:token" component={PasswordResetConfirm}/>
         {/* auth required */}
@@ -72,11 +72,9 @@ class AutoRouter extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => ({
     token: localStorage.getItem('token'),
     isAuth: state.restAuth.isAuth,
-  }
-}
+})
 
 export default withRouter(connect(mapStateToProps, undefined)(AutoRouter))

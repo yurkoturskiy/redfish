@@ -3,8 +3,12 @@ import { connect } from 'react-redux'
 // presentational components
 import LoginForm from '../../components/auth/LoginForm'
 // actions
-import { login, validate } from '../../actions/restAuth'
+import {
+  login,
+  validate,
+} from '../../actions/restAuth'
 import { switchPasswordVisibility } from '../../actions/conditions'
+
 
 class Login extends React.Component {
   constructor(props) {
@@ -33,19 +37,15 @@ class Login extends React.Component {
   }
 }
 
-const mapStatetoProps = state => {
-  return {
+const mapStatetoProps = state => ({
     passwordVisibilityCondition: state.ui.passwordVisibilityCondition,
-    requestCondition: state.requestCondition.LOGIN,
-  }
-}
+    requestCondition: state.requestCondition.login,
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
+const mapDispatchToProps = dispatch => ({
     login: (values) => dispatch(login(values)),
     validate: (res) => dispatch(validate(res)),
     switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
-  }
-}
+})
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Login)

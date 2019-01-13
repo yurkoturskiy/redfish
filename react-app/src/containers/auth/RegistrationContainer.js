@@ -3,7 +3,11 @@ import { connect } from 'react-redux'
 // presentational components
 import RegistrationForm from '../../components/auth/RegistrationForm'
 // actions
-import { registration, validate, passValidate } from '../../actions/restAuth'
+import {
+  registration,
+  validate, 
+  passValidate
+} from '../../actions/restAuth'
 import { switchPasswordVisibility } from '../../actions/conditions'
 import { resetRequestCondition } from '../../actions/conditions'
 
@@ -40,12 +44,12 @@ class Registration extends React.Component {
     }
   }
   componentWillUnmount() {
-    this.props.resetRequestCondition('REGISTRATION')
+    this.props.resetRequestCondition('registration')
   }
 }
 
 const mapStatetoProps = state => ({
-  requestCondition: state.requestCondition.REGISTRATION,
+  requestCondition: state.requestCondition.registration,
   // password field
   passwordVisibilityCondition: state.ui.passwordVisibilityCondition,
   passwordScore: state.ui.passwordValidation.score,

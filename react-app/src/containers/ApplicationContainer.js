@@ -1,7 +1,9 @@
 import React from "react"
 import { connect } from 'react-redux'
 // actions
-import { user } from '../actions/restAuth'
+import {
+  user
+} from '../actions/restAuth'
 
 
 class Application extends React.Component {
@@ -21,17 +23,13 @@ class Application extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => ({
     isAuth: state.restAuth.isAuth,
     user: state.restAuth.user,
-  }
-}
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
+const mapDispatchToProps = dispatch => ({
     getUser: () => dispatch(user()),
-  }
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application)

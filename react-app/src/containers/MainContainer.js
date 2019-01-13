@@ -30,10 +30,8 @@ class Main extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => ({
       isAuth: state.restAuth.isAuth,
-  }
-}
+})
 
 export default connect(mapStateToProps, undefined)(Main)

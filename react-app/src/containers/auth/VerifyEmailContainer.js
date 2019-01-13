@@ -2,20 +2,22 @@ import React from 'react'
 import { connect } from 'react-redux'
 // presentational components
 // actions
-import { confirmEmail, validate } from '../../actions/restAuth'
+import {
+  verifyEmail, 
+  validate 
+} from '../../actions/restAuth'
 
 
-class ConfirmEmail extends React.Component {
+class VerifyEmail extends React.Component {
   constructor(props) {
     super(props)
     let values = {
       key: this.props.match.params.key,
     }
-    this.props.confirmEmail(values)
+    this.props.verifyEmail(values)
       .then(res => console.log(res))
   }
   render() {
-    console.log('confirm email')
     if (this.props.requestCondition === 1 || this.props.requestCondition === 0) {
       return <p>confirming</p>
     } else if (this.props.requestCondition === 2) {
@@ -28,12 +30,12 @@ class ConfirmEmail extends React.Component {
 
 const mapStatetoProps = state => ({
   // password field
-  requestCondition: state.requestCondition.CONFIRM_EMAIL,
+  requestCondition: state.requestCondition.verifyEmail,
 })
 
 const mapDispatchToProps = dispatch => ({
-  confirmEmail: (values) => dispatch(confirmEmail(values)),
+  verifyEmail: (values) => dispatch(verifyEmail(values)),
   validate: (res) => dispatch(validate(res)),
 })
 
-export default connect(mapStatetoProps, mapDispatchToProps)(ConfirmEmail)
+export default connect(mapStatetoProps, mapDispatchToProps)(VerifyEmail)

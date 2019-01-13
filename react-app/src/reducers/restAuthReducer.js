@@ -1,6 +1,15 @@
 import { SubmissionError } from 'redux-form'
 // actions
 import { REST_AUTH } from '../actions/restAuth'
+import { 
+  login,
+  logout,
+  registration,
+  verifyEmail,
+  passwordReset,
+  passwordResetConfirm,
+  user, 
+} from '../actions/restAuth'
 import { RESET_REQUEST_CONDITION } from '../actions/conditions'
 
 const initState = () => ({
@@ -18,15 +27,28 @@ const initState = () => ({
   numPassResetConfirmSucceed: 0,
 })
 
-const requestConditionInitState = () => {
-  let state = {}
-  Object.entries(REST_AUTH.REQUEST).forEach(
-    ([key, value]) => {
-      state[key] = 0
-    }
-  )
-  return state
-}
+// const requestConditionInitState = () => {
+//   let state = {}
+//   Object.entries(REST_AUTH.REQUEST).forEach(
+//     ([key, value]) => {
+//       state[key] = 0
+//     }
+//   )
+//   return state
+// }
+
+
+
+const requestConditionInitState = () => ({
+    login: 0,
+    logout: 0,
+    registration: 0,
+    verifyEmail: 0,
+    passwordReset: 0,
+    passwordResetConfirm: 0,
+    user: 0, 
+})
+
 export const requestCondition = (state = requestConditionInitState(), action) => {
   /* Setting conditions for the REST requests
   Useful for UI freezing and behaviour
@@ -62,7 +84,7 @@ export const requestCondition = (state = requestConditionInitState(), action) =>
 export const restAuth = (state = initState(), action) => {
   if (action.type.indexOf('REQUEST') !== -1) {
     switch(action.type) {
-      case REST_AUTH.REQUEST.LOGOUT:
+      case logout.types.request:
         localStorage.removeItem('token')
         return initState()
       default: 
@@ -70,11 +92,11 @@ export const restAuth = (state = initState(), action) => {
     }
   } else if (action.type.indexOf('SUCCESS') !== -1) {
     switch(action.type) {
-      case REST_AUTH.SUCCESS.LOGIN:
+      case login.types.success:
         localStorage.setItem('token', action.payload.key)
         state.isAuth = true
         return {...state}
-      case REST_AUTH.SUCCESS.USER:
+      case user.types.success:
         state.user = action.payload
         return {...state}
       default:

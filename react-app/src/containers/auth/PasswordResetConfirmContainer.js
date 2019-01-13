@@ -3,7 +3,11 @@ import {connect} from 'react-redux'
 // presentational components
 import PasswordResetConfirmForm from '../../components/auth/PasswordResetConfirmForm'
 // actions
-import {passwordResetConfirm, validate, passValidate} from '../../actions/restAuth'
+import {
+  passwordResetConfirm, 
+  validate, 
+  passValidate,
+} from '../../actions/restAuth'
 import {switchPasswordVisibility} from '../../actions/conditions'
 import { resetRequestCondition } from '../../actions/conditions'
 
@@ -48,7 +52,7 @@ class PasswordResetConfirm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  requestCondition: state.requestCondition.PASSWORD_RESET_CONFIRM,
+  requestCondition: state.requestCondition.passwordResetConfirm,
   // password field
   passwordVisibilityCondition: state.ui.passwordVisibilityCondition,
   passwordScore: state.ui.passwordValidation.score,

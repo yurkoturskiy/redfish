@@ -7,39 +7,32 @@ import NavigationContainer from './NavigationContainer'
 // styled components
 import GlobalStyle from '../components/GlobalStyle'
 // actions
-import { user } from '../actions/restAuth'
 import { snippets } from '../actions/snippets'
 
 
 class GlobalContainer extends React.Component {
   render() {
+    console.log('is authenticated: ' + this.props.isAuth)
+    console.log('token: ' + this.props.token)
     return (
       <AutoRouter>
         <GlobalStyle/>
-        <NavigationContainer>
-          <p>auth: {((this.props.isAuth) ? 'true' : 'false')}</p>
-          <p>token: {this.props.token}</p>
-        </NavigationContainer>
+        <NavigationContainer/>
       </AutoRouter>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => ({
     isAuth: state.restAuth.isAuth,
     token: localStorage.getItem('token'),
     snippets: state.snippets.snippets,
     users: state.snippets.users,
-  }
-}
+})
 
-const mapDispatchToProps = dispatch => {
-  return {
+const mapDispatchToProps = dispatch => ({
     putSnippets: (payload) => dispatch(snippets(payload)),
-    getUser: (payload) => dispatch(user(payload)),
-  }
-}
+})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GlobalContainer))
 

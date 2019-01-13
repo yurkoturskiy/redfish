@@ -3,7 +3,10 @@ import {connect} from 'react-redux'
 // presentational components
 import PasswordResetForm from '../../components/auth/PasswordResetForm'
 // actions
-import {passwordReset, validate} from '../../actions/restAuth'
+import {
+  passwordReset,
+  validate
+} from '../../actions/restAuth'
 import { resetRequestCondition } from '../../actions/conditions'
 
 
@@ -21,20 +24,23 @@ class PasswordReset extends React.Component {
       return <p>Check your email</p>
     } else {
       return (
+        <React.Fragment>
         <PasswordResetForm 
           onSubmit={this.handleSubmit}
           requestCondition={this.props.requestCondition}
         />
+        <p>{this.props.requestCondition}</p>
+        </React.Fragment>
       )
     }
   }
   componentWillUnmount() {
-    this.props.resetRequestCondition('PASSWORD_RESET')
+    this.props.resetRequestCondition('passwordReset')
   }
 }
 
 const mapStateToProps = state => ({
-  requestCondition: state.requestCondition.PASSWORD_RESET,
+  requestCondition: state.requestCondition.passwordReset,
 })
 
 const mapDispatchToProps = dispatch => ({
