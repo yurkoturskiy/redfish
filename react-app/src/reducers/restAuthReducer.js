@@ -1,15 +1,12 @@
 import { SubmissionError } from 'redux-form'
 // actions
-import { REST_AUTH } from '../actions/restAuth'
+import { VALIDATE_FORM_RESPONSE } from '../actions/restAuth'
 import { 
-  login,
-  logout,
-  registration,
-  verifyEmail,
-  passwordReset,
-  passwordResetConfirm,
-  user, 
+  LOGIN_SUCCESS,
+  LOGOUT_REQUEST,
+  USER_SUCCESS,
 } from '../actions/restAuth'
+
 import { RESET_REQUEST_CONDITION } from '../actions/conditions'
 
 const initState = () => ({
@@ -26,17 +23,6 @@ const initState = () => ({
   numPassResetSucceed: 0,
   numPassResetConfirmSucceed: 0,
 })
-
-// const requestConditionInitState = () => {
-//   let state = {}
-//   Object.entries(REST_AUTH.REQUEST).forEach(
-//     ([key, value]) => {
-//       state[key] = 0
-//     }
-//   )
-//   return state
-// }
-
 
 
 const requestConditionInitState = () => ({
@@ -84,7 +70,7 @@ export const requestCondition = (state = requestConditionInitState(), action) =>
 export const restAuth = (state = initState(), action) => {
   if (action.type.indexOf('REQUEST') !== -1) {
     switch(action.type) {
-      case logout.types.request:
+      case LOGOUT_REQUEST:
         localStorage.removeItem('token')
         return initState()
       default: 
@@ -92,11 +78,11 @@ export const restAuth = (state = initState(), action) => {
     }
   } else if (action.type.indexOf('SUCCESS') !== -1) {
     switch(action.type) {
-      case login.types.success:
+      case LOGIN_SUCCESS:
         localStorage.setItem('token', action.payload.key)
         state.isAuth = true
         return {...state}
-      case user.types.success:
+      case USER_SUCCESS:
         state.user = action.payload
         return {...state}
       default:
@@ -112,7 +98,7 @@ export const restAuth = (state = initState(), action) => {
     }
     return {...state}
   }
-  if (action.type === REST_AUTH.VALIDATE) {
+  if (action.type === VALIDATE_FORM_RESPONSE) {
     if (action.response.payload.status && action.response.payload.status !== 200) {
       if (action.response.payload.response.non_field_errors) {
         action.response.payload.response._error = action.response.payload.response.non_field_errors  

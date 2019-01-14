@@ -2,86 +2,135 @@ import { RSAA } from 'redux-api-middleware'
 
 const URL = 'http://127.0.0.1:9000/'
 
-
-class Endpoint {
-  constructor(name, endpoint, method, authIsRequired) {
-    this.name = name
-    this.endpoint = URL + endpoint
-    this.method = method
-    this.authIsRequired = authIsRequired
-    this.types = {
-      request: '@@' + this.name + '/' + this.name.toUpperCase() + '_REQUEST',
-      success: '@@' + this.name + '/' + this.name.toUpperCase() + '_SUCCESS',
-      failure: '@@' + this.name + '/' + this.name.toUpperCase() + '_FAILURE',
-    }
+export const restApiAction = ({
+  endpoint,
+  method, 
+  types,
+  values,
+  isPrivate,
+}) => ({
+  [RSAA]: {
+    endpoint: URL + endpoint,
+    method: method,
+    headers: (
+      isPrivate ? {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + localStorage.getItem('token'),
+      } : {
+        'Content-Type': 'application/json',
+      }
+    ),
+    body: JSON.stringify(values),
+    types: types,
   }
-  __call__(values=undefined) {
-    return {
-      [RSAA]: {
-        endpoint: this.dispatch.endpoint,
-        method: this.dispatch.method,
-        headers: (
-          this.dispatch.authIsRequired ? {
-            'Content-Type': 'application/json',
-            'Authorization': 'Token ' + localStorage.getItem('token'),
-          } : {
-            'Content-Type': 'application/json',
-          }
-        ),
-        body: JSON.stringify(values),
-        types: [
-          this.dispatch.types.request, 
-          this.dispatch.types.success, 
-          this.dispatch.types.failure,
-        ],
-      }  
-    }
-    
-  }
-}
-
-var ObjectCallable_handler = {
-    get: function get(self, key) {
-        if (self.hasOwnProperty(key)) {
-            return self[key];
-        } else { 
-          return self.dispatch[key]; 
-        }
-    },
-    apply: function apply(self, thisValue, args) {
-        return (self.__call__ || self.dispatch.__call__).apply(self, args);
-    }
-};
-
-function Action(...args) {
-    var cls = new Endpoint(...args)
-    var p = new Proxy(function() { }, ObjectCallable_handler);
-    p.dispatch = cls;
-    return p;
-}
+})
 
 
-export var login = Action('login', 'rest-auth/login/', 'POST', false)
-export var logout = Action('logout', 'rest-auth/logout/', 'POST', true)
-export var registration = Action('registration', 'rest-auth/registration/', 'POST', false)
-export var verifyEmail = Action('verifyEmail', 'rest-auth/registration/verify-email/', 'POST', false)
-export var passwordReset = Action('passwordReset', 'rest-auth/password/reset/', 'POST', false)
-export var passwordResetConfirm = Action('passwordResetConfirm', 'rest-auth/password/reset/confirm/', 'POST', false)
-export var user = Action('user', 'rest-auth/user/', 'GET', true)
+export const LOGIN_REQUEST = '@@rest_auth/LOGIN_REQUEST'
+export const LOGIN_SUCCESS = '@@rest_auth/LOGIN_SUCCESS'
+export const LOGIN_FAILURE = '@@rest_auth/LOGIN_FAILURE'
+export const login = (values) => (
+  restApiAction({
+    endpoint: 'rest-auth/login/',
+    method: 'POST',
+    types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE],
+    values: values,
+  })
+)
 
 
-export const REST_AUTH = {
-  VALIDATE: '@@validate/RESPONSE_VALIDATE',
-  PASSWORD_VALIDATE: '@@password_validate/PASSWORD_VALIDATE'
-}
+export const LOGOUT_REQUEST = '@@rest_auth/LOGOUT_REQUEST'
+export const LOGOUT_SUCCESS = '@@rest_auth/LOGOUT_SUCCESS'
+export const LOGOUT_FAILURE = '@@rest_auth/LOGOUT_FAILURE'
+export const logout = () => (
+  restApiAction({
+    endpoint: 'rest-auth/logout/',
+    method: 'POST',
+    types: [LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE],
+    isPrivate: true,
+  })
+)
 
-export const validate = (response, values) => ({
-  type: REST_AUTH.VALIDATE,
+
+export const REGISTRATION_REQUEST = '@@rest_auth/REGISTRATION_REQUEST'
+export const REGISTRATION_SUCCESS = '@@rest_auth/REGISTRATION_SUCCESS'
+export const REGISTRATION_FAILURE = '@@rest_auth/REGISTRATION_FAILURE'
+export const registration = (values) => (
+  restApiAction({
+    endpoint: 'rest-auth/registration/',
+    method: 'POST',
+    types: [REGISTRATION_REQUEST, REGISTRATION_SUCCESS, REGISTRATION_FAILURE],
+    values: values,
+  })
+)
+
+
+export const VERIFY_EMAIL_REQUEST = '@@rest_auth/VERIFY_EMAIL_REQUEST'
+export const VERIFY_EMAIL_SUCCESS = '@@rest_auth/VERIFY_EMAIL_SUCCESS'
+export const VERIFY_EMAIL_FAILURE = '@@rest_auth/VERIFY_EMAIL_FAILURE'
+export const verifyEmail = (values) => (
+  restApiAction({
+    endpoint: 'rest-auth/registration/verify-email/',
+    method: 'POST',
+    types: [VERIFY_EMAIL_REQUEST, VERIFY_EMAIL_SUCCESS, VERIFY_EMAIL_FAILURE],
+    values: values,
+  })
+)
+
+
+export const PASSWORD_RESET_REQUEST = '@@rest_auth/PASSWORD_RESET_REQUEST'
+export const PASSWORD_RESET_SUCCESS = '@@rest_auth/PASSWORD_RESET_SUCCESS'
+export const PASSWORD_RESET_FAILURE = '@@rest_auth/PASSWORD_RESET_FAILURE'
+export const passwordReset = (values) => (
+  restApiAction({
+    endpoint: 'rest-auth/password/reset/',
+    method: 'POST',
+    types: [PASSWORD_RESET_REQUEST, PASSWORD_RESET_SUCCESS, PASSWORD_RESET_FAILURE],
+    values: values,
+  })
+)
+
+
+export const PASSWORD_RESET_CONFIRM_REQUEST = '@@rest_auth/PASSWORD_RESET_CONFIRM_REQUEST'
+export const PASSWORD_RESET_CONFIRM_SUCCESS = '@@rest_auth/PASSWORD_RESET_CONFIRM_SUCCESS'
+export const PASSWORD_RESET_CONFIRM_FAILURE = '@@rest_auth/PASSWORD_RESET_CONFIRM_FAILURE'
+export const passwordResetConfirm = (values) => (
+  restApiAction({
+    endpoint:'rest-auth/password/reset/confirm/',
+    method:'POST',
+    types: [
+      PASSWORD_RESET_CONFIRM_REQUEST,
+      PASSWORD_RESET_CONFIRM_SUCCESS,
+      PASSWORD_RESET_CONFIRM_FAILURE,
+    ],
+    values: values,
+  })
+) 
+
+
+export const USER_REQUEST = '@@rest_auth/USER_REQUEST'
+export const USER_SUCCESS = '@@rest_auth/USER_SUCCESS'
+export const USER_FAILURE = '@@rest_auth/USER_FAILURE'
+export const user = () => (
+  restApiAction({
+    types: [USER_REQUEST, USER_SUCCESS, USER_FAILURE],
+    endpoint: 'rest-auth/user/',
+    method: 'GET',
+    isPrivate: true,
+  })
+) 
+
+
+export const VALIDATE_FORM_RESPONSE = '@@redux_form/VALIDATE_FORM_RESPONSE'
+export const validateFormResponse = (response, values) => ({
+  type: VALIDATE_FORM_RESPONSE,
   values,
   response,
 })
 
+
+export const PASSWORD_FIELD_VALIDATE = '@@zxcvbn/PASSWORD_FIELD_VALIDATE'
 export const passValidate = (payload) => ({
-  type: REST_AUTH.PASSWORD_VALIDATE,
+  type: PASSWORD_FIELD_VALIDATE,
   payload,
 })

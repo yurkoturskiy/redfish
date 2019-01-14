@@ -5,7 +5,7 @@ import PasswordResetForm from '../../components/auth/PasswordResetForm'
 // actions
 import {
   passwordReset,
-  validate
+  validateFormResponse,
 } from '../../actions/restAuth'
 import { resetRequestCondition } from '../../actions/conditions'
 
@@ -17,7 +17,7 @@ class PasswordReset extends React.Component {
   }
   handleSubmit(values) {
     return this.props.passwordReset(values)
-      .then(res => this.props.validate(res))
+      .then(res => this.props.validateFormResponse(res))
   }
   render() {
     if (this.props.requestCondition === 2) {
@@ -45,7 +45,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   passwordReset: (email) => dispatch(passwordReset(email)),
-  validate: (res) => dispatch(validate(res)),
+  validateFormResponse: (res) => dispatch(validateFormResponse(res)),
   resetRequestCondition: (payload) => dispatch(resetRequestCondition(payload)),
 })
 

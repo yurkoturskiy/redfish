@@ -5,7 +5,7 @@ import RegistrationForm from '../../components/auth/RegistrationForm'
 // actions
 import {
   registration,
-  validate, 
+  validateFormResponse, 
   passValidate
 } from '../../actions/restAuth'
 import { switchPasswordVisibility } from '../../actions/conditions'
@@ -25,7 +25,7 @@ class Registration extends React.Component {
     values.password2 = values.password1 
     // submit values to the api
     return this.props.registration(values)
-      .then(res => this.props.validate(res))
+      .then(res => this.props.validateFormResponse(res))
   }
   render() {
     if (this.props.requestCondition === 2) {
@@ -58,7 +58,7 @@ const mapStatetoProps = state => ({
 const mapDispatchToProps = dispatch => ({
   registration: (values) => dispatch(registration(values)),
   resetRequestCondition: (payload) => dispatch(resetRequestCondition(payload)),
-  validate: (res) => dispatch(validate(res)),
+  validateFormResponse: (res) => dispatch(validateFormResponse(res)),
   passValidate: (payload) => dispatch(passValidate(payload)),
   switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
 })

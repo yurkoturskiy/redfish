@@ -9,7 +9,7 @@ import { logout } from '../actions/restAuth'
 
 class NavigationContainer extends React.Component {
   render() {
-    if (this.props.isAuth === true) {
+    if (this.props.isAuth) {
       return (
         <Navigation>
           <ul>

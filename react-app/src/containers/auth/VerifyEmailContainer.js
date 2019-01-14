@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 // actions
 import {
   verifyEmail, 
-  validate 
+  validateFormResponse
 } from '../../actions/restAuth'
 
 
@@ -35,7 +35,7 @@ const mapStatetoProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   verifyEmail: (values) => dispatch(verifyEmail(values)),
-  validate: (res) => dispatch(validate(res)),
+  validateFormResponse: (res) => dispatch(validateFormResponse(res)),
 })
 
 export default connect(mapStatetoProps, mapDispatchToProps)(VerifyEmail)

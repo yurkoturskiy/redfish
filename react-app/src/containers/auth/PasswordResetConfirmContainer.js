@@ -5,7 +5,7 @@ import PasswordResetConfirmForm from '../../components/auth/PasswordResetConfirm
 // actions
 import {
   passwordResetConfirm, 
-  validate, 
+  validateFormResponse, 
   passValidate,
 } from '../../actions/restAuth'
 import {switchPasswordVisibility} from '../../actions/conditions'
@@ -25,7 +25,7 @@ class PasswordResetConfirm extends React.Component {
     values['token'] = this.props.match.params.token
     values['new_password2'] = values.new_password1
     return this.props.passwordResetConfirm(values)
-      .then(res => this.props.validate(res))
+      .then(res => this.props.validateFormResponse(res))
   }
   render() {
     if (this.props.requestCondition === 2) {
@@ -60,7 +60,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   passwordResetConfirm: (values) => dispatch(passwordResetConfirm(values)),
-  validate: (res) => dispatch(validate(res)),
+  validateFormResponse: (res) => dispatch(validateFormResponse(res)),
   passValidate: (payload) => dispatch(passValidate(payload)),
   switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
   resetRequestCondition: (payload) => dispatch(resetRequestCondition(payload)),

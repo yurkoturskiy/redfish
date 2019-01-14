@@ -5,7 +5,7 @@ import LoginForm from '../../components/auth/LoginForm'
 // actions
 import {
   login,
-  validate,
+  validateFormResponse,
 } from '../../actions/restAuth'
 import { switchPasswordVisibility } from '../../actions/conditions'
 
@@ -22,7 +22,7 @@ class Login extends React.Component {
   handleSubmit(values) {
     // submit values to the server
     return this.props.login(values)
-      .then(res => this.props.validate(res))
+      .then(res => this.props.validateFormResponse(res))
   }
   render() {
     return (
@@ -44,7 +44,7 @@ const mapStatetoProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     login: (values) => dispatch(login(values)),
-    validate: (res) => dispatch(validate(res)),
+    validateFormResponse: (res) => dispatch(validateFormResponse(res)),
     switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
 })
 
