@@ -1,6 +1,5 @@
 // actions
 import { PASSWORD_FIELD_VALIDATE } from '../actions/restAuth'
-import { SWITCH_PASSWORD_VISIBILITY } from '../actions/conditions'
 
 const initState = () => {
   return {
@@ -17,9 +16,6 @@ const initState = () => {
 
 const ui = (state = initState(), action) => {
   switch(action.type) {
-    case SWITCH_PASSWORD_VISIBILITY:
-      state.passwordVisibilityCondition = state.passwordVisibilityCondition ? false : true
-      return {...state}
     case PASSWORD_FIELD_VALIDATE:
       state.passwordValidation.feedback = action.payload.feedback
       console.log(action.payload.password)

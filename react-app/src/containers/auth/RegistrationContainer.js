@@ -8,13 +8,16 @@ import {
   validateFormResponse, 
   passValidate
 } from '../../actions/restAuth'
-import { switchPasswordVisibility } from '../../actions/conditions'
 import { resetRequestCondition } from '../../actions/conditions'
 
 
 class Registration extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      passwordVisibilityCondition: false
+    }
+    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     if (this.props.passwordVisibilityCondition) {
       this.props.switchPasswordVisibility()
@@ -27,6 +30,11 @@ class Registration extends React.Component {
     return this.props.registration(values)
       .then(res => this.props.validateFormResponse(res))
   }
+  switchPasswordVisibility() {
+    this.setState({
+      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
+    })
+  }
   render() {
     if (this.props.requestCondition === 2) {
       return <p>Confirm your email address</p>
@@ -34,9 +42,9 @@ class Registration extends React.Component {
       return (
         <RegistrationForm 
           onSubmit={this.handleSubmit} 
-          passwordVisibilityCondition={this.props.passwordVisibilityCondition}
+          passwordVisibilityCondition={this.state.passwordVisibilityCondition}
           passwordHelperText={this.props.passwordScore}
-          passwordTralingIconOnClick={this.props.switchPasswordVisibility}
+          passwordTralingIconOnClick={this.switchPasswordVisibility}
           passwordOnChange={this.props.passValidate}
           requestCondition={this.props.requestCondition}
         />
@@ -51,7 +59,6 @@ class Registration extends React.Component {
 const mapStatetoProps = state => ({
   requestCondition: state.requestCondition.registration,
   // password field
-  passwordVisibilityCondition: state.ui.passwordVisibilityCondition,
   passwordScore: state.ui.passwordValidation.score,
 })
 
@@ -60,7 +67,6 @@ const mapDispatchToProps = dispatch => ({
   resetRequestCondition: (payload) => dispatch(resetRequestCondition(payload)),
   validateFormResponse: (res) => dispatch(validateFormResponse(res)),
   passValidate: (payload) => dispatch(passValidate(payload)),
-  switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
 })
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Registration)

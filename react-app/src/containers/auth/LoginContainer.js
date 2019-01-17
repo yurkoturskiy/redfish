@@ -7,12 +7,15 @@ import {
   login,
   validateFormResponse,
 } from '../../actions/restAuth'
-import { switchPasswordVisibility } from '../../actions/conditions'
 
 
 class Login extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      passwordVisibilityCondition: false
+    }
+    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.forgotPasswordEndpoint = '/password-reset'
     if (this.props.passwordVisibilityCondition) {
@@ -24,12 +27,17 @@ class Login extends React.Component {
     return this.props.login(values)
       .then(res => this.props.validateFormResponse(res))
   }
+  switchPasswordVisibility() {
+    this.setState({
+      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
+    })
+  }
   render() {
     return (
       <LoginForm 
         onSubmit={this.handleSubmit}
-        passwordVisibilityCondition={this.props.passwordVisibilityCondition}
-        passwordTralingIconOnClick={this.props.switchPasswordVisibility}
+        passwordVisibilityCondition={this.state.passwordVisibilityCondition}
+        passwordTralingIconOnClick={this.switchPasswordVisibility}
         forgotPasswordEndpoint={this.forgotPasswordEndpoint}
         requestCondition={this.props.requestCondition}
        />
@@ -38,14 +46,12 @@ class Login extends React.Component {
 }
 
 const mapStatetoProps = state => ({
-    passwordVisibilityCondition: state.ui.passwordVisibilityCondition,
     requestCondition: state.requestCondition.login,
 })
 
 const mapDispatchToProps = dispatch => ({
     login: (values) => dispatch(login(values)),
     validateFormResponse: (res) => dispatch(validateFormResponse(res)),
-    switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
 })
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Login)

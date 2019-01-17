@@ -8,13 +8,16 @@ import {
   validateFormResponse, 
   passValidate,
 } from '../../actions/restAuth'
-import {switchPasswordVisibility} from '../../actions/conditions'
 import { resetRequestCondition } from '../../actions/conditions'
 
 
 class PasswordResetConfirm extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      passwordVisibilityCondition: false
+    }
+    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     if (this.props.passwordVisibilityCondition) {
       this.props.switchPasswordVisibility()
@@ -27,6 +30,11 @@ class PasswordResetConfirm extends React.Component {
     return this.props.passwordResetConfirm(values)
       .then(res => this.props.validateFormResponse(res))
   }
+  switchPasswordVisibility() {
+    this.setState({
+      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
+    })
+  }
   render() {
     if (this.props.requestCondition === 2) {
       return <p>password reset is succeed</p>
@@ -36,11 +44,11 @@ class PasswordResetConfirm extends React.Component {
           // form submit handling method
           onSubmit={this.handleSubmit}
           // state of the show/hide password button
-          passwordVisibilityCondition={this.props.passwordVisibilityCondition}
+          passwordVisibilityCondition={this.state.passwordVisibilityCondition}
           // zxcvbn password strength
           passwordHelperText={this.props.passwordScore}
           // show/hide password button method
-          passwordTralingIconOnClick={this.props.switchPasswordVisibility}
+          passwordTralingIconOnClick={this.switchPasswordVisibility}
           // zxcvbn validation method
           passwordOnChange={this.props.passValidate}
           // request condition for freezing UI while requesting
@@ -54,7 +62,6 @@ class PasswordResetConfirm extends React.Component {
 const mapStateToProps = state => ({
   requestCondition: state.requestCondition.passwordResetConfirm,
   // password field
-  passwordVisibilityCondition: state.ui.passwordVisibilityCondition,
   passwordScore: state.ui.passwordValidation.score,
 })
 
@@ -62,7 +69,6 @@ const mapDispatchToProps = dispatch => ({
   passwordResetConfirm: (values) => dispatch(passwordResetConfirm(values)),
   validateFormResponse: (res) => dispatch(validateFormResponse(res)),
   passValidate: (payload) => dispatch(passValidate(payload)),
-  switchPasswordVisibility: () => dispatch(switchPasswordVisibility()),
   resetRequestCondition: (payload) => dispatch(resetRequestCondition(payload)),
 })
 

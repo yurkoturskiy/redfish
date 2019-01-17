@@ -2,6 +2,7 @@ from django.db import models
 import notes
 import os
 
+
 class Color(models.Model):
 	label = models.CharField(max_length=30)
 	value = models.CharField(max_length=7)

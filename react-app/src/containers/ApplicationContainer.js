@@ -17,7 +17,6 @@ class Application extends React.Component {
     return (
       <React.Fragment>
           <h1>Application</h1>
-          <h5>{this.props.user.pk}</h5>
       </React.Fragment>
     )
   }

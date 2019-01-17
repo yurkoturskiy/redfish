@@ -1,6 +1,6 @@
 import { RSAA } from 'redux-api-middleware'
 
-const url = 'http://127.0.0.1:9000/'
+const url = 'http://192.168.0.118:9000/'
 
 export const SNIPPETS_REQUEST = '@@snippets/SNIPPETS_REQUEST'
 export const SNIPPETS_SUCCESS = '@@snippets/SNIPPETS_SUCCESS'
