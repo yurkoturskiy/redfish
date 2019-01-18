@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom'
 import Main from './MainContainer'
 import Application from './ApplicationContainer'
 import Login from './auth/LoginContainer'
+import Basic from './auth/Basic'
 import Registration from './auth/RegistrationContainer'
 import VerifyEmail from './auth/VerifyEmailContainer'
 import Profile from './auth/ProfileContainer'
@@ -57,6 +58,7 @@ class AutoRouter extends React.Component {
         {/* for not loged in users */}
           <Route exact path="/" component={Main} />
           <Route path="/login" component={Login}/>
+          <Route path="/basic" component={Basic}/>
           <Route path="/registration" component={Registration}/>
           <Route path="/rest-auth/registration/account-confirm-email/:key/" component={VerifyEmail}/>
           <Route exact path="/password-reset" component={PasswordReset}/>
