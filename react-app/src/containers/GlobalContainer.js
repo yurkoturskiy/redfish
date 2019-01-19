@@ -1,7 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import coreapi from 'coreapi'
 // container components
 import AutoRouter from './AutoRouterContainer'
 import NavigationContainer from './NavigationContainer'

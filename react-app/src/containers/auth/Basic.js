@@ -1,64 +1,69 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Link } from "react-router-dom";
+import { Formik, Form, Field } from 'formik';
 import FormWrapper from '../../components/FormWrapper'
 import { login, } from '../../actions/restAuth'
+import { endpoints } from '../AutoRouterContainer'
+import FormikMaterialTextField from '../../components/FormikMaterialTextField'
+import Button from '@material/react-button';
+import BasicForm from '../../components/auth/BasicForm'
+
+const theme = {
+  background: '#f0f0f0',
+}
 
 class Basic extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = {
+      passwordVisibilityCondition: false,
+    }
+    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
+  }
+  handleSubmit(
+    values, { setSubmitting, setErrors, setStatus }
+  ) {
+    this.props.login(values)
+      .then(res => {
+        if (res.error) {
+          if (res.payload.status) {
+            // server responded
+            console.log(res)
+            setErrors(res.payload.response)
+            setStatus({non_field_errors: res.payload.response.non_field_errors})
+          } else {
+            // server is not answered
+            setStatus({non_field_errors: 'Something wrong with a server'})
+          }
+        }
+        setSubmitting(false)
+      })
+  }
+  switchPasswordVisibility() {
+    this.setState({
+      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
+    })
+  }
   render() {
-  return (
-      <FormWrapper>
-        <h3>Login</h3>
-        <Formik
-          initialValues={{ email: '', password: '' }}
-          validate={values => {
-            let errors = {};
-            if (!values.email) {
-              errors.email = 'Required';
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = 'Invalid email address';
-            }
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting, setFieldError, setErrors }) => {
-            setTimeout(() => {
-              this.props.login(values)
-                .then(res => {
-                  if (res.error) {
-                    console.log(res)
-                    let errors = res.payload.response
-                    // setFieldError('email', 'aaa')
-                    // setErrors({email: 'aaa', password: 'lol'})
-                    setErrors(errors)
-                  }
-                })
-              setSubmitting(false);
-            }, 400);
-          }}
-        >
-          {({ isSubmitting }) => (
-            <Form>
-              <Field type="email" name="email" />
-              <ErrorMessage name="email" component="div" />
-              <Field type="password" name="password" />
-              <ErrorMessage name="password" component="div" />
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
-            </Form>
-          )}
-        </Formik>
-      </FormWrapper>
+  return ( 
+      <Formik
+        initialValues={{ email: undefined, password: undefined }}
+        onSubmit={this.handleSubmit}
+      >
+        {({ status, touched, isSubmitting, errors }) => (
+          <BasicForm 
+            status={status}
+            touched={touched}
+            isSubmitting={isSubmitting}
+            errors={errors}
+          />
+        )}
+      </Formik>
     );
   }
 }
-
-
-// const mapStatetoProps = state => ({
-//     requestCondition: state.requestCondition.login,
-// })
 
 const mapDispatchToProps = dispatch => ({
     login: (values) => dispatch(login(values)),

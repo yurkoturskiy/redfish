@@ -13,6 +13,10 @@ import Profile from './auth/ProfileContainer'
 import PasswordReset from './auth/PasswordResetContainer'
 import PasswordResetConfirm from './auth/PasswordResetConfirmContainer'
 
+export const endpoints = {
+  passwordReset: '/password-reset',
+}
+
 const authEndpoints = [
   '/profile',
   '/app',

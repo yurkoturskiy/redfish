@@ -1,6 +1,6 @@
 import { RSAA } from 'redux-api-middleware'
 
-const URL = 'http://192.168.0.118:9000/'
+const URL = 'http://localhost:9000/'
 
 export const restApiAction = ({
   endpoint,

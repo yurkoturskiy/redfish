@@ -6,6 +6,7 @@ const FormWrapper = styled.div`
   width: 100%;
   background: ${props => props.theme.background};
 
+
   form {
     width: 300px;
     position: absolute;
