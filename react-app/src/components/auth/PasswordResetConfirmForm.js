@@ -1,52 +1,51 @@
-import React from "react"
-import { Field, reduxForm } from 'redux-form'
-// presentational components
+import React from 'react';
+import { Form, Field } from 'formik';
+import FormikMaterialTextField from '../FormikMaterialTextField'
 import FormWrapper from '../FormWrapper'
-import MaterialTextField from '../../components/MaterialTextField'
-import Button from '@material/react-button'
+import Button from '@material/react-button';
+import { Link } from "react-router-dom";
+import { endpoints } from '../../containers/AutoRouterContainer'
 
 const theme = {
   background: '#f0f0f0',
 }
 
-let PasswordResetConfirmForm = ({
-  // general props
-  error, requestCondition, // state
-  handleSubmit, // actions
-
-  // Password field props
-  passwordVisibilityCondition, passwordHelperText, // state
-  passwordTralingIconOnClick, passwordOnChange, //actions
-}) => (
-  <FormWrapper theme={theme}>
-    <form onSubmit={handleSubmit}>
-      <h3>Password reset</h3>
-      <Field 
-        name="new_password1" 
-        label="New password"
-        type={passwordVisibilityCondition ? 'text' : 'password'}
-        helperText={passwordHelperText}
-        tralingIcon={passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
-        tralingIconOnClick={passwordTralingIconOnClick}
-        onChange={passwordOnChange}
-        component={MaterialTextField}
-      />
-      <Button 
-        type="submit" 
-        className="form-button"
-        disabled={requestCondition === 1}
-      >
-        Set new password
-      </Button>
-      {error && <strong>{error}</strong>}
-    </form>
-  </FormWrapper>
-)
-
-
-PasswordResetConfirmForm = reduxForm({
-  form: 'passwordResetConfirmForm'
-})(PasswordResetConfirmForm)
-
+class PasswordResetConfirmForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      passwordVisibilityCondition: false,
+    }
+    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
+  }
+  switchPasswordVisibility() {
+    this.setState({
+      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
+    })
+  }
+  render() {
+    const {status, touched, isSubmitting, errors} = this.props
+    return (
+      <FormWrapper theme={theme}>
+        <Form>
+          <h3>Enter your new password</h3>
+          <Field 
+            id="new_password1" 
+            label="New password"
+            name="new_password1"
+            type={this.state.passwordVisibilityCondition ? 'text' : 'password'} 
+            tralingIcon={this.state.passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
+            tralingIconOnClick={this.switchPasswordVisibility}
+            component={FormikMaterialTextField}       
+          />
+          <Button type="submit" className="form-button" disabled={isSubmitting}>
+            Set new password
+          </Button>
+          <span>{status && status.non_field_errors}</span>
+        </Form>
+      </FormWrapper>
+    )
+  }
+}
 
 export default PasswordResetConfirmForm

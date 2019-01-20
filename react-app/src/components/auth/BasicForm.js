@@ -10,13 +10,13 @@ const theme = {
   background: '#f0f0f0',
 }
 
-
 class BasicForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       passwordVisibilityCondition: false,
     }
+    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
   }
   switchPasswordVisibility() {
     this.setState({

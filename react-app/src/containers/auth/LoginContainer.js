@@ -1,57 +1,63 @@
 import React from 'react';
-import { connect } from 'react-redux'
-// presentational components
+import {connect} from 'react-redux'
+import { Link } from "react-router-dom";
+import { Formik } from 'formik';
+import FormWrapper from '../../components/FormWrapper'
+import { login, } from '../../actions/restAuth'
+import { endpoints } from '../AutoRouterContainer'
+import FormikMaterialTextField from '../../components/FormikMaterialTextField'
+import Button from '@material/react-button';
 import LoginForm from '../../components/auth/LoginForm'
-// actions
-import {
-  login,
-  validateFormResponse,
-} from '../../actions/restAuth'
 
+const theme = {
+  background: '#f0f0f0',
+}
 
 class Login extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      passwordVisibilityCondition: false
-    }
-    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.forgotPasswordEndpoint = '/password-reset'
-    if (this.props.passwordVisibilityCondition) {
-      this.props.switchPasswordVisibility()
-    }
   }
-  handleSubmit(values) {
-    // submit values to the server
-    return this.props.login(values)
-      .then(res => this.props.validateFormResponse(res))
-  }
-  switchPasswordVisibility() {
-    this.setState({
-      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
-    })
+  handleSubmit(
+    values, { setSubmitting, setErrors, setStatus }
+  ) {
+    this.props.login(values)
+      .then(res => {
+        if (res.error) {
+          if (res.payload.status) {
+            // server responded
+            console.log(res)
+            setErrors(res.payload.response)
+            setStatus({non_field_errors: res.payload.response.non_field_errors})
+          } else {
+            // server is not answered
+            setStatus({non_field_errors: 'Something wrong with a server'})
+          }
+        }
+        setSubmitting(false)
+      })
   }
   render() {
-    return (
-      <LoginForm 
+  return ( 
+      <Formik
+        initialValues={{ email: undefined, password: undefined }}
         onSubmit={this.handleSubmit}
-        passwordVisibilityCondition={this.state.passwordVisibilityCondition}
-        passwordTralingIconOnClick={this.switchPasswordVisibility}
-        forgotPasswordEndpoint={this.forgotPasswordEndpoint}
-        requestCondition={this.props.requestCondition}
-       />
-    )
+      >
+        {({ status, touched, isSubmitting, errors }) => (
+          <LoginForm 
+            status={status}
+            touched={touched}
+            isSubmitting={isSubmitting}
+            errors={errors}
+          />
+        )}
+      </Formik>
+    );
   }
 }
 
-const mapStatetoProps = state => ({
-    requestCondition: state.requestCondition.login,
-})
-
 const mapDispatchToProps = dispatch => ({
     login: (values) => dispatch(login(values)),
-    validateFormResponse: (res) => dispatch(validateFormResponse(res)),
 })
 
-export default connect(mapStatetoProps, mapDispatchToProps)(Login)
+export default connect(undefined, mapDispatchToProps)(Login)

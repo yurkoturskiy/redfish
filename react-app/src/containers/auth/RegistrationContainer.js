@@ -1,72 +1,73 @@
-import React from 'react'
-import { connect } from 'react-redux'
-// presentational components
+import React from 'react';
+import {connect} from 'react-redux'
+import { Link } from "react-router-dom";
+import { Formik } from 'formik';
+import FormWrapper from '../../components/FormWrapper'
+import { registration, } from '../../actions/restAuth'
+import { endpoints } from '../AutoRouterContainer'
+import FormikMaterialTextField from '../../components/FormikMaterialTextField'
+import Button from '@material/react-button';
 import RegistrationForm from '../../components/auth/RegistrationForm'
-// actions
-import {
-  registration,
-  validateFormResponse, 
-  passValidate
-} from '../../actions/restAuth'
-import { resetRequestCondition } from '../../actions/conditions'
 
+const theme = {
+  background: '#f0f0f0',
+}
 
 class Registration extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      passwordVisibilityCondition: false
-    }
-    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    if (this.props.passwordVisibilityCondition) {
-      this.props.switchPasswordVisibility()
+    this.state = {
+      requestIsSucced: false,
     }
   }
-  handleSubmit(values) {
-    // prepare values
-    values.password2 = values.password1 
-    // submit values to the api
-    return this.props.registration(values)
-      .then(res => this.props.validateFormResponse(res))
-  }
-  switchPasswordVisibility() {
-    this.setState({
-      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
-    })
+  handleSubmit(
+    values, { setSubmitting, setErrors, setStatus }
+  ) {
+    values['password2'] = values.password1
+    this.props.registration(values)
+      .then(res => {
+        if (res.error) {
+          if (res.payload.status) {
+            // server responded
+            console.log(res)
+            setErrors(res.payload.response)
+            setStatus({non_field_errors: res.payload.response.non_field_errors})
+          } else {
+            // server is not answered
+            setStatus({non_field_errors: 'Something wrong with a server'})
+          }
+        } else {
+          this.setState({requestIsSucced: true})
+        }
+        setSubmitting(false)
+      })
   }
   render() {
-    if (this.props.requestCondition === 2) {
-      return <p>Confirm your email address</p>
-    } else { 
-      return (
-        <RegistrationForm 
-          onSubmit={this.handleSubmit} 
-          passwordVisibilityCondition={this.state.passwordVisibilityCondition}
-          passwordHelperText={this.props.passwordScore}
-          passwordTralingIconOnClick={this.switchPasswordVisibility}
-          passwordOnChange={this.props.passValidate}
-          requestCondition={this.props.requestCondition}
-        />
+    if (this.state.requestIsSucced) {
+      return <h1>Confirm your email address</h1>
+    } else {
+      return ( 
+        <Formik
+          initialValues={{ username: undefined, email: undefined, password1: undefined }}
+          onSubmit={this.handleSubmit}
+        >
+          {({ status, touched, isSubmitting, errors }) => (
+            <RegistrationForm 
+              status={status}
+              touched={touched}
+              isSubmitting={isSubmitting}
+              errors={errors}
+            />
+          )}
+        </Formik>
       )
     }
   }
-  componentWillUnmount() {
-    this.props.resetRequestCondition('registration')
-  }
 }
 
-const mapStatetoProps = state => ({
-  requestCondition: state.requestCondition.registration,
-  // password field
-  passwordScore: state.ui.passwordValidation.score,
-})
-
 const mapDispatchToProps = dispatch => ({
-  registration: (values) => dispatch(registration(values)),
-  resetRequestCondition: (payload) => dispatch(resetRequestCondition(payload)),
-  validateFormResponse: (res) => dispatch(validateFormResponse(res)),
-  passValidate: (payload) => dispatch(passValidate(payload)),
+    registration: (values) => dispatch(registration(values)),
 })
 
-export default connect(mapStatetoProps, mapDispatchToProps)(Registration)
+export default connect(undefined, mapDispatchToProps)(Registration)

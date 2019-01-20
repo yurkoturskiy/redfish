@@ -1,52 +1,69 @@
 import React from 'react';
 import {connect} from 'react-redux'
-// presentational components
+import { Link } from "react-router-dom";
+import { Formik } from 'formik';
+import FormWrapper from '../../components/FormWrapper'
+import { passwordReset, } from '../../actions/restAuth'
+import { endpoints } from '../AutoRouterContainer'
+import FormikMaterialTextField from '../../components/FormikMaterialTextField'
+import Button from '@material/react-button';
 import PasswordResetForm from '../../components/auth/PasswordResetForm'
-// actions
-import {
-  passwordReset,
-  validateFormResponse,
-} from '../../actions/restAuth'
-import { resetRequestCondition } from '../../actions/conditions'
 
 
 class PasswordReset extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = {
+      requestIsSucced: false,
+    }
   }
-  handleSubmit(values) {
-    return this.props.passwordReset(values)
-      .then(res => this.props.validateFormResponse(res))
+  handleSubmit(
+    values, { setSubmitting, setErrors, setStatus }
+  ) {
+    this.props.passwordReset(values)
+      .then(res => {
+        if (res.error) {
+          if (res.payload.status) {
+            // server responded
+            console.log(res)
+            setErrors(res.payload.response)
+            setStatus({non_field_errors: res.payload.response.non_field_errors})
+          } else {
+            // server is not answered
+            setStatus({non_field_errors: 'Something wrong with a server'})
+          }
+        } else {
+          this.setState({requestIsSucced: true})
+        }
+        setSubmitting(false)
+      })
   }
   render() {
-    if (this.props.requestCondition === 2) {
-      return <p>Check your email</p>
+    if (this.state.requestIsSucced) {
+      return <h3>Check your email</h3>
     } else {
       return (
-        <React.Fragment>
-        <PasswordResetForm 
+        <Formik
+          initialValues={{ email: undefined }}
           onSubmit={this.handleSubmit}
-          requestCondition={this.props.requestCondition}
-        />
-        <p>{this.props.requestCondition}</p>
-        </React.Fragment>
+        >
+          {({ status, touched, isSubmitting, errors }) => (
+            <PasswordResetForm 
+              status={status}
+              touched={touched}
+              isSubmitting={isSubmitting}
+              errors={errors}
+            />
+          )}
+        </Formik>
       )
     }
   }
-  componentWillUnmount() {
-    this.props.resetRequestCondition('passwordReset')
-  }
 }
-
-const mapStateToProps = state => ({
-  requestCondition: state.requestCondition.passwordReset,
-})
 
 const mapDispatchToProps = dispatch => ({
   passwordReset: (email) => dispatch(passwordReset(email)),
-  validateFormResponse: (res) => dispatch(validateFormResponse(res)),
-  resetRequestCondition: (payload) => dispatch(resetRequestCondition(payload)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PasswordReset)
+export default connect(undefined, mapDispatchToProps)(PasswordReset)

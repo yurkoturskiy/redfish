@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import { Link } from "react-router-dom";
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import FormWrapper from '../../components/FormWrapper'
 import { login, } from '../../actions/restAuth'
 import { endpoints } from '../AutoRouterContainer'
@@ -9,18 +9,11 @@ import FormikMaterialTextField from '../../components/FormikMaterialTextField'
 import Button from '@material/react-button';
 import BasicForm from '../../components/auth/BasicForm'
 
-const theme = {
-  background: '#f0f0f0',
-}
 
-class Basic extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.state = {
-      passwordVisibilityCondition: false,
-    }
-    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
   }
   handleSubmit(
     values, { setSubmitting, setErrors, setStatus }
@@ -40,11 +33,6 @@ class Basic extends React.Component {
         }
         setSubmitting(false)
       })
-  }
-  switchPasswordVisibility() {
-    this.setState({
-      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
-    })
   }
   render() {
   return ( 
@@ -69,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
     login: (values) => dispatch(login(values)),
 })
 
-export default connect(undefined, mapDispatchToProps)(Basic)
+export default connect(undefined, mapDispatchToProps)(Login)
