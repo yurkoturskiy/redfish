@@ -24,7 +24,7 @@ class RegistrationForm extends React.Component {
     })
   }
   render() {
-    const {status, touched, isSubmitting, errors} = this.props
+    const {status, touched, isSubmitting, errors, passwordOnChange, onChange, passwordHelperText} = this.props
     return (
       <FormWrapper theme={theme}>
         <Form>
@@ -50,7 +50,9 @@ class RegistrationForm extends React.Component {
             type={this.state.passwordVisibilityCondition ? 'text' : 'password'} 
             tralingIcon={this.state.passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
             tralingIconOnClick={this.switchPasswordVisibility}
-            component={FormikMaterialTextField}       
+            component={FormikMaterialTextField}
+            onChange={(e) => {onChange(e); passwordOnChange(e)}}
+            helperText={passwordHelperText}
           />
           <Button type="submit" className="form-button" disabled={isSubmitting}>
             Submit
