@@ -6,6 +6,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "@material/react-button": "^0.8.0",
+    "@material/react-text-field": "^0.8.0",
     "axios": "^0.18.0",
     "babel-plugin-styled-components": "^1.10.0",
     "formik": "^1.4.2",

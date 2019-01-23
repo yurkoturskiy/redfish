@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import '@material/react-button/dist/button.css';
+import '@material/react-text-field/dist/text-field.css';
 
 
 const FormWrapper = styled.div`
