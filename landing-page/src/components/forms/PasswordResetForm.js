@@ -1,10 +1,8 @@
 import React from 'react';
 import { Form, Field } from 'formik';
-import FormikMaterialTextField from '../FormikMaterialTextField'
-import FormWrapper from '../FormWrapper'
+import FormikMaterialTextField from './FormikMaterialTextField'
+import FormWrapper from './FormWrapper'
 import Button from '@material/react-button';
-import { Link } from "react-router-dom";
-import { endpoints } from '../../containers/AutoRouterContainer'
 
 const theme = {
   background: '#f0f0f0',
@@ -24,7 +22,7 @@ class PasswordResetForm extends React.Component {
     })
   }
   render() {
-    const {status, touched, isSubmitting, errors} = this.props
+    const {status, isSubmitting } = this.props
     return (
       <FormWrapper theme={theme}>
         <Form>

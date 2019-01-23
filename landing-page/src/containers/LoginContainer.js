@@ -1,7 +1,8 @@
 import React from 'react'
-import { Formik, Form, Field } from 'formik';
-import LoginForm from '../components/forms/LoginForm'
+import { Formik } from 'formik';
+
 import FormsMaster from './FormsMaster'
+import LoginForm from '../components/forms/LoginForm'
 
 
 class Login extends FormsMaster {
@@ -17,11 +18,11 @@ class Login extends FormsMaster {
   render() {
   return ( 
       <Formik
-        initialValues={{ username: '', password: '' }}
+        initialValues={{ username: undefined, password: undefined }}
         onSubmit={this.handleSubmit}
       >
         {({ status, touched, isSubmitting, errors }) => (
-          <LoginForm 
+          <LoginForm
             status={status}
             touched={touched}
             isSubmitting={isSubmitting}

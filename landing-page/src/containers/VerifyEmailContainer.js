@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
 // presentational components
 // actions
 import {
@@ -17,6 +18,11 @@ class VerifyEmail extends React.Component {
     this.props.verifyEmail(values)
       .then(res => console.log(res))
   }
+  componentDidMount() {
+    axios({
+
+    })
+  }
   render() {
     if (this.props.requestCondition === 1 || this.props.requestCondition === 0) {
       return <p>confirming</p>
@@ -28,14 +34,4 @@ class VerifyEmail extends React.Component {
   }
 }
 
-const mapStatetoProps = state => ({
-  // password field
-  requestCondition: state.requestCondition.verifyEmail,
-})
-
-const mapDispatchToProps = dispatch => ({
-  verifyEmail: (values) => dispatch(verifyEmail(values)),
-  validateFormResponse: (res) => dispatch(validateFormResponse(res)),
-})
-
-export default connect(mapStatetoProps, mapDispatchToProps)(VerifyEmail)
+export default VerifyEmail

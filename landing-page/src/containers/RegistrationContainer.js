@@ -1,50 +1,28 @@
 import React from 'react';
-import {connect} from 'react-redux'
-import { Link } from "react-router-dom";
 import { Formik } from 'formik';
 import zxcvbn from 'zxcvbn'
-import FormWrapper from '../../components/FormWrapper'
-import { registration, } from '../../actions/restAuth'
-import { endpoints } from '../AutoRouterContainer'
-import FormikMaterialTextField from '../../components/FormikMaterialTextField'
-import Button from '@material/react-button';
-import RegistrationForm from '../../components/auth/RegistrationForm'
+import FormsMaster from './FormsMaster'
+import RegistrationForm from '../components/forms/RegistrationForm'
 
-const theme = {
-  background: '#f0f0f0',
-}
 
-class Registration extends React.Component {
+class Registration extends FormsMaster {
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.endpoint = 'rest-auth/registration/'
     this.passwordStrengthValidation = this.passwordStrengthValidation.bind(this)
+    this.handleResponse = this.handleResponse.bind(this)
+    this.prepareValues = this.prepareValues.bind(this)
     this.state = {
-      requestIsSucced: false,
+      requestIsSucceed: false,
       passwordStrengthScore: undefined,
     }
   }
-  handleSubmit(
-    values, { setSubmitting, setErrors, setStatus }
-  ) {
+  prepareValues(values) {
     values['password2'] = values.password1
-    this.props.registration(values)
-      .then(res => {
-        if (res.error) {
-          if (res.payload.status) {
-            // server responded
-            console.log(res)
-            setErrors(res.payload.response)
-            setStatus({non_field_errors: res.payload.response.non_field_errors})
-          } else {
-            // server is not answered
-            setStatus({non_field_errors: 'Something wrong with a server'})
-          }
-        } else {
-          this.setState({requestIsSucced: true})
-        }
-        setSubmitting(false)
-      })
+    return values
+  }
+  handleResponse(response) {
+    this.setState({requestIsSucceed: true})
   }
   passwordStrengthValidation(payload) {
     let fieldIsEmpty = payload.target.value.length === 0 ? true : false
@@ -61,7 +39,7 @@ class Registration extends React.Component {
     })
   }
   render() {
-    if (this.state.requestIsSucced) {
+    if (this.state.requestIsSucceed) {
       return <h1>Confirm your email address</h1>
     } else {
       return ( 
@@ -86,8 +64,4 @@ class Registration extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-    registration: (values) => dispatch(registration(values)),
-})
-
-export default connect(undefined, mapDispatchToProps)(Registration)
+export default Registration

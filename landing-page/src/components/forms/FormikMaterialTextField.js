@@ -28,6 +28,7 @@ export const FormikMaterialTextField = ({
         className='material-icons' 
         tabIndex="1" 
         role="button" 
+        id="tralingIcon"
         onClick={tralingIconOnClick}
       >
         {tralingIcon}

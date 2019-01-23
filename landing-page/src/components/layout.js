@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StaticQuery, graphql, Link } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
-import Navigation from './Navigation'
 import GlobalStyle from './GlobalStyle'
 
 const Layout = ({ children }) => (

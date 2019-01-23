@@ -5,16 +5,15 @@ import axios from 'axios'
 class FormsMaster extends React.Component {
   constructor(props) {
     super(props)
+    this.postValues = this.postValues.bind(this)
+    this.prepareValues = this.prepareValues.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(
     values, { setSubmitting, setErrors, setStatus }
   ) {
-    axios({
-      method: 'post',
-      url: 'http://localhost:9000/' + this.endpoint,
-      data: values
-    })
+    let preparedValues = this.prepareValues(values)
+    this.postValues(preparedValues)
       .then(response => {
         this.handleResponse(response)
         setSubmitting(false)
@@ -33,6 +32,16 @@ class FormsMaster extends React.Component {
         }
         setSubmitting(false)
       })
+  }
+  prepareValues(values) {
+    return values
+  }
+  postValues(values) {
+    return axios({
+      method: 'post',
+      url: 'http://localhost:9000/' + this.endpoint,
+      data: values
+    })
   }
 }
 

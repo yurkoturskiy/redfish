@@ -1,9 +1,10 @@
 import React from 'react';
 import { Form, Field } from 'formik';
-import FormikMaterialTextField from './FormikMaterialTextField'
-import FormWrapper from './FormWrapper'
-import Button from '@material/react-button';
 import { Link } from "gatsby";
+
+import FormWrapper from './FormWrapper'
+import FormikMaterialTextField from './FormikMaterialTextField'
+import Button from '@material/react-button';
 
 const theme = {
   background: '#f0f0f0',
@@ -23,7 +24,7 @@ class LoginForm extends React.Component {
     })
   }
   render() {
-    const {status, touched, isSubmitting, errors} = this.props
+    const {status, isSubmitting} = this.props
     return (
       <FormWrapper theme={theme}>
         <Form>
