@@ -14,7 +14,7 @@ export const FormikMaterialTextField = ({
   ...props
 }) => {
   const helperTextTag = (
-    <HelperText persistent='true'>
+    <HelperText persistent='true' validation isValidationMessage>
       {
         (touched[field.name] && 
           ((errors[field.name] && errors[field.name]) || (warning && warning))
@@ -46,6 +46,7 @@ export const FormikMaterialTextField = ({
         trailingIcon={tralingIconTag}
       >
         <Input 
+          isValid={!errors[field.name]}
           type={type} 
           {...field} 
           {...props} 
