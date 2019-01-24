@@ -28,7 +28,7 @@ class LoginForm extends React.Component {
     return (
       <FormWrapper theme={theme}>
         <Form>
-          <h3>Login</h3>
+          <h3>Welcome back!</h3>
           <Field
             id="username"
             label="username or email"
