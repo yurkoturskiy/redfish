@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import '@material/react-button/dist/button.css';
+
 import '@material/react-text-field/dist/text-field.css';
 
 
@@ -60,6 +60,28 @@ const FormWrapper = styled.div`
 
   .form-button {
     float: right;
+  }
+  .text-field {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .non-fields-error {
+    color: red;
+    font-size: 0.8em;
+  }
+
+  .subform-container {
+    height: 36px;
+    
+    padding-left: 16px;
+  }
+
+  .reset-password {
+    height: 36px;
+    font-size: 0.8em;
+    line-height: 36px;
+    text-align: center;
   }
 `
 

@@ -36,12 +36,12 @@ export const FormikMaterialTextField = ({
     </Icon>
   )
   return (
-    <div>
+    <div className='text-field'>
       <TextField
         label={label}
         {...field} {...props}
         className='input-container'
-        outlined={false}
+        outlined={true}
         helperText={helperTextTag}
         trailingIcon={tralingIconTag}
       >

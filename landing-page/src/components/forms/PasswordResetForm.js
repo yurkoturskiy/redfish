@@ -2,7 +2,8 @@ import React from 'react';
 import { Form, Field } from 'formik';
 import FormikMaterialTextField from './FormikMaterialTextField'
 import FormWrapper from './FormWrapper'
-import Button from '@material/react-button';
+// import Button from '@material/react-button';
+import Button from '@material-ui/core/Button';
 
 const theme = {
   background: '#f0f0f0',
@@ -34,7 +35,7 @@ class PasswordResetForm extends React.Component {
             type="email"
             component={FormikMaterialTextField}
           />
-          <Button type="submit" className="form-button" disabled={isSubmitting}>
+          <Button variant="text" type="submit" className="form-button" disabled={isSubmitting}>
             Reset password
           </Button>
           <span>{status && status.non_field_errors}</span>

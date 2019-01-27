@@ -10,13 +10,24 @@ class Login extends FormsMaster {
     super(props)
     this.endpoint = 'rest-auth/login/'
     this.handleResponse = this.handleResponse.bind(this)
+    this.state = {
+      isAuth: false,
+    }
   }
   handleResponse(response) {
     localStorage.setItem('token', response.data.key);
+    this.setState({
+      isAuth: true,
+    })
     console.log('Token received and saved')
   }
+  componentDidUpdate() {
+    if (this.state.isAuth) {
+      window.location.replace("http://localhost:9000/app");
+    }
+  }
   render() {
-  return ( 
+    return (
       <Formik
         initialValues={{ username: undefined, password: undefined }}
         onSubmit={this.handleSubmit}
@@ -30,7 +41,7 @@ class Login extends FormsMaster {
           />
         )}
       </Formik>
-    );
+    )
   }
 }
 

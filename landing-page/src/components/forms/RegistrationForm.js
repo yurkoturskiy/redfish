@@ -2,7 +2,8 @@ import React from 'react';
 import { Form, Field } from 'formik';
 import FormikMaterialTextField from './FormikMaterialTextField'
 import FormWrapper from './FormWrapper'
-import Button from '@material/react-button';
+// import Button from '@material/react-button';
+import Button from '@material-ui/core/Button';
 
 const theme = {
   background: '#f0f0f0',
@@ -26,7 +27,7 @@ class RegistrationForm extends React.Component {
     return (
       <FormWrapper theme={theme}>
         <Form>
-          <h3>Registration</h3>
+          <h3>Sign Up</h3>
           <Field
             id="username"
             label="Username"
@@ -52,10 +53,12 @@ class RegistrationForm extends React.Component {
             onChange={(e) => {onChange(e); passwordOnChange(e)}}
             helperText={passwordHelperText}
           />
-          <Button type="submit" className="form-button" disabled={isSubmitting}>
-            Submit
-          </Button>
-          <span>{status && status.non_field_errors}</span>
+          <div className="subform-container">
+            <span className="non-fields-error">{status && status.non_field_errors}</span>
+            <Button variant="text" type="submit" className="form-button" disabled={isSubmitting}>
+              Submit
+            </Button>
+          </div>
         </Form>
       </FormWrapper>
     )
