@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
 
+import GrapheneProvider from "./containers/GrapheneProvider"
 import { Notes } from "./containers/Notes"
-
-const client = new ApolloClient({
-  uri: "http://localhost:9000/graphql"
-});
 
 class App extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>
+      <GrapheneProvider>
         <div>
           <Notes/>
         </div>
-      </ApolloProvider>
+      </GrapheneProvider>
     );
   }
 }

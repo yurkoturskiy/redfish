@@ -6,6 +6,7 @@ import AutoRouter from './AutoRouterContainer'
 import NavigationContainer from './NavigationContainer'
 // styled components
 import GlobalStyle from '../components/GlobalStyle'
+import GrapheneProvider from './GrapheneProvider'
 
 
 class GlobalContainer extends React.Component {
@@ -14,10 +15,12 @@ class GlobalContainer extends React.Component {
     console.log('is authenticated: ' + this.props.isAuth)
     console.log('token: ' + this.props.token)
     return (
-      <AutoRouter>
-        <GlobalStyle/>
-        <NavigationContainer/>
-      </AutoRouter>
+      <GrapheneProvider>
+        <AutoRouter>
+          <GlobalStyle/>
+          <NavigationContainer/>
+        </AutoRouter>
+      </GrapheneProvider>
     )
   }
 }

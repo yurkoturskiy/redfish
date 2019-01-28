@@ -35,7 +35,7 @@ class AutoRouter extends React.Component {
     super(props)
     this.checkPermission()
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     this.checkPermission()
   }
   checkPermission() {

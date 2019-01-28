@@ -1,12 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { Link } from "react-router-dom";
 import { Formik } from 'formik';
-import FormWrapper from '../../components/FormWrapper'
+
 import { login, } from '../../actions/restAuth'
-import { endpoints } from '../AutoRouterContainer'
-import FormikMaterialTextField from '../../components/FormikMaterialTextField'
-import Button from '@material/react-button';
 import LoginForm from '../../components/auth/LoginForm'
 
 const theme = {

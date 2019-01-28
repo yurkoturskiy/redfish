@@ -1,34 +1,48 @@
-import React from "react"
-import { connect } from 'react-redux'
-// actions
-import {
-  user
-} from '../actions/restAuth'
+import React from "react";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
+const Notes = () => (
+  <Query
+    query={gql`
+      {
+        allNotes {
+          edges {
+            node {
+              id
+              title
+              content
+            }
+          }
+        }
+      }
+    `}
+  >
+    {({ loading, error, data }) => {
+      if (loading) return <p>Loading...</p>;
+      if (error) {
+        console.log(error)
+        return <p>Error :(</p>;
+      }
+      console.log(data)
+      return data.allNotes.edges.map(({ node }) => (
+        <div key={node.id}>
+          <h3>{node.title}</h3>
+          <p>{node.content}</p>
+        </div>
+      ))
+    }}
+  </Query>
+);
 
 class Application extends React.Component {
-  constructor(props) {
-    super(props)
-    if (this.props.isAuth) {
-      this.props.getUser()
-    }
-  }
   render() {
     return (
-      <React.Fragment>
-          <h1>Application</h1>
-      </React.Fragment>
-    )
+      <div>
+        <Notes/>
+      </div>
+    );
   }
 }
 
-const mapStateToProps = state => ({
-    isAuth: state.restAuth.isAuth,
-    user: state.restAuth.user,
-})
-
-const mapDispatchToProps = dispatch => ({
-    getUser: () => dispatch(user()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Application)
+export default Application;
