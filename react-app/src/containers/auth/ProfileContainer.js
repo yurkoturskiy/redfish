@@ -2,26 +2,43 @@ import React from 'react'
 import { connect } from 'react-redux'
 // presentational components
 import ProfileForm from '../../components/auth/ProfileForm'
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
+const Profile = () => (
+  <Query
+    query={gql`
+      {
+        profile {
+          edges {
+            node {
+              id
+              username
+              email
+            }
+          }
+        }
+      }
+    `}
+  >
+    {({ loading, error, data }) => {
+      if (loading) return <p>Loading...</p>;
+      if (error) {
+        console.log(error)
+        return <p>Error :(</p>;
+      }
+      console.log(data)
+      return data.profile.edges.map(({ node }) => (
+        <div key={node.id}>
+          <p>{node.id}</p>
+          <p>{node.username}</p>
+          <p>{node.email}</p>
+          <p>{node.firstName}</p>
+          <p>{node.lastName}</p>
+        </div>
+      ))
+    }}
+  </Query>
+);
 
-class Profile extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <ProfileForm user={this.props.user} />
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = state => ({
-    user: state.restAuth.user,
-})
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     validate: (res) => dispatch(validate(res)),
-//   }
-// }
-
-export default connect(mapStateToProps, undefined)(Profile)
+export default Profile
