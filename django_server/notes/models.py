@@ -24,7 +24,7 @@ class Note(models.Model):
 	content = models.TextField(blank=True,)
 	color = models.ForeignKey('Color', on_delete=models.CASCADE, blank=True, null=True)
 	pinned = models.BooleanField(default=False)
-	author = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True, null=True)
+	owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True, null=True)
 
 	def __str__(self):
 		return self.title
