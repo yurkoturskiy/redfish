@@ -1,5 +1,6 @@
 # cookbook/ingredients/schema.py
-from graphene import relay
+import graphene
+from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
@@ -15,12 +16,14 @@ class NoteNode(DjangoObjectType):
         filter_fields = ['title', 'content', 'color', 'pinned']
         interfaces = (relay.Node, )
 
+
 class UserNode(DjangoObjectType):
     class Meta:
         model = User
         filter_fields = ['username']
         exclude_fields = ('password', 'is_superuser', 'is_staff',)
         interfaces = (relay.Node, )
+
 
 class Query(object):
     note = relay.Node.Field(NoteNode)
@@ -40,3 +43,22 @@ class Query(object):
         if info.context.user.is_authenticated:
             return User.objects.filter(username=info.context.user)
 
+
+class CreateNote(relay.ClientIDMutation):
+
+    class Input:
+        title = graphene.String(required=False)
+        content = graphene.String(required=False)
+
+    new_note = graphene.Field(NoteNode)
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        owner = User.objects.get(username=info.context.user)
+        note = Note.objects.create(owner=owner, **input)
+        print(note)
+        return CreateNote(new_note=note)
+
+
+class Mutation(ObjectType):
+    create_note = CreateNote.Field()     
