@@ -1,28 +1,60 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 // presentational components
 import Navigation from '../components/Navigation'
+import { 
+  Navbar, 
+  Container, 
+  NavbarToggler,
+  Collapse,
+  Nav,
+  NavDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarBrand,
+  A,
+} from '@bootstrap-styled/v4'
 // actions
 import { logout } from '../actions/restAuth'
 
+const initialState = {
+  showNavbar: false,
+  dropdownOpen: false,
+};
 
 class NavigationContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = initialState
+  }
+  componentDidMount() {
+    console.log(this)
+  }
   render() {
     if (this.props.isAuth) {
       return (
-        <Navigation>
-          <ul>
-            <Link to="/app"><li>redject</li></Link>
-            <Link to="/profile"><li>Profile</li></Link>
-            <div onClick={this.props.logout}>
-              <li>
-                Logout
-              </li>
-            </div>
-          </ul>
-          {this.props.children}
-        </Navigation>
+        <Navbar color="dark" light toggleable="sm">
+          <Container>
+            <NavbarBrand onClick={() => this.props.history.push('/app')}>Redject</NavbarBrand>
+            <NavbarToggler onClick={() => this.setState({ showNavbar: !this.state.showNavbar})} />
+            <Collapse navbar isOpen={this.state.showNavbar}>
+              <Nav navbar>
+                <NavDropdown isOpen={this.state.dropdownOpen} toggle={() => this.setState({ dropdownOpen: !this.state.dropdownOpen})}>
+                  <DropdownToggle nav caret>
+                    Username
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem header onClick={() => this.props.history.push('/profile')} >Profile</DropdownItem>
+                    <DropdownItem onClick={this.props.logout}>Logout</DropdownItem>
+                  </DropdownMenu>
+                </NavDropdown>
+              </Nav>
+            </Collapse>
+          </Container>
+        </Navbar>
       )
     } else {
       return (
@@ -48,4 +80,4 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationContainer)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationContainer))
