@@ -1,6 +1,8 @@
 import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import Card from "react-bootstrap/Card"
+import CardDeck from "react-bootstrap/CardDeck"
 
 const Notes = () => (
   <Query
@@ -25,12 +27,28 @@ const Notes = () => (
         return <p>Error :(</p>;
       }
       console.log(data)
-      return data.allNotes.edges.map(({ node }) => (
-        <div key={node.id}>
-          <h3>{node.title}</h3>
-          <p>{node.content}</p>
+      const notes = data.allNotes.edges.map(({ node }) => (
+        <div>
+          <Card key={node.id} style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Title>{node.title}</Card.Title>
+              <Card.Text>{node.content}</Card.Text>
+            </Card.Body>
+          </Card>
         </div>
       ))
+      return (
+        <CardDeck>
+          <div>
+            <Card style={{ width: '18rem' }}>
+              <Card.Body>
+                <h1>+</h1>
+              </Card.Body>
+            </Card>
+          </div>
+          {notes}
+        </CardDeck>
+      )
     }}
   </Query>
 );
