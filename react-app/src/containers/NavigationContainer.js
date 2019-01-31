@@ -5,18 +5,11 @@ import { withRouter } from 'react-router'
 // presentational components
 import Navigation from '../components/Navigation'
 import { 
-  Navbar, 
-  Container, 
-  NavbarToggler,
-  Collapse,
+  Navbar,
   Nav,
   NavDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarBrand,
-  A,
-} from '@bootstrap-styled/v4'
+  Button,
+} from 'react-bootstrap'
 // actions
 import { logout } from '../actions/restAuth'
 
@@ -36,36 +29,36 @@ class NavigationContainer extends React.Component {
   render() {
     if (this.props.isAuth) {
       return (
-        <Navbar color="dark" light toggleable="sm">
-          <Container>
-            <NavbarBrand onClick={() => this.props.history.push('/app')}>Redject</NavbarBrand>
-            <NavbarToggler onClick={() => this.setState({ showNavbar: !this.state.showNavbar})} />
-            <Collapse navbar isOpen={this.state.showNavbar}>
-              <Nav navbar>
-                <NavDropdown isOpen={this.state.dropdownOpen} toggle={() => this.setState({ dropdownOpen: !this.state.dropdownOpen})}>
-                  <DropdownToggle nav caret>
-                    Username
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem header onClick={() => this.props.history.push('/profile')} >Profile</DropdownItem>
-                    <DropdownItem onClick={this.props.logout}>Logout</DropdownItem>
-                  </DropdownMenu>
-                </NavDropdown>
-              </Nav>
-            </Collapse>
-          </Container>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand onClick={() => this.props.history.push('/app')}>Redject</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse className="justify-content-end">
+            <Nav>
+              <NavDropdown alignRight title="Username" id="nav-dropdown">
+                <NavDropdown.Item onClick={() => this.props.history.push('/profile') }>Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={this.props.logout}>Logout</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
       )
     } else {
       return (
-        <Navigation>
-          <ul>
-            <Link to="/"><li>redject</li></Link>
-            <Link to="/login"><li>Login</li></Link>
-            <Link to="/registration"><li>Registration</li></Link>
-          </ul>
-          {this.props.children}
-        </Navigation>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand onClick={() => this.props.history.push('/')}>Redject</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse className="justify-content-end">
+            <Nav>
+              <Nav.Link>
+                <Button variant="link" onClick={() => this.props.history.push('/login')}>Login</Button>
+              </Nav.Link>
+              <Nav.Link>
+                <Button variant="outline-primary" onClick={() => this.props.history.push('/registration')}>Sign Up</Button>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+
       )
     }
   }
