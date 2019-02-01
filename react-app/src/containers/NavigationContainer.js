@@ -44,21 +44,22 @@ class NavigationContainer extends React.Component {
       )
     } else {
       return (
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand onClick={() => this.props.history.push('/')}>Redject</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse className="justify-content-end">
-            <Nav>
-              <Nav.Link>
-                <Button variant="link" onClick={() => this.props.history.push('/login')}>Login</Button>
-              </Nav.Link>
-              <Nav.Link>
-                <Button variant="outline-primary" onClick={() => this.props.history.push('/registration')}>Sign Up</Button>
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-
+        <Navigation>
+          <Navbar bg="light" expand="lg">
+            <Navbar.Brand onClick={() => this.props.history.push('/')}>Redject</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse className="justify-content-end">
+              <Nav>
+                <Nav.Link>
+                  <Button variant="link" onClick={() => this.props.history.push('/login')}>Login</Button>
+                </Nav.Link>
+                <Nav.Link>
+                  <Button variant="outline-primary" onClick={() => this.props.history.push('/registration')}>Sign Up</Button>
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        </Navigation>
       )
     }
   }
