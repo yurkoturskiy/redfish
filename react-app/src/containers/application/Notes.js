@@ -1,7 +1,7 @@
 import React from "react";
 import { Query } from "react-apollo";
-import gql from "graphql-tag";
 
+import allNotes from '../../graphql/allNotes'
 import Note from './Note'
 import Card from "react-bootstrap/Card"
 import CardDeck from "react-bootstrap/CardDeck"
@@ -19,21 +19,7 @@ class Notes extends React.Component {
   }
   render() {
     return (
-      <Query
-        query={gql`
-          {
-            allNotes {
-              edges {
-                node {
-                  id
-                  title
-                  content
-                }
-              }
-            }
-          }
-        `}
-      >
+      <Query query={allNotes}>
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>;
           if (error) {
