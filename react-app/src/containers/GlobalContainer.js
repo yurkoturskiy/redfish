@@ -1,37 +1,39 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
+import { withApollo, compose, graphql } from 'react-apollo'
 // container components
 import AutoRouter from './AutoRouterContainer'
 import NavigationContainer from './NavigationContainer'
 // styled components
 import GlobalStyle from '../components/GlobalStyle'
-import GrapheneProvider from './GrapheneProvider'
+//graphql
+import appState from '../graphql/appState'
 
 
 class GlobalContainer extends React.Component {
+  componentDidUpdate(prevProps) {
+    if (prevProps.appState.isAuth && !this.props.appState.isAuth) {
+      this.props.client.resetStore()
+    }
+  }
   render() {
-    
-    console.log('is authenticated: ' + this.props.isAuth)
-    console.log('token: ' + this.props.token)
+    console.log('is authenticated: ' + this.props.appState.isAuth)
+    console.log('token: ' + localStorage.getItem('token'))
     return (
-      <GrapheneProvider>
-        <AutoRouter>
-          <GlobalStyle/>
-          <NavigationContainer/>
-        </AutoRouter>
-      </GrapheneProvider>
+      <AutoRouter>
+        <GlobalStyle/>
+        <NavigationContainer/>
+      </AutoRouter>
     )
   }
 }
 
-const mapStateToProps = state => ({
-    isAuth: state.restAuth.isAuth,
-    users: state.restAuth.schema,
-    token: localStorage.getItem('token'),
-    snippets: state.snippets.snippets,
-    users: state.snippets.users,
-})
+const mapIsAuthToProps = ({data: { appState: {isAuth} } }) => ({isAuth})
 
-export default withRouter(connect(mapStateToProps, undefined)(GlobalContainer))
-
+export default withRouter(withApollo(compose(
+  graphql(appState, {
+    props: ({ data: { appState } }) => ({
+      appState
+    })
+  }),
+)(GlobalContainer)))
