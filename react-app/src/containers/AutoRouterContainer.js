@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import { connect } from 'react-redux'
+import { compose, graphql } from 'react-apollo'
 import { Route, Switch } from 'react-router-dom'
 // container components
 import Main from './MainContainer'
@@ -12,6 +12,8 @@ import VerifyEmail from './auth/VerifyEmailContainer'
 import Profile from './auth/ProfileContainer'
 import PasswordReset from './auth/PasswordResetContainer'
 import PasswordResetConfirm from './auth/PasswordResetConfirmContainer'
+// graphql
+import appState from '../graphql/appState'
 
 export const endpoints = {
   passwordReset: '/password-reset',
@@ -39,7 +41,8 @@ class AutoRouter extends React.Component {
     this.checkPermission()
   }
   checkPermission() {
-    if (this.props.isAuth) {
+    // Auto-redirection
+    if (this.props.appState.isAuth) {
       for (let i in notAuthEndpoints) {
         if (this.props.location.pathname === notAuthEndpoints[i]) {
           console.log('you logged in')
@@ -78,9 +81,10 @@ class AutoRouter extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-    token: localStorage.getItem('token'),
-    isAuth: state.restAuth.isAuth,
-})
-
-export default withRouter(connect(mapStateToProps, undefined)(AutoRouter))
+export default withRouter(compose(
+  graphql(appState, {
+    props: ({ data: { appState } }) => ({
+      appState
+    })
+  }),
+)(AutoRouter))

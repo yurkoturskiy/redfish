@@ -1,7 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import { compose, graphql } from 'react-apollo'
 // presentational components
 import Navigation from '../components/Navigation'
 import { 
@@ -10,24 +10,14 @@ import {
   NavDropdown,
   Button,
 } from 'react-bootstrap'
-// actions
-import { logout } from '../actions/restAuth'
+// graphql
+import appState from '../graphql/appState'
+import logout from '../graphql/logout'
 
-const initialState = {
-  showNavbar: false,
-  dropdownOpen: false,
-};
 
 class NavigationContainer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = initialState
-  }
-  componentDidMount() {
-    console.log(this)
-  }
   render() {
-    if (this.props.isAuth) {
+    if (this.props.appState.isAuth) {
       return (
         <Navbar bg="light" expand="lg">
           <Navbar.Brand onClick={() => this.props.history.push('/app')}>Redject</Navbar.Brand>
@@ -65,13 +55,11 @@ class NavigationContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuth: state.restAuth.isAuth,
-  username: state.restAuth.user.username
-})
-
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout()),
-})
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationContainer))
+export default withRouter(compose(
+  graphql(logout, { name: 'logout' }),
+  graphql(appState, {
+    props: ({ data: { appState } }) => ({
+      appState
+    })
+  }),
+)(NavigationContainer))
