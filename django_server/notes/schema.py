@@ -39,7 +39,6 @@ class Query(object):
             return Note.objects.filter(owner=info.context.user)
 
     def resolve_profile(self, info):
-        print(info.context.user)
         if info.context.user.is_authenticated:
             return User.objects.filter(username=info.context.user)
 
