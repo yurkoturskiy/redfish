@@ -15,12 +15,11 @@ from custom_django_rest_auth.grapheneDRF import AuthenticatedGraphQLView
 
 
 API_TITLE = 'Pastebin API'
-API_DESCRIPTION = 'A Web API for creating and viewing highlighted code snippets.'
+API_DESCRIPTION = 'A Web API for django-rest-auth.'
 schema_view = get_schema_view(title=API_TITLE)
 
 urlpatterns = [
     path('schema/', schema_view),
-    path('rest/', include('snippets.urls')),
     path('admin/', admin.site.urls),
     # path('app/', TemplateView.as_view(template_name='react-note-app-index.html'), name='index.html'),
     # url(r'^app/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', appAuth, name='app'),)
