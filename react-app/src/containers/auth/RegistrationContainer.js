@@ -1,14 +1,14 @@
-import React from 'react';
-import {connect} from 'react-redux'
-import { Link } from "react-router-dom";
-import { Formik } from 'formik';
+import React from 'react'
+import { Link } from "react-router-dom"
+import { Formik } from 'formik'
 import zxcvbn from 'zxcvbn'
+import { withApollo } from 'react-apollo'
 import FormWrapper from '../../components/FormWrapper'
-import { registration, } from '../../actions/restAuth'
-import { endpoints } from '../AutoRouterContainer'
 import FormikMaterialTextField from '../../components/FormikMaterialTextField'
-import Button from '@material/react-button';
+import Button from '@material/react-button'
 import RegistrationForm from '../../components/auth/RegistrationForm'
+// queries
+import registration from '../../graphql/registration'
 
 const theme = {
   background: '#f0f0f0',
@@ -27,21 +27,28 @@ class Registration extends React.Component {
   handleSubmit(
     values, { setSubmitting, setErrors, setStatus }
   ) {
-    values['password2'] = values.password1
-    this.props.registration(values)
+    this.props.client.query({
+      query: registration,
+      variables: { 
+        username: values.username, 
+        email: values.email, 
+        password1: values.password1,
+        password2: values.password1,
+      }
+    })
       .then(res => {
-        if (res.error) {
-          if (res.payload.status) {
-            // server responded
-            console.log(res)
-            setErrors(res.payload.response)
-            setStatus({non_field_errors: res.payload.response.non_field_errors})
-          } else {
-            // server is not answered
-            setStatus({non_field_errors: 'Something wrong with a server'})
-          }
+        this.setState({requestIsSucced: true})
+        setSubmitting(false)
+      })
+      .catch(err => {
+        console.dir(err)
+        if (err.networkError.result) {
+          // server responded
+          setErrors(err.networkError.result)
+          setStatus({non_field_errors: err.networkError.result.non_field_errors})
         } else {
-          this.setState({requestIsSucced: true})
+          // server is not answered
+          setStatus({non_field_errors: 'Something wrong with the server'})
         }
         setSubmitting(false)
       })
@@ -86,8 +93,4 @@ class Registration extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-    registration: (values) => dispatch(registration(values)),
-})
-
-export default connect(undefined, mapDispatchToProps)(Registration)
+export default withApollo(Registration)
