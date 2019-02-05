@@ -1,11 +1,7 @@
 import React from 'react'
-import { Link } from "react-router-dom"
-import { Formik } from 'formik'
 import zxcvbn from 'zxcvbn'
+import { Formik } from 'formik'
 import { withApollo } from 'react-apollo'
-import FormWrapper from '../../components/FormWrapper'
-import FormikMaterialTextField from '../../components/FormikMaterialTextField'
-import Button from '@material/react-button'
 import RegistrationForm from '../../components/auth/RegistrationForm'
 // queries
 import registration from '../../graphql/registration'
@@ -20,7 +16,8 @@ class Registration extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.passwordStrengthValidation = this.passwordStrengthValidation.bind(this)
     this.state = {
-      requestIsSucced: false,
+      requestIsSucceed: false,
+      successMessage: 'Confirm your email address',
       passwordStrengthScore: undefined,
     }
   }
@@ -36,22 +33,24 @@ class Registration extends React.Component {
         password2: values.password1,
       }
     })
-      .then(res => {
-        this.setState({requestIsSucced: true})
-        setSubmitting(false)
+    .then(res => {
+      this.setState({
+        requestIsSucceed: true,
       })
-      .catch(err => {
-        console.dir(err)
-        if (err.networkError.result) {
-          // server responded
-          setErrors(err.networkError.result)
-          setStatus({non_field_errors: err.networkError.result.non_field_errors})
-        } else {
-          // server is not answered
-          setStatus({non_field_errors: 'Something wrong with the server'})
-        }
-        setSubmitting(false)
-      })
+      setSubmitting(false)
+    })
+    .catch(err => {
+      console.dir(err)
+      if (err.networkError.result) {
+        // server responded
+        setErrors(err.networkError.result)
+        setStatus({non_field_errors: err.networkError.result.non_field_errors})
+      } else {
+        // server is not answered
+        setStatus({non_field_errors: 'Something wrong with the server'})
+      }
+      setSubmitting(false)
+    })
   }
   passwordStrengthValidation(payload) {
     let fieldIsEmpty = payload.target.value.length === 0 ? true : false
@@ -68,8 +67,8 @@ class Registration extends React.Component {
     })
   }
   render() {
-    if (this.state.requestIsSucced) {
-      return <h1>Confirm your email address</h1>
+    if (this.state.requestIsSucceed) {
+      return <h1>{this.state.successMessage}</h1>
     } else {
       return ( 
         <Formik

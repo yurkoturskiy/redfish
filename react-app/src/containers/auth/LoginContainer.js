@@ -22,26 +22,26 @@ class Login extends React.Component {
       query: login,
       variables: { username: values.username, password: values.password }
     })
-      .then(res => {
-        localStorage.setItem('token', res.data.login.key)
-        this.props.client.writeData({ data: { isAuth : true }})
-        setSubmitting(false)
-      })
-      .catch(err => {
-        console.dir(err)
-        if (err.networkError.result) {
-          // server responded
-          setErrors(err.networkError.result)
-          setStatus({non_field_errors: err.networkError.result.non_field_errors})
-        } else {
-          // server is not answered
-          setStatus({non_field_errors: 'Something wrong with the server'})
-        }
-        setSubmitting(false)
-      })
+    .then(res => {
+      localStorage.setItem('token', res.data.login.key)
+      this.props.client.writeData({ data: { isAuth : true }})
+      setSubmitting(false)
+    })
+    .catch(err => {
+      console.dir(err)
+      if (err.networkError.result) {
+        // server responded
+        setErrors(err.networkError.result)
+        setStatus({non_field_errors: err.networkError.result.non_field_errors})
+      } else {
+        // server is not answered
+        setStatus({non_field_errors: 'Something wrong with the server'})
+      }
+      setSubmitting(false)
+    })
   }
   render() {
-  return ( 
+    return ( 
       <Formik
         initialValues={{ username: undefined, password: undefined }}
         onSubmit={this.handleSubmit}
@@ -55,7 +55,7 @@ class Login extends React.Component {
           />
         )}
       </Formik>
-    );
+    )
   }
 }
 

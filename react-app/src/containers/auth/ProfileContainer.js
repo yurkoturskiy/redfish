@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 // presentational components
 import ProfileForm from '../../components/auth/ProfileForm'
 import { Query } from "react-apollo";
