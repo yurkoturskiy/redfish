@@ -42,7 +42,7 @@ class AutoRouter extends React.Component {
   }
   checkPermission() {
     // Auto-redirection
-    if (this.props.appState.isAuth) {
+    if (this.props.isAuth) {
       for (let i in notAuthEndpoints) {
         if (this.props.location.pathname === notAuthEndpoints[i]) {
           console.log('you logged in')
@@ -83,8 +83,8 @@ class AutoRouter extends React.Component {
 
 export default withRouter(compose(
   graphql(appState, {
-    props: ({ data: { appState } }) => ({
-      appState
+    props: ({ data: { isAuth } }) => ({
+      isAuth
     })
   }),
 )(AutoRouter))

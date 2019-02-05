@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation logout {
-    logout @client {
-      isAuth
+  query {
+    logout(input: {}) @rest(type: "Logout", method: "POST", path: "rest-auth/logout/") {
+      __typename
     }
   }
 `

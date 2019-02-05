@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { withApollo, compose, graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 // container components
 import AutoRouter from './AutoRouterContainer'
 import NavigationContainer from './NavigationContainer'
@@ -8,16 +9,12 @@ import NavigationContainer from './NavigationContainer'
 import GlobalStyle from '../components/GlobalStyle'
 //graphql
 import appState from '../graphql/appState'
+import login from '../graphql/login'
 
 
 class GlobalContainer extends React.Component {
-  componentDidUpdate(prevProps) {
-    if (prevProps.appState.isAuth && !this.props.appState.isAuth) {
-      this.props.client.resetStore()
-    }
-  }
   render() {
-    console.log('is authenticated: ' + this.props.appState.isAuth)
+    console.log('is authenticated: ' + this.props.isAuth)
     console.log('token: ' + localStorage.getItem('token'))
     return (
       <AutoRouter>
@@ -28,12 +25,11 @@ class GlobalContainer extends React.Component {
   }
 }
 
-const mapIsAuthToProps = ({data: { appState: {isAuth} } }) => ({isAuth})
 
 export default withRouter(withApollo(compose(
   graphql(appState, {
-    props: ({ data: { appState } }) => ({
-      appState
+    props: ({ data: { isAuth } }) => ({
+      isAuth
     })
   }),
 )(GlobalContainer)))
