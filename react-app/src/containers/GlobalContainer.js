@@ -1,13 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import { withApollo, compose, graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { compose, graphql } from 'react-apollo'
 // container components
 import AutoRouter from './AutoRouterContainer'
 import NavigationContainer from './NavigationContainer'
 // styled components
 import GlobalStyle from '../components/GlobalStyle'
-//graphql
+// queries
 import appState from '../graphql/appState'
 import login from '../graphql/login'
 
@@ -25,11 +24,10 @@ class GlobalContainer extends React.Component {
   }
 }
 
-
-export default withRouter(withApollo(compose(
+export default withRouter(compose(
   graphql(appState, {
     props: ({ data: { isAuth } }) => ({
       isAuth
     })
   }),
-)(GlobalContainer)))
+)(GlobalContainer))

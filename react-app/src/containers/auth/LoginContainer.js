@@ -1,11 +1,9 @@
-import React from 'react';
-import {connect} from 'react-redux'
+import React from 'react'
 import { Formik } from 'formik'
 import { withApollo } from 'react-apollo'
-
-// import { login, } from '../../actions/restAuth'
+//presentational components
 import LoginForm from '../../components/auth/LoginForm'
-
+// queries
 import login from '../../graphql/login'
 
 const theme = {
