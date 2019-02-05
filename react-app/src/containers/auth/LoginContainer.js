@@ -1,9 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { Formik } from 'formik';
+import { Formik } from 'formik'
+import { withApollo } from 'react-apollo'
 
-import { login, } from '../../actions/restAuth'
+// import { login, } from '../../actions/restAuth'
 import LoginForm from '../../components/auth/LoginForm'
+
+import login from '../../graphql/login'
 
 const theme = {
   background: '#f0f0f0',
@@ -17,18 +20,24 @@ class Login extends React.Component {
   handleSubmit(
     values, { setSubmitting, setErrors, setStatus }
   ) {
-    this.props.login(values)
+    this.props.client.query({
+      query: login,
+      variables: { username: values.username, password: values.password }
+    })
       .then(res => {
-        if (res.error) {
-          if (res.payload.status) {
-            // server responded
-            console.log(res)
-            setErrors(res.payload.response)
-            setStatus({non_field_errors: res.payload.response.non_field_errors})
-          } else {
-            // server is not answered
-            setStatus({non_field_errors: 'Something wrong with a server'})
-          }
+        localStorage.setItem('token', res.data.login.key)
+        this.props.client.writeData({ data: { isAuth : true }})
+        setSubmitting(false)
+      })
+      .catch(err => {
+        console.dir(err)
+        if (err.networkError.result) {
+          // server responded
+          setErrors(err.networkError.result)
+          setStatus({non_field_errors: err.networkError.result.non_field_errors})
+        } else {
+          // server is not answered
+          setStatus({non_field_errors: 'Something wrong with the server'})
         }
         setSubmitting(false)
       })
@@ -36,7 +45,7 @@ class Login extends React.Component {
   render() {
   return ( 
       <Formik
-        initialValues={{ email: undefined, password: undefined }}
+        initialValues={{ username: undefined, password: undefined }}
         onSubmit={this.handleSubmit}
       >
         {({ status, touched, isSubmitting, errors }) => (
@@ -52,8 +61,4 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-    login: (values) => dispatch(login(values)),
-})
-
-export default connect(undefined, mapDispatchToProps)(Login)
+export default withApollo(Login)

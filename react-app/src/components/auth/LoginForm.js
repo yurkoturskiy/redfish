@@ -30,10 +30,10 @@ class LoginForm extends React.Component {
         <Form>
           <h3>Login</h3>
           <Field
-            id="email"
+            id="username"
             label="username or email"
-            name="email"
-            type="email"
+            name="username"
+            type="username"
             component={FormikMaterialTextField}
           />
           <Field 
