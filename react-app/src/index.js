@@ -4,20 +4,16 @@ import ReactDOM from 'react-dom'
 import GlobalContainer from './containers/GlobalContainer'
 import { ApolloProvider } from "react-apollo";
 import { Router } from 'react-router-dom'
-import { Provider } from 'react-redux'
 // others
 import * as serviceWorker from './serviceWorker'
 import history from './history'
-import store from './store/configureStore'
 import apolloClient from './apolloClient'
 
 
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
     <Router history={history}>
-      <Provider store={store}>
-        <GlobalContainer />
-      </Provider>
+      <GlobalContainer />
     </Router>
   </ApolloProvider>, document.getElementById('root'));
   
