@@ -10,7 +10,7 @@ from rest_framework.schemas import get_schema_view
 from rest_framework.documentation import include_docs_urls
 
 from rest_auth.registration.views import VerifyEmailView
-from custom_django_rest_auth.views import appAuth
+from custom_django_rest_auth.views import accountEmailConfirm
 from custom_django_rest_auth.grapheneDRF import AuthenticatedGraphQLView
 
 
@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
     # confirm email
     url(r'^rest-auth/registration/account-confirm-email/(?P<key>[-:\w]+)/$', 
-        TemplateView.as_view(template_name='index.html'), name="account_confirm_email"),
+        accountEmailConfirm, name="account_confirm_email"),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     re_path(r'^account-confirm-email/', VerifyEmailView.as_view(),
          name='account_email_verification_sent'),
@@ -36,6 +36,9 @@ urlpatterns = [
     url(r'^password-reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         TemplateView.as_view(template_name="index.html"),
         name='password_reset_confirm'),
+    path('email-confirm-status/<str:status>/', 
+        TemplateView.as_view(template_name="index.html"),
+        name='email_confirm_status'),
     path('', TemplateView.as_view(template_name='index.html'), name='index.html'),
     path('app/', TemplateView.as_view(template_name='index.html'), name='index.html'),
 ]
