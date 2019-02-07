@@ -18,11 +18,13 @@ class PasswordReset extends React.Component {
   handleSubmit(
     values, { setSubmitting, setErrors, setStatus }
   ) {
-    this.props.client.query({
+    this.props.client.query({ // graphql query
       query: passwordReset,
-      variables: { email: values.email }
+      variables: { // prepare values
+        email: values.email
+      }
     })
-    .then(res => {
+    .then(res => { // handle success response
       console.log(res)
       this.setState({
         requestIsSucceed: true,
@@ -30,14 +32,12 @@ class PasswordReset extends React.Component {
       })
       setSubmitting(false)
     })
-    .catch(err => {
+    .catch(err => { // handle errors
       console.dir(err)
-      if (err.networkError.result) {
-        // server responded
+      if (err.networkError.result) { // server responded
         setErrors(err.networkError.result)
         setStatus({non_field_errors: err.networkError.result.non_field_errors})
-      } else {
-        // server is not answered
+      } else { // server is not answered
         setStatus({non_field_errors: 'Something wrong with the server'})
       }
       setSubmitting(false)

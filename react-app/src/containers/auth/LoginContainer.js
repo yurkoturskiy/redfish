@@ -18,23 +18,24 @@ class Login extends React.Component {
   handleSubmit(
     values, { setSubmitting, setErrors, setStatus }
   ) {
-    this.props.client.query({
+    this.props.client.query({ // graphql query
       query: login,
-      variables: { username: values.username, password: values.password }
+      variables: { // prepare values
+        username: values.username, 
+        password: values.password,
+      }
     })
-    .then(res => {
+    .then(res => { // handle success response
       localStorage.setItem('token', res.data.login.key)
       this.props.client.writeData({ data: { isAuth : true }})
       setSubmitting(false)
     })
-    .catch(err => {
+    .catch(err => { // handle errors
       console.dir(err)
-      if (err.networkError.result) {
-        // server responded
+      if (err.networkError.result) { // server responded
         setErrors(err.networkError.result)
         setStatus({non_field_errors: err.networkError.result.non_field_errors})
-      } else {
-        // server is not answered
+      } else { // server is not answered
         setStatus({non_field_errors: 'Something wrong with the server'})
       }
       setSubmitting(false)
