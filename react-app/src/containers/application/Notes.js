@@ -1,5 +1,5 @@
 import React from "react";
-import { Query } from "react-apollo";
+import { withApollo, Query } from "react-apollo";
 
 import allNotes from '../../graphql/allNotes'
 import Note from './Note'
@@ -17,18 +17,24 @@ class Notes extends React.Component {
       originPoints: [],
     }
   }
+  componentDidMount() {
+    console.log('mount')
+    // this.props.client.writeData({ data: { NoteNodeEdge: [] } })
+  }
   render() {
     return (
       <Query query={allNotes}>
         {({ loading, error, data }) => {
+          console.log(data)
           if (loading) return <p>Loading...</p>;
           if (error) {
             console.log(error)
             return <p>Error :(</p>;
           }
-          const notes = data.allNotes.edges.map(({ node }, index) => (
-            <Note index={index} key={node.id} node={node}/>
-          ))
+          const notes = data.allNotes.edges.map(({ node }, index) => {
+            // console.log(node)
+            return <Note index={index} key={node.id} node={node}/>
+          })
           return (
             <NotesWrapper>
                 {notes}
@@ -40,4 +46,4 @@ class Notes extends React.Component {
   }
 }
 
-export default Notes
+export default withApollo(Notes)
