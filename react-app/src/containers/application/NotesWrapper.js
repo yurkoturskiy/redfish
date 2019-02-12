@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const Styled = styled.div`
   display: block;
   width: ${props => props.values.width}px;
-  border: 1px solid grey;
+  // border: 1px solid grey;
   margin: 32px auto 0 auto;
   @media (min-width: 576px) {
     width: 340px;
@@ -32,6 +32,7 @@ Styled.defaultProps =  {
 
 function NotesWrapper(props) {
   const [globalWidth, setGlobalWidth] = useState(0)
+  const [globalHeight, setGlobalHeight] = useState(0)
   useEffect(() => {
     setGlobalWidth(document.getElementById("wrapper").offsetWidth)
   })
@@ -42,6 +43,7 @@ function NotesWrapper(props) {
     marginRight: 0,
     marginBottom: 0,
     marginLeft: 0,
+    totalWidth: 0,
   })
   useEffect(() => {
     // set cardsSampleProps
@@ -52,18 +54,18 @@ function NotesWrapper(props) {
     cardsSampleProps.marginRight = Number(cardsSampleStyles.marginRight.replace(/[^0-9]/g, ''))
     cardsSampleProps.marginBottom = Number(cardsSampleStyles.marginBottom.replace(/[^0-9]/g, ''))
     cardsSampleProps.marginLeft = Number(cardsSampleStyles.marginLeft.replace(/[^0-9]/g, ''))
+    cardsSampleProps.totalWidth = (
+      cardsSampleProps.width 
+      + cardsSampleProps.marginRight 
+      + cardsSampleProps.marginLeft
+    )
     setCardsSampleProps(cardsSampleProps)  
     console.log(cardsSampleProps)
   })
 
-  const [columns, setColumns] = useState(1)
+  const [columns, setColumns] = useState(undefined)
   useEffect(() => {
-    setColumns(Math.floor(
-      globalWidth / (
-        cardsSampleProps.width 
-        + cardsSampleProps.marginLeft 
-        + cardsSampleProps.marginRight
-    )))
+    setColumns(Math.floor(globalWidth / cardsSampleProps.totalWidth))
   }, [globalWidth, cardsSampleProps])
 
   const [cards, setCards] = useState([])
@@ -72,11 +74,7 @@ function NotesWrapper(props) {
   })
   const updateCards = (index, position, id) => {
     console.log('updateCards')
-    var width = (
-      document.getElementById(id).offsetWidth 
-      + cardsSampleProps.marginLeft 
-      + cardsSampleProps.marginRight
-    )
+    var width = cardsSampleProps.totalWidth
     var height = (
       document.getElementById(id).offsetHeight 
       + cardsSampleProps.marginTop 
@@ -104,6 +102,8 @@ function NotesWrapper(props) {
         var posY = endline[leastNumIndex]  
         cards[index].position = {x: posX, y: posY}
         setCards(cards)
+        endline[leastNumIndex] += cards[i].height
+        setGlobalHeight(Math.max(...endline))
         return cards[index].position
       }
       endline[leastNumIndex] += cards[i].height
@@ -143,7 +143,14 @@ function NotesWrapper(props) {
 
   return (
     <Styled id="wrapper">
-      {notes}
+      <div style={{
+        width: columns * cardsSampleProps.totalWidth + 'px', 
+        height: globalHeight + 'px',
+        // border: '1px solid red',
+        margin: 'auto',
+      }}>
+        {notes}
+      </div>
     </Styled>
   )
 }
