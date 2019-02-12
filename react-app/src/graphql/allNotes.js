@@ -5,6 +5,7 @@ export default gql`
     allNotes {
       edges {
         node {
+          __typename
           id
           title
           content
