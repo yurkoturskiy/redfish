@@ -14,7 +14,8 @@ export const NoteCard = styled.div`
   padding: 12px;
   border: 1px solid grey;
   border-radius: 6px;
-  transform: translate(${props => props.position.x}px, ${props => props.position.y}px);
+  background-color: white;
+  transition: transform ${props => props.transition}s;
   visibility: ${props => props.visibility};
 `
 
@@ -29,4 +30,5 @@ export const NoteContent = styled.p`
 NoteCard.defaultProps =  {
   position: '0px, 0px',
   visibility: 'hidden',
+  transition: 1,
 }
