@@ -3,10 +3,10 @@ import Note from './Note'
 
 import styled from 'styled-components'
 
-const Styled = styled.div`
+const Container = styled.div`
   display: block;
   width: ${props => props.values.width}px;
-  // border: 1px solid grey;
+  // border: 1px solid #CFCFCF;
   margin: 32px auto 0 auto;
   @media (min-width: 576px) {
     width: 340px;
@@ -24,7 +24,7 @@ const Styled = styled.div`
     width: 1612px;
   }
 `
-Styled.defaultProps =  {
+Container.defaultProps =  {
   values: {
     width: 256,
   }
@@ -37,6 +37,8 @@ function NotesWrapper(props) {
     setGlobalWidth(document.getElementById("wrapper").offsetWidth)
   })
 
+
+  // the sample of cards is a representer of all general styles of cards
   const [cardsSampleProps, setCardsSampleProps] = useState({
     width: 0,
     marginTop: 0,
@@ -60,20 +62,29 @@ function NotesWrapper(props) {
       + cardsSampleProps.marginLeft
     )
     setCardsSampleProps(cardsSampleProps)  
-    console.log(cardsSampleProps)
   })
 
+
+  // the number of columns depends on the width of screen
   const [columns, setColumns] = useState(undefined)
   useEffect(() => {
     setColumns(Math.floor(globalWidth / cardsSampleProps.totalWidth))
   }, [globalWidth, cardsSampleProps])
 
+
   const [cards, setCards] = useState([])
   useEffect(() => {
     window.addEventListener("resize", handleResize)
   })
+
+  const handleResize = () => {
+    setGlobalWidth(document.getElementById("wrapper").offsetWidth)
+    cardsSampleProps.width = document.getElementById(props.allNotes[0].node.id).offsetWidth
+    setCardsSampleProps(cardsSampleProps)
+    // setColumns(Math.floor(globalWidth / cardsSampleProps.width))
+  }
+
   const updateCards = (index, position, id) => {
-    console.log('updateCards')
     var width = cardsSampleProps.totalWidth
     var height = (
       document.getElementById(id).offsetHeight 
@@ -90,10 +101,6 @@ function NotesWrapper(props) {
     for (let i = 0; i < columns; i++) {
       endline[i] = 0
     }
-    // console.log("height", height)
-    // console.log("empty endline", endline)
-    // console.log("index", index)
-    // console.log("columns", columns)
     for (let i in cards) {
       let leastNum = Math.min(...endline)
       let leastNumIndex = endline.indexOf(leastNum)
@@ -110,24 +117,9 @@ function NotesWrapper(props) {
     }
     return false
   }
-  const handleResize = () => {
-    // console.log('resize')
-    setGlobalWidth(document.getElementById("wrapper").offsetWidth)
-    cardsSampleProps.width = document.getElementById(props.allNotes[0].node.id).offsetWidth
-    setCardsSampleProps(cardsSampleProps)
-    // setColumns(Math.floor(globalWidth / cardsSampleProps.width))
-  }
 
-  const styles = () => ({
-    display: 'block',
-    width: `300px`,
-    margin: '32px auto 0 auto',
-    border: '1px solid grey',
-    background: '#030303'
-  })
 
   const notes = props.allNotes.map(({ node }, index) => {
-    // console.log(node)
     return (
       <Note 
         globalWidth={globalWidth} 
@@ -142,7 +134,7 @@ function NotesWrapper(props) {
   })
 
   return (
-    <Styled id="wrapper">
+    <Container id="wrapper">
       <div style={{
         width: columns * cardsSampleProps.totalWidth + 'px', 
         height: globalHeight + 'px',
@@ -151,7 +143,7 @@ function NotesWrapper(props) {
       }}>
         {notes}
       </div>
-    </Styled>
+    </Container>
   )
 }
 
