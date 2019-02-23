@@ -23,12 +23,11 @@ export const FormikMaterialTextField = ({
     </HelperText>
   )
   const tralingIconTag = (
-    <Icon>
+    <Icon onSelect={tralingIconOnClick}>
       <i 
         className='material-icons' 
         tabIndex="1" 
-        role="button" 
-        onClick={tralingIconOnClick}
+        role="button"
       >
         {tralingIcon}
       </i>
