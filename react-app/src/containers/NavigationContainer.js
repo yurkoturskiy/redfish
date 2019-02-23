@@ -12,6 +12,7 @@ import {
   Button,
 } from 'react-bootstrap'
 // graphql
+import icon from '../static/icon.svg'
 import appState from '../graphql/appState'
 import logout from '../graphql/logout'
 
@@ -32,7 +33,13 @@ class NavigationContainer extends React.Component {
     if (this.props.isAuth) {
       return (
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand onClick={() => this.props.history.push('/app')}>Redject</Navbar.Brand>
+          <Navbar.Brand onClick={() => this.props.history.push('/app')}>
+              <img src={icon} style={{ 
+                width: '38px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+                borderRadius: '4px'
+              }}/>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse className="justify-content-end">
             <Nav>
@@ -52,7 +59,13 @@ class NavigationContainer extends React.Component {
       return (
         <Navigation>
           <Navbar bg="light" expand="lg">
-            <Navbar.Brand onClick={() => this.props.history.push('/')}>Redject</Navbar.Brand>
+            <Navbar.Brand onClick={() => this.props.history.push('/')}>
+              <img src={icon} style={{ 
+                width: '38px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+                borderRadius: '4px'
+              }}/>
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse className="justify-content-end">
               <Nav>
