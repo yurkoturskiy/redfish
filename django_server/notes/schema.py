@@ -16,6 +16,18 @@ class NoteNode(DjangoObjectType):
         filter_fields = ['title', 'content', 'color', 'pinned']
         interfaces = (relay.Node, )
 
+    @classmethod
+    def get_node(cls, info, id):
+        # get object by provided id
+        try:
+            note = cls._meta.model.objects.get(id=id)
+        except cls._meta.model.DoesNotExist:
+            return None
+        # check the ownership
+        if info.context.user == note.owner:
+            return note
+        # different owner. Not allowed
+        return None
 
 class UserNode(DjangoObjectType):
     class Meta:
