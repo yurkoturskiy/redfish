@@ -40,10 +40,9 @@ class UserNode(DjangoObjectType):
 class Query(object):
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
-    # user = relay.Node.Field(UserNode)
     profile = DjangoFilterConnectionField(UserNode)
 
-    def resolve_all_notes(self, info):
+    def resolve_all_notes(self, info, **kwargs):
         # context will reference to the Django request
         if not info.context.user.is_authenticated:
             return Note.objects.none()
