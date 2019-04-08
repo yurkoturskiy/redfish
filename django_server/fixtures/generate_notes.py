@@ -25,7 +25,7 @@ def create_notes():
 			r = requests.get(url())
 			if r.status_code == 200:
 				fish = {
-					"model": "notes.note",
+					"model": "notes.note", # APP_NAME.MODEL_NAME
 					"pk": i + 100 + RECORDS_AMOUNT * user_index,
 					"fields": {
 						"title": "",
