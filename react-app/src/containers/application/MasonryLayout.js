@@ -5,6 +5,8 @@ var elementRefMeasures = {}
 function MasonryLayout(props) {
   const masonryLayout = useRef();
   const elementRef = useRef(); // asign on a first element for representing general styles
+  const endlineStartRef = useRef()
+  const endlineEndRef = useRef()
   // declare vars for general styles of all elements
   const checkLayout = (evt) => {
     updateCardRefMeasures()
@@ -12,12 +14,32 @@ function MasonryLayout(props) {
     setColumns(Math.floor(wrapperWidth / elementRefMeasures.totalWidth));
     setTransition(evt !== undefined)
   };
+  const handleScroll = () => {
+    setLayout(layout => {
+        if (
+          endlineStartRef.current &&
+          endlineStartRef.current.getBoundingClientRect().top
+          - window.innerHeight <= 0 &&
+          layout.endline.enterEvent.position.x !== layout.endline.start.x &&
+          layout.endline.enterEvent.position.y !== layout.endline.start.y &&
+          layout.endline.enterEvent.elementsNum !== layout.elements.length
+        ) {
+          layout.endline.enterEvent.position.x = layout.endline.start.x
+          layout.endline.enterEvent.position.y = layout.endline.start.y
+          layout.endline.enterEvent.elementsNum = layout.elements.length
+          layout.endline.enterEvent.eventHandler && layout.endline.enterEvent.eventHandler()
+        }
+      return layout
+    })
+  }
   useEffect(() => {
     // mount and unmount only
     checkLayout()
     window.addEventListener("resize", checkLayout);
+    window.addEventListener("scroll", handleScroll)
     return () => {
       window.removeEventListener("resize", checkLayout);
+      window.removeEventListener("scroll", handleScroll)
     };
   }, []);
 
@@ -42,7 +64,7 @@ function MasonryLayout(props) {
       marginLeft: Number(style.marginLeft.replace(/[^0-9]/g, "")),
       totalWidth: (
         elementRef.current.offsetWidth 
-        + Number(style.marginRight.replace(/[^0-9]/g, "")) 
+        + Number(style.marginRight.replace(/[^0-9]/g, ""))
         + Number(style.marginLeft.replace(/[^0-9]/g, ""))
       )
     }
@@ -60,14 +82,25 @@ function MasonryLayout(props) {
   const [layout, setLayout] = useState({
     elements: [],
     width: 0,
-    height: 0
+    height: 0,
+    endline: {
+      start: {x: undefined, y: undefined},
+      end: {x: undefined, y: undefined},
+      byColumns: [],
+      enterEvent: {
+        position: {x: undefined, y: undefined},
+        elementsNum: 0,
+        eventHandler: props.onEndlineEnter && props.onEndlineEnter,
+      }
+    }
   })
   useEffect(
     () => {
-      var protoElements = [];
-      var endline = [];
+      var elements = [];
+      var endline = layout.endline
+      endline.byColumns = []
       for (let i = 0; i < columns; i++) {
-        endline[i] = 0;
+        endline.byColumns[i] = 0;
       }
       updateCardRefMeasures()
       React.Children.map(props.children, (child, index) => {
@@ -76,21 +109,25 @@ function MasonryLayout(props) {
           document.getElementById(child.key).offsetHeight +
           elementRefMeasures.marginTop +
           elementRefMeasures.marginBottom
-        let leastNum = Math.min(...endline);
-        let leastNumIndex = endline.indexOf(leastNum);
+        let leastNum = Math.min(...endline.byColumns);
+        let leastNumIndex = endline.byColumns.indexOf(leastNum);
         var posX = leastNumIndex * elementRefMeasures.totalWidth;
-        var posY = endline[leastNumIndex];
-        protoElements[index] = { x: posX, y: posY,};
-        endline[leastNumIndex] += height;
+        var posY = endline.byColumns[leastNumIndex];
+        elements[index] = { x: posX, y: posY,};
+        endline.byColumns[leastNumIndex] += height;
       });
+      endline.start.x = elementRefMeasures.totalWidth * endline.byColumns.indexOf(Math.min(...endline.byColumns))
+      endline.start.y = Math.min(...endline.byColumns)
+      endline.end.x = elementRefMeasures.totalWidth * endline.byColumns.indexOf(Math.max(...endline.byColumns))
+      endline.end.y = Math.max(...endline.byColumns)
       setLayout({
-        elements: protoElements, // list of all elements with coorditares
+        elements: elements, // list of all elements with coorditares
         width: elementRefMeasures.totalWidth * columns, // width of the whole layout
-        height: endline[endline.indexOf(Math.max(...endline))] // height of the whole layout 
+        height: endline.end.y, // height of the whole layout
+        endline: endline,
       })
     }, [columns, onLoadCount, props.children]
   );
-
   const renderChildren =
     React.Children.map(props.children, (child, index) => {
       // Change eash child
@@ -100,10 +137,9 @@ function MasonryLayout(props) {
           id={child.key}
           style={{
             position: "absolute",
-            transform: `translate(${layout.elements[index] ? layout.elements[index].x : 0}px, ${
-              layout.elements[index] ? layout.elements[index].y : 0
-            }px)`,
-            transition: `${transition ? 'transform 0.4s' : 'none'}`,
+            top: `${layout.elements[index] ? layout.elements[index].y : 0}px`,
+            left: `${layout.elements[index] ? layout.elements[index].x : 0}px`,
+            transition: `${transition ? 'top 0.4s, left 0.4s' : 'none'}`,
             visibility: layout.elements[index] ? 'visible' : 'hidden',
           }}
           onLoad={loadHandler}
@@ -116,16 +152,42 @@ function MasonryLayout(props) {
       return newComponent;
     });
   return (
-    <div className="masonry" ref={masonryLayout}>
+    <div 
+      className="masonry" 
+      ref={masonryLayout}
+    >
       <div
         style={{
+          position: 'relative',
           width: `${layout.width}px`,
           height: `${layout.height}px`,
-          margin: 'auto',
+          margin: '0 auto 0 auto',
         }}
         className="boundry-box"
       >
         {renderChildren}
+        {layout.endline.start.y && 
+          <React.Fragment>
+            <div 
+              id="MasonryLayoutEndlineStart"
+              ref={endlineStartRef} 
+              style={{
+                position: "absolute",
+                top: `${layout.endline.start.y}px`,
+                left: `${layout.endline.start.x}px`,
+              }}
+            />
+            <div 
+              id="MasonryLayoutEndlineEnd"
+              ref={endlineEndRef}
+              style={{
+                position: "absolute",
+                top: `${layout.endline.end.y}px`,
+                left: `${layout.endline.end.x}px`,
+              }}
+            />
+          </React.Fragment>
+        }
       </div>
     </div>
   );
