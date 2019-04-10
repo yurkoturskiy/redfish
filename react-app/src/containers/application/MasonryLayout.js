@@ -3,10 +3,44 @@ import React, { useEffect, useRef, useState } from "react";
 var elementRefMeasures = {}
 
 function MasonryLayout(props) {
-  const masonryLayout = useRef();
+  const [columns, setColumns] = useState(0);
+  const [transition, setTransition] = useState(false)
+  const [layout, setLayout] = useState({
+    elements: [],
+    width: 0,
+    height: 0,
+    endline: {
+      start: {x: undefined, y: undefined},
+      end: {x: undefined, y: undefined},
+      byColumns: [],
+      enterEvent: {
+        elementsNum: 0,
+        eventHandler: props.onEndlineEnter && props.onEndlineEnter,
+      }
+    }
+  })
+  const [onErrorCount, setOnErrorCount] = useState(0)
+  const [onLoadCount, setOnLoadCount] = useState(0)
+
+  const masonryLayout = useRef(); // top wrapper
   const elementRef = useRef(); // asign on a first element for representing general styles
-  const endlineStartRef = useRef()
-  const endlineEndRef = useRef()
+  const endlineStartRef = useRef() // endline start sensor
+  const endlineEndRef = useRef() // endline end sensor
+
+  useEffect(() => { // Mount and unmount only
+    // add/remove event listeners
+    checkLayout()
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll)
+    };
+  }, []);
+
+  const handleResize = (evt) => {
+    checkLayout(evt)
+  }
 
   const checkLayout = (evt) => {
     updateCardRefMeasures()
@@ -15,6 +49,10 @@ function MasonryLayout(props) {
     // turn on transition if window resizing
     setTransition(evt !== undefined)
   };
+
+  const handleScroll = () => {
+    checkEndlineEnterEvent()
+  }
 
   const checkEndlineEnterEvent = () => {
     setLayout(layout => {
@@ -32,37 +70,16 @@ function MasonryLayout(props) {
     })    
   }
 
-  const handleScroll = () => {
-    checkEndlineEnterEvent()
-  }
-
-  useEffect(() => { // add/remove event listeners
-    // mount and unmount only
-    checkLayout()
-    window.addEventListener("resize", checkLayout);
-    window.addEventListener("scroll", handleScroll)
-    return () => {
-      window.removeEventListener("resize", checkLayout);
-      window.removeEventListener("scroll", handleScroll)
-    };
-  }, []);
-  
   useEffect(() => { // component did mount or update
     if (masonryLayout.current.offsetHeight > 0) {
+    // if layout rendered
       checkEndlineEnterEvent()  
     }
   })
 
-  const [onErrorCount, setOnErrorCount] = useState(0);
-  const errorHandler = index => {
-    setOnErrorCount(onErrorCount + 1);
-    console.log("can't load: ", index);
-  };
-
-  const [onLoadCount, setOnLoadCount] = useState(0);
-  const loadHandler = index => {
-    setOnLoadCount(onLoadCount + 1);
-  };
+  useEffect(() => { // set of children changed
+    setTransition(false)
+  }, [props.children])
 
   const updateCardRefMeasures = () => {
     const style = window.getComputedStyle(elementRef.current)
@@ -80,63 +97,47 @@ function MasonryLayout(props) {
     }
   }
 
-  // everytime window resize
-  const [columns, setColumns] = useState(0);
-
-  const [transition, setTransition] = useState(false)
-  useEffect(() => {
-    setTransition(false)
-  }, [props.children])
-  
-
-  const [layout, setLayout] = useState({
-    elements: [],
-    width: 0,
-    height: 0,
-    endline: {
-      start: {x: undefined, y: undefined},
-      end: {x: undefined, y: undefined},
-      byColumns: [],
-      enterEvent: {
-        elementsNum: 0,
-        eventHandler: props.onEndlineEnter && props.onEndlineEnter,
-      }
+  useEffect(() => { // set layout
+    var elements = [];
+    var endline = layout.endline
+    endline.byColumns = []
+    for (let i = 0; i < columns; i++) {
+      endline.byColumns[i] = 0;
     }
-  })
-  useEffect(
-    () => {
-      var elements = [];
-      var endline = layout.endline
-      endline.byColumns = []
-      for (let i = 0; i < columns; i++) {
-        endline.byColumns[i] = 0;
-      }
-      updateCardRefMeasures()
-      React.Children.map(props.children, (child, index) => {
-        // Calculate positions of each element
-        let height =
-          document.getElementById(child.key).offsetHeight +
-          elementRefMeasures.marginTop +
-          elementRefMeasures.marginBottom
-        let leastNum = Math.min(...endline.byColumns);
-        let leastNumIndex = endline.byColumns.indexOf(leastNum);
-        var posX = leastNumIndex * elementRefMeasures.totalWidth;
-        var posY = endline.byColumns[leastNumIndex];
-        elements[index] = { x: posX, y: posY,};
-        endline.byColumns[leastNumIndex] += height;
-      });
-      endline.start.x = elementRefMeasures.totalWidth * endline.byColumns.indexOf(Math.min(...endline.byColumns))
-      endline.start.y = Math.min(...endline.byColumns)
-      endline.end.x = elementRefMeasures.totalWidth * endline.byColumns.indexOf(Math.max(...endline.byColumns))
-      endline.end.y = Math.max(...endline.byColumns)
-      setLayout({
-        elements: elements, // list of all elements with coorditares
-        width: elementRefMeasures.totalWidth * columns, // width of the whole layout
-        height: endline.end.y, // height of the whole layout
-        endline: endline,
-      })
-    }, [columns, onLoadCount, props.children]
-  );
+    updateCardRefMeasures()
+    React.Children.map(props.children, (child, index) => {
+      // Calculate positions of each element
+      let height =
+        document.getElementById(child.key).offsetHeight +
+        elementRefMeasures.marginTop +
+        elementRefMeasures.marginBottom
+      let leastNum = Math.min(...endline.byColumns);
+      let leastNumIndex = endline.byColumns.indexOf(leastNum);
+      var posX = leastNumIndex * elementRefMeasures.totalWidth;
+      var posY = endline.byColumns[leastNumIndex];
+      elements[index] = { x: posX, y: posY,};
+      endline.byColumns[leastNumIndex] += height;
+    });
+    endline.start.x = elementRefMeasures.totalWidth * endline.byColumns.indexOf(Math.min(...endline.byColumns))
+    endline.start.y = Math.min(...endline.byColumns)
+    endline.end.x = elementRefMeasures.totalWidth * endline.byColumns.indexOf(Math.max(...endline.byColumns))
+    endline.end.y = Math.max(...endline.byColumns)
+    setLayout({
+      elements: elements, // list of all elements with coorditares
+      width: elementRefMeasures.totalWidth * columns, // width of the whole layout
+      height: endline.end.y, // height of the whole layout
+      endline: endline,
+    })
+  }, [columns, onLoadCount, props.children]);
+
+  const errorHandler = index => {
+    setOnErrorCount(onErrorCount + 1);
+    console.log("can't load: ", index);
+  };
+
+  const loadHandler = index => {
+    setOnLoadCount(onLoadCount + 1);
+  };
 
   const renderChildren =
     React.Children.map(props.children, (child, index) => {
