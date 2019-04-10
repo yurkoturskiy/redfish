@@ -1,11 +1,14 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query {
-    allNotes {
+  query($amount: Int!, $cursor: String) {
+    allNotes(first: $amount, after: $cursor) {
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
       edges {
         node {
-          __typename
           id
           title
           content
