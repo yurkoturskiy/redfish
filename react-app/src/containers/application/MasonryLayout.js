@@ -128,7 +128,7 @@ function MasonryLayout(props) {
       height: endline.end.y, // height of the whole layout
       endline: endline,
     })
-  }, [columns, onLoadCount, props.children]);
+  }, [columns, onLoadCount, onErrorCount, props.children]);
 
   const errorHandler = index => {
     setOnErrorCount(onErrorCount + 1);
