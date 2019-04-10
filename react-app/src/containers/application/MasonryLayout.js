@@ -7,32 +7,36 @@ function MasonryLayout(props) {
   const elementRef = useRef(); // asign on a first element for representing general styles
   const endlineStartRef = useRef()
   const endlineEndRef = useRef()
-  // declare vars for general styles of all elements
+
   const checkLayout = (evt) => {
     updateCardRefMeasures()
     const wrapperWidth = masonryLayout.current.offsetWidth;
     setColumns(Math.floor(wrapperWidth / elementRefMeasures.totalWidth));
+    // turn on transition if window resizing
     setTransition(evt !== undefined)
   };
-  const handleScroll = () => {
+
+  const checkEndlineEnterEvent = () => {
     setLayout(layout => {
         if (
           endlineStartRef.current &&
           endlineStartRef.current.getBoundingClientRect().top
           - window.innerHeight <= 0 &&
-          layout.endline.enterEvent.position.x !== layout.endline.start.x &&
-          layout.endline.enterEvent.position.y !== layout.endline.start.y &&
           layout.endline.enterEvent.elementsNum !== layout.elements.length
-        ) {
-          layout.endline.enterEvent.position.x = layout.endline.start.x
-          layout.endline.enterEvent.position.y = layout.endline.start.y
+        ) { // enter endline event
           layout.endline.enterEvent.elementsNum = layout.elements.length
+          // execute enter endline event handler
           layout.endline.enterEvent.eventHandler && layout.endline.enterEvent.eventHandler()
         }
       return layout
-    })
+    })    
   }
-  useEffect(() => {
+
+  const handleScroll = () => {
+    checkEndlineEnterEvent()
+  }
+
+  useEffect(() => { // add/remove event listeners
     // mount and unmount only
     checkLayout()
     window.addEventListener("resize", checkLayout);
@@ -42,6 +46,12 @@ function MasonryLayout(props) {
       window.removeEventListener("scroll", handleScroll)
     };
   }, []);
+  
+  useEffect(() => { // component did mount or update
+    if (masonryLayout.current.offsetHeight > 0) {
+      checkEndlineEnterEvent()  
+    }
+  })
 
   const [onErrorCount, setOnErrorCount] = useState(0);
   const errorHandler = index => {
@@ -88,7 +98,6 @@ function MasonryLayout(props) {
       end: {x: undefined, y: undefined},
       byColumns: [],
       enterEvent: {
-        position: {x: undefined, y: undefined},
         elementsNum: 0,
         eventHandler: props.onEndlineEnter && props.onEndlineEnter,
       }
@@ -128,6 +137,7 @@ function MasonryLayout(props) {
       })
     }, [columns, onLoadCount, props.children]
   );
+
   const renderChildren =
     React.Children.map(props.children, (child, index) => {
       // Change eash child
@@ -166,7 +176,7 @@ function MasonryLayout(props) {
         className="boundry-box"
       >
         {renderChildren}
-        {layout.endline.start.y && 
+        {layout.endline.start.y != undefined && 
           <React.Fragment>
             <div 
               id="MasonryLayoutEndlineStart"
