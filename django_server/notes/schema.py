@@ -3,6 +3,7 @@ import graphene
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
+from graphql_relay.node.node import from_global_id
 
 from .models import Note
 from django.contrib.auth.models import User
@@ -54,7 +55,7 @@ class Query(object):
             return User.objects.filter(username=info.context.user)
 
 
-class CreateNote(relay.ClientIDMutation):
+class AddNote(relay.ClientIDMutation):
 
     class Input:
         title = graphene.String(required=False)
@@ -64,11 +65,28 @@ class CreateNote(relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        owner = User.objects.get(username=info.context.user)
-        note = Note.objects.create(owner=owner, **input)
-        print(note)
-        return CreateNote(new_note=note)
+        if not info.context.user.is_authenticated:
+            return None
+        note = Note.objects.create(owner=info.context.user, **input)
+        return AddNote(new_note=note)
+
+class DeleteNotes(relay.ClientIDMutation):
+    class Input:
+        ids = graphene.List(graphene.ID, required=True)
+
+    deleted_notes = graphene.List(NoteNode)
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        local_ids = [from_global_id(i)[1] for i in input['ids']]
+        try:
+            notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
+        except Note.DoesNotExist:
+            return None
+        notes.delete()
+        return DeleteNotes(notes)
 
 
 class Mutation(ObjectType):
-    create_note = CreateNote.Field()     
+    add_note = AddNote.Field()
+    delete_notes = DeleteNotes.Field()
