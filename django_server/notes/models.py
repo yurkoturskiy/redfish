@@ -20,11 +20,15 @@ class Image(models.Model):
 
 
 class Note(models.Model):
+	class Meta:
+		ordering = ['-timestamp']
+
 	title = models.TextField(blank=True, null=True)
 	content = models.TextField(blank=True,)
 	color = models.ForeignKey('Color', on_delete=models.CASCADE, blank=True, null=True)
 	pinned = models.BooleanField(default=False)
 	owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=False, null=False)
+	timestamp = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.title
