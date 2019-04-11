@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import PropTypes from 'prop-types';
 
 var elementRefMeasures = {}
 
@@ -203,5 +204,9 @@ function MasonryLayout(props) {
     </div>
   );
 }
+
+MasonryLayout.propTypes = {
+  onEndlineEnter: PropTypes.func
+};
 
 export default MasonryLayout;
