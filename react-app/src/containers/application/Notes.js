@@ -5,13 +5,11 @@ import { withApollo, Query } from "react-apollo"
 import Note from './Note'
 import MasonryLayout from './MasonryLayout'
 // queries
-import allNotes from '../../graphql/allNotes'
-
-const amount = 30
+import { ALL_NOTES } from './queries'
 
 function Notes() {
   return (
-    <Query query={allNotes} variables={{amount: amount}}>
+    <Query query={ALL_NOTES} >
       {({ loading, error, data, fetchMore }) => {
         if (loading) return <p>Loading...</p>
         if (error) {
@@ -25,9 +23,8 @@ function Notes() {
           <MasonryLayout onEndlineEnter={() => {
             if (data.allNotes.pageInfo.hasNextPage) {
               fetchMore({
-              query: allNotes,
+              query: ALL_NOTES,
               variables: {
-                amount: amount,
                 cursor: data.allNotes.pageInfo.endCursor
               },
               updateQuery: (prevResult, { fetchMoreResult }) => {
