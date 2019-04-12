@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import IconButton, {IconToggle} from '@material/react-icon-button';
 import MaterialIcon from '@material/react-material-icon';
 
 export const StyledDiv = styled.div`
