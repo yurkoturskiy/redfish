@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { Route, Switch } from 'react-router-dom'
 // container components
 import Main from './MainContainer'
@@ -38,6 +38,7 @@ class AutoRouter extends React.Component {
   }
   componentDidUpdate(prevProps) {
     this.checkPermission()
+    console.log(this.props)
   }
   checkPermission() {
     // Auto-redirection
@@ -79,10 +80,9 @@ class AutoRouter extends React.Component {
   }
 }
 
-export default withRouter(compose(
-  graphql(appState, {
+export default graphql(appState, {
     props: ({ data: { isAuth } }) => ({
       isAuth
     })
-  }),
-)(AutoRouter))
+  }
+)(withRouter(AutoRouter))
