@@ -8,6 +8,9 @@ import MasonryLayout from './MasonryLayout'
 import { ALL_NOTES } from './queries'
 
 function Notes() {
+  const selectionHandler = () => {
+
+  }
   return (
     <Query query={ALL_NOTES} >
       {({ loading, error, data, fetchMore }) => {
@@ -17,7 +20,12 @@ function Notes() {
           return <p>Error :(</p>
         }
         const cards = data.allNotes.edges.map((note, index) => (
-          <Note key={note.node.id} node={note.node} number={index} />
+          <Note 
+            key={note.node.id} 
+            node={note.node} 
+            number={index + 1} 
+            selectionHandler={selectionHandler} 
+          />
         ))
         return (
           <MasonryLayout onEndlineEnter={() => {
@@ -44,4 +52,4 @@ function Notes() {
   )
 }
 
-export default Notes
+export default withApollo(Notes)

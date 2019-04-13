@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Mutation } from "react-apollo";
-
 // queries
 import { ALL_NOTES, ADD_NOTE } from './queries'
 

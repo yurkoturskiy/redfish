@@ -83,8 +83,9 @@ class DeleteNotes(relay.ClientIDMutation):
             notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
         except Note.DoesNotExist:
             return None
+        snapshot = list(notes)
         notes.delete()
-        return DeleteNotes(notes)
+        return DeleteNotes(snapshot)
 
 
 class Mutation(ObjectType):

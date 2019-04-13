@@ -1,13 +1,14 @@
 import gql from 'graphql-tag'
 
 export const ALL_NOTES = gql`
-  query AllNotes($amount: Int = 27, $cursor: String) {
+  query AllNotes($amount: Int = 20, $cursor: String) {
     allNotes(first: $amount, after: $cursor) {
       pageInfo {
         endCursor
         hasNextPage
       }
       edges {
+        cursor
         node {
           id
           title
@@ -32,14 +33,20 @@ export const ADD_NOTE = gql`
   }
 `
 
-export const DELETE_NOTE = gql`
-mutation DeleteNote($id: ID!) {
-  deleteNote(input: {id: "Tm90ZU5vZGU6MzQz"}) {
-    deletedNote {
-      id
-      title
-      content
+export const DELETE_NOTES = gql`
+  mutation DeleteNotes($ids: [ID]!) {
+    deleteNotes(input: {ids: $ids}) {
+      deletedNotes {
+        id
+        title
+        content
+      }
     }
   }
-}
+`
+
+export const SWITCH_NOTES_SELECTOR = gql`
+  mutation switchNotesSelector($id: ID!, $isSelected: Boolean!) {
+    switchNotesSelector(id: $id, isSelected: $isSelected) @client
+  }
 `

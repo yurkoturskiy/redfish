@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
 import MaterialIcon from '@material/react-material-icon';
+// queries
+import { ALL_NOTES, SWITCH_NOTES_SELECTOR, DELETE_NOTES } from "./queries"
 
 export const StyledDiv = styled.div`
   width: 256px;
@@ -54,32 +57,80 @@ export const StyledDiv = styled.div`
     transform:translate(-3px, -3px);
     font-size: 24px;
     fill: #3E3E3E;
+    user-select: none;
   }
 
-  .container:hover input ~ .checkmark {
-    color: #3E3E3E;
+  .menu {
+    height: 48px;
+    background-color: pink;
+    width: 100%;
+    left: 0;
   }
 
-  .container input:checked ~ .checkmark {
-    color: #3E3E3E;
+  .menu .item {
+    line-height: 48px;
   }
 `
 
 function Note(props) {
   const [isSelected, setIsSelected] = useState(false)
+  const handleSelection = () => {
+    setIsSelected(!isSelected)
+  }
+  const handleDeletion = (cache, { data: { deleteNotes: { deletedNotes } } }) => {
+    console.log('DELETED')
+    const { allNotes } = cache.readQuery({ query: ALL_NOTES })
+    console.log(allNotes)
+    var deletedNotesIDs = []
+    deletedNotes.forEach(note => {
+      deletedNotesIDs.push(note.id)
+    })
+    var allCursors = []
+    var freshNodes = []
+    allNotes.edges.forEach(edge => {
+      allCursors.push(edge.cursor)
+      !deletedNotesIDs.includes(edge.node.id) && freshNodes.push(edge.node)
+    })
+    var newEdges = []
+    freshNodes.forEach((node, index) => {
+      newEdges.push({
+        cursor: allCursors[index], 
+        node: node,
+        __typename: "NoteNodeEdge"
+      })
+    })
+    const endCursor = allCursors[newEdges.length - 1]
+    allNotes.edges = newEdges
+    allNotes.pageInfo.endCursor = endCursor
+  }
   return (
-    <React.Fragment>
-      <StyledDiv isSelected={isSelected}> 
-        <label className="container">
-          <input type="checkbox" onClick={() => setIsSelected(!isSelected)} />
-          <MaterialIcon className="checkmark"  icon='check_circle' />
-        </label>
-
-        <p>{props.index}</p>
-        {props.node.title && <h3 className="title">{props.node.title}</h3>}
-        {props.node.content && <p className="content">{props.node.content}</p>}
-      </StyledDiv>
-    </React.Fragment>
+    <StyledDiv isSelected={isSelected}> 
+      <Mutation 
+        mutation={SWITCH_NOTES_SELECTOR} 
+        update={handleSelection} 
+        variables={{ id: props.node.id, isSelected: !isSelected }}
+      >
+        {switchNotesSelector => (
+          <div className="container">
+            <MaterialIcon className="checkmark" onClick={switchNotesSelector} icon='check_circle' />
+          </div>
+        )}
+      </Mutation>
+      <p>{props.number}</p>
+      {props.node.title && <h3 className="title">{props.node.title}</h3>}
+      {props.node.content && <p className="content">{props.node.content}</p>}
+      <Mutation
+        mutation={DELETE_NOTES}
+        update={handleDeletion}
+        variables={{ ids: [props.node.id] }}
+      >
+        {deleteNotes => (
+          <div className="menu">
+            <MaterialIcon onClick={deleteNotes} className="item" icon='delete' />
+          </div>
+        )}
+      </Mutation>
+    </StyledDiv>
   )
 }
 
