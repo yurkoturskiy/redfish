@@ -74,13 +74,25 @@ function MasonryLayout(props) {
   useEffect(() => { // component did mount or update
     if (masonryLayout.current.offsetHeight > 0) {
     // if layout rendered
-      checkEndlineEnterEvent()  
+      checkEndlineEnterEvent()
+      setTransition(true)
     }
   })
 
-  useEffect(() => { // set of children changed
-    setTransition(false)
-  }, [props.children])
+  useEffect(() => { // if number of children changed
+    setTransition(() => {
+      if (props.children.length > layout.elements.length) {
+        // disable transition for infinite scroll
+        return false
+      } else if (props.children.length === layout.elements.length) {
+        // enable for creation or change
+        return true
+      } else if (props.children.length < layout.elements.length) {
+        // enable for deletion
+        return true
+      }
+    })
+  }, [props.children.length])
 
   const updateCardRefMeasures = () => {
     const style = window.getComputedStyle(elementRef.current)
