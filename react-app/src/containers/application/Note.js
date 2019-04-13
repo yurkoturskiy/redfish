@@ -78,19 +78,20 @@ function Note(props) {
     setIsSelected(!isSelected)
   }
   const handleDeletion = (cache, { data: { deleteNotes: { deletedNotes } } }) => {
-    console.log('DELETED')
     const { allNotes } = cache.readQuery({ query: ALL_NOTES })
-    console.log(allNotes)
+    // remaping notes with correct cursors
     var deletedNotesIDs = []
     deletedNotes.forEach(note => {
       deletedNotesIDs.push(note.id)
     })
+    // remember cursors and filter Nodes
     var allCursors = []
     var freshNodes = []
     allNotes.edges.forEach(edge => {
       allCursors.push(edge.cursor)
       !deletedNotesIDs.includes(edge.node.id) && freshNodes.push(edge.node)
     })
+    // prototype of new edges
     var newEdges = []
     freshNodes.forEach((node, index) => {
       newEdges.push({
@@ -99,9 +100,10 @@ function Note(props) {
         __typename: "NoteNodeEdge"
       })
     })
+    // prototype of the end cursor
     const endCursor = allCursors[newEdges.length - 1]
-    allNotes.edges = newEdges
-    allNotes.pageInfo.endCursor = endCursor
+    allNotes.edges = newEdges // include new edges into the cache
+    allNotes.pageInfo.endCursor = endCursor // reset end cursor
   }
   return (
     <StyledDiv isSelected={isSelected}> 
