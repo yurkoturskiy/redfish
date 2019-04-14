@@ -2,13 +2,41 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import { compose, graphql } from 'react-apollo'
 // container components
-import AutoRouter from './AutoRouterContainer'
+import AutoRouter from './AutoRouter'
 import NavigationContainer from './NavigationContainer'
-// styled components
-import GlobalStyle from '../components/GlobalStyle'
 // queries
 import appState from '../graphql/appState'
-import login from '../graphql/login'
+
+
+// global style
+import { createGlobalStyle } from 'styled-components'
+import '@material/react-text-field/dist/text-field.css';
+import '@material/react-button/dist/button.css';
+import '@material/react-material-icon/dist/material-icon.css';
+const GlobalStyle = createGlobalStyle`
+  @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css');
+  @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+  body {
+    font-family: 'Fira Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+`
+
+const authEndpoints = [
+  '/profile',
+  '/app',
+]
+
+const notAuthEndpoints = [
+  '/',
+  '/login',
+  '/registration',
+  '/password-reset',
+]
+
 
 
 class GlobalContainer extends React.Component {
@@ -24,10 +52,10 @@ class GlobalContainer extends React.Component {
   }
 }
 
-export default withRouter(compose(
+export default compose(
   graphql(appState, {
     props: ({ data: { isAuth } }) => ({
       isAuth
     })
   }),
-)(GlobalContainer))
+)(withRouter(GlobalContainer))

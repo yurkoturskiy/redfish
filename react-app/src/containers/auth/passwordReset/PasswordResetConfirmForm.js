@@ -4,13 +4,13 @@ import FormikMaterialTextField from '../FormikMaterialTextField'
 import FormWrapper from '../FormWrapper'
 import Button from '@material/react-button';
 import { Link } from "react-router-dom";
-import { endpoints } from '../../containers/AutoRouterContainer'
+import { endpoints } from '../../AutoRouter'
 
 const theme = {
   background: '#f0f0f0',
 }
 
-class PasswordResetForm extends React.Component {
+class PasswordResetConfirmForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,16 +28,18 @@ class PasswordResetForm extends React.Component {
     return (
       <FormWrapper theme={theme}>
         <Form>
-          <h3>Reset password</h3>
-          <Field
-            id="email"
-            label="Email address"
-            name="email"
-            type="email"
-            component={FormikMaterialTextField}
+          <h3>Enter your new password</h3>
+          <Field 
+            id="new_password1" 
+            label="New password"
+            name="new_password1"
+            type={this.state.passwordVisibilityCondition ? 'text' : 'password'} 
+            tralingIcon={this.state.passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
+            tralingIconOnClick={this.switchPasswordVisibility}
+            component={FormikMaterialTextField}       
           />
           <Button type="submit" className="form-button" disabled={isSubmitting}>
-            Reset password
+            Set new password
           </Button>
           <span>{status && status.non_field_errors}</span>
         </Form>
@@ -46,4 +48,4 @@ class PasswordResetForm extends React.Component {
   }
 }
 
-export default PasswordResetForm
+export default PasswordResetConfirmForm

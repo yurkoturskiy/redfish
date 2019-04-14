@@ -1,14 +1,23 @@
 import React from 'react'
+import gql from "graphql-tag"
 import { Formik } from 'formik'
 import { withApollo } from 'react-apollo'
 //presentational components
-import LoginForm from '../../components/auth/LoginForm'
-// queries
-import login from '../../graphql/login'
+import LoginForm from './LoginForm'
 
 const theme = {
   background: '#f0f0f0',
 }
+
+const query = gql`
+  query($username: String!, $password: String!) {
+    login(input: {username: $username, password: $password}) 
+      @rest(type: "Login", method: "POST", path: "rest-auth/login/") {
+      key
+      __typename
+    }
+  }
+`
 
 class Login extends React.Component {
   constructor(props) {
@@ -19,7 +28,7 @@ class Login extends React.Component {
     values, { setSubmitting, setErrors, setStatus }
   ) {
     this.props.client.query({ // graphql query
-      query: login,
+      query: query,
       variables: { // prepare values
         username: values.username, 
         password: values.password,

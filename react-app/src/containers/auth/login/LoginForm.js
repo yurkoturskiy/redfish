@@ -4,13 +4,13 @@ import FormikMaterialTextField from '../FormikMaterialTextField'
 import FormWrapper from '../FormWrapper'
 import Button from '@material/react-button';
 import { Link } from "react-router-dom";
-import { endpoints } from '../../containers/AutoRouterContainer'
+import { endpoints } from '../../AutoRouter'
 
 const theme = {
   background: '#f0f0f0',
 }
 
-class BasicForm extends React.Component {
+class LoginForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,10 +30,10 @@ class BasicForm extends React.Component {
         <Form>
           <h3>Login</h3>
           <Field
-            id="email"
+            id="username"
             label="username or email"
-            name="email"
-            type="email"
+            name="username"
+            type="username"
             component={FormikMaterialTextField}
           />
           <Field 
@@ -56,4 +56,4 @@ class BasicForm extends React.Component {
   }
 }
 
-export default BasicForm
+export default LoginForm

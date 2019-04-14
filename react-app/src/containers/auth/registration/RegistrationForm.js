@@ -4,7 +4,7 @@ import FormikMaterialTextField from '../FormikMaterialTextField'
 import FormWrapper from '../FormWrapper'
 import Button from '@material/react-button';
 import { Link } from "react-router-dom";
-import { endpoints } from '../../containers/AutoRouterContainer'
+import { endpoints } from '../../AutoRouter'
 
 const theme = {
   background: '#f0f0f0',

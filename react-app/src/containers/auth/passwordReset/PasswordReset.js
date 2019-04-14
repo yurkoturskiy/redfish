@@ -1,10 +1,18 @@
 import React from 'react'
+import gql from "graphql-tag"
 import { withApollo } from 'react-apollo'
 import { Formik } from 'formik'
-import PasswordResetForm from '../../components/auth/PasswordResetForm'
-// queries
-import passwordReset from '../../graphql/passwordReset'
+import PasswordResetForm from './PasswordResetForm'
 
+const query = gql`
+  query($email: String!) {
+    passwordReset(input: {email: $email}) 
+      @rest(type: "PasswordReset", method: "POST", path: "rest-auth/password/reset/") {
+      detail
+      __typename
+    }
+  }
+`
 
 class PasswordReset extends React.Component {
   constructor(props) {
@@ -19,7 +27,7 @@ class PasswordReset extends React.Component {
     values, { setSubmitting, setErrors, setStatus }
   ) {
     this.props.client.query({ // graphql query
-      query: passwordReset,
+      query: query,
       variables: { // prepare values
         email: values.email
       }

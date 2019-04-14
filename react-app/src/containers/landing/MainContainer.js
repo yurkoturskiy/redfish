@@ -1,7 +1,6 @@
 import React from "react"
 import styled from 'styled-components'
-// styled components
-import Hero from '../components/Hero'
+// components
 
 const Title = styled.h1`
   position: absolute;
@@ -11,6 +10,13 @@ const Title = styled.h1`
   transform: translate(-50%, -50%);
   font-size: 1.5em;
   color: palevioletred;
+`
+
+const Hero = styled.div`
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: papayawhip;
 `
 
 class Main extends React.Component {

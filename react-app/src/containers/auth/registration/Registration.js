@@ -1,10 +1,32 @@
 import React from 'react'
+import gql from 'graphql-tag'
 import zxcvbn from 'zxcvbn'
 import { Formik } from 'formik'
 import { withApollo } from 'react-apollo'
-import RegistrationForm from '../../components/auth/RegistrationForm'
-// queries
-import registration from '../../graphql/registration'
+import RegistrationForm from './RegistrationForm'
+
+const query = gql`
+  query(
+    $username: String!, 
+    $email: String!, 
+    $password1: String!, 
+    $password2: String!
+  ) {
+    registration(input: {
+      username: $username, 
+      email: $email, 
+      password1: $password1, 
+      password2: $password2
+    }) @rest(
+      type: "Registration", 
+      method: "POST", 
+      path: "rest-auth/registration/"
+    ) {
+      key
+      __typename
+    }
+  }
+`
 
 const theme = {
   background: '#f0f0f0',
@@ -25,7 +47,7 @@ class Registration extends React.Component {
     values, { setSubmitting, setErrors, setStatus }
   ) {
     this.props.client.query({ // graphql query
-      query: registration,
+      query: query,
       variables: { // prepare values
         username: values.username, 
         email: values.email, 

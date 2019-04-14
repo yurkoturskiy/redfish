@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
 import MaterialIcon from '@material/react-material-icon';
+// Components
+import Selector from './Selector'
 // queries
-import { ALL_NOTES, SWITCH_NOTES_SELECTOR, DELETE_NOTES } from "./queries"
+import { ALL_NOTES, SWITCH_NOTES_SELECTOR, DELETE_NOTES } from "./../queries"
 
 export const StyledDiv = styled.div`
   width: 256px;
@@ -30,7 +32,6 @@ export const StyledDiv = styled.div`
   &:hover .container {
     opacity: 100;
   }
-
 
   .container {
     position: absolute;
@@ -106,18 +107,14 @@ function Note(props) {
     allNotes.pageInfo.endCursor = endCursor // reset end cursor
   }
   return (
-    <StyledDiv isSelected={isSelected}> 
-      <Mutation 
-        mutation={SWITCH_NOTES_SELECTOR} 
-        update={handleSelection} 
-        variables={{ id: props.node.id, isSelected: !isSelected }}
-      >
-        {switchNotesSelector => (
-          <div className="container">
-            <MaterialIcon className="checkmark" onClick={switchNotesSelector} icon='check_circle' />
-          </div>
-        )}
-      </Mutation>
+    <StyledDiv isSelected={isSelected} > 
+      <Selector 
+        handleSelection={handleSelection} 
+        variables={{ 
+          id: props.node.id, 
+          isSelected: !props.isSelected 
+        }}
+      />
       <p>{props.number}</p>
       {props.node.title && <h3 className="title">{props.node.title}</h3>}
       {props.node.content && <p className="content">{props.node.content}</p>}

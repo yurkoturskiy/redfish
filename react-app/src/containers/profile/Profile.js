@@ -1,6 +1,6 @@
 import React from 'react'
 // presentational components
-import ProfileForm from '../../components/auth/ProfileForm'
+import ProfileForm from './ProfileForm'
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 

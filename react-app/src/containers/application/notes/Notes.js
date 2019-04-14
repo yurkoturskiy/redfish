@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { withApollo, Query } from "react-apollo"
 // local components
-import Note from './Note'
+import Note from './note/Note'
 import MasonryLayout from './MasonryLayout'
 // queries
 import { ALL_NOTES } from './queries'

@@ -1,9 +1,31 @@
 import React from 'react'
+import gql from "graphql-tag"
 import { withApollo } from 'react-apollo'
 import { Formik } from 'formik'
-import PasswordResetConfirmForm from '../../components/auth/PasswordResetConfirmForm'
-// queries
-import passwordResetConfirm from '../../graphql/passwordResetConfirm'
+import PasswordResetConfirmForm from './PasswordResetConfirmForm'
+
+const query = gql`
+  query(
+    $uid: String!, 
+    $token: String!, 
+    $new_password1: String!, 
+    $new_password2: String!
+  ) {
+    passwordResetConfirm(input: {
+      uid: $uid, 
+      token: $token, 
+      new_password1: $new_password1, 
+      new_password2: $new_password2
+    }) @rest(
+      type: "PasswordResetConfirm", 
+      method: "POST", 
+      path: "rest-auth/password/reset/confirm/"
+    ) {
+      detail
+      __typename
+    }
+  }
+`
 
 const theme = {
   background: '#f0f0f0',
@@ -22,7 +44,7 @@ class PasswordResetConfirm extends React.Component {
     values, { setSubmitting, setErrors, setStatus }
   ) {
     this.props.client.query({ // graphql query
-      query: passwordResetConfirm,
+      query: query,
       variables: { // prepare values
         uid: this.props.match.params.uid,
         token: this.props.match.params.token,
