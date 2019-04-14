@@ -1,4 +1,5 @@
 from django.db import models
+from .managers import NoteManager
 import notes
 import os
 
@@ -21,7 +22,7 @@ class Image(models.Model):
 
 class Note(models.Model):
 	class Meta:
-		ordering = ['-pk']
+		ordering = ['order']
 
 	title = models.TextField(blank=True, null=True)
 	content = models.TextField(blank=True,)
@@ -30,6 +31,9 @@ class Note(models.Model):
 	owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=False, null=False)
 	created = models.DateTimeField(auto_now_add=True)
 	edited = models.DateTimeField(auto_now=True)
+	order = models.IntegerField(default=1)
+
+	objects = NoteManager()
 
 	def __str__(self):
 		return self.title
