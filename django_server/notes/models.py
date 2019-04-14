@@ -29,6 +29,7 @@ class Note(models.Model):
 	pinned = models.BooleanField(default=False)
 	owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=False, null=False)
 	created = models.DateTimeField(auto_now_add=True)
+	edited = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return self.title
