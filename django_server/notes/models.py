@@ -21,7 +21,7 @@ class Image(models.Model):
 
 class Note(models.Model):
 	class Meta:
-		ordering = ['-created']
+		ordering = ['-pk']
 
 	title = models.TextField(blank=True, null=True)
 	content = models.TextField(blank=True,)
