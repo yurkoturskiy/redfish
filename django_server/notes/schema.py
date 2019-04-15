@@ -75,6 +75,26 @@ class AddNote(relay.ClientIDMutation):
         note = Note.objects.create(owner=info.context.user, **input)
         return AddNote(new_note=note)
 
+class UpdateNotesColor(relay.ClientIDMutation):
+    class Input:
+        id = graphene.ID(required=True)
+        new_color = graphene.String(required=True)
+
+    updated_note = graphene.Field(NoteNode)
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        local_id = from_global_id(input['id'])[1]
+        try:
+            note = Note.objects.get(id=local_id, owner=info.context.user)
+        except Note.DoesNotExist:
+            return None
+        color = Color.objects.get(label=input['new_color'])
+        note.color = color
+        note.save()
+        return UpdateNotesColor(note)
+
+
 class DeleteNotes(relay.ClientIDMutation):
     class Input:
         ids = graphene.List(graphene.ID, required=True)
@@ -95,4 +115,6 @@ class DeleteNotes(relay.ClientIDMutation):
 
 class Mutation(ObjectType):
     add_note = AddNote.Field()
+    update_notes_color = UpdateNotesColor.Field()
     delete_notes = DeleteNotes.Field()
+
