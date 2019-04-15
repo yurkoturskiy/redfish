@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
-import MaterialIcon from '@material/react-material-icon';
 // Components
 import Selector from './Selector'
+import OptionsContainer from './OptionsContainer'
 // queries
 import { ALL_NOTES, SWITCH_NOTES_SELECTOR, DELETE_NOTES } from "./../queries"
 
@@ -16,6 +15,26 @@ export const StyledDiv = styled.div`
   background-color: white;
   transition: box-shadow 0.2s;
   visibility: ${props => props.visibility};
+
+  &.red {
+    background-color: #FFDDDD;
+  }
+
+  &.green {
+    background-color: #C3FFBB;
+  }
+
+  &.blue {
+    background-color: #E4F3FF;
+  }
+
+  &.yellow {
+    background-color: #FFF6A7;
+  }
+
+  &.purple {
+    background-color: #FFA1C9;
+  }
 
   &:hover {
     box-shadow: inset 0 0 0 ${(props) => props.isSelected ? 2 : 0}pt #3E3E3E, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -78,36 +97,8 @@ function Note(props) {
   const handleSelection = () => {
     setIsSelected(!isSelected)
   }
-  const handleDeletion = (cache, { data: { deleteNotes: { deletedNotes } } }) => {
-    const { allNotes } = cache.readQuery({ query: ALL_NOTES })
-    // remaping notes with correct cursors
-    var deletedNotesIDs = []
-    deletedNotes.forEach(note => {
-      deletedNotesIDs.push(note.id)
-    })
-    // remember cursors and filter Nodes
-    var allCursors = []
-    var freshNodes = []
-    allNotes.edges.forEach(edge => {
-      allCursors.push(edge.cursor)
-      !deletedNotesIDs.includes(edge.node.id) && freshNodes.push(edge.node)
-    })
-    // prototype of new edges
-    var newEdges = []
-    freshNodes.forEach((node, index) => {
-      newEdges.push({
-        cursor: allCursors[index], 
-        node: node,
-        __typename: "NoteNodeEdge"
-      })
-    })
-    // prototype of the end cursor
-    const endCursor = allCursors[newEdges.length - 1]
-    allNotes.edges = newEdges // include new edges into the cache
-    allNotes.pageInfo.endCursor = endCursor // reset end cursor
-  }
   return (
-    <StyledDiv isSelected={isSelected} > 
+    <StyledDiv isSelected={isSelected} className={props.node.color.label} > 
       <Selector 
         handleSelection={handleSelection} 
         variables={{ 
@@ -118,17 +109,7 @@ function Note(props) {
       <p>{props.number}</p>
       {props.node.title && <h3 className="title">{props.node.title}</h3>}
       {props.node.content && <p className="content">{props.node.content}</p>}
-      <Mutation
-        mutation={DELETE_NOTES}
-        update={handleDeletion}
-        variables={{ ids: [props.node.id] }}
-      >
-        {deleteNotes => (
-          <div className="menu">
-            <MaterialIcon onClick={deleteNotes} className="item" icon='delete' />
-          </div>
-        )}
-      </Mutation>
+      <OptionsContainer node={props.node} />
     </StyledDiv>
   )
 }
