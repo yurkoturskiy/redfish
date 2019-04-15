@@ -68,3 +68,18 @@ export const SWITCH_NOTES_SELECTOR = gql`
     switchNotesSelector(id: $id, isSelected: $isSelected) @client
   }
 `
+
+export const UPDATE_NOTES_COLOR = gql`
+  mutation updateNotesColor($id: ID!, $newColor: String!) {
+    updateNotesColor(input: {id: $id, newColor: $newColor}) {
+      updatedNote {
+        id
+        content
+        color {
+          id
+          label
+        }
+      }  
+    }
+  }
+`
