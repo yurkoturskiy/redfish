@@ -13,6 +13,15 @@ export const ALL_NOTES = gql`
           id
           title
           content
+          pinned
+          created
+          edited
+          order
+          color {
+            id
+            label
+            value
+          }
         }
       }
     }
@@ -27,6 +36,15 @@ export const ADD_NOTE = gql`
         id
         title
         content
+        pinned
+        created
+        edited
+        order
+        color {
+          id
+          label
+          value
+        }
         __typename
       }
     }
