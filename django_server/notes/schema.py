@@ -5,7 +5,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay.node.node import from_global_id
 
-from .models import Note
+from .models import Note, Color
 from django.contrib.auth.models import User
 
 
@@ -37,6 +37,11 @@ class UserNode(DjangoObjectType):
         exclude_fields = ('password', 'is_superuser', 'is_staff',)
         interfaces = (relay.Node, )
 
+class ColorNode(DjangoObjectType):
+    class Meta:
+        model = Color
+        filter_fields = ['value']
+        interfaces = (relay.Node,)
 
 class Query(object):
     note = relay.Node.Field(NoteNode)

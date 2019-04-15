@@ -22,16 +22,16 @@ class Image(models.Model):
 
 class Note(models.Model):
 	class Meta:
-		ordering = ['order']
+		ordering = ['-order']
 
 	title = models.TextField(blank=True, null=True)
 	content = models.TextField(blank=True,)
-	color = models.ForeignKey('Color', on_delete=models.CASCADE, blank=True, null=True)
+	color = models.ForeignKey('Color', on_delete=models.CASCADE, blank=False, null=False, default=7)
 	pinned = models.BooleanField(default=False)
 	owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=False, null=False)
 	created = models.DateTimeField(auto_now_add=True)
 	edited = models.DateTimeField(auto_now=True)
-	order = models.IntegerField(default=1)
+	order = models.IntegerField(default=1, null=False)
 
 	objects = NoteManager()
 
