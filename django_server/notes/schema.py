@@ -47,6 +47,7 @@ class Query(object):
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
     profile = DjangoFilterConnectionField(UserNode)
+    all_colors = DjangoFilterConnectionField(ColorNode)
 
     def resolve_all_notes(self, info, **kwargs):
         # context will reference to the Django request
@@ -58,6 +59,9 @@ class Query(object):
     def resolve_profile(self, info):
         if info.context.user.is_authenticated:
             return User.objects.filter(username=info.context.user)
+
+    def resolve_all_colors(self, info):
+        return (Color.objects.all())
 
 
 class AddNote(relay.ClientIDMutation):
