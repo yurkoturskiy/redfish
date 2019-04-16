@@ -53,6 +53,8 @@ function DeleteOption(props) {
   )
 }
 
-
+DeleteOption.propTypes = {
+  node: PropTypes.object,
+}
 
 export default DeleteOption

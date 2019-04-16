@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 // Components
 import Selector from './Selector'
@@ -7,6 +8,7 @@ import OptionsContainer from './OptionsContainer'
 import { ALL_NOTES, SWITCH_NOTES_SELECTOR, DELETE_NOTES } from "./../queries"
 // styled components
 import { CheckmarkContainerStyledDiv } from './Selector'
+import { OptionsContainerStyledDiv } from './OptionsContainer'
 
 export const NoteContainerStyledDiv = styled.div`
   width: 256px;
@@ -45,6 +47,10 @@ export const NoteContainerStyledDiv = styled.div`
   &:hover ${CheckmarkContainerStyledDiv} {
     opacity: 100;
   }
+
+  &:hover ${OptionsContainerStyledDiv} {
+    opacity: 100;
+  }
 `
 export const TitleStyledH3 = styled.h3`
   font-size: 1.5em;
@@ -75,6 +81,10 @@ function Note(props) {
       <OptionsContainer node={props.node} />
     </NoteContainerStyledDiv>
   )
+}
+
+Note.propTypes = {
+  node: PropTypes.object,
 }
 
 export default Note
