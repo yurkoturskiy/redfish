@@ -69,6 +69,20 @@ export const SWITCH_NOTES_SELECTOR = gql`
   }
 `
 
+export const ALL_COLORS = gql`
+  query {
+    allColors {
+      edges {
+        node {
+          id
+          label
+          value
+        }
+      }
+    }
+  }
+`
+
 export const UPDATE_NOTES_COLOR = gql`
   mutation updateNotesColor($id: ID!, $newColor: String!) {
     updateNotesColor(input: {id: $id, newColor: $newColor}) {
