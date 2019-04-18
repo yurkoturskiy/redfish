@@ -2,6 +2,7 @@ import React from "react";
 // components
 import NotesContainer from "./notes/NotesContainer"
 import Logo from "./Logo"
+import PreferencesBtn from "./PreferencesBtn"
 
 
 class Application extends React.Component {
@@ -10,6 +11,7 @@ class Application extends React.Component {
       <div>
         <Logo/>
         <NotesContainer/>
+        <PreferencesBtn/>
       </div>
     );
   }
