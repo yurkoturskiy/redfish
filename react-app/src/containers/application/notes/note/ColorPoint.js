@@ -14,13 +14,9 @@ export const ColorOptionStyledDiv = styled.div`
 `
 
 function ColorPoint(props) {
-  const handleColorUpdate = () => {
-    console.log('CHANGE')
-  }
   return (
     <Mutation 
       mutation={UPDATE_NOTES_COLOR} 
-      update={handleColorUpdate} 
       variables={{ id: props.noteId, newColor: props.color.label }}
     >
       {(updateNotesColor, { data }) => (
