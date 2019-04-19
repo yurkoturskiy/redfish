@@ -86,14 +86,11 @@ export const ALL_COLORS = gql`
 export const UPDATE_NOTES_COLOR = gql`
   mutation updateNotesColor($id: ID!, $newColor: String!) {
     updateNotesColor(input: {id: $id, newColor: $newColor}) {
-      updatedNote {
+      newColor {
         id
-        content
-        color {
-          id
-          label
-        }
-      }  
+        label
+        value
+      }
     }
   }
 `

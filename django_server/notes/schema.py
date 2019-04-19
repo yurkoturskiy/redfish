@@ -43,6 +43,14 @@ class ColorNode(DjangoObjectType):
         filter_fields = ['value']
         interfaces = (relay.Node,)
 
+    @classmethod
+    def get_node(cls, info, id):
+        try:
+            color = cls._meta.model.objects.get(id=id)
+        except cls._meta.model.DoesNotExist:
+            return None
+        return color
+        
 class Query(object):
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
@@ -84,7 +92,7 @@ class UpdateNotesColor(relay.ClientIDMutation):
         id = graphene.ID(required=True)
         new_color = graphene.String(required=True)
 
-    updated_note = graphene.Field(NoteNode)
+    new_color = graphene.Field(ColorNode)
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
@@ -96,7 +104,7 @@ class UpdateNotesColor(relay.ClientIDMutation):
         color = Color.objects.get(label=input['new_color'])
         note.color = color
         note.save()
-        return UpdateNotesColor(note)
+        return UpdateNotesColor(color)
 
 
 class DeleteNotes(relay.ClientIDMutation):
