@@ -14,14 +14,15 @@ export const ColorOptionStyledDiv = styled.div`
 `
 
 function ColorPoint(props) {
-  const updateNote = (cache, { data }) => {
-    const { allNotes } = cache.readQuery({ query: ALL_NOTES })
-    allNotes.edges.map(edge => {
+  const updateNote = (cache, { data: { updateNotesColor } }) => {
+    const cacheData = cache.readQuery({ query: ALL_NOTES })
+    let data = cacheData.allNotes.edges.map(edge => {
       if (edge.node.id === props.noteId) {
-        return edge.node.color = data.updateNotesColor.newColor
+        return edge.node.color = updateNotesColor.newColor
       }
       return edge
     })
+    cache.writeQuery({ query: ALL_NOTES, data })
   }
   return (
     <Mutation 

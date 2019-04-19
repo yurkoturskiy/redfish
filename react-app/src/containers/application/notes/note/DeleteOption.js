@@ -12,7 +12,7 @@ export const DeleteOptionStyledMaterialIcon = styled(MaterialIcon)`
 
 function DeleteOption(props) {
   const handleDeletion = (cache, { data: { deleteNotes: { deletedNotes } } }) => {
-    const { allNotes } = cache.readQuery({ query: ALL_NOTES })
+    var cacheData = cache.readQuery({ query: ALL_NOTES })
     // remaping notes with correct cursors
     var deletedNotesIDs = []
     deletedNotes.forEach(note => {
@@ -21,7 +21,7 @@ function DeleteOption(props) {
     // remember cursors and filter Nodes
     var allCursors = []
     var freshNodes = []
-    allNotes.edges.forEach(edge => {
+    cacheData.allNotes.edges.forEach(edge => {
       allCursors.push(edge.cursor)
       !deletedNotesIDs.includes(edge.node.id) && freshNodes.push(edge.node)
     })
@@ -36,8 +36,9 @@ function DeleteOption(props) {
     })
     // prototype of the end cursor
     const endCursor = allCursors[newEdges.length - 1]
-    allNotes.edges = newEdges // include new edges into the cache
-    allNotes.pageInfo.endCursor = endCursor // reset end cursor
+    cacheData.allNotes.edges = newEdges // include new edges into the cache
+    cacheData.allNotes.pageInfo.endCursor = endCursor // reset end cursor
+    cache.writeQuery({ query: ALL_NOTES, data: cacheData })
   }
 
   return (

@@ -6,26 +6,27 @@ import { ALL_NOTES, ADD_NOTE } from './queries'
 
 
 const updateCache = (cache, { data: { addNote: { newNote } } }) => {
-  const { allNotes } = cache.readQuery({ query: ALL_NOTES })
+  const cacheData = cache.readQuery({ query: ALL_NOTES })
   // remember cursors
   var allCursors = []
-  allNotes.edges.forEach(edge => {
+  cacheData.allNotes.edges.forEach(edge => {
     allCursors.push(edge.cursor)
   })
   // new edge prototype
   var newEdge = {
-    cursor: undefined,
+    cursor: undefined, // setup in the reset cursors section
     node: newNote,
     __typename: "NoteNodeEdge"
   }
   // include new edge as first item 
   // and exclude the last one without the cursor
-  allNotes.edges.unshift(newEdge)
-  allNotes.edges.pop()
+  cacheData.allNotes.edges.unshift(newEdge)
+  cacheData.allNotes.edges.pop()
   // reset cursors
-  allNotes.edges.forEach((edge, index) =>  {
+  cacheData.allNotes.edges.forEach((edge, index) =>  {
     edge.cursor = allCursors[index]
   })
+  cache.writeQuery({ query: ALL_NOTES, data: cacheData })
 }
 
 function AddNote() {
