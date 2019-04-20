@@ -22,6 +22,7 @@ class NoteManager(models.Manager):
         with transaction.atomic():
             if obj.order > int(new_order):
                 qs.filter(
+                    owner=obj.owner,
                     order__lt=obj.order,
                     order__gte=new_order,
                 ).exclude(
@@ -31,6 +32,7 @@ class NoteManager(models.Manager):
                 )
             else:
                 qs.filter(
+                    owner=obj.owner,
                     order__lte=new_order,
                     order__gt=obj.order,
                 ).exclude(
