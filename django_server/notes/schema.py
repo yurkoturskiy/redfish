@@ -146,6 +146,7 @@ class DeleteNotes(relay.ClientIDMutation):
         except Note.DoesNotExist:
             return None
         snapshot = list(notes)
+        Note.objects.fill_gaps(notes)
         notes.delete()
         return DeleteNotes(snapshot)
 
