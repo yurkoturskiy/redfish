@@ -4,6 +4,7 @@ import styled from 'styled-components'
 // Components
 import Selector from './Selector'
 import OptionsContainer from './OptionsContainer'
+import DialogWindow from './DialogWindow'
 // queries
 import { ALL_NOTES, SWITCH_NOTES_SELECTOR, DELETE_NOTES } from "./../queries"
 // styled components
@@ -66,20 +67,22 @@ function Note(props) {
     setIsSelected(!isSelected)
   }
   return (
-    <NoteContainerStyledDiv isSelected={isSelected} className={props.node.color.label} > 
-      <Selector 
-        handleSelection={handleSelection}
-        isSelected={isSelected} 
-        variables={{
-          id: props.node.id,
-          isSelected: !props.isSelected
-        }}
-      />
-      <p>{props.number}</p>
-      {props.node.title && <TitleStyledH3>{props.node.title}</TitleStyledH3>}
-      {props.node.content && <ContentStyledP>{props.node.content}</ContentStyledP>}
-      <OptionsContainer node={props.node} />
-    </NoteContainerStyledDiv>
+    <DialogWindow>
+      <NoteContainerStyledDiv isSelected={isSelected} className={props.node.color.label} > 
+        <Selector 
+          handleSelection={handleSelection}
+          isSelected={isSelected} 
+          variables={{
+            id: props.node.id,
+            isSelected: !props.isSelected
+          }}
+        />
+        <p>{props.number}</p>
+        {props.node.title && <TitleStyledH3>{props.node.title}</TitleStyledH3>}
+        {props.node.content && <ContentStyledP>{props.node.content}</ContentStyledP>}
+        <OptionsContainer node={props.node} />
+      </NoteContainerStyledDiv>
+    </DialogWindow>
   )
 }
 
