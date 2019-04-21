@@ -27,6 +27,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.8",
+    "react-transition-group": "^4.0.0",
     "styled-components": "^4.2.0",
     "zxcvbn": "^4.4.2"
   },
