@@ -4,6 +4,7 @@ migrations
 __pycache__
 *.pyc
 *.pyo
+settings.json
 settings.py
 tmux_setup.py
 *.sublime-*
