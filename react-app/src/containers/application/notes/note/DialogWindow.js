@@ -46,37 +46,29 @@ const Background = styled.div`
 `
 
 function DialogWindow(props) {
-  const [dialogWindow, setDialogWindow] = useState(false);
-  const onClickHandler = () => {
-    setDialogWindow(true)
-  }
-  const renderChildren =
-    React.Children.map(props.children, (child, index) => {
-      // Change eash child
-      let newComponent = React.cloneElement(child, {
-        onClick: onClickHandler,
-        style: dialogWindow ? {
-          opacity: 0,
-        } : undefined
-      })
-      return newComponent;
-    });
   return (
     <Wrapper>
       <CSSTransition
-        in={dialogWindow}
+        in={props.inEdit}
         timeout={300}
         classNames="dialog"
         unmountOnExit
       >
         <DialogWindowStyledDiv>
-          {props.children}
+          <h1>{props.node.title}</h1>
+          <p>{props.node.content}</p>
         </DialogWindowStyledDiv>
       </CSSTransition>
-      {dialogWindow && <Background onClick={() => setDialogWindow(false)} />}
-      {renderChildren}
+      {props.inEdit && <Background onClick={() => props.setInEdit(false)} />}
+      {props.children}
     </Wrapper>
   );
+}
+
+DialogWindow.propTypes = {
+  inEdit: PropTypes.bool,
+  setInEdit: PropTypes.func,
+  node: PropTypes.object,
 }
 
 export default DialogWindow

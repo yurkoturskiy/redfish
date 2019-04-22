@@ -19,7 +19,7 @@ export const NoteContainerStyledDiv = styled.div`
   border-radius: 6px;
   background-color: white;
   transition: box-shadow 0.2s;
-  visibility: ${props => props.visibility};
+  opacity: ${props => props.opacity};
 
   &.red {
     background-color: #FFDDDD;
@@ -63,12 +63,21 @@ export const ContentStyledP = styled.p`
 
 function Note(props) {
   const [isSelected, setIsSelected] = useState(false)
+  const [inEdit, setInEdit] = useState(false);
   const handleSelection = () => {
     setIsSelected(!isSelected)
   }
   return (
-    <DialogWindow>
-      <NoteContainerStyledDiv isSelected={isSelected} className={props.node.color.label} > 
+    <DialogWindow 
+      inEdit={inEdit} 
+      setInEdit={setInEdit}
+      node={props.node}
+    >
+      <NoteContainerStyledDiv 
+        isSelected={isSelected} 
+        className={props.node.color.label}
+        opacity={inEdit ? 0 : 1}
+      > 
         <Selector 
           handleSelection={handleSelection}
           isSelected={isSelected} 
@@ -77,9 +86,11 @@ function Note(props) {
             isSelected: !props.isSelected
           }}
         />
-        <p>{props.number}</p>
-        {props.node.title && <TitleStyledH3>{props.node.title}</TitleStyledH3>}
-        {props.node.content && <ContentStyledP>{props.node.content}</ContentStyledP>}
+        <div onClick={() => setInEdit(true)}>
+          <p>{props.number}</p>
+          {props.node.title && <TitleStyledH3>{props.node.title}</TitleStyledH3>}
+          {props.node.content && <ContentStyledP>{props.node.content}</ContentStyledP>}
+        </div>
         <OptionsContainer node={props.node} />
       </NoteContainerStyledDiv>
     </DialogWindow>
