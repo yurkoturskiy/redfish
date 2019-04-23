@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import styled from 'styled-components'
 import icon from '../../static/icon.svg'
 
@@ -11,10 +12,15 @@ export const LogoStyledImg = styled.img`
   border-radius: 4px;
 `
 
-function Logo() {
+function Logo(props) {
+  const redirect = () => {
+    if (props.history.location.pathname !== '/app') {
+      props.history.push('/app')
+    }
+  }
   return (
-    <LogoStyledImg src={icon} />
+    <LogoStyledImg src={icon} onClick={redirect} />
   )
 }
 
-export default Logo
+export default withRouter(Logo)

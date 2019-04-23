@@ -3,8 +3,13 @@ import { withRouter } from 'react-router'
 
 
 function ProfileBtn(props) {
+  const redirect = () => {
+    if (props.history.location.pathname !== '/profile') {
+      props.history.push('/profile')
+    }
+  }
   return (
-    <div onClick={() => props.history.push('/profile') }>Profile</div>
+    <div onClick={redirect}>Profile</div>
   )
 }
 
