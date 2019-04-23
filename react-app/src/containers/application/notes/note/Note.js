@@ -87,7 +87,6 @@ function Note(props) {
           }}
         />
         <div onClick={() => setInEdit(true)}>
-          <p>{props.number}</p>
           {props.node.title && <TitleStyledH3>{props.node.title}</TitleStyledH3>}
           {props.node.content && <ContentStyledP>{props.node.content}</ContentStyledP>}
         </div>
