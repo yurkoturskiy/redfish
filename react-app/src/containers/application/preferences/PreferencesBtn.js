@@ -9,6 +9,7 @@ import Logout from './Logout'
 import ProfileBtn from './ProfileBtn'
 
 export const MenuWrapper = styled.div`
+  z-index: 2;
   position: fixed;
   bottom: 32px;
   left: 32px;
