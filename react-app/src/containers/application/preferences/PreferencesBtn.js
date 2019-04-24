@@ -26,8 +26,6 @@ export const Wrapper = styled.div`
 
 export const Menu = styled.div`
   vertical-align: bottom;
-  height: 100px;
-  width: 100px;
   background-color: red;
   display: ${props => props.status ? 'inline-block' : 'none'};
 `
@@ -36,12 +34,22 @@ function PreferencesBtn(props) {
   const fabRef = useRef()
   const menuRef = useRef()
   const [status, setStatus] = useState(false)
+
   const handleClickOutside = (event) => {
-    if (fabRef.current && !fabRef.current.contains(event.target) && !menuRef.current.contains(event.target)) {
-      console.log('click outside')
+    // Collapse on click outside of the menu
+    if (fabRef.current 
+      && !fabRef.current.contains(event.target) 
+      && !menuRef.current.contains(event.target)
+    ) {
       setStatus(false)
     }
   }
+
+  const handleMenuClick = () => {
+    // Collapse on menu element click
+    setStatus(false)
+  }
+
   useEffect(() => {
     if (status) {
       document.addEventListener('mousedown', handleClickOutside)
@@ -53,17 +61,6 @@ function PreferencesBtn(props) {
     }
   }, [status])
 
-  const switchMenu = () => {
-    setStatus((status) => {
-      if (status) {
-        document.removeEventListener('mousedown', handleClickOutside)
-        return false
-      } else {
-        document.addEventListener('mousedown', handleClickOutside)
-        return true
-      }
-    })
-  }
   return (
     <React.Fragment>
       <MenuWrapper>
@@ -71,8 +68,8 @@ function PreferencesBtn(props) {
           <Fab mini onClick={() => setStatus(!status)} icon={<MaterialIcon icon="settings"/>} />
         </Wrapper>
         <Menu status={status} ref={menuRef}>
-          <ProfileBtn/>
-          <Logout/>
+          <ProfileBtn handleMenuClick={handleMenuClick} />
+          <Logout handleMenuClick={handleMenuClick} />
         </Menu>
       </MenuWrapper>
     </React.Fragment>

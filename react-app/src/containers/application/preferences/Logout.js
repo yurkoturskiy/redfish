@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import gql from 'graphql-tag'
 import { withRouter } from 'react-router'
 import { withApollo } from 'react-apollo'
@@ -18,12 +19,17 @@ function Logout(props) {
     props.client.writeData({ data: { isAuth: false } })
     props.history.push('/login')
     console.log('logout')
+    props.handleMenuClick()
   }
   return (
     <div onClick={logout}>
       Logout
     </div>
   )
+}
+
+Logout.propTypes = {
+  handleMenuClick: PropTypes.func,
 }
 
 export default withApollo(withRouter(Logout))
