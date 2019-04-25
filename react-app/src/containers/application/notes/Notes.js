@@ -4,6 +4,7 @@ import { withApollo, Query } from "react-apollo"
 // local components
 import Note from './note/Note'
 import MasonryLayout from './MasonryLayout'
+import SelectedNotesOptionsBar from './SelectedNotesOptionsBar'
 // queries
 import { ALL_NOTES } from './queries'
 
@@ -28,24 +29,27 @@ function Notes() {
           />
         ))
         return (
-          <MasonryLayout onEndlineEnter={() => {
-            if (data.allNotes.pageInfo.hasNextPage) {
-              fetchMore({
-              query: ALL_NOTES,
-              variables: {
-                cursor: data.allNotes.pageInfo.endCursor
-              },
-              updateQuery: (prevResult, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prevResult
-                let mix = prevResult
-                mix.allNotes.pageInfo = fetchMoreResult.allNotes.pageInfo
-                mix.allNotes.edges = [...prevResult.allNotes.edges, ...fetchMoreResult.allNotes.edges]
-                return mix
-              }              
-            })
-          }}}>
-            {cards}
-          </MasonryLayout>
+          <React.Fragment>
+            <SelectedNotesOptionsBar/>
+            <MasonryLayout onEndlineEnter={() => {
+              if (data.allNotes.pageInfo.hasNextPage) {
+                fetchMore({
+                query: ALL_NOTES,
+                variables: {
+                  cursor: data.allNotes.pageInfo.endCursor
+                },
+                updateQuery: (prevResult, { fetchMoreResult }) => {
+                  if (!fetchMoreResult) return prevResult
+                  let mix = prevResult
+                  mix.allNotes.pageInfo = fetchMoreResult.allNotes.pageInfo
+                  mix.allNotes.edges = [...prevResult.allNotes.edges, ...fetchMoreResult.allNotes.edges]
+                  return mix
+                }              
+              })
+            }}}>
+              {cards}
+            </MasonryLayout>
+          </React.Fragment>
         )
       }}
     </Query>
