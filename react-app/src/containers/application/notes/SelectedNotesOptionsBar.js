@@ -4,7 +4,7 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const BarWrapperStyledDiv = styled.div`
-  position: absolute;
+  position: fixed;
   display: ${props => props.display};
   top: 0;
   left: 50%;
