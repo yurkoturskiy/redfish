@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { withApollo, Query } from "react-apollo"
 // local components
 import Note from './note/Note'
-import MasonryLayout from './MasonryLayout'
+import DraggableMasonryLayout from './DraggableMasonryLayout'
 import SelectedNotesOptionsBar from './SelectedNotesOptionsBar'
 // queries
 import { ALL_NOTES } from './queries'
@@ -31,7 +31,7 @@ function Notes() {
         return (
           <React.Fragment>
             <SelectedNotesOptionsBar/>
-            <MasonryLayout onEndlineEnter={() => {
+            <DraggableMasonryLayout onEndlineEnter={() => {
               if (data.allNotes.pageInfo.hasNextPage) {
                 fetchMore({
                 query: ALL_NOTES,
@@ -48,7 +48,7 @@ function Notes() {
               })
             }}}>
               {cards}
-            </MasonryLayout>
+            </DraggableMasonryLayout>
           </React.Fragment>
         )
       }}
