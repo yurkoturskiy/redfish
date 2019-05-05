@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import { css } from 'linaria'
 import { Mutation } from 'react-apollo'
 import MaterialIcon from '@material/react-material-icon';
 // queries
 import { ALL_NOTES, DELETE_NOTES } from "./../queries"
 
-export const DeleteOptionStyledMaterialIcon = styled(MaterialIcon)`
+export const deleteOption = css`
   line-height: 48px;
 `
 
@@ -48,7 +48,7 @@ function DeleteOption(props) {
       variables={{ ids: [props.node.id] }}
     >
       {deleteNotes => (
-        <DeleteOptionStyledMaterialIcon onClick={deleteNotes} className="item" icon='delete' />
+        <MaterialIcon className={deleteOption} onClick={deleteNotes} icon='delete' />
       )}
     </Mutation>
   )

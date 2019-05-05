@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import { css } from 'linaria'
 import { Mutation } from 'react-apollo'
 // queries
 import { ALL_NOTES, UPDATE_NOTES_COLOR } from "./../queries"
 
-export const ColorOptionStyledDiv = styled.div`
+export const colorOption = css`
   box-shadow: inset 0px 0px 0px 2px rgba(255,255,255,1);
-  background-color: #${props => props.value};
   height: 32px;
   width: 32px
   border-radius: 16px;
@@ -31,10 +30,14 @@ function ColorPoint(props) {
       variables={{ id: props.noteId, newColor: props.color.label }}
     >
       {(updateNotesColor, { data }) => (
-        <ColorOptionStyledDiv value={props.color.value} onClick={async e => {
-          e.preventDefault()
-          await updateNotesColor()
-        }}/>
+        <div 
+          className={colorOption} 
+          style={{backgroundColor: `#${props.color.value}`}} 
+          onClick={async e => {
+            e.preventDefault()
+            await updateNotesColor()
+          }}
+        />
       )}
     </Mutation>
   )

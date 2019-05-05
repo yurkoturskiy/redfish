@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import { css } from 'linaria'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { CSSTransition } from 'react-transition-group'
 
-const Wrapper = styled.div`
+const wrapper = css`
   .dialog-enter {
     opacity: 0;
     transform: scale(0.9);
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   }
 `
 
-const DialogWindowStyledDiv = styled.div`
+const dialogWindow = css`
   position: fixed;
   top: 0;
   left: 50%;
@@ -35,7 +35,7 @@ const DialogWindowStyledDiv = styled.div`
   border-radius: 6px;
   box-shadow: 0px 3px 26px 0px rgba(0,0,0,0.3);
 `
-const Background = styled.div`
+const background = css`
   position: fixed;
   top: 0;
   left: 0;
@@ -47,21 +47,21 @@ const Background = styled.div`
 
 function DialogWindow(props) {
   return (
-    <Wrapper>
+    <div className={wrapper}>
       <CSSTransition
         in={props.inEdit}
         timeout={300}
         classNames="dialog"
         unmountOnExit
       >
-        <DialogWindowStyledDiv>
+        <div className={dialogWindow}>
           <h1>{props.node.title}</h1>
           <p>{props.node.content}</p>
-        </DialogWindowStyledDiv>
+        </div>
       </CSSTransition>
-      {props.inEdit && <Background onClick={() => props.setInEdit(false)} />}
+      {props.inEdit && <div className={background} onClick={() => props.setInEdit(false)} />}
       {props.children}
-    </Wrapper>
+    </div>
   );
 }
 
