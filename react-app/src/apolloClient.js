@@ -19,9 +19,8 @@ const stateLink = withClientState({
   defaults: defaultState(),
 })
 
-
 const httpLink = createHttpLink({
-  uri: "http://localhost:9000/graphql",
+  uri: `http://${window.location.hostname}:9000/graphql`,
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -37,7 +36,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const restLink = new RestLink({ 
-  uri: 'http://localhost:9000/',
+  uri: `http://${window.location.hostname}:9000/`,
 })
 
 const apolloClient = new ApolloClient({
