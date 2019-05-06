@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { withRouter } from 'react-router'
-import styled from 'styled-components'
+import { css } from 'linaria'
 import icon from '../../../static/icon.svg'
 import Fab from '@material/react-fab'
 import MaterialIcon from '@material/react-material-icon';
@@ -8,14 +8,14 @@ import MaterialIcon from '@material/react-material-icon';
 import Logout from './Logout'
 import ProfileBtn from './ProfileBtn'
 
-export const MenuWrapper = styled.div`
+export const menuWrapper = css`
   z-index: 2;
   position: fixed;
   bottom: 32px;
   left: 32px;
 `
 
-export const Wrapper = styled.div`
+export const fabWrapper = css`
   padding: 0;
   margin: 0;
   width: 40px;
@@ -24,10 +24,10 @@ export const Wrapper = styled.div`
   border-radius: 40px;
 `
 
-export const Menu = styled.div`
+export const menu = css`
   vertical-align: bottom;
   background-color: red;
-  display: ${props => props.status ? 'inline-block' : 'none'};
+  display: var(--preferences-btn-menu-display);
 `
 
 function PreferencesBtn(props) {
@@ -63,15 +63,20 @@ function PreferencesBtn(props) {
 
   return (
     <React.Fragment>
-      <MenuWrapper>
-        <Wrapper ref={fabRef}>
+      <div className={menuWrapper}>
+        <div className={fabWrapper} ref={fabRef}>
           <Fab mini onClick={() => setStatus(!status)} icon={<MaterialIcon icon="settings"/>} />
-        </Wrapper>
-        <Menu status={status} ref={menuRef}>
+        </div>
+        <div 
+          className={menu} 
+          status={status} 
+          ref={menuRef} 
+          style={{'--preferences-btn-menu-display': props.status ? 'inline-block' : 'none'}}
+        >
           <ProfileBtn handleMenuClick={handleMenuClick} />
           <Logout handleMenuClick={handleMenuClick} />
-        </Menu>
-      </MenuWrapper>
+        </div>
+      </div>
     </React.Fragment>
   )
 }

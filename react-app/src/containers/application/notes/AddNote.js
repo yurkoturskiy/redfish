@@ -1,19 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react'
-import styled from 'styled-components'
+import { css } from 'linaria'
 import { Mutation } from "react-apollo";
 // queries
 import { ALL_NOTES, ADD_NOTE } from './queries'
 
-export const WrapperStyledDiv = styled.div`
-  position: ${props => props.isActive ? 'fixed' : 'absolute'};
+export const wrapper = css`
+  position: var(--add-note-wrapper-position);
   z-index: 2;
   border-radius: 6px;
-  top: ${props => props.isActive ? '20vh' : '20px'};
+  top: var(--add-note-wrapper-top);
   left: 50%;
   margin: 0 0 0 -250px;
   transition: top 0.4s, box-shadow 1s;
   background-color: white;
-  box-shadow: ${props => props.isActive ? '0px 3px 26px 0px rgba(0,0,0,0.3)' : '0px 1px 1px 0px rgba(0,0,0,0.2)'};
+  box-shadow: var(--add-note-wrapper-box-shadow);
   padding: 0px;
 
   &:hover {
@@ -21,7 +21,7 @@ export const WrapperStyledDiv = styled.div`
   }
 `
 
-export const Background = styled.div`
+export const background = css`
   position: fixed;
   top: 0;
   left: 0;
@@ -31,7 +31,7 @@ export const Background = styled.div`
   z-index: 1;
 `
 
-export const TitleLabel = styled.label`
+export const titleLabel = css`
   position: absolute;
   top: 0;
   left: 0;
@@ -42,8 +42,8 @@ export const TitleLabel = styled.label`
   pointer-events: none;
 `
 
-export const TitleInput = styled.textarea`
-  display: ${props => props.isActive ? 'block' : 'none'};
+export const titleInput = css`
+  display: var(--add-note-title-input-display);
   vertical-align: top;
   padding: 16px 20px 16px 20px;
   border: 0px;
@@ -54,7 +54,7 @@ export const TitleInput = styled.textarea`
   width: 500px;
 `
 
-export const ContentLabel = styled.label`
+export const contentLabel = css`
   position: absolute;
   padding: 16px 20px 16px 20px;
   line-height: 24px;
@@ -63,7 +63,7 @@ export const ContentLabel = styled.label`
   pointer-events: none;
 `
 
-export const ContentInput = styled.textarea`
+export const contentInput = css`
   vertical-align: top;
   padding: 16px 20px 16px 20px;
   border: 0px;
@@ -74,8 +74,8 @@ export const ContentInput = styled.textarea`
   height: 56px;
 `
 
-export const SubmitButton = styled.button`
-  display: ${props => props.isActive ? 'block' : 'none'};
+export const submitButton = css`
+  display: var(--add-note-submit-button-display);
 `
 
 const updateCache = (cache, { data: { addNote: { newNote } } }) => {
@@ -133,7 +133,15 @@ function AddNote() {
     <Mutation mutation={ADD_NOTE} update={updateCache}>
       {(addNote, { data }) => (
         <React.Fragment>
-          <WrapperStyledDiv onClick={() => setIsActive(true)} isActive={isActive}>
+          <div 
+            className={wrapper}
+            style={{
+              '--add-note-wrapper-position': isActive ? 'fixed' : 'absolute',
+              '--add-note-wrapper-top': isActive ? '20vh' : '20px',
+              '--add-note-wrapper-box-shadow': isActive ? '0px 3px 26px 0px rgba(0,0,0,0.3)' : '0px 1px 1px 0px rgba(0,0,0,0.2)'
+            }}
+            onClick={() => setIsActive(true)} 
+          >
             <form
               onSubmit={async e => {
                 e.preventDefault()
@@ -142,8 +150,12 @@ function AddNote() {
                 reset()
               }}
             >
-              {isActive && <TitleLabel>{title === "" && 'Title'}</TitleLabel>}
-              <TitleInput
+              {isActive && <label className={titleLabel}>{title === "" && 'Title'}</label>}
+              <textarea
+                className={titleInput}
+                style={{
+                  '--add-note-title-input-display': isActive ? 'block' : 'none',
+                }}
                 id="title"
                 value={title}
                 type="text"
@@ -151,8 +163,9 @@ function AddNote() {
                 isActive={isActive}
                 ref={titleInputRef}
               />
-              <ContentLabel>{content === "" && 'Take a note...'}</ContentLabel>
-              <ContentInput
+              <label className={contentLabel}>{content === "" && 'Take a note...'}</label>
+              <textarea
+                className={contentInput}
                 data-adaptheight
                 id="content"
                 value={content}
@@ -161,10 +174,18 @@ function AddNote() {
                 isActive={isActive}
                 ref={contentInputRef}
               />
-              <SubmitButton type="submit" isActive={isActive}>Add Nodo</SubmitButton>
+              <button 
+                type="submit" 
+                className={submitButton}
+                style={{
+                  '--add-note-submit-button-display': isActive ? 'block' : 'none'
+                }}
+              >
+                Add Nodo
+              </button>
             </form>
-          </WrapperStyledDiv>
-          { isActive && <Background onClick={() => setIsActive(false)} /> }
+          </div>
+          { isActive && <div className={background} onClick={() => setIsActive(false)} /> }
         </React.Fragment>
       )}
     </Mutation>

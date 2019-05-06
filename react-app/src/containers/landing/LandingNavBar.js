@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import { css } from 'linaria'
 import { withRouter } from 'react-router'
 import { 
   Navbar,
@@ -9,7 +9,7 @@ import {
 } from 'react-bootstrap'
 import icon from '../../static/icon.svg'
 
-const Navigation = styled.nav`
+const navigation = css`
   position: absolute;
   width: 100%;
   height: 100px;
@@ -38,7 +38,7 @@ const Navigation = styled.nav`
 
 function NavBar(props) {
   return (
-    <Navigation>
+    <nav className={navigation}>
       <Navbar bg="light" expand="lg">
         <Navbar.Brand onClick={() => props.history.push('/')}>
           <img src={icon} style={{ 
@@ -66,7 +66,7 @@ function NavBar(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    </Navigation>
+    </nav>
   )
 }
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import styled from 'styled-components'
 import icon from '../../static/icon.svg'
+import { css } from "linaria"
 
-export const LogoStyledImg = styled.img`
+export const logo = css`
   position: absolute;
   top: 32px;
   left: 32px;
@@ -19,7 +19,9 @@ function Logo(props) {
     }
   }
   return (
-    <LogoStyledImg src={icon} onClick={redirect} />
+    <React.Fragment>
+      <img className={logo} src={icon} onClick={redirect} />
+    </React.Fragment>
   )
 }
 

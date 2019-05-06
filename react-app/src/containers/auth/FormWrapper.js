@@ -1,10 +1,10 @@
-import styled from 'styled-components'
+import { styled } from 'linaria/react'
 
 
 const FormWrapper = styled.div`
   height: 100vh;
   width: 100%;
-  background: ${props => props.theme.background};
+  background: #f0f0f0;
 
 
   form {
@@ -60,11 +60,5 @@ const FormWrapper = styled.div`
     float: right;
   }
 `
-
-FormWrapper.defaultProps =  {
-  theme: {
-    background: 'palevioletred'
-  }
-}
 
 export default FormWrapper

@@ -1,11 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
+import { css } from 'linaria'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const BarWrapperStyledDiv = styled.div`
+const barWrapper = css`
   position: fixed;
-  display: ${props => props.display};
+  display: var(--selected-notes-options-bar-wrapper-display);
   top: 0;
   left: 50%;
   z-index: 4;
@@ -25,12 +25,14 @@ function SelectedNotesOptionsBar(props) {
     {({ loading, error, data, fetchMore }) => {
       if (loading) return <p>Loading...</p>
       if (error) return <p>Error</p>
-      console.log(data)
       const numNotesSelected = data.selectedNotes.length
       return (
-        <BarWrapperStyledDiv display={numNotesSelected ? 'block' : 'none'}>
+        <div 
+          className={barWrapper}
+          style={{'--selected-notes-options-bar-wrapper-display': numNotesSelected ? 'block' : 'none'}}
+        >
           <p>items selected: {numNotesSelected}</p>
-        </BarWrapperStyledDiv>
+        </div>
       )
     }}
 

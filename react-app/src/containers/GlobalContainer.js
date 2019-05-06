@@ -9,22 +9,35 @@ import appState from '../graphql/appState'
 
 
 // global style
-import { createGlobalStyle } from 'styled-components'
+import { css } from 'linaria'
 import '@material/react-text-field/dist/text-field.css';
 import '@material/react-button/dist/button.css';
 import '@material/react-material-icon/dist/material-icon.css';
 import '@material/react-fab/dist/fab.css';
-const GlobalStyle = createGlobalStyle`
-  @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css');
-  @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
-  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+export const globals = css`
+  :global() {
+    @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css');
+    @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-  body {
-    font-family: 'Fira Sans', sans-serif;
-    margin: 0;
-    padding: 0;
+    body {
+      font-family: 'Fira Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+    }    
   }
 `
+// const GlobalStyle = createGlobalStyle`
+//   @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css');
+//   @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+//   @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+//   body {
+//     font-family: 'Fira Sans', sans-serif;
+//     margin: 0;
+//     padding: 0;
+//   }
+// `
 
 const authEndpoints = [
   '/profile',
@@ -46,7 +59,6 @@ class GlobalContainer extends React.Component {
     console.log('token: ' + localStorage.getItem('token'))
     return (
       <AutoRouter>
-        <GlobalStyle/>
         <NavigationContainer/>
       </AutoRouter>
     )

@@ -1,8 +1,8 @@
 import React from "react"
-import styled from 'styled-components'
+import { css } from 'linaria'
 // components
 
-const Title = styled.h1`
+const title = css`
   position: absolute;
   top: 45%;
   left: 50%;
@@ -12,7 +12,7 @@ const Title = styled.h1`
   color: palevioletred;
 `
 
-const Hero = styled.div`
+const hero = css`
   position: relative;
   height: 100vh;
   width: 100%;
@@ -23,12 +23,12 @@ class Main extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Hero>
-            <Title>Blank React-Django project</Title>
-        </Hero>
-        <Hero>
+        <div className={hero}>
+            <h1 className={title}>Blank React-Django project</h1>
+        </div>
+        <div className={hero}>
           <h1>Second view</h1>
-        </Hero>
+        </div>
       </React.Fragment>
     )
   }
