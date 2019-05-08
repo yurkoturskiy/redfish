@@ -28,17 +28,18 @@ var ghost;
 //////////////////////////////
 
 function DraggableMasonryLayout(props) {
-  // General
-  const [items, setItems] = useState(() =>
+  const generateItems = () => (
     props.children.map((child, index) => {
-      console.log("init item");
+      console.log("init item")
       return {
         index: index,
         id: child.key,
         order: index
-      };
+      }
     })
-  );
+  )
+  // General
+  const [items, setItems] = useState(() => generateItems());
   const [overItem, setOverItem] = useState(undefined);
   const [cursorPosX, setCursorPosX] = useState(undefined);
   const [cursorPosY, setCursorPosY] = useState(undefined);
@@ -51,6 +52,8 @@ function DraggableMasonryLayout(props) {
   const [dragItem, setDragItem] = useState();
   const [preventClick, setPreventClick] = useState();
   const [dragPoint, setDragPoint] = useState({ x: 0, y: 0 });
+
+
 
   /////////////////////
   /* Events' methods */
