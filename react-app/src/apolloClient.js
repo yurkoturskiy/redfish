@@ -48,7 +48,7 @@ const apolloClient = new ApolloClient({
   cache,
   resolvers: {
     Mutation: {
-      switchNotesSelector: (_, { id, isSelected }, { cache }) => {
+      switchNotesSelector: (_, { id }, { cache }) => {
         const query = gql`
           query {
             selectedNotes @client
@@ -56,7 +56,7 @@ const apolloClient = new ApolloClient({
         `
         const { selectedNotes } = cache.readQuery({ query })
         var data
-        if (isSelected) {
+        if (selectedNotes.indexOf(id) === -1) {
           // Select. Add note's ID to the global state
           selectedNotes.push(id)
           data = { selectedNotes }

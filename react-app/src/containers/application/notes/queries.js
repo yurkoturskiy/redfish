@@ -94,3 +94,9 @@ export const UPDATE_NOTES_COLOR = gql`
     }
   }
 `
+
+export const SELECTED_NOTES = gql`
+  query { 
+    selectedNotes @client
+  }
+`

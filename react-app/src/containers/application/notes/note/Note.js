@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria'
+import gql from 'graphql-tag'
 // Components
 import Selector from './Selector'
 import OptionsContainer from './OptionsContainer'
 import DialogWindow from './DialogWindow'
 // queries
-import { ALL_NOTES, SWITCH_NOTES_SELECTOR, DELETE_NOTES } from "./../queries"
+import { ALL_NOTES, SWITCH_NOTES_SELECTOR, DELETE_NOTES, SELECTED_NOTES } from "./../queries"
 // styled components
 import { CheckmarkContainerStyledDiv } from './Selector'
 import { OptionsContainerStyledDiv } from './OptionsContainer'
@@ -74,11 +75,8 @@ export const content = css`
 
 
 function Note(props) {
-  const [isSelected, setIsSelected] = useState(false)
   const [inEdit, setInEdit] = useState(false);
-  const handleSelection = () => {
-    setIsSelected(!isSelected)
-  }
+
   return (
     <DialogWindow 
       inEdit={inEdit} 
@@ -90,19 +88,15 @@ function Note(props) {
         className={container}
         style={{
           '--container-background-color': `#${props.node.color.value}`,
-          '--container-box-shadow': `inset 0 0 0 ${isSelected ? 2 : 0}pt #3E3E3E, 0 0 0 1px #E3E3E3`,
-          '--container-box-shadow-hover': `inset 0 0 0 ${isSelected ? 2 : 0}pt #3E3E3E, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)`,
+          '--container-box-shadow': `inset 0 0 0 ${props.isSelected ? 2 : 0}pt #3E3E3E, 0 0 0 1px #E3E3E3`,
+          '--container-box-shadow-hover': `inset 0 0 0 ${props.isSelected ? 2 : 0}pt #3E3E3E, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)`,
           '--opacity': inEdit ? 0 : 1
         }}
         id={props.node.id}
       > 
         <Selector 
-          handleSelection={handleSelection}
-          isSelected={isSelected} 
-          variables={{
-            id: props.node.id,
-            isSelected: !props.isSelected
-          }}
+          isSelected={props.isSelected}
+          id={props.node.id}
         />
         <div onClick={() => setInEdit(true)}>
           {props.node.title && <h3 className={title} >{props.node.title}</h3>}

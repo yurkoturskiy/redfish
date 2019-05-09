@@ -10,8 +10,7 @@ function Selector(props) {
   return (
     <Mutation 
       mutation={SWITCH_NOTES_SELECTOR} 
-      update={props.handleSelection}
-      variables={props.variables}
+      variables={{id: props.id}}
     >
       {switchNotesSelector => (
         <div className="checkmark-container" style={{

@@ -1,14 +1,14 @@
 // external
 import React, { useState, useEffect } from 'react'
-import { withApollo, Query } from "react-apollo"
+import { withApollo, Query, graphql } from "react-apollo"
 // local components
 import Note from './note/Note'
 import DraggableMasonryLayout from './DraggableMasonryLayout'
 import SelectedNotesOptionsBar from './SelectedNotesOptionsBar'
 // queries
-import { ALL_NOTES } from './queries'
+import { ALL_NOTES, SELECTED_NOTES } from './queries'
 
-function Notes() {
+function Notes(props) {
   const selectionHandler = () => {
 
   }
@@ -26,6 +26,7 @@ function Notes() {
             node={note.node} 
             number={index + 1} 
             selectionHandler={selectionHandler} 
+            isSelected={props.selectedNotes.indexOf(note.node.id) !== -1}
           />
         ))
         return (
@@ -56,4 +57,8 @@ function Notes() {
   )
 }
 
-export default withApollo(Notes)
+export default graphql(SELECTED_NOTES, {
+  props: ({ data: { selectedNotes } }) => ({
+    selectedNotes
+  })
+})(Notes)
