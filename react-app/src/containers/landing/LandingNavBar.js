@@ -1,13 +1,8 @@
-import React from 'react'
-import { css } from 'linaria'
-import { withRouter } from 'react-router'
-import { 
-  Navbar,
-  Nav,
-  NavDropdown,
-  Button,
-} from 'react-bootstrap'
-import icon from '../../static/icon.svg'
+import React from "react";
+import { css } from "linaria";
+import { withRouter } from "react-router";
+import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
+import icon from "../../static/icon.svg";
 
 const navigation = css`
   position: absolute;
@@ -32,33 +27,40 @@ const navigation = css`
   }
 
   li:hover {
-    background-color: #f0f0f0
+    background-color: #f0f0f0;
   }
-`
+`;
 
 function NavBar(props) {
   return (
     <nav className={navigation}>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand onClick={() => props.history.push('/')}>
-          <img src={icon} style={{ 
-            width: '38px',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
-            borderRadius: '4px'
-          }}/>
+        <Navbar.Brand onClick={() => props.history.push("/")}>
+          <img
+            src={icon}
+            style={{
+              width: "38px",
+              boxShadow:
+                "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+              borderRadius: "4px"
+            }}
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
           <Nav>
             <Nav.Link>
-              <Button variant="link" onClick={() => props.history.push('/login')}>
+              <Button
+                variant="link"
+                onClick={() => props.history.push("/login")}
+              >
                 Login
               </Button>
             </Nav.Link>
             <Nav.Link>
-              <Button 
-                variant="outline-primary" 
-                onClick={() => props.history.push('/registration')}
+              <Button
+                variant="outline-primary"
+                onClick={() => props.history.push("/registration")}
               >
                 Sign Up
               </Button>
@@ -67,7 +69,7 @@ function NavBar(props) {
         </Navbar.Collapse>
       </Navbar>
     </nav>
-  )
+  );
 }
 
-export default withRouter(NavBar)
+export default withRouter(NavBar);

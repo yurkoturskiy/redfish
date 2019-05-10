@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { css } from 'linaria'
-import PropTypes from 'prop-types'
-import { CSSTransition } from 'react-transition-group'
+import React, { useState } from "react";
+import { css } from "linaria";
+import PropTypes from "prop-types";
+import { CSSTransition } from "react-transition-group";
 
 const wrapper = css`
   .dialog-enter {
@@ -21,7 +21,7 @@ const wrapper = css`
     transform: scale(0.9);
     transition: opacity 300ms, transform 300ms;
   }
-`
+`;
 
 const dialogWindow = css`
   position: fixed;
@@ -33,8 +33,8 @@ const dialogWindow = css`
   width: 800px;
   background-color: white;
   border-radius: 6px;
-  box-shadow: 0px 3px 26px 0px rgba(0,0,0,0.3);
-`
+  box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
+`;
 const background = css`
   position: fixed;
   top: 0;
@@ -43,7 +43,7 @@ const background = css`
   width: 100%;
   height: 100%;
   z-index: 3;
-`
+`;
 
 function DialogWindow(props) {
   return (
@@ -59,7 +59,9 @@ function DialogWindow(props) {
           <p>{props.node.content}</p>
         </div>
       </CSSTransition>
-      {props.inEdit && <div className={background} onClick={() => props.setInEdit(false)} />}
+      {props.inEdit && (
+        <div className={background} onClick={() => props.setInEdit(false)} />
+      )}
       {props.children}
     </div>
   );
@@ -68,7 +70,7 @@ function DialogWindow(props) {
 DialogWindow.propTypes = {
   inEdit: PropTypes.bool,
   setInEdit: PropTypes.func,
-  node: PropTypes.object,
-}
+  node: PropTypes.object
+};
 
-export default DialogWindow
+export default DialogWindow;

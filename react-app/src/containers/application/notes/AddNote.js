@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { css } from 'linaria'
+import React, { useState, useRef, useEffect } from "react";
+import { css } from "linaria";
 import { Mutation } from "react-apollo";
 // queries
-import { ALL_NOTES, ADD_NOTE } from './queries'
+import { ALL_NOTES, ADD_NOTE } from "./queries";
 
 export const wrapper = css`
   position: var(--add-note-wrapper-position);
@@ -17,9 +17,9 @@ export const wrapper = css`
   padding: 0px;
 
   &:hover {
-    box-shadow: 0px 3px 26px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
   }
-`
+`;
 
 export const background = css`
   position: fixed;
@@ -29,7 +29,7 @@ export const background = css`
   width: 100vw;
   height: 100vh;
   z-index: 1;
-`
+`;
 
 export const titleLabel = css`
   position: absolute;
@@ -40,7 +40,7 @@ export const titleLabel = css`
   font-size: 16px;
   height: 56px;
   pointer-events: none;
-`
+`;
 
 export const titleInput = css`
   display: var(--add-note-title-input-display);
@@ -52,7 +52,7 @@ export const titleInput = css`
   height: 56px;
   resize: none;
   width: 500px;
-`
+`;
 
 export const contentLabel = css`
   position: absolute;
@@ -61,7 +61,7 @@ export const contentLabel = css`
   font-size: 16px;
   height: 56px;
   pointer-events: none;
-`
+`;
 
 export const contentInput = css`
   vertical-align: top;
@@ -72,89 +72,110 @@ export const contentInput = css`
   font-size: 16px;
   resize: none;
   height: 56px;
-`
+`;
 
 export const submitButton = css`
   display: var(--add-note-submit-button-display);
-`
+`;
 
-const updateCache = (cache, { data: { addNote: { newNote } } }) => {
-  const cacheData = cache.readQuery({ query: ALL_NOTES })
+const updateCache = (
+  cache,
+  {
+    data: {
+      addNote: { newNote }
+    }
+  }
+) => {
+  const cacheData = cache.readQuery({ query: ALL_NOTES });
   // remember cursors
-  var allCursors = []
+  var allCursors = [];
   cacheData.allNotes.edges.forEach(edge => {
-    allCursors.push(edge.cursor)
-  })
+    allCursors.push(edge.cursor);
+  });
   // new edge prototype
   var newEdge = {
     cursor: undefined, // setup in the reset cursors section
     node: newNote,
     __typename: "NoteNodeEdge"
-  }
-  // include new edge as first item 
+  };
+  // include new edge as first item
   // and exclude the last one without the cursor
-  cacheData.allNotes.edges.unshift(newEdge)
-  cacheData.allNotes.edges.pop()
+  cacheData.allNotes.edges.unshift(newEdge);
+  cacheData.allNotes.edges.pop();
   // reset cursors
-  cacheData.allNotes.edges.forEach((edge, index) =>  {
-    edge.cursor = allCursors[index]
-  })
-  cache.writeQuery({ query: ALL_NOTES, data: cacheData })
-}
+  cacheData.allNotes.edges.forEach((edge, index) => {
+    edge.cursor = allCursors[index];
+  });
+  cache.writeQuery({ query: ALL_NOTES, data: cacheData });
+};
 
 function AddNote() {
   let input;
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
-  const [isActive, setIsActive] = useState(false)
-  const contentInputRef = useRef()
-  const titleInputRef = useRef()
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [isActive, setIsActive] = useState(false);
+  const contentInputRef = useRef();
+  const titleInputRef = useRef();
   const reset = () => {
-    setTitle("")
-    setContent("")
-    titleInputRef.current.style.height = '56px';
-    contentInputRef.current.style.height = '56px';
-  }
-  const onTitleChange = (event) => {
-    var outerHeight = parseInt(window.getComputedStyle(titleInputRef.current).height, 10)
-    var diff = outerHeight - titleInputRef.current.clientHeight
+    setTitle("");
+    setContent("");
+    titleInputRef.current.style.height = "56px";
+    contentInputRef.current.style.height = "56px";
+  };
+  const onTitleChange = event => {
+    var outerHeight = parseInt(
+      window.getComputedStyle(titleInputRef.current).height,
+      10
+    );
+    var diff = outerHeight - titleInputRef.current.clientHeight;
     titleInputRef.current.style.height = 0;
-    titleInputRef.current.style.height = Math.max(56, titleInputRef.current.scrollHeight + diff) + 'px';
-    setTitle(event.target.value)
-  }
-  const onContentChange = (event) => {
-    var outerHeight = parseInt(window.getComputedStyle(contentInputRef.current).height, 10)
-    var diff = outerHeight - contentInputRef.current.clientHeight
+    titleInputRef.current.style.height =
+      Math.max(56, titleInputRef.current.scrollHeight + diff) + "px";
+    setTitle(event.target.value);
+  };
+  const onContentChange = event => {
+    var outerHeight = parseInt(
+      window.getComputedStyle(contentInputRef.current).height,
+      10
+    );
+    var diff = outerHeight - contentInputRef.current.clientHeight;
     contentInputRef.current.style.height = 0;
-    contentInputRef.current.style.height = Math.max(56, contentInputRef.current.scrollHeight + diff) + 'px';
-    setContent(event.target.value) 
-  }
+    contentInputRef.current.style.height =
+      Math.max(56, contentInputRef.current.scrollHeight + diff) + "px";
+    setContent(event.target.value);
+  };
   return (
     <Mutation mutation={ADD_NOTE} update={updateCache}>
       {(addNote, { data }) => (
         <React.Fragment>
-          <div 
+          <div
             className={wrapper}
             style={{
-              '--add-note-wrapper-position': isActive ? 'fixed' : 'absolute',
-              '--add-note-wrapper-top': isActive ? '20vh' : '20px',
-              '--add-note-wrapper-box-shadow': isActive ? '0px 3px 26px 0px rgba(0,0,0,0.3)' : '0px 1px 1px 0px rgba(0,0,0,0.2)'
+              "--add-note-wrapper-position": isActive ? "fixed" : "absolute",
+              "--add-note-wrapper-top": isActive ? "20vh" : "20px",
+              "--add-note-wrapper-box-shadow": isActive
+                ? "0px 3px 26px 0px rgba(0,0,0,0.3)"
+                : "0px 1px 1px 0px rgba(0,0,0,0.2)"
             }}
-            onClick={() => setIsActive(true)} 
+            onClick={() => setIsActive(true)}
           >
             <form
               onSubmit={async e => {
-                e.preventDefault()
-                await addNote({ variables: { title: title, content: content } })
-                setIsActive(false)
-                reset()
+                e.preventDefault();
+                await addNote({
+                  variables: { title: title, content: content }
+                });
+                setIsActive(false);
+                reset();
               }}
             >
-              {isActive && <label className={titleLabel}>{title === "" && 'Title'}</label>}
+              {isActive && (
+                <label className={titleLabel}>{title === "" && "Title"}</label>
+              )}
               <textarea
                 className={titleInput}
                 style={{
-                  '--add-note-title-input-display': isActive ? 'block' : 'none',
+                  "--add-note-title-input-display": isActive ? "block" : "none"
                 }}
                 id="title"
                 value={title}
@@ -163,7 +184,9 @@ function AddNote() {
                 isActive={isActive}
                 ref={titleInputRef}
               />
-              <label className={contentLabel}>{content === "" && 'Take a note...'}</label>
+              <label className={contentLabel}>
+                {content === "" && "Take a note..."}
+              </label>
               <textarea
                 className={contentInput}
                 data-adaptheight
@@ -174,22 +197,26 @@ function AddNote() {
                 isActive={isActive}
                 ref={contentInputRef}
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className={submitButton}
                 style={{
-                  '--add-note-submit-button-display': isActive ? 'block' : 'none'
+                  "--add-note-submit-button-display": isActive
+                    ? "block"
+                    : "none"
                 }}
               >
                 Add Nodo
               </button>
             </form>
           </div>
-          { isActive && <div className={background} onClick={() => setIsActive(false)} /> }
+          {isActive && (
+            <div className={background} onClick={() => setIsActive(false)} />
+          )}
         </React.Fragment>
       )}
     </Mutation>
   );
 }
 
-export default AddNote
+export default AddNote;

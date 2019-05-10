@@ -1,30 +1,32 @@
-import React from 'react';
-import { Form, Field } from 'formik';
-import FormikMaterialTextField from '../FormikMaterialTextField'
-import FormWrapper from '../FormWrapper'
-import Button from '@material/react-button';
+import React from "react";
+import { Form, Field } from "formik";
+import FormikMaterialTextField from "../FormikMaterialTextField";
+import FormWrapper from "../FormWrapper";
+import Button from "@material/react-button";
 import { Link } from "react-router-dom";
-import { endpoints } from '../../AutoRouter'
+import { endpoints } from "../../AutoRouter";
 
 const theme = {
-  background: '#f0f0f0',
-}
+  background: "#f0f0f0"
+};
 
 class LoginForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      passwordVisibilityCondition: false,
-    }
-    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this)
+      passwordVisibilityCondition: false
+    };
+    this.switchPasswordVisibility = this.switchPasswordVisibility.bind(this);
   }
   switchPasswordVisibility() {
     this.setState({
-      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
-    })
+      passwordVisibilityCondition: this.state.passwordVisibilityCondition
+        ? false
+        : true
+    });
   }
   render() {
-    const {status, touched, isSubmitting, errors} = this.props
+    const { status, touched, isSubmitting, errors } = this.props;
     return (
       <FormWrapper theme={theme}>
         <Form>
@@ -36,14 +38,18 @@ class LoginForm extends React.Component {
             type="username"
             component={FormikMaterialTextField}
           />
-          <Field 
-            id="password" 
+          <Field
+            id="password"
             label="password"
             name="password"
-            type={this.state.passwordVisibilityCondition ? 'text' : 'password'} 
-            tralingIcon={this.state.passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
+            type={this.state.passwordVisibilityCondition ? "text" : "password"}
+            tralingIcon={
+              this.state.passwordVisibilityCondition
+                ? "visibility"
+                : "visibility_off"
+            }
             tralingIconOnClick={this.switchPasswordVisibility}
-            component={FormikMaterialTextField}       
+            component={FormikMaterialTextField}
           />
           <Button type="submit" className="form-button" disabled={isSubmitting}>
             Submit
@@ -52,8 +58,8 @@ class LoginForm extends React.Component {
           <Link to={endpoints.passwordReset}>Forgot password?</Link>
         </Form>
       </FormWrapper>
-    )
+    );
   }
 }
 
-export default LoginForm
+export default LoginForm;

@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 // local components
-import Notes from './Notes'
-import AddNote from './AddNote'
+import Notes from "./Notes";
+import AddNote from "./AddNote";
 
 function NotesContainer() {
-  return (
-    <React.Fragment>
-      <AddNote/>
-      <Notes/>
-    </React.Fragment>
-  )
+	return (
+		<React.Fragment>
+			<AddNote />
+			<Notes />
+		</React.Fragment>
+	);
 }
 
-export default NotesContainer
+export default NotesContainer;

@@ -1,22 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
-
+import React from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router";
 
 function ProfileBtn(props) {
   const redirect = () => {
-    if (props.history.location.pathname !== '/profile') {
-      props.history.push('/profile')
+    if (props.history.location.pathname !== "/profile") {
+      props.history.push("/profile");
     }
-    props.handleMenuClick()
-  }
-  return (
-    <div onClick={redirect}>Profile</div>
-  )
+    props.handleMenuClick();
+  };
+  return <div onClick={redirect}>Profile</div>;
 }
 
 ProfileBtn.propTypes = {
-  handleMenuClick: PropTypes.func,
-}
+  handleMenuClick: PropTypes.func
+};
 
-export default withRouter(ProfileBtn)
+export default withRouter(ProfileBtn);

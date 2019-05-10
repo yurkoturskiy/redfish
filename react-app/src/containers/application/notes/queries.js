@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from "graphql-tag";
 
 export const ALL_NOTES = gql`
   query AllNotes($amount: Int = 20, $cursor: String) {
@@ -26,7 +26,7 @@ export const ALL_NOTES = gql`
       }
     }
   }
-`
+`;
 
 export const ADD_NOTE = gql`
   mutation AddNote($title: String, $content: String) {
@@ -49,11 +49,11 @@ export const ADD_NOTE = gql`
       }
     }
   }
-`
+`;
 
 export const DELETE_NOTES = gql`
   mutation DeleteNotes($ids: [ID]!) {
-    deleteNotes(input: {ids: $ids}) {
+    deleteNotes(input: { ids: $ids }) {
       deletedNotes {
         id
         title
@@ -61,13 +61,13 @@ export const DELETE_NOTES = gql`
       }
     }
   }
-`
+`;
 
 export const SWITCH_NOTES_SELECTOR = gql`
   mutation switchNotesSelector($id: ID!, $isSelected: Boolean!) {
     switchNotesSelector(id: $id, isSelected: $isSelected) @client
   }
-`
+`;
 
 export const ALL_COLORS = gql`
   query {
@@ -81,11 +81,11 @@ export const ALL_COLORS = gql`
       }
     }
   }
-`
+`;
 
 export const UPDATE_NOTES_COLOR = gql`
   mutation updateNotesColor($id: ID!, $newColor: String!) {
-    updateNotesColor(input: {id: $id, newColor: $newColor}) {
+    updateNotesColor(input: { id: $id, newColor: $newColor }) {
       newColor {
         id
         label
@@ -93,10 +93,10 @@ export const UPDATE_NOTES_COLOR = gql`
       }
     }
   }
-`
+`;
 
 export const SELECTED_NOTES = gql`
-  query { 
+  query {
     selectedNotes @client
   }
-`
+`;

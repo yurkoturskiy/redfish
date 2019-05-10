@@ -1,8 +1,8 @@
-import React from "react"
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
 let ProfileForm = props => {
-  const { user } = props
+  const { user } = props;
   return (
     <div>
       <p>{user.pk}</p>
@@ -11,11 +11,11 @@ let ProfileForm = props => {
       <p>{user.first_name}</p>
       <p>{user.last_name}</p>
     </div>
-  )
-}
+  );
+};
 
 ProfileForm.propTypes = {
   user: PropTypes.object
-}
+};
 
-export default ProfileForm
+export default ProfileForm;

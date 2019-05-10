@@ -1,5 +1,5 @@
-import React from "react"
-import TextField, {HelperText, Input, Icon} from '@material/react-text-field';
+import React from "react";
+import TextField, { HelperText, Input, Icon } from "@material/react-text-field";
 
 export const FormikMaterialTextField = ({
   field, // { name, value, onChange, onBlur }
@@ -14,44 +14,39 @@ export const FormikMaterialTextField = ({
   ...props
 }) => {
   const helperTextTag = (
-    <HelperText persistent='true' validation isValidationMessage>
-      {
-        (touched[field.name] && 
-          ((errors[field.name] && errors[field.name]) || (warning && warning))
-        ) || helperText
-      }
+    <HelperText persistent="true" validation isValidationMessage>
+      {(touched[field.name] &&
+        ((errors[field.name] && errors[field.name]) || (warning && warning))) ||
+        helperText}
     </HelperText>
-  )
+  );
   const tralingIconTag = (
     <Icon onSelect={tralingIconOnClick}>
-      <i 
-        className='material-icons' 
-        tabIndex="1" 
-        role="button"
-      >
+      <i className="material-icons" tabIndex="1" role="button">
         {tralingIcon}
       </i>
     </Icon>
-  )
+  );
   return (
     <div>
       <TextField
         label={label}
-        {...field} {...props}
-        className='input-container'
+        {...field}
+        {...props}
+        className="input-container"
         outlined={false}
         helperText={helperTextTag}
         trailingIcon={tralingIconTag}
       >
-        <Input 
+        <Input
           isValid={!errors[field.name]}
-          type={type} 
-          {...field} 
-          {...props} 
+          type={type}
+          {...field}
+          {...props}
         />
       </TextField>
     </div>
-  )
-}
+  );
+};
 
-export default FormikMaterialTextField
+export default FormikMaterialTextField;

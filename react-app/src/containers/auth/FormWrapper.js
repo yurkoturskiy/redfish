@@ -1,5 +1,4 @@
-import { styled } from 'linaria/react'
-
+import { styled } from "linaria/react";
 
 const FormWrapper = styled.div`
   height: 100vh;
@@ -59,6 +58,6 @@ const FormWrapper = styled.div`
   .form-button {
     float: right;
   }
-`
+`;
 
-export default FormWrapper
+export default FormWrapper;
