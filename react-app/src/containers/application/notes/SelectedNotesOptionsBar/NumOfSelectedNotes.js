@@ -3,7 +3,7 @@ import { css } from "linaria";
 
 const paragraph = css`
   display: inline-block;
-  padding: 12px 12px 12px 12px;
+  line-height: 64px;
 `;
 
 function NumOfSelectedNotes(props) {

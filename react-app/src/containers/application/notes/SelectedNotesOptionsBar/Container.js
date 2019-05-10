@@ -9,12 +9,12 @@ import NumOfSelectedNotes from "./NumOfSelectedNotes";
 const barWrapper = css`
   position: fixed;
   top: 0;
-  left: 50%;
+  left: 0;
   z-index: 4;
-  width: 500px;
-  height: 48px;
-  margin-left: -250px;
-  background-color: lightgrey;
+  width: 100%;
+  height: 64px;
+  background-color: white;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
 `;
 
 function SelectedNotesOptionsBar(props) {

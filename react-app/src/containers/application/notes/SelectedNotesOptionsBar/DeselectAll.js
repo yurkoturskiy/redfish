@@ -5,8 +5,10 @@ import { css } from "linaria";
 const deselectAll = css`
   display: inline-block;
   font-size: 16px;
+  width: 64px;
+  text-align: center;
+  line-height: 64px;
   color: red;
-  padding: 12px;
 `;
 
 function DeselectAll(props) {
