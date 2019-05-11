@@ -5,6 +5,7 @@ import { withApollo, Query, graphql } from "react-apollo";
 import Note from "./note/Note";
 import DraggableMasonryLayout from "./DraggableMasonryLayout";
 import SelectedNotesOptionsBar from "./SelectedNotesOptionsBar/Container";
+import Topics from "./topics/Container";
 // queries
 import { ALL_NOTES, SELECTED_NOTES } from "./queries";
 
@@ -56,6 +57,7 @@ function Notes(props) {
             >
               {cards}
             </DraggableMasonryLayout>
+            <Topics />
           </React.Fragment>
         );
       }}
