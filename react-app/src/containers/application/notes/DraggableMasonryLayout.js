@@ -28,28 +28,6 @@ var ghost;
 //////////////////////////////
 
 function DraggableMasonryLayout(props) {
-  const generateItems = () =>
-    React.Children.map(props.children, (child, index) => {
-      console.log("init item");
-      return {
-        index: index,
-        id: child.key,
-        order: index,
-        element: React.cloneElement(child, {
-          draggableItem: {
-            onMouseDown: e => onMouseDown(e, index),
-            onMouseEnter: e => onMouseEnterItem(e, index),
-            onDragEnd: e => onDragEnd(e, index),
-            onTouchStart: onTouchStart,
-            onTouchMove: onTouchMove,
-            onTouchEnd: onTouchEnd,
-            onClick: onClickEvent
-          }
-        })
-      };
-    });
-  // General
-  const [items, setItems] = useState(() => generateItems());
   const [overItemIndex, setOverItemIndex] = useState(undefined);
   const [cursorPosX, setCursorPosX] = useState(undefined);
   const [cursorPosY, setCursorPosY] = useState(undefined);
@@ -71,14 +49,14 @@ function DraggableMasonryLayout(props) {
     // Return object with required id from items array
     let indexOfItem;
     for (var i = 0, len = props.children.length; i < len; i++) {
-      if (items[i].id === id) {
+      if (layout.items[i].id === id) {
         indexOfItem = i;
         break;
       }
     }
     // not support IE8
     // let indexOfItem = items.findIndex(item => item.id === id);
-    return items[indexOfItem];
+    return layout.items[indexOfItem];
   };
 
   const initDrag = (cursor, itemIndex) => {
@@ -88,20 +66,23 @@ function DraggableMasonryLayout(props) {
       item: {id, content, order} // Objects from items array
     */
     let dragElementWrapper = document.getElementById(
-      `${items[itemIndex].id}-wrapper`
+      `${layout.items[itemIndex].id}-wrapper`
     );
     setDragPoint({
       x: cursor.x - dragElementWrapper.offsetLeft,
       y: cursor.y - dragElementWrapper.offsetTop
     });
     setDragItemIndex(itemIndex);
-    ghost = React.cloneElement(items[itemIndex].element);
+    ghost = React.cloneElement(layout.items[itemIndex].element, {
+      style: { visibility: "visible" }
+    });
+    console.log("ghost props", ghost.props);
   };
 
   useEffect(() => {
     var newItems;
     var newOrder = [];
-    setItems(() => {
+    setLayout(layout => {
       if (
         dragItemIndex &&
         overItemIndex &&
@@ -109,42 +90,48 @@ function DraggableMasonryLayout(props) {
         !isRearranges
       ) {
         console.log("rearrange");
-        items.forEach((item, index) => {
+        layout.items.forEach((item, index) => {
           newOrder[index] = item.order; // Item is out of range. Keep same order
           // Override for items need to be changed
-          if (items[dragItemIndex].order < items[overItemIndex].order) {
+          if (
+            layout.items[dragItemIndex].order <
+            layout.items[overItemIndex].order
+          ) {
             // Drag toward the end
             if (
-              item.order > items[dragItemIndex].order &&
-              item.order <= items[overItemIndex].order
+              item.order > layout.items[dragItemIndex].order &&
+              item.order <= layout.items[overItemIndex].order
             )
               // Inbetween notes. Replace on one to the start
               newOrder[index] = item.order - 1;
-            if (item.order === items[dragItemIndex].order)
+            if (item.order === layout.items[dragItemIndex].order)
               // Assign new order to the draggable
-              newOrder[index] = items[overItemIndex].order;
+              newOrder[index] = layout.items[overItemIndex].order;
           }
-          if (items[dragItemIndex].order > items[overItemIndex].order) {
+          if (
+            layout.items[dragItemIndex].order >
+            layout.items[overItemIndex].order
+          ) {
             // Drag toward the start
             if (
-              item.order < items[dragItemIndex].order &&
-              item.order >= items[overItemIndex].order
+              item.order < layout.items[dragItemIndex].order &&
+              item.order >= layout.items[overItemIndex].order
             )
               // Inbetween notes. Replace on one to the end
               newOrder[index] = item.order + 1;
-            if (item.order === items[dragItemIndex].order)
+            if (item.order === layout.items[dragItemIndex].order)
               // Assign new order to the draggable
-              newOrder[index] = items[overItemIndex].order;
+              newOrder[index] = layout.items[overItemIndex].order;
           }
         });
-        newItems = items.map((item, index) => {
+        newItems = layout.items.map((item, index) => {
           item.order = newOrder[index];
           return item;
         });
         setIsRearranges(true);
-        return newItems;
+        return { ...layout, items: newItems };
       }
-      return items;
+      return layout;
     });
   }, [overItemIndex]);
 
@@ -281,31 +268,74 @@ function DraggableMasonryLayout(props) {
   ////////////////////
   /* Masonry Layout */
   ////////////////////
-  const cloneChildren = () =>
-    React.Children.map(props.children, (child, index) =>
-      // Change eash child
-      React.cloneElement(child, {
-        draggableItem: {
-          // draggable: "true",
-          onMouseDown: e => onMouseDown(e, items[index]),
-          onMouseEnter: e => onMouseEnterItem(e, items[index]),
-          // onDragOver: e => onDragOverItem(e, items[index]),
-          onDragEnd: e => onDragEnd(e, items[index]),
-          onTouchStart: onTouchStart,
-          onTouchMove: onTouchMove,
-          onTouchEnd: onTouchEnd,
-          onClick: onClickEvent
-        }
-      })
+  const generateItem = (
+    index,
+    child,
+    id,
+    order,
+    pos,
+    size,
+    offset,
+    transition
+  ) => {
+    let cloneChild = React.cloneElement(child, {
+      draggableItem: {
+        onMouseDown: e => onMouseDown(e, index),
+        onMouseEnter: e => onMouseEnterItem(e, index),
+        onDragEnd: e => onDragEnd(e, index),
+        onTouchStart: onTouchStart,
+        onTouchMove: onTouchMove,
+        onTouchEnd: onTouchEnd,
+        onClick: onClickEvent
+      }
+    });
+    let element = (
+      <div
+        className="element-bounding"
+        id={`${child.key}-wrapper`}
+        order={child.props.order}
+        style={{
+          position: "absolute",
+          margin: 0,
+          padding: 0,
+          touchAction: "none",
+          left: `${pos ? pos.x : 0}px`,
+          top: `${pos ? pos.y : 0}px`,
+          transition: `${transition ? "top 0.4s, left 0.4s" : "none"}`,
+          visibility: transition ? "visible" : "hidden",
+          opacity: dragItemIndex === index ? 0 : 1
+        }}
+        onLoad={loadHandler}
+        onError={errorHandler}
+        onTransitionEnd={() => setIsRearranges(false)}
+        onClickCapture={onClickCapture}
+      >
+        {cloneChild}
+      </div>
     );
+    return {
+      index: index,
+      id: child.key,
+      order: order ? order : index,
+      pos,
+      size,
+      offset,
+      element
+    };
+  };
 
-  const [modChildren, setModChildren] = useState(() => cloneChildren());
-  const [columns, setColumns] = useState(0);
-  const [transition, setTransition] = useState(false);
+  const initLayoutItems = () => {
+    return React.Children.map(props.children, (child, index) =>
+      generateItem(index, child)
+    );
+  };
+
   const [layout, setLayout] = useState({
     elements: [],
+    items: initLayoutItems(),
     width: 0,
     height: 0,
+    ghost: undefined,
     endline: {
       start: { x: undefined, y: undefined },
       end: { x: undefined, y: undefined },
@@ -316,6 +346,8 @@ function DraggableMasonryLayout(props) {
       }
     }
   });
+  const [columns, setColumns] = useState(0);
+  const [transition, setTransition] = useState(false);
   const [onErrorCount, setOnErrorCount] = useState(0);
   const [onLoadCount, setOnLoadCount] = useState(0);
 
@@ -341,8 +373,9 @@ function DraggableMasonryLayout(props) {
 
   const checkLayout = evt => {
     const wrapperWidth = masonryLayout.current.offsetWidth;
-    let cardWrapperWidth = document.getElementById(`${items[0].id}-wrapper`)
-      .offsetWidth;
+    let cardWrapperWidth = document.getElementById(
+      `${layout.items[0].id}-wrapper`
+    ).offsetWidth;
     setColumns(Math.floor(wrapperWidth / cardWrapperWidth));
     // turn on transition if window resizing
     setTransition(evt !== undefined);
@@ -397,24 +430,17 @@ function DraggableMasonryLayout(props) {
   }, [props.children.length]);
 
   useEffect(() => {
-    setItems(() => generateItems());
-    // setModChildren(() => cloneChildren())
-  }, [props.children]);
-
-  useEffect(() => {
-    setModChildren(() => cloneChildren());
-  }, [items]);
-
-  useEffect(() => {
     // set layout
-    var elements = [];
+    var layoutItems = [];
     var endline = layout.endline;
     var cardWrapperWidth;
     endline.byColumns = [];
     for (let i = 0; i < columns; i++) {
       endline.byColumns[i] = 0;
     }
-    let itemsSortedByOrder = items.concat().sort((a, b) => a.order - b.order);
+    let itemsSortedByOrder = layout.items
+      .concat()
+      .sort((a, b) => a.order - b.order);
     itemsSortedByOrder.forEach((item, index) => {
       // Calculate positions of each element
       let cardWrapperElement = document.getElementById(`${item.id}-wrapper`);
@@ -429,14 +455,16 @@ function DraggableMasonryLayout(props) {
       let cardHeight = cardElement.offsetHeight;
       let cardOffsetLeft = cardElement.offsetLeft;
       let cardOffsetTop = cardElement.offsetTop;
-      elements[item.index] = {
-        x,
-        y,
-        cardWidth,
-        cardHeight,
-        cardOffsetLeft,
-        cardOffsetTop
-      };
+      layoutItems[item.index] = generateItem(
+        item.index,
+        props.children[item.index],
+        item.id,
+        item.order,
+        { x, y },
+        { width: cardWidth, height: cardHeight },
+        { left: cardOffsetLeft, top: cardOffsetTop },
+        transition
+      );
       endline.byColumns[leastNumIndex] += height;
     });
     endline.start.x =
@@ -448,12 +476,13 @@ function DraggableMasonryLayout(props) {
       endline.byColumns.indexOf(Math.max(...endline.byColumns));
     endline.end.y = Math.max(...endline.byColumns);
     setLayout({
-      elements: elements, // list of all elements with coorditares
+      ...layout,
+      items: layoutItems, // list of all elements with coorditares
       width: cardWrapperWidth * columns, // width of the whole layout
       height: endline.end.y, // height of the whole layout
       endline: endline
     });
-  }, [columns, onLoadCount, onErrorCount, modChildren]);
+  }, [columns, onLoadCount, onErrorCount, transition]);
 
   const errorHandler = index => {
     setOnErrorCount(onErrorCount + 1);
@@ -468,34 +497,9 @@ function DraggableMasonryLayout(props) {
     console.log("click");
   };
 
-  renderChildren = React.Children.map(props.children, (child, index) => {
-    // Change eash child
-    let newComponent = (
-      <div
-        className="element-bounding"
-        id={`${child.key}-wrapper`}
-        order={child.props.order}
-        style={{
-          position: "absolute",
-          margin: 0,
-          padding: 0,
-          touchAction: "none",
-          top: `${layout.elements[index] ? layout.elements[index].y : 0}px`,
-          left: `${layout.elements[index] ? layout.elements[index].x : 0}px`,
-          transition: `${transition ? "top 0.4s, left 0.4s" : "none"}`,
-          visibility: transition ? "visible" : "hidden",
-          opacity: dragItemIndex === items[index].index ? 0 : 1
-        }}
-        onLoad={loadHandler}
-        onError={errorHandler}
-        onTransitionEnd={() => setIsRearranges(false)}
-        onClickCapture={onClickCapture}
-      >
-        {items[index].element}
-      </div>
-    );
-    return newComponent;
-  });
+  ghost && console.log("x", cursorPosX - dragPoint.x - window.scrollX);
+  const renderItems = layout.items.map(item => item.element);
+
   return (
     <div className="masonry" ref={masonryLayout}>
       <div
@@ -507,7 +511,7 @@ function DraggableMasonryLayout(props) {
         }}
         className="boundry-box"
       >
-        {renderChildren}
+        {renderItems}
         {ghost && (
           <Ghost
             x={cursorPosX - dragPoint.x - window.scrollX}
@@ -540,10 +544,10 @@ function DraggableMasonryLayout(props) {
         )}
       </div>
       <h5 style={{ position: "fixed", bottom: "70px" }}>
-        drag item: {dragItemIndex && items[dragItemIndex].id}
+        drag item: {dragItemIndex && layout.items[dragItemIndex].id}
       </h5>
       <h5 style={{ position: "fixed", bottom: "50px" }}>
-        over item: {overItemIndex && items[overItemIndex].id}
+        over item: {overItemIndex && layout.items[overItemIndex].id}
       </h5>
       <h5 style={{ position: "fixed", bottom: "30px" }}>
         is touch: {isTouch.toString()}
