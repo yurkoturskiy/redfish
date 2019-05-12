@@ -51,8 +51,9 @@ function DraggableMasonryLayout(props) {
   // General
   const [items, setItems] = useState(() => generateItems());
   const [overItemIndex, setOverItemIndex] = useState(undefined);
-  const [cursorPosX, setCursorPosX] = useState(undefined);
-  const [cursorPosY, setCursorPosY] = useState(undefined);
+  const [cursorPos, setCursorPos] = useState(undefined);
+  // const [cursorPosX, setCursorPosX] = useState(undefined);
+  // const [cursorPosY, setCursorPosY] = useState(undefined);
   const [lastRearrangedItemId, setLastRearrangedItemId] = useState();
   const [isRearranges, setIsRearranges] = useState(false);
   // Touch events
@@ -154,8 +155,7 @@ function DraggableMasonryLayout(props) {
     setDragItemIndex(undefined);
     setOverItemIndex(undefined);
     setLastRearrangedItemId(undefined);
-    setCursorPosX(undefined);
-    setCursorPosY(undefined);
+    setCursorPos(undefined);
     setDragPoint(undefined);
   };
 
@@ -169,8 +169,7 @@ function DraggableMasonryLayout(props) {
     const touchPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     const fingers = e.touches.length;
     setIsTouch(true);
-    setCursorPosX(touchPos.x);
-    setCursorPosY(touchPos.y);
+    setCursorPos({ x: touchPos.x, y: touchPos.y });
     longPress =
       fingers === 1 &&
       setTimeout(() => {
@@ -192,8 +191,7 @@ function DraggableMasonryLayout(props) {
       return dragItem;
     });
     !freshDragItem && clearTimeout(longPress);
-    setCursorPosX(e.touches[0].clientX);
-    setCursorPosY(e.touches[0].clientY);
+    setCursorPos({ x: e.touches[0].clientX, y: e.touches[0].clientY });
     let overObjectId = document.elementFromPoint(
       e.touches[0].clientX,
       e.touches[0].clientY
@@ -242,16 +240,14 @@ function DraggableMasonryLayout(props) {
       return isTouch;
     });
     freshIsTouch && e.preventDefault();
-    setCursorPosX(e.clientX);
-    setCursorPosY(e.clientY);
+    setCursorPos({ x: e.clientX, y: e.clientY });
     setPreventClick(false);
     !freshIsTouch && initDrag({ x: e.clientX, y: e.clientY }, itemIndex);
   };
 
   const onMouseEnterItem = (e, overItemIndex) => {
     setOverItemIndex(overItemIndex);
-    setCursorPosX(e.clientX);
-    setCursorPosY(e.clientY);
+    setCursorPos({ x: e.clientX, y: e.clientY });
   };
 
   const onMouseMove = e => {
@@ -263,9 +259,7 @@ function DraggableMasonryLayout(props) {
       return dragItemIndex;
     });
     setPreventClick(freshDragItem ? true : false);
-    setCursorPosX(freshDragItem ? e.clientX : cursorPosX);
-    setCursorPosY(freshDragItem ? e.clientY : cursorPosY);
-    // setCursorPos({ x: e.clientX, y: e.clientY });
+    setCursorPos(freshDragItem ? { x: e.clientX, y: e.clientY } : cursorPos);
   };
 
   const onDragEnd = () => {
@@ -510,8 +504,8 @@ function DraggableMasonryLayout(props) {
         {renderChildren}
         {ghost && (
           <Ghost
-            x={cursorPosX - dragPoint.x - window.scrollX}
-            y={cursorPosY - dragPoint.y - window.scrollY}
+            x={cursorPos.x - dragPoint.x - window.scrollX}
+            y={cursorPos.y - dragPoint.y - window.scrollY}
           >
             {ghost}
           </Ghost>
