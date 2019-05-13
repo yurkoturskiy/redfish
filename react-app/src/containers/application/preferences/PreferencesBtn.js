@@ -77,9 +77,7 @@ function PreferencesBtn(props) {
           status={status}
           ref={menuRef}
           style={{
-            "--preferences-btn-menu-display": props.status
-              ? "inline-block"
-              : "none"
+            "--preferences-btn-menu-display": status ? "inline-block" : "none"
           }}
         >
           <ProfileBtn handleMenuClick={handleMenuClick} />
