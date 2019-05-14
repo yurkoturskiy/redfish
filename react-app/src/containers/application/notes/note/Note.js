@@ -27,6 +27,26 @@ export const container = css`
   transition: box-shadow 0.2s;
   opacity: var(--opacity);
 
+  @media (max-width: 767px) {
+    /* Extra small */
+    width: 160px;
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    /* Small */
+    width: 256px;
+  }
+
+  @media (min-width: 991px) and (max-width: 1199px) {
+    /* Medium */
+    width: 256px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large */
+    width: 256px;
+  }
+
   &:hover {
     box-shadow: var(--container-box-shadow-hover);
   }
