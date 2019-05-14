@@ -6,6 +6,7 @@ import gql from "graphql-tag";
 import Selector from "./Selector";
 import OptionsContainer from "./OptionsContainer";
 import DialogWindow from "./DialogWindow";
+import Pin from "./Pin";
 // queries
 import {
   ALL_NOTES,
@@ -13,9 +14,6 @@ import {
   DELETE_NOTES,
   SELECTED_NOTES
 } from "./../queries";
-// styled components
-import { CheckmarkContainerStyledDiv } from "./Selector";
-import { OptionsContainerStyledDiv } from "./OptionsContainer";
 
 export const container = css`
   width: 256px;
@@ -49,6 +47,20 @@ export const container = css`
 
   &:hover {
     box-shadow: var(--container-box-shadow-hover);
+  }
+
+  .pin {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    height: 24px;
+    width: 24px;
+    background-color: pink;
+    opacity: 0;
+  }
+
+  &:hover .pin {
+    opacity: 100;
   }
 
   .options {
@@ -119,6 +131,7 @@ function Note(props) {
         id={props.node.id}
       >
         <Selector isSelected={props.isSelected} id={props.node.id} />
+        <Pin />
         <div onClick={() => setInEdit(true)}>
           {props.node.title && <h3 className={title}>{props.node.title}</h3>}
           {props.node.content && (
