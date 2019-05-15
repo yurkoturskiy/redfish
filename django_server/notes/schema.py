@@ -54,6 +54,7 @@ class ColorNode(DjangoObjectType):
 class Query(object):
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
+    pinned_notes = DjangoFilterConnectionField(NoteNode)
     profile = DjangoFilterConnectionField(UserNode)
     all_colors = DjangoFilterConnectionField(ColorNode)
 

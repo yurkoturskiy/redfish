@@ -19,7 +19,16 @@ function Notes(props) {
           console.log(error);
           return <p>Error :(</p>;
         }
-        const cards = data.allNotes.edges.map((note, index) => (
+        const pinnedNotes = data.pinnedNotes.edges.map((note, index) => (
+          <Note
+            key={note.node.id}
+            node={note.node}
+            number={index + 1}
+            selectionHandler={selectionHandler}
+            isSelected={props.selectedNotes.indexOf(note.node.id) !== -1}
+          />
+        ));
+        const notPinnedNotes = data.allNotes.edges.map((note, index) => (
           <Note
             key={note.node.id}
             node={note.node}
@@ -33,6 +42,9 @@ function Notes(props) {
             {props.selectedNotes.length > 0 && (
               <SelectedNotesOptionsBar selectedNotes={props.selectedNotes} />
             )}
+            <h1>pinned</h1>
+            <DraggableMasonryLayout>{pinnedNotes}</DraggableMasonryLayout>
+            <h1>not pinned</h1>
             <DraggableMasonryLayout
               onEndlineEnter={() => {
                 if (data.allNotes.pageInfo.hasNextPage) {
@@ -55,7 +67,7 @@ function Notes(props) {
                 }
               }}
             >
-              {cards}
+              {notPinnedNotes}
             </DraggableMasonryLayout>
             <Topics />
           </React.Fragment>

@@ -2,7 +2,25 @@ import gql from "graphql-tag";
 
 export const ALL_NOTES = gql`
   query AllNotes($amount: Int = 20, $cursor: String) {
-    allNotes(first: $amount, after: $cursor) {
+    pinnedNotes(pinned: true) {
+      edges {
+        cursor
+        node {
+          id
+          title
+          content
+          created
+          edited
+          order
+          color {
+            id
+            label
+            value
+          }
+        }
+      }
+    }
+    allNotes(first: $amount, after: $cursor, pinned: false) {
       pageInfo {
         endCursor
         hasNextPage
@@ -13,7 +31,6 @@ export const ALL_NOTES = gql`
           id
           title
           content
-          pinned
           created
           edited
           order
