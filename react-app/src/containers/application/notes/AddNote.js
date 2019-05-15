@@ -181,7 +181,6 @@ function AddNote() {
                 value={title}
                 type="text"
                 onChange={e => onTitleChange(e)}
-                isActive={isActive}
                 ref={titleInputRef}
               />
               <label className={contentLabel}>
@@ -194,7 +193,6 @@ function AddNote() {
                 value={content}
                 type="text"
                 onChange={e => onContentChange(e)}
-                isActive={isActive}
                 ref={contentInputRef}
               />
               <button

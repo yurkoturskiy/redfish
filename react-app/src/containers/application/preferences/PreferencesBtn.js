@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import { withRouter } from "react-router";
 import { css } from "linaria";
 import icon from "../../../static/icon.svg";
 import Fab from "@material/react-fab";
@@ -74,7 +73,6 @@ function PreferencesBtn(props) {
         </div>
         <div
           className={menu}
-          status={status}
           ref={menuRef}
           style={{
             "--preferences-btn-menu-display": status ? "inline-block" : "none"
@@ -88,4 +86,4 @@ function PreferencesBtn(props) {
   );
 }
 
-export default withRouter(PreferencesBtn);
+export default PreferencesBtn;

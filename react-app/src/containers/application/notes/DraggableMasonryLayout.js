@@ -497,6 +497,7 @@ function DraggableMasonryLayout(props) {
       <div
         className="element-bounding"
         id={`${item.id}-wrapper`}
+        key={`${item.id}-wrapper`}
         style={{
           position: "absolute",
           margin: 0,

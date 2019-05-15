@@ -20,7 +20,7 @@ function Logo(props) {
   };
   return (
     <React.Fragment>
-      <img className={logo} src={icon} onClick={redirect} />
+      <img className={logo} src={icon} onClick={() => redirect()} />
     </React.Fragment>
   );
 }
