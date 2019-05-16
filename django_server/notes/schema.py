@@ -152,9 +152,36 @@ class DeleteNotes(relay.ClientIDMutation):
         return DeleteNotes(snapshot)
 
 
+class SwitchPinNotes(relay.ClientIDMutation):
+    class Input:
+        ids = graphene.List(graphene.ID, required=True)
+        action = graphene.String(required=True)
+
+    pinned_unpinned_notes = graphene.List(NoteNode)
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        local_ids = [from_global_id(i)[1] for i in input['ids']]
+        try:
+            notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
+            if input['action'] == "unpin":
+                num_of_pinned_objects = len(Note.objects.filter(owner=info.context.user, pinned=True))
+        except Note.DoesNotExist:
+            return None
+
+        for index, note in enumerate(notes):
+            note.pinned = True if input['action'] == "pin" else False
+            note.save()
+            new_order = index if input['action'] == "pin" else num_of_pinned_objects + index
+            Note.objects.move(note, new_order)
+
+        return notes
+
+
 class Mutation(ObjectType):
     add_note = AddNote.Field()
     update_notes_color = UpdateNotesColor.Field()
     update_note = UpdateNote.Field()
     delete_notes = DeleteNotes.Field()
+    switch_pin_notes = SwitchPinNotes.Field()
 
