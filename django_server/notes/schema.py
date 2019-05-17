@@ -164,18 +164,26 @@ class SwitchPinNotes(relay.ClientIDMutation):
         local_ids = [from_global_id(i)[1] for i in input['ids']]
         try:
             notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
-            if input['action'] == "unpin":
-                num_of_pinned_objects = len(Note.objects.filter(owner=info.context.user, pinned=True))
+            try:
+                first_pinned_order = Note.objects.filter(owner=info.context.user, pinned=True).first().order
+                last_pinned_order = Note.objects.filter(owner=info.context.user, pinned=True).last().order
+            except AttributeError:
+                first_pinned_order = None
+                last_pinned_order = None
+            try:
+                first_not_pinned_order = Note.objects.filter(owner=info.context.user, pinned=False).first().order
+            except AttributeError:
+                first_not_pinned_order = None
         except Note.DoesNotExist:
             return None
 
         for index, note in enumerate(notes):
             note.pinned = True if input['action'] == "pin" else False
             note.save()
-            new_order = index if input['action'] == "pin" else num_of_pinned_objects + index
+            new_order = first_not_pinned_order if input['action'] == "pin" else last_pinned_order
             Note.objects.move(note, new_order)
 
-        return notes
+        return SwitchPinNotes(notes)
 
 
 class Mutation(ObjectType):
