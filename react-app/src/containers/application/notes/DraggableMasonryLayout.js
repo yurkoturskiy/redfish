@@ -25,10 +25,20 @@ function DraggableMasonryLayout(props) {
   const generateItems = () =>
     React.Children.map(props.children, (child, index) => {
       console.log("init item");
+      if (child.props.separator) {
+        return {
+          index: index,
+          id: child.key,
+          order: index,
+          separator: child.props.separator,
+          element: child
+        };
+      }
       return {
         index: index,
         id: child.key,
         order: index,
+        separator: child.props.separator,
         element: React.cloneElement(child, {
           draggableItem: {
             onMouseDown: e => onMouseDown(e, index),
@@ -366,7 +376,14 @@ function DraggableMasonryLayout(props) {
 
   const checkLayout = evt => {
     const wrapperWidth = masonryLayout.current.offsetWidth;
-    let cardWrapperWidth = document.getElementById(`${items[0].id}-wrapper`)
+    var cardRefItem;
+    for (let i = 0; i < items.length; i++) {
+      if (!items[i].separator) {
+        cardRefItem = items[i];
+        break;
+      }
+    }
+    let cardWrapperWidth = document.getElementById(`${cardRefItem.id}-wrapper`)
       .offsetWidth;
     setColumns(Math.floor(wrapperWidth / cardWrapperWidth));
     // turn on transition if window resizing
@@ -441,17 +458,28 @@ function DraggableMasonryLayout(props) {
     itemsSortedByOrder.forEach((item, index) => {
       // Calculate positions of each element
       let cardWrapperElement = document.getElementById(`${item.id}-wrapper`);
-      let cardElement = document.getElementById(item.id);
       let height = cardWrapperElement.offsetHeight;
       cardWrapperWidth = cardWrapperElement.offsetWidth;
-      let leastNum = Math.min(...endline.byColumns);
-      let leastNumIndex = endline.byColumns.indexOf(leastNum);
-      let x = leastNumIndex * cardWrapperWidth;
-      let y = endline.byColumns[leastNumIndex];
+      let cardElement = document.getElementById(item.id);
       let cardWidth = cardElement.offsetWidth;
       let cardHeight = cardElement.offsetHeight;
       let cardOffsetLeft = cardElement.offsetLeft;
       let cardOffsetTop = cardElement.offsetTop;
+      let leastNum = Math.min(...endline.byColumns);
+      let leastNumIndex = endline.byColumns.indexOf(leastNum);
+      let maxNum = Math.max(...endline.byColumns);
+      let maxNumIndex = endline.byColumns.indexOf(maxNum);
+      let x, y;
+      if (item.separator) {
+        x = 0;
+        y = endline.byColumns[maxNumIndex];
+        let newLine = endline.byColumns[maxNumIndex] + height;
+        endline.byColumns.fill(newLine);
+      } else {
+        x = leastNumIndex * cardWrapperWidth;
+        y = endline.byColumns[leastNumIndex];
+        endline.byColumns[leastNumIndex] += height;
+      }
       elements[item.index] = {
         x,
         y,
@@ -460,7 +488,6 @@ function DraggableMasonryLayout(props) {
         cardOffsetLeft,
         cardOffsetTop
       };
-      endline.byColumns[leastNumIndex] += height;
     });
     endline.start.x =
       cardWrapperWidth *
