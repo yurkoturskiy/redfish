@@ -78,7 +78,7 @@ class NoteManager(models.Manager):
             if current_order is None:
                 current_order = 0
 
-            value = current_order + 1
+            value = current_order
             instance.order = value
             instance.save()
 
