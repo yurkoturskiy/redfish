@@ -164,24 +164,14 @@ class SwitchPinNotes(relay.ClientIDMutation):
         local_ids = [from_global_id(i)[1] for i in input['ids']]
         try:
             notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
-            try:
-                first_pinned_order = Note.objects.filter(owner=info.context.user, pinned=True).first().order
-                last_pinned_order = Note.objects.filter(owner=info.context.user, pinned=True).last().order
-            except AttributeError:
-                first_pinned_order = None
-                last_pinned_order = None
-            try:
-                first_not_pinned_order = Note.objects.filter(owner=info.context.user, pinned=False).first().order
-            except AttributeError:
-                first_not_pinned_order = None
         except Note.DoesNotExist:
             return None
 
-        for index, note in enumerate(notes):
-            note.pinned = True if input['action'] == "pin" else False
-            note.save()
-            new_order = first_not_pinned_order if input['action'] == "pin" else last_pinned_order
-            Note.objects.move(note, new_order)
+        for note in notes:
+            if input['action'] == "pin":
+                Note.objects.pin(note)
+            else:
+                Note.objects.unpin(note)
 
         return SwitchPinNotes(notes)
 
