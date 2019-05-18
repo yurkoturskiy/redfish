@@ -10,9 +10,18 @@ class NoteManager(models.Manager):
         users = User.objects.all()
         for user in users:
             qs = self.get_queryset().filter(owner=user).order_by(field)
-            for index, note in enumerate(qs):
-                note.order = index + 1
+            amount_of_pinned = len(qs.filter(pinned=True))
+
+            for index, note in enumerate(qs.filter(pinned=True)):
+                # pinned on top
+                note.order = index
                 note.save()
+
+            for index, note in enumerate(qs.filter(pinned=False)):
+                # not pinned after pinned
+                note.order = index + amount_of_pinned
+                note.save()
+
 
     def remove_order_gaps(self):
         """ Remove all gaps in ordering which somehow occured
