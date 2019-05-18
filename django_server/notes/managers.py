@@ -65,6 +65,21 @@ class NoteManager(models.Manager):
             obj.order = new_order
             obj.save()
 
+    def pin(self, obj):
+        # Set pinned to True and set order to the end of pinned notes
+        new_order = len(self.filter(owner=obj.owner, pinned=True))
+        obj.pinned = True
+        obj.save()
+        self.move(obj, new_order)
+
+    def unpin(self, obj):
+        # Set pinned to False and set order to the beginning of unpinned notes
+        new_order = len(self.filter(owner=obj.owner, pinned=True)) - 1
+        obj.pinned = False
+        obj.save()
+        self.move(obj, new_order)
+
+
 
     def create(self, **kwargs):
         instance = self.model(**kwargs)
