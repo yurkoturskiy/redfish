@@ -100,3 +100,11 @@ export const SELECTED_NOTES = gql`
     selectedNotes @client
   }
 `;
+
+export const SWITCH_PIN_NOTES = gql`
+  mutation switchPinNotes($ids: [ID]!, $action: String!) {
+    pinnedUnpinnedNotes {
+      id
+    }
+  }
+`;
