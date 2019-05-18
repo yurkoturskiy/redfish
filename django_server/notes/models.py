@@ -22,7 +22,7 @@ class Image(models.Model):
 
 class Note(models.Model):
 	class Meta:
-		ordering = ['-pinned', '-order']
+		ordering = ['-pinned', 'order']
 
 	title = models.TextField(blank=True, null=True)
 	content = models.TextField(blank=True,)

@@ -72,6 +72,7 @@ class NoteManager(models.Manager):
         with transaction.atomic():
             # Get our current max order number
             results = self.filter(owner=kwargs['owner']).aggregate(Max('order'))
+            amount_of_pinned = len(self.filter(owner=kwargs['owner'], pinned=True))
 
             # Increment and use it for our new object
             current_order = results['order__max'] + 1
@@ -81,5 +82,6 @@ class NoteManager(models.Manager):
             value = current_order
             instance.order = value
             instance.save()
+            self.move(instance, amount_of_pinned) # move the order to 0
 
             return instance
