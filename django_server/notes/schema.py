@@ -176,10 +176,31 @@ class SwitchPinNotes(relay.ClientIDMutation):
         return SwitchPinNotes(notes)
 
 
+class ReorderNote(relay.ClientIDMutation):
+    """ Reorder note with move model's manager """
+    class Input:
+        id = graphene.ID(required=True)
+        new_order = graphene.Int(required=True)
+
+    note = graphene.Field(NoteNode)
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        local_id = from_global_id(input['id'])[1]
+        try:
+            note = Note.objects.get(id=local_id, owner=info.context.user)
+        except Note.DoesNotExist:
+            return None
+
+        Note.objects.move(note, input['new_order'])
+        return ReorderNote(note)
+
+
 class Mutation(ObjectType):
     add_note = AddNote.Field()
     update_notes_color = UpdateNotesColor.Field()
     update_note = UpdateNote.Field()
     delete_notes = DeleteNotes.Field()
     switch_pin_notes = SwitchPinNotes.Field()
+    reorder_note = ReorderNote.Field()
 
