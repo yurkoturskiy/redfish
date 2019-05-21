@@ -17,20 +17,15 @@ function Notes(props) {
     var data = cacheData.allNotes.edges.map(edge => {
       if (oldOrder < newOrder) {
         // Drag toward the end
-        console.log("drag toward the end");
         if (edge.node.order > oldOrder && edge.node.order <= newOrder) {
           edge.node.order -= 1;
-        }
-        if (edge.node.order === oldOrder) edge.node.order = newOrder;
+        } else if (edge.node.order === oldOrder) edge.node.order = newOrder;
       }
       if (oldOrder > newOrder) {
         // Drag toward the start
-        console.log("drag toward the start");
         if (edge.node.order < oldOrder && edge.node.order >= newOrder) {
-          console.log("inbetween note");
           edge.node.order += 1;
         } else if (edge.node.order === oldOrder) {
-          console.log("drag item");
           edge.node.order = newOrder;
         }
       }
