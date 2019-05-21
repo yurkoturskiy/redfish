@@ -89,7 +89,7 @@ function Notes(props) {
               <SelectedNotesOptionsBar selectedNotes={props.selectedNotes} />
             )}
             <Mutation mutation={REORDER_NOTE} update={updateNotesOrder}>
-              {(reorderNote, { data }) => (
+              {reorderNote => (
                 <DraggableMasonryLayout
                   reverse={true}
                   onRearrange={(dragItem, newOrder) => {
