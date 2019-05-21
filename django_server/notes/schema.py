@@ -181,9 +181,10 @@ class ReorderNote(relay.ClientIDMutation):
     class Input:
         id = graphene.ID(required=True)
         new_order = graphene.Int(required=True)
-        notes_fetched = graphene.Int(required=True)
 
-    new_orders = graphene.List(NoteNode)
+    new_note = graphene.Field(NoteNode)
+    new_order = graphene.Int()
+    old_order = graphene.Int()
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
@@ -193,10 +194,10 @@ class ReorderNote(relay.ClientIDMutation):
         except Note.DoesNotExist:
             return None
 
-        Note.objects.move(note, input['new_order'])
-        # list_orders = list(Note.objects.filter(owner=info.context.user).values_list("order", flat=True))
-        list_orders = Note.objects.filter(owner=info.context.user)[:input['notes_fetched']]
-        return ReorderNote(list_orders)
+        old_order = note.order
+        new_order = input['new_order']
+        Note.objects.move(note, new_order)
+        return ReorderNote(note, new_order, old_order)
 
 
 class Mutation(ObjectType):

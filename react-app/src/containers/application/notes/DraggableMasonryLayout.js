@@ -29,7 +29,7 @@ function DraggableMasonryLayout(props) {
         return {
           index: index,
           id: child.key,
-          order: index,
+          order: child.props.order,
           separator: child.props.separator,
           element: child
         };
@@ -37,7 +37,7 @@ function DraggableMasonryLayout(props) {
       return {
         index: index,
         id: child.key,
-        order: index,
+        order: child.props.order,
         separator: child.props.separator,
         element: React.cloneElement(child, {
           draggableItem: {
@@ -56,8 +56,10 @@ function DraggableMasonryLayout(props) {
   const [items, setItems] = useState(() => generateItems());
   useEffect(() => {
     setItems(() => generateItems());
-  }, [props.children, items]);
+  }, [props.children]);
   const [overItemIndex, setOverItemIndex] = useState(undefined);
+  const [dragItemPrevOrder, setDragItemPrevOrder] = useState(undefined);
+  const [dragItemNewOrder, setDragItemNewOrder] = useState(undefined);
   const [isRearranges, setIsRearranges] = useState(false);
   // Touch events
   const [touch, setTouch] = useState(false);
@@ -100,7 +102,7 @@ function DraggableMasonryLayout(props) {
   useEffect(() => {
     var newItems;
     var newOrder = [];
-    setItems(() => {
+    setItems(items => {
       if (
         dragItemIndex !== undefined &&
         overItemIndex !== undefined &&
@@ -108,6 +110,9 @@ function DraggableMasonryLayout(props) {
         !isRearranges
       ) {
         console.log("rearrange");
+        console.log("drag item order", items[dragItemIndex].order);
+        console.log("drag item new order", items[overItemIndex].order);
+        setDragItemNewOrder(items[overItemIndex].order);
         items.forEach((item, index) => {
           newOrder[index] = item.order; // Item is out of range. Keep same order
           // Override for items need to be changed
@@ -234,6 +239,20 @@ function DraggableMasonryLayout(props) {
     };
   }, []);
 
+  useEffect(() => {
+    if (
+      dragItemPrevOrder &&
+      dragItemNewOrder &&
+      dragItemNewOrder !== dragItemPrevOrder &&
+      !drag
+    ) {
+      console.log(items[dragItemIndex]);
+      props.onRearrange(items[dragItemIndex], dragItemNewOrder);
+      setDragItemPrevOrder(undefined);
+      setDragItemNewOrder(undefined);
+    }
+  }, [dragItemNewOrder, dragItemIndex, items, dragItemPrevOrder, props, drag]);
+
   const onMouseUp = e => {
     console.log("mouse up");
     cleanupDrag();
@@ -291,6 +310,7 @@ function DraggableMasonryLayout(props) {
         console.log("set drag");
         setDrag(true);
         setPreventClick(true);
+        setDragItemPrevOrder(items[dragItemIndex].order);
       }
     }
     if (touch && !drag) {
@@ -439,11 +459,6 @@ function DraggableMasonryLayout(props) {
       }
     });
   }, [items]);
-
-  useEffect(() => {
-    setItems(() => generateItems());
-    // setModChildren(() => cloneChildren())
-  }, [props.children]);
 
   useEffect(() => {
     // set layout
@@ -609,7 +624,7 @@ function DraggableMasonryLayout(props) {
           `x: ${Math.floor(dragPoint.x)} y: ${Math.floor(dragPoint.y)}`}
       </h5>
       <h5 style={{ position: "fixed", bottom: "70px" }}>
-        drag item: {dragItemIndex && dragItemIndex}
+        drag item: {dragItemIndex && items[dragItemIndex].order}
       </h5>
       <h5 style={{ position: "fixed", bottom: "50px" }}>
         over item: {overItemIndex && items[overItemIndex].id}
@@ -623,6 +638,7 @@ function DraggableMasonryLayout(props) {
 }
 
 DraggableMasonryLayout.propTypes = {
+  reverse: PropTypes.bool,
   onEndlineEnter: PropTypes.func
 };
 

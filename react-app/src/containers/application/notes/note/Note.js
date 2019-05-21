@@ -133,6 +133,7 @@ function Note(props) {
         <Selector isSelected={props.isSelected} id={props.node.id} />
         <Pin />
         <div onClick={() => setInEdit(true)}>
+          <p>{props.node.order}</p>
           {props.node.title && <h3 className={title}>{props.node.title}</h3>}
           {props.node.content && (
             <p className={content}>{props.node.content}</p>

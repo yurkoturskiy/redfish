@@ -112,7 +112,8 @@ export const SWITCH_PIN_NOTES = gql`
 export const REORDER_NOTE = gql`
   mutation reorderNote($id: ID!, $newOrder: Int!) {
     reorderNote(input: { id: $id, newOrder: $newOrder }) {
-      newOrders
+      oldOrder
+      newOrder
     }
   }
 `;
