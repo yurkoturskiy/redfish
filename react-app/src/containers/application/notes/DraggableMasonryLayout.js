@@ -247,7 +247,8 @@ function DraggableMasonryLayout(props) {
       !drag
     ) {
       console.log(items[dragItemIndex]);
-      props.onRearrange(items[dragItemIndex], dragItemNewOrder);
+      props.onRearrange &&
+        props.onRearrange(items[dragItemIndex], dragItemNewOrder);
       setDragItemPrevOrder(undefined);
       setDragItemNewOrder(undefined);
     }
@@ -639,7 +640,8 @@ function DraggableMasonryLayout(props) {
 
 DraggableMasonryLayout.propTypes = {
   reverse: PropTypes.bool,
-  onEndlineEnter: PropTypes.func
+  onEndlineEnter: PropTypes.func,
+  onRearrange: PropTypes.func
 };
 
 export default DraggableMasonryLayout;
