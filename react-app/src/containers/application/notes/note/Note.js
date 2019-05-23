@@ -110,38 +110,43 @@ export const content = css`
   font-size: 1em;
 `;
 
+// Context
+export const NoteNode = React.createContext();
+
 function Note(props) {
   const [inEdit, setInEdit] = useState(false);
 
   return (
-    <DialogWindow inEdit={inEdit} setInEdit={setInEdit} node={props.node}>
-      <div
-        {...props.draggableItem}
-        className={container}
-        style={{
-          "--container-background-color": `#${props.node.color.value}`,
-          "--container-box-shadow": `inset 0 0 0 ${
-            props.isSelected ? 2 : 0
-          }pt #3E3E3E, 0 0 0 1px #E3E3E3`,
-          "--container-box-shadow-hover": `inset 0 0 0 ${
-            props.isSelected ? 2 : 0
-          }pt #3E3E3E, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)`,
-          "--opacity": inEdit ? 0 : 1
-        }}
-        id={props.node.id}
-      >
-        <Selector isSelected={props.isSelected} id={props.node.id} />
-        <Pin />
-        <div onClick={() => setInEdit(true)}>
-          <p>{props.node.order}</p>
-          {props.node.title && <h3 className={title}>{props.node.title}</h3>}
-          {props.node.content && (
-            <p className={content}>{props.node.content}</p>
-          )}
+    <NoteNode.Provider value={props.node}>
+      <DialogWindow inEdit={inEdit} setInEdit={setInEdit}>
+        <div
+          {...props.draggableItem}
+          className={container}
+          style={{
+            "--container-background-color": `#${props.node.color.value}`,
+            "--container-box-shadow": `inset 0 0 0 ${
+              props.isSelected ? 2 : 0
+            }pt #3E3E3E, 0 0 0 1px #E3E3E3`,
+            "--container-box-shadow-hover": `inset 0 0 0 ${
+              props.isSelected ? 2 : 0
+            }pt #3E3E3E, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)`,
+            "--opacity": inEdit ? 0 : 1
+          }}
+          id={props.node.id}
+        >
+          <Selector isSelected={props.isSelected} id={props.node.id} />
+          <Pin />
+          <div onClick={() => setInEdit(true)}>
+            <p>{props.node.order}</p>
+            {props.node.title && <h3 className={title}>{props.node.title}</h3>}
+            {props.node.content && (
+              <p className={content}>{props.node.content}</p>
+            )}
+          </div>
+          <OptionsContainer node={props.node} />
         </div>
-        <OptionsContainer node={props.node} />
-      </div>
-    </DialogWindow>
+      </DialogWindow>
+    </NoteNode.Provider>
   );
 }
 
