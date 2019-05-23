@@ -9,6 +9,8 @@ import Topics from "./topics/Container";
 // queries
 import { ALL_NOTES, SELECTED_NOTES, REORDER_NOTE } from "./queries";
 
+export const Cursors = React.createContext();
+
 function Notes(props) {
   const selectionHandler = () => {};
   const updateNotesOrder = (cache, { data: { reorderNote } }) => {
@@ -41,6 +43,7 @@ function Notes(props) {
           console.log(error);
           return <p>Error :(</p>;
         }
+        const cursors = data.allNotes.edges.map(note => note.cursor);
         const noteComponents = data.allNotes.edges.map((note, index) => (
           <Note
             key={note.node.id}
@@ -79,7 +82,7 @@ function Notes(props) {
         );
 
         return (
-          <React.Fragment>
+          <Cursors.Provider value>
             {props.selectedNotes.length > 0 && (
               <SelectedNotesOptionsBar selectedNotes={props.selectedNotes} />
             )}
@@ -122,7 +125,7 @@ function Notes(props) {
               )}
             </Mutation>
             <Topics />
-          </React.Fragment>
+          </Cursors.Provider>
         );
       }}
     </Query>
