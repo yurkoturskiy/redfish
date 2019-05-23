@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { css } from "linaria";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
+// Context
+import { NoteNode } from "./Note";
 
 const wrapper = css`
   .dialog-enter {
@@ -46,6 +48,7 @@ const background = css`
 `;
 
 function DialogWindow(props) {
+  const node = useContext(NoteNode);
   return (
     <div className={wrapper}>
       <CSSTransition
@@ -55,8 +58,8 @@ function DialogWindow(props) {
         unmountOnExit
       >
         <div className={dialogWindow}>
-          <h1>{props.node.title}</h1>
-          <p>{props.node.content}</p>
+          <h1>{node.title}</h1>
+          <p>{node.content}</p>
         </div>
       </CSSTransition>
       {props.inEdit && (
@@ -69,8 +72,7 @@ function DialogWindow(props) {
 
 DialogWindow.propTypes = {
   inEdit: PropTypes.bool,
-  setInEdit: PropTypes.func,
-  node: PropTypes.object
+  setInEdit: PropTypes.func
 };
 
 export default DialogWindow;
