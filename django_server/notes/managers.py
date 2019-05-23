@@ -10,7 +10,6 @@ class NoteManager(models.Manager):
         users = User.objects.all()
         for user in users:
             qs = self.get_queryset().filter(owner=user).order_by(field)
-            amount_of_pinned = len(qs.filter(pinned=True))
 
             for index, note in enumerate(qs.filter(pinned=True)):
                 # pinned on top
@@ -18,8 +17,8 @@ class NoteManager(models.Manager):
                 note.save()
 
             for index, note in enumerate(qs.filter(pinned=False)):
-                # not pinned after pinned
-                note.order = index + amount_of_pinned
+                # not pinned
+                note.order = index
                 note.save()
 
 
@@ -36,12 +35,12 @@ class NoteManager(models.Manager):
 
 
     def fill_gaps(self, objects):
-        """ Pass notes here before delete them """
+        """ Pass notes here before delete them or pin/unpin """
         qs = self.get_queryset()
         
         with transaction.atomic():
             for obj in objects:
-                qs.filter(order__gt=obj.order, owner=obj.owner).update(order=F('order') - 1)
+                qs.filter(order__gt=obj.order, owner=obj.owner, pinned=obj.pinned).update(order=F('order') - 1)
 
 
     def move(self, obj, new_order):
@@ -55,6 +54,7 @@ class NoteManager(models.Manager):
                     owner=obj.owner,
                     order__lt=obj.order,
                     order__gte=new_order,
+                    pinned=obj.pinned
                 ).exclude(
                     pk=obj.pk
                 ).update(
@@ -65,6 +65,7 @@ class NoteManager(models.Manager):
                     owner=obj.owner,
                     order__lte=new_order,
                     order__gt=obj.order,
+                    pinned=obj.pinned
                 ).exclude(
                     pk=obj.pk,
                 ).update(
@@ -78,17 +79,24 @@ class NoteManager(models.Manager):
         # Set pinned to True and set order to the end of pinned notes
         if not obj.pinned:
             new_order = len(self.filter(owner=obj.owner, pinned=True))
+            self.fill_gaps([obj])
             obj.pinned = True
+            obj.order = new_order # order to the end of pinned
             obj.save()
-            self.move(obj, new_order)
 
     def unpin(self, obj):
         # Set pinned to False and set order to the beginning of unpinned notes
         if obj.pinned:
-            new_order = len(self.filter(owner=obj.owner, pinned=True)) - 1
+            self.fill_gaps([obj])
             obj.pinned = False
+            # Get our current max order number
+            results = self.filter(owner=obj.owner).aggregate(Max('order'))
+            end_order = results['order__max'] + 1
+            if end_order is None:
+                end_order = 0
+            obj.order = end_order # Set order to the end of unpinned
             obj.save()
-            self.move(obj, new_order)
+            self.move(obj, 0) # Move to the beginning
 
 
 
@@ -98,7 +106,6 @@ class NoteManager(models.Manager):
         with transaction.atomic():
             # Get our current max order number
             results = self.filter(owner=kwargs['owner']).aggregate(Max('order'))
-            amount_of_pinned = len(self.filter(owner=kwargs['owner'], pinned=True))
 
             # Increment and use it for our new object
             current_order = results['order__max'] + 1
@@ -108,6 +115,6 @@ class NoteManager(models.Manager):
             value = current_order
             instance.order = value
             instance.save()
-            self.move(instance, amount_of_pinned) # move the order to 0
+            self.move(instance, 0) # move the order to 0
 
             return instance
