@@ -82,7 +82,7 @@ function Notes(props) {
         );
 
         return (
-          <Cursors.Provider value>
+          <Cursors.Provider value={cursors}>
             {props.selectedNotes.length > 0 && (
               <SelectedNotesOptionsBar selectedNotes={props.selectedNotes} />
             )}
