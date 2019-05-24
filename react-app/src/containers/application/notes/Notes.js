@@ -16,7 +16,7 @@ function Notes(props) {
   const updateNotesOrder = (cache, { data: { reorderNote } }) => {
     var cacheData = cache.readQuery({ query: ALL_NOTES });
     var { oldOrder, newOrder, pinned } = reorderNote;
-    var data = cacheData.allNotes.edges.map(edge => {
+    cacheData.allNotes.edges.map(edge => {
       if (edge.node.pinned === pinned) {
         // Drag withing pinned or unpinned span
         if (oldOrder < newOrder) {
@@ -36,7 +36,7 @@ function Notes(props) {
       }
       return edge;
     });
-    cache.writeQuery({ query: ALL_NOTES, data });
+    cache.writeQuery({ query: ALL_NOTES, data: cacheData });
   };
   return (
     <Query query={ALL_NOTES}>
