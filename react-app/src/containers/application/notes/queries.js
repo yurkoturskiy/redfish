@@ -103,8 +103,14 @@ export const SELECTED_NOTES = gql`
 
 export const SWITCH_PIN_NOTES = gql`
   mutation switchPinNotes($ids: [ID]!, $action: String!) {
-    pinnedUnpinnedNotes {
-      id
+    switchPinNotes(input: { ids: $ids, action: $action }) {
+      pinnedUnpinnedNotes {
+        id
+        title
+        content
+        order
+        pinned
+      }
     }
   }
 `;
@@ -114,6 +120,7 @@ export const REORDER_NOTE = gql`
     reorderNote(input: { id: $id, newOrder: $newOrder }) {
       oldOrder
       newOrder
+      pinned
     }
   }
 `;

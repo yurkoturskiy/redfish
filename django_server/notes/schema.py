@@ -185,6 +185,7 @@ class ReorderNote(relay.ClientIDMutation):
     new_note = graphene.Field(NoteNode)
     new_order = graphene.Int()
     old_order = graphene.Int()
+    pinned = graphene.Boolean()
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
@@ -197,7 +198,7 @@ class ReorderNote(relay.ClientIDMutation):
         old_order = note.order
         new_order = input['new_order']
         Note.objects.move(note, new_order)
-        return ReorderNote(note, new_order, old_order)
+        return ReorderNote(note, new_order, old_order, note.pinned)
 
 
 class Mutation(ObjectType):

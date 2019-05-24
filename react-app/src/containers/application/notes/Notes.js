@@ -15,20 +15,23 @@ function Notes(props) {
   const selectionHandler = () => {};
   const updateNotesOrder = (cache, { data: { reorderNote } }) => {
     var cacheData = cache.readQuery({ query: ALL_NOTES });
-    var { oldOrder, newOrder } = reorderNote;
+    var { oldOrder, newOrder, pinned } = reorderNote;
     var data = cacheData.allNotes.edges.map(edge => {
-      if (oldOrder < newOrder) {
-        // Drag toward the end
-        if (edge.node.order > oldOrder && edge.node.order <= newOrder) {
-          edge.node.order -= 1;
-        } else if (edge.node.order === oldOrder) edge.node.order = newOrder;
-      }
-      if (oldOrder > newOrder) {
-        // Drag toward the start
-        if (edge.node.order < oldOrder && edge.node.order >= newOrder) {
-          edge.node.order += 1;
-        } else if (edge.node.order === oldOrder) {
-          edge.node.order = newOrder;
+      if (edge.node.pinned === pinned) {
+        // Drag withing pinned or unpinned span
+        if (oldOrder < newOrder) {
+          // Drag toward the end
+          if (edge.node.order > oldOrder && edge.node.order <= newOrder) {
+            edge.node.order -= 1;
+          } else if (edge.node.order === oldOrder) edge.node.order = newOrder;
+        }
+        if (oldOrder > newOrder) {
+          // Drag toward the start
+          if (edge.node.order < oldOrder && edge.node.order >= newOrder) {
+            edge.node.order += 1;
+          } else if (edge.node.order === oldOrder) {
+            edge.node.order = newOrder;
+          }
         }
       }
       return edge;
@@ -54,32 +57,16 @@ function Notes(props) {
             isSelected={props.selectedNotes.indexOf(note.node.id) !== -1}
           />
         ));
-        var allCards = [];
-        const pinnedLabel = (
-          <div key="pinned-label" id="pinned-label" separator="true" order={-1}>
-            <h3>Pinned</h3>
-          </div>
-        );
-        allCards.push(pinnedLabel);
-        noteComponents.forEach(
-          (card, index) =>
-            data.allNotes.edges[index].node.pinned && allCards.push(card)
-        );
-        const notPinnedLabel = (
-          <div
-            key="not-pinned-label"
-            id="not-pinned-label"
-            separator="true"
-            order={allCards.length - 1}
-          >
-            <h3>Not pinned</h3>
-          </div>
-        );
-        allCards.push(notPinnedLabel);
-        noteComponents.forEach(
-          (card, index) =>
-            !data.allNotes.edges[index].node.pinned && allCards.push(card)
-        );
+        var pinnedCards = [];
+        noteComponents.map((card, index) => {
+          if (data.allNotes.edges[index].node.pinned) pinnedCards.push(card);
+        });
+        var notPinnedCards = [];
+        noteComponents.forEach((card, index) => {
+          if (!data.allNotes.edges[index].node.pinned)
+            notPinnedCards.push(card);
+        });
+        console.log("not pinned cards", notPinnedCards);
 
         return (
           <Cursors.Provider value={cursors}>
@@ -88,40 +75,73 @@ function Notes(props) {
             )}
             <Mutation mutation={REORDER_NOTE} update={updateNotesOrder}>
               {reorderNote => (
-                <DraggableMasonryLayout
-                  reverse={true}
-                  onRearrange={(dragItem, newOrder) => {
-                    reorderNote({
-                      variables: {
-                        id: dragItem.id,
-                        newOrder: newOrder
-                      }
-                    });
-                  }}
-                  onEndlineEnter={() => {
-                    if (data.allNotes.pageInfo.hasNextPage) {
-                      fetchMore({
-                        query: ALL_NOTES,
-                        variables: {
-                          cursor: data.allNotes.pageInfo.endCursor
-                        },
-                        updateQuery: (prevResult, { fetchMoreResult }) => {
-                          if (!fetchMoreResult) return prevResult;
-                          let mix = prevResult;
-                          mix.allNotes.pageInfo =
-                            fetchMoreResult.allNotes.pageInfo;
-                          mix.allNotes.edges = [
-                            ...prevResult.allNotes.edges,
-                            ...fetchMoreResult.allNotes.edges
-                          ];
-                          return mix;
-                        }
-                      });
-                    }
-                  }}
-                >
-                  {allCards}
-                </DraggableMasonryLayout>
+                <React.Fragment>
+                  {pinnedCards.length !== 0 && (
+                    /* Pinned notes */
+                    <React.Fragment>
+                      <div>
+                        <h3>Pinned</h3>
+                      </div>
+                      <DraggableMasonryLayout
+                        onRearrange={(dragItem, newOrder) => {
+                          reorderNote({
+                            variables: {
+                              id: dragItem.id,
+                              newOrder: newOrder
+                            }
+                          });
+                        }}
+                      >
+                        {pinnedCards}
+                      </DraggableMasonryLayout>
+                    </React.Fragment>
+                  )}
+                  {notPinnedCards.length !== 0 && (
+                    /* Not pinned notes */
+                    <React.Fragment>
+                      <div>
+                        <h3>Not pinned</h3>
+                      </div>
+                      <DraggableMasonryLayout
+                        reverse={true}
+                        onRearrange={(dragItem, newOrder) => {
+                          reorderNote({
+                            variables: {
+                              id: dragItem.id,
+                              newOrder: newOrder
+                            }
+                          });
+                        }}
+                        onEndlineEnter={() => {
+                          if (data.allNotes.pageInfo.hasNextPage) {
+                            fetchMore({
+                              query: ALL_NOTES,
+                              variables: {
+                                cursor: data.allNotes.pageInfo.endCursor
+                              },
+                              updateQuery: (
+                                prevResult,
+                                { fetchMoreResult }
+                              ) => {
+                                if (!fetchMoreResult) return prevResult;
+                                let mix = prevResult;
+                                mix.allNotes.pageInfo =
+                                  fetchMoreResult.allNotes.pageInfo;
+                                mix.allNotes.edges = [
+                                  ...prevResult.allNotes.edges,
+                                  ...fetchMoreResult.allNotes.edges
+                                ];
+                                return mix;
+                              }
+                            });
+                          }
+                        }}
+                      >
+                        {notPinnedCards}
+                      </DraggableMasonryLayout>
+                    </React.Fragment>
+                  )}
+                </React.Fragment>
               )}
             </Mutation>
             <Topics />

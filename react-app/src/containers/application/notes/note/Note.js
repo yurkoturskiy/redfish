@@ -138,6 +138,7 @@ function Note(props) {
           <Pin />
           <div onClick={() => setInEdit(true)}>
             <p>{props.node.order}</p>
+            <p>{props.node.pinned ? "pinned" : "not pinned"}</p>
             {props.node.title && <h3 className={title}>{props.node.title}</h3>}
             {props.node.content && (
               <p className={content}>{props.node.content}</p>
