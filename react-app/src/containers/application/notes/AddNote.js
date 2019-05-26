@@ -102,9 +102,11 @@ const updateCache = (
   // and exclude the last one without the cursor
   cacheData.allNotes.edges.unshift(newEdge);
   cacheData.allNotes.edges.pop();
-  // reset cursors
-  cacheData.allNotes.edges.forEach((edge, index) => {
+  // Shift order by one for existed notes and reset cursors for all
+  cacheData.allNotes.edges.map((edge, index) => {
+    if (edge !== newEdge && !edge.node.pinned) edge.node.order += 1;
     edge.cursor = allCursors[index];
+    return edge;
   });
   cache.writeQuery({ query: ALL_NOTES, data: cacheData });
 };
