@@ -28,9 +28,11 @@ function DeleteOption(props) {
     // remember cursors and filter Nodes
     var allCursors = [];
     var freshNodes = [];
+    var deletedNodes = [];
     cacheData.allNotes.edges.forEach(edge => {
       allCursors.push(edge.cursor);
       !deletedNotesIDs.includes(edge.node.id) && freshNodes.push(edge.node);
+      deletedNotesIDs.includes(edge.node.id) && deletedNodes.push(edge.node);
     });
     // prototype of new edges
     var newEdges = [];
@@ -45,6 +47,17 @@ function DeleteOption(props) {
     const endCursor = allCursors[newEdges.length - 1];
     cacheData.allNotes.edges = newEdges; // include new edges into the cache
     cacheData.allNotes.pageInfo.endCursor = endCursor; // reset end cursor
+    // Update order
+    cacheData.allNotes.edges.map(edge => {
+      deletedNodes.forEach(deletedNode => {
+        if (
+          edge.node.order > deletedNode.order &&
+          deletedNode.pinned === edge.node.pinned
+        )
+          edge.node.order -= 1;
+      });
+      return edge;
+    });
     cache.writeQuery({ query: ALL_NOTES, data: cacheData });
   };
 
