@@ -157,7 +157,12 @@ class SwitchPinNotes(relay.ClientIDMutation):
         ids = graphene.List(graphene.ID, required=True)
         action = graphene.String(required=True)
 
+    action = graphene.String()
     pinned_unpinned_notes = graphene.List(NoteNode)
+    prev_pinned_status = graphene.List(graphene.Boolean)
+    cur_pinned_status = graphene.List(graphene.Boolean)
+    prev_order = graphene.List(graphene.Int)
+    cur_order = graphene.List(graphene.Int)
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
@@ -166,14 +171,20 @@ class SwitchPinNotes(relay.ClientIDMutation):
             notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
         except Note.DoesNotExist:
             return None
-
-        for note in notes:
+        prevOrder = []
+        prevPinnedStatus = []
+        for index, note in enumerate(notes):
+            prevOrder.append(note.order)
+            prevPinnedStatus.append(note.pinned)
             if input['action'] == "pin":
                 Note.objects.pin(note)
             else:
                 Note.objects.unpin(note)
 
-        return SwitchPinNotes(notes)
+        curPinnedStatus = [note.pinned for note in notes]
+        curOrder = [note.order for note in notes]
+
+        return SwitchPinNotes(input['action'], notes, prevPinnedStatus, curPinnedStatus, prevOrder, curOrder)
 
 
 class ReorderNote(relay.ClientIDMutation):
