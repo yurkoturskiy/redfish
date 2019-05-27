@@ -39,10 +39,11 @@ function NavBar(props) {
           <img
             src={icon}
             style={{
-              width: "38px",
+              width: "44px",
+              height: "44px",
               boxShadow:
                 "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-              borderRadius: "4px"
+              borderRadius: "12px"
             }}
           />
         </Navbar.Brand>
