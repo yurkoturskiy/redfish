@@ -115,10 +115,18 @@ export const NoteNode = React.createContext();
 
 function Note(props) {
   const [inEdit, setInEdit] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const switchVisibility = () => {
+    setVisible(visible => !visible);
+  };
 
   return (
     <NoteNode.Provider value={props.node}>
-      <DialogWindow inEdit={inEdit} setInEdit={setInEdit}>
+      <DialogWindow
+        inEdit={inEdit}
+        setInEdit={setInEdit}
+        switchVisibility={switchVisibility}
+      >
         <div
           {...props.draggableItem}
           className={container}
@@ -130,7 +138,7 @@ function Note(props) {
             "--container-box-shadow-hover": `inset 0 0 0 ${
               props.isSelected ? 2 : 0
             }pt #3E3E3E, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)`,
-            "--opacity": inEdit ? 0 : 1
+            "--opacity": visible ? 1 : 0
           }}
           id={props.node.id}
         >
