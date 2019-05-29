@@ -1,10 +1,9 @@
-import React from "react"
-import { Router } from "@reach/router";
+import React from 'react'
+import { Router } from '@reach/router'
 
-import Layout from "../../components/layout"
-import PasswordResetContainer from "../../containers/PasswordResetContainer"
-import PasswordResetConfirmContainer from "../../containers/PasswordResetConfirmContainer"
-
+import Layout from '../../components/layout'
+import PasswordResetContainer from '../../containers/PasswordResetContainer'
+import PasswordResetConfirmContainer from '../../containers/PasswordResetConfirmContainer'
 
 export default () => {
   return (

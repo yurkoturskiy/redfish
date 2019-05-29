@@ -1,9 +1,9 @@
-import React from 'react';
-import { Form, Field } from 'formik';
+import React from 'react'
+import { Form, Field } from 'formik'
 import FormikMaterialTextField from './FormikMaterialTextField'
 import FormWrapper from './FormWrapper'
 // import Button from '@material/react-button';
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
 const theme = {
   background: '#f0f0f0',
@@ -19,25 +19,36 @@ class PasswordResetConfirmForm extends React.Component {
   }
   switchPasswordVisibility() {
     this.setState({
-      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
+      passwordVisibilityCondition: this.state.passwordVisibilityCondition
+        ? false
+        : true,
     })
   }
   render() {
-    const {status, isSubmitting } = this.props
+    const { status, isSubmitting } = this.props
     return (
       <FormWrapper theme={theme}>
         <Form>
           <h3>Enter your new password</h3>
-          <Field 
-            id="new_password1" 
+          <Field
+            id="new_password1"
             label="New password"
             name="new_password1"
-            type={this.state.passwordVisibilityCondition ? 'text' : 'password'} 
-            tralingIcon={this.state.passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
+            type={this.state.passwordVisibilityCondition ? 'text' : 'password'}
+            tralingIcon={
+              this.state.passwordVisibilityCondition
+                ? 'visibility'
+                : 'visibility_off'
+            }
             tralingIconOnClick={this.switchPasswordVisibility}
-            component={FormikMaterialTextField}       
+            component={FormikMaterialTextField}
           />
-          <Button variant="text" type="submit" className="form-button" disabled={isSubmitting}>
+          <Button
+            variant="text"
+            type="submit"
+            className="form-button"
+            disabled={isSubmitting}
+          >
             Set new password
           </Button>
           <span>{status && status.non_field_errors}</span>

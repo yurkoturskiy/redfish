@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-import '@material/react-text-field/dist/text-field.css';
-
+import '@material/react-text-field/dist/text-field.css'
 
 const FormWrapper = styled.div`
   height: 100vh;
@@ -85,10 +84,10 @@ const FormWrapper = styled.div`
   }
 `
 
-FormWrapper.defaultProps =  {
+FormWrapper.defaultProps = {
   theme: {
-    background: 'palevioletred'
-  }
+    background: 'palevioletred',
+  },
 }
 
 export default FormWrapper

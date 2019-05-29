@@ -1,9 +1,8 @@
 import React from 'react'
-import { Formik } from 'formik';
+import { Formik } from 'formik'
 
 import FormsMaster from './FormsMaster'
 import LoginForm from '../components/forms/LoginForm'
-
 
 class Login extends FormsMaster {
   constructor(props) {
@@ -15,7 +14,7 @@ class Login extends FormsMaster {
     }
   }
   handleResponse(response) {
-    localStorage.setItem('token', response.data.key);
+    localStorage.setItem('token', response.data.key)
     this.setState({
       isAuth: true,
     })
@@ -23,7 +22,7 @@ class Login extends FormsMaster {
   }
   componentDidUpdate() {
     if (this.state.isAuth) {
-      window.location.replace("http://localhost:9000/app");
+      window.location.replace('http://localhost:9000/app')
     }
   }
   render() {

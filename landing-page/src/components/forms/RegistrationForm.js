@@ -1,9 +1,9 @@
-import React from 'react';
-import { Form, Field } from 'formik';
+import React from 'react'
+import { Form, Field } from 'formik'
 import FormikMaterialTextField from './FormikMaterialTextField'
 import FormWrapper from './FormWrapper'
 // import Button from '@material/react-button';
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
 const theme = {
   background: '#f0f0f0',
@@ -19,11 +19,19 @@ class RegistrationForm extends React.Component {
   }
   switchPasswordVisibility() {
     this.setState({
-      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
+      passwordVisibilityCondition: this.state.passwordVisibilityCondition
+        ? false
+        : true,
     })
   }
   render() {
-    const {status, isSubmitting, passwordOnChange, onChange, passwordHelperText} = this.props
+    const {
+      status,
+      isSubmitting,
+      passwordOnChange,
+      onChange,
+      passwordHelperText,
+    } = this.props
     return (
       <FormWrapper theme={theme}>
         <Form>
@@ -42,20 +50,34 @@ class RegistrationForm extends React.Component {
             type="email"
             component={FormikMaterialTextField}
           />
-          <Field 
-            id="password" 
+          <Field
+            id="password"
             label="password"
             name="password1"
-            type={this.state.passwordVisibilityCondition ? 'text' : 'password'} 
-            tralingIcon={this.state.passwordVisibilityCondition ? 'visibility' : 'visibility_off'}
+            type={this.state.passwordVisibilityCondition ? 'text' : 'password'}
+            tralingIcon={
+              this.state.passwordVisibilityCondition
+                ? 'visibility'
+                : 'visibility_off'
+            }
             tralingIconOnClick={this.switchPasswordVisibility}
             component={FormikMaterialTextField}
-            onChange={(e) => {onChange(e); passwordOnChange(e)}}
+            onChange={e => {
+              onChange(e)
+              passwordOnChange(e)
+            }}
             helperText={passwordHelperText}
           />
           <div className="subform-container">
-            <span className="non-fields-error">{status && status.non_field_errors}</span>
-            <Button variant="text" type="submit" className="form-button" disabled={isSubmitting}>
+            <span className="non-fields-error">
+              {status && status.non_field_errors}
+            </span>
+            <Button
+              variant="text"
+              type="submit"
+              className="form-button"
+              disabled={isSubmitting}
+            >
               Submit
             </Button>
           </div>

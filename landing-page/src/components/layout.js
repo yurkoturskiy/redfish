@@ -18,11 +18,9 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-        <GlobalStyle/>
+        <GlobalStyle />
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </>
     )}
   />

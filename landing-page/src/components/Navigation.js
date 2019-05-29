@@ -1,13 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-
 const Navigation = props => {
-  return (
-    <nav className={props.className} >
-      {props.children}
-    </nav>
-  )
+  return <nav className={props.className}>{props.children}</nav>
 }
 
 export default styled(Navigation)`
@@ -33,6 +28,6 @@ export default styled(Navigation)`
   }
 
   li:hover {
-    background-color: #f0f0f0
+    background-color: #f0f0f0;
   }
 `

@@ -3,11 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 // presentational components
 // actions
-import {
-  verifyEmail, 
-  validateFormResponse
-} from '../../actions/restAuth'
-
+import { verifyEmail, validateFormResponse } from '../../actions/restAuth'
 
 class VerifyEmail extends React.Component {
   constructor(props) {
@@ -15,16 +11,16 @@ class VerifyEmail extends React.Component {
     let values = {
       key: this.props.match.params.key,
     }
-    this.props.verifyEmail(values)
-      .then(res => console.log(res))
+    this.props.verifyEmail(values).then(res => console.log(res))
   }
   componentDidMount() {
-    axios({
-
-    })
+    axios({})
   }
   render() {
-    if (this.props.requestCondition === 1 || this.props.requestCondition === 0) {
+    if (
+      this.props.requestCondition === 1 ||
+      this.props.requestCondition === 0
+    ) {
       return <p>confirming</p>
     } else if (this.props.requestCondition === 2) {
       return <p>confirmed</p>

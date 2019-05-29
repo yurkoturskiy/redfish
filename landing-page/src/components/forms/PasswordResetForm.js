@@ -1,9 +1,9 @@
-import React from 'react';
-import { Form, Field } from 'formik';
+import React from 'react'
+import { Form, Field } from 'formik'
 import FormikMaterialTextField from './FormikMaterialTextField'
 import FormWrapper from './FormWrapper'
 // import Button from '@material/react-button';
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
 const theme = {
   background: '#f0f0f0',
@@ -19,11 +19,13 @@ class PasswordResetForm extends React.Component {
   }
   switchPasswordVisibility() {
     this.setState({
-      passwordVisibilityCondition: this.state.passwordVisibilityCondition ? false : true
+      passwordVisibilityCondition: this.state.passwordVisibilityCondition
+        ? false
+        : true,
     })
   }
   render() {
-    const {status, isSubmitting } = this.props
+    const { status, isSubmitting } = this.props
     return (
       <FormWrapper theme={theme}>
         <Form>
@@ -35,7 +37,12 @@ class PasswordResetForm extends React.Component {
             type="email"
             component={FormikMaterialTextField}
           />
-          <Button variant="text" type="submit" className="form-button" disabled={isSubmitting}>
+          <Button
+            variant="text"
+            type="submit"
+            className="form-button"
+            disabled={isSubmitting}
+          >
             Reset password
           </Button>
           <span>{status && status.non_field_errors}</span>

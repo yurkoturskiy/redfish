@@ -1,9 +1,8 @@
-import React from 'react';
-import { Formik } from 'formik';
+import React from 'react'
+import { Formik } from 'formik'
 
 import FormsMaster from './FormsMaster'
 import PasswordResetForm from '../components/forms/PasswordResetForm'
-
 
 class PasswordReset extends FormsMaster {
   constructor(props) {
@@ -15,7 +14,7 @@ class PasswordReset extends FormsMaster {
     }
   }
   handleResponse(response) {
-    this.setState({requestIsSucceed: true})
+    this.setState({ requestIsSucceed: true })
   }
   render() {
     if (this.state.requestIsSucceed) {
@@ -27,7 +26,7 @@ class PasswordReset extends FormsMaster {
           onSubmit={this.handleSubmit}
         >
           {({ status, touched, isSubmitting, errors }) => (
-            <PasswordResetForm 
+            <PasswordResetForm
               status={status}
               touched={touched}
               isSubmitting={isSubmitting}

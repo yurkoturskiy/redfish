@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-
-
 const Hero = styled.div`
   position: relative;
   height: 100vh;
@@ -16,14 +14,14 @@ const Hero = styled.div`
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     font-size: 1.5em;
-    color: palevioletred; 
+    color: palevioletred;
   }
 `
 
 Hero.defaultProps = {
   theme: {
-    background: 'papayawhip'
-  }
+    background: 'papayawhip',
+  },
 }
 
 export default Hero

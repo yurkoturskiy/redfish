@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 
-
 class FormsMaster extends React.Component {
   constructor(props) {
     super(props)
@@ -9,9 +8,7 @@ class FormsMaster extends React.Component {
     this.prepareValues = this.prepareValues.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleSubmit(
-    values, { setSubmitting, setErrors, setStatus }
-  ) {
+  handleSubmit(values, { setSubmitting, setErrors, setStatus }) {
     let preparedValues = this.prepareValues(values)
     this.postValues(preparedValues)
       .then(response => {
@@ -22,9 +19,9 @@ class FormsMaster extends React.Component {
         if (error.response) {
           console.log(error.response.data)
           setErrors(error.response.data)
-          setStatus({non_field_errors: error.response.data.non_field_errors})
+          setStatus({ non_field_errors: error.response.data.non_field_errors })
         } else if (error.request) {
-          setStatus({non_field_errors: 'Something wrong with a server'})
+          setStatus({ non_field_errors: 'Something wrong with a server' })
           console.log('Something wrong with a server')
           console.log(error.request)
         } else {
@@ -40,7 +37,7 @@ class FormsMaster extends React.Component {
     return axios({
       method: 'post',
       url: 'http://localhost:9000/' + this.endpoint,
-      data: values
+      data: values,
     })
   }
 }

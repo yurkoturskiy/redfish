@@ -7,9 +7,15 @@ import Navigation from './Navigation'
 const Header = ({ siteTitle }) => (
   <Navigation>
     <ul>
-      <Link to="/"><li>Redject</li></Link>
-      <Link to="/login"><li>login</li></Link>
-      <Link to="/registration"><li>registration</li></Link>
+      <Link to="/">
+        <li>Redject</li>
+      </Link>
+      <Link to="/login">
+        <li>login</li>
+      </Link>
+      <Link to="/registration">
+        <li>registration</li>
+      </Link>
     </ul>
   </Navigation>
 )
