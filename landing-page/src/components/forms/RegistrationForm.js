@@ -5,10 +5,6 @@ import FormWrapper from './FormWrapper'
 // import Button from '@material/react-button';
 import Button from '@material-ui/core/Button'
 
-const theme = {
-  background: '#f0f0f0',
-}
-
 class RegistrationForm extends React.Component {
   constructor(props) {
     super(props)
@@ -33,7 +29,7 @@ class RegistrationForm extends React.Component {
       passwordHelperText,
     } = this.props
     return (
-      <FormWrapper theme={theme}>
+      <FormWrapper>
         <Form>
           <h3>Sign Up</h3>
           <Field

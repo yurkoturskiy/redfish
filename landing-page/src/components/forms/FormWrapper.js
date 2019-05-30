@@ -1,11 +1,12 @@
-import styled from 'styled-components'
+import React from 'react'
+import { css } from 'linaria'
 
 import '@material/react-text-field/dist/text-field.css'
 
-const FormWrapper = styled.div`
+const wrapper = css`
   height: 100vh;
   width: 100%;
-  background: ${props => props.theme.background};
+  background: #f0f0f0;
 
 
   form {
@@ -84,10 +85,8 @@ const FormWrapper = styled.div`
   }
 `
 
-FormWrapper.defaultProps = {
-  theme: {
-    background: 'palevioletred',
-  },
+function FormWrapper(props) {
+  return <div className={wrapper}>{props.children}</div>
 }
 
 export default FormWrapper

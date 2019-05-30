@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
   render() {
     const { status, isSubmitting } = this.props
     return (
-      <FormWrapper theme={theme}>
+      <FormWrapper>
         <Form>
           <h3>Welcome back!</h3>
           <Field

@@ -1,26 +1,34 @@
 import React from 'react'
+import { css } from 'linaria'
 
 import Layout from '../components/layout'
-import Hero from '../components/Hero'
 import SEO from '../components/seo'
 
-const first = {
-  background: 'papayawhip',
-}
+const hero = css`
+  position: relative;
+  height: 100vh;
+  width: 100%;
 
-const second = {
-  background: 'grey',
-}
+  h1 {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: palevioletred;
+  }
+`
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <Hero theme={first}>
+    <div className={hero} style={{ background: 'papayawhip' }}>
       <h1>Boilerplate for your application</h1>
-    </Hero>
-    <Hero theme={second}>
+    </div>
+    <div className={hero} style={{ background: 'grey' }}>
       <h1>Under the hood</h1>
-    </Hero>
+    </div>
   </Layout>
 )
 

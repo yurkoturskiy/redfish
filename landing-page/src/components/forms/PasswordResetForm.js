@@ -5,10 +5,6 @@ import FormWrapper from './FormWrapper'
 // import Button from '@material/react-button';
 import Button from '@material-ui/core/Button'
 
-const theme = {
-  background: '#f0f0f0',
-}
-
 class PasswordResetForm extends React.Component {
   constructor(props) {
     super(props)
@@ -27,7 +23,7 @@ class PasswordResetForm extends React.Component {
   render() {
     const { status, isSubmitting } = this.props
     return (
-      <FormWrapper theme={theme}>
+      <FormWrapper>
         <Form>
           <h3>Reset password</h3>
           <Field
