@@ -29,6 +29,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-facebook-login": "^4.1.1",
+    "react-github-login": "^1.0.3",
     "react-helmet": "^5.2.1",
     "styled-components": "^4.2.0",
     "zxcvbn": "^4.4.2"
