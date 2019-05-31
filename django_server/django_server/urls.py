@@ -12,6 +12,8 @@ from rest_framework.documentation import include_docs_urls
 from rest_auth.registration.views import VerifyEmailView
 from custom_django_rest_auth.views import accountEmailConfirm
 from custom_django_rest_auth.grapheneDRF import AuthenticatedGraphQLView
+# Social auth
+from custom_django_rest_auth.views import FacebookLogin
 
 
 API_TITLE = 'Pastebin API'
@@ -41,4 +43,6 @@ urlpatterns = [
         name='email_confirm_status'),
     path('', TemplateView.as_view(template_name='index.html'), name='index.html'),
     path('app/', TemplateView.as_view(template_name='index.html'), name='index.html'),
+    # Social auth
+    url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
 ]

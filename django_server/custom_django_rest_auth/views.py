@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 import requests
 import json
+# Social auth imports
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
 
 
 @api_view(['GET'])
@@ -33,3 +36,7 @@ def accountEmailConfirm(request, key):
 	else:
 		status = 'failed'
 		return HttpResponseRedirect(reverse('email_confirm_status', args=(status,)))
+
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter
