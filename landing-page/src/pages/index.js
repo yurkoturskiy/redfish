@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { css } from 'linaria'
 
 import Layout from '../components/layout'
@@ -20,16 +20,20 @@ const hero = css`
   }
 `
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <div className={hero} style={{ background: 'papayawhip' }}>
-      <h1>Boilerplate for your application</h1>
-    </div>
-    <div className={hero} style={{ background: 'grey' }}>
-      <h1>Under the hood</h1>
-    </div>
-  </Layout>
-)
+const IndexPage = () => {
+  const [token, setToken] = useState(localStorage.getItem('token'))
+  if (token) window.location.replace('http://localhost:9000/app')
+  return (
+    <Layout>
+      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+      <div className={hero} style={{ background: 'papayawhip' }}>
+        <h1>Boilerplate for your application</h1>
+      </div>
+      <div className={hero} style={{ background: 'grey' }}>
+        <h1>Under the hood</h1>
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
