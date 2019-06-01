@@ -1,8 +1,8 @@
 import React from "react";
-import { withRouter } from "react-router";
 import { graphql } from "react-apollo";
 import { Route, Switch } from "react-router-dom";
 // container components
+import Authentication from "./Authentication";
 import Main from "./landing/MainContainer";
 import Login from "./auth/login/Login";
 import Registration from "./auth/registration/Registration";
@@ -18,43 +18,16 @@ export const endpoints = {
   passwordReset: "/password-reset"
 };
 
-const authEndpoints = ["/profile", "/app"];
-
-const notAuthEndpoints = ["/", "/login", "/registration", "/password-reset"];
-
-class AutoRouter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.checkPermission();
-  }
-  componentDidUpdate(prevProps) {
-    this.checkPermission();
-    console.log(this.props);
-  }
-  checkPermission() {
-    // Auto-redirection
-    if (this.props.isAuth) {
-      for (let i in notAuthEndpoints) {
-        if (this.props.location.pathname === notAuthEndpoints[i]) {
-          console.log("you logged in");
-          this.props.history.push("/app");
-        }
-      }
-    } else {
-      for (let i in authEndpoints) {
-        if (this.props.location.pathname === authEndpoints[i]) {
-          this.props.history.push("/login");
-        }
-      }
-    }
-  }
-  render() {
+function AutoRouter(props) {
+  console.log("is authenticated", props.isAuthenticated);
+  if (props.isAuthenticated) {
+    // Return the app if user is authenticated
     return (
       <React.Fragment>
-        {this.props.children}
+        {props.children}
         <Switch>
           {/* for not loged in users */}
-          <Route exact path="/" component={Main} />
+          <Route exact path="/" component={Application} />
           <Route path="/login" component={Login} />
           <Route path="/registration" component={Registration} />
           <Route
@@ -74,11 +47,20 @@ class AutoRouter extends React.Component {
         </Switch>
       </React.Fragment>
     );
+  } else {
+    // Return the authentication component at first to authenticate user
+    // Redirect to login page if credentials are wrong
+    return (
+      <div>
+        <Authentication />
+        <p>spinner</p>
+      </div>
+    );
   }
 }
 
 export default graphql(appState, {
-  props: ({ data: { isAuth } }) => ({
-    isAuth
+  props: ({ data: { isAuthenticated } }) => ({
+    isAuthenticated
   })
-})(withRouter(AutoRouter));
+})(AutoRouter);

@@ -10,7 +10,7 @@ import gql from "graphql-tag";
 const cache = new InMemoryCache();
 
 const defaultState = () => ({
-  isAuth: localStorage.getItem("token") ? true : false,
+  isAuthenticated: false,
   selectedNotes: []
 });
 
