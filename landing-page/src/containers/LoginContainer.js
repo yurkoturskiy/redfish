@@ -22,7 +22,7 @@ class Login extends FormsMaster {
   }
   componentDidUpdate() {
     if (this.state.isAuth) {
-      window.location.replace('http://localhost:9000/app')
+      window.location.replace('http://localhost:3006/')
     }
   }
   render() {
