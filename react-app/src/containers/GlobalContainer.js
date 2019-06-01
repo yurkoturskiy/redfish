@@ -1,11 +1,7 @@
 import React from "react";
-import { withRouter } from "react-router";
-import { compose, graphql } from "react-apollo";
 // container components
 import AutoRouter from "./AutoRouter";
 import NavigationContainer from "./NavigationContainer";
-// queries
-import appState from "../graphql/appState";
 
 // global style
 import { css } from "linaria";
@@ -27,15 +23,12 @@ export const globals = css`
   }
 `;
 
-class GlobalContainer extends React.Component {
-  render() {
-    console.log("token: " + localStorage.getItem("token"));
-    return (
-      <AutoRouter>
-        <NavigationContainer />
-      </AutoRouter>
-    );
-  }
+function GlobalContainer() {
+  return (
+    <AutoRouter>
+      <NavigationContainer />
+    </AutoRouter>
+  );
 }
 
 export default GlobalContainer;
