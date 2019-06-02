@@ -13,7 +13,7 @@ const logoutQuery = gql`
   }
 `;
 
-function Logout(props) {
+function LogoutBtn(props) {
   const logout = () => {
     props.client.query({ query: logoutQuery });
     localStorage.removeItem("token");
@@ -25,8 +25,8 @@ function Logout(props) {
   return <div onClick={logout}>Logout</div>;
 }
 
-Logout.propTypes = {
+LogoutBtn.propTypes = {
   handleMenuClick: PropTypes.func
 };
 
-export default withApollo(withRouter(Logout));
+export default withApollo(withRouter(LogoutBtn));

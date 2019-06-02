@@ -4,7 +4,7 @@ import icon from "../../../static/icon.svg";
 import Fab from "@material/react-fab";
 import MaterialIcon from "@material/react-material-icon";
 // local components
-import Logout from "./Logout";
+import LogoutBtn from "./LogoutBtn";
 import ProfileBtn from "./ProfileBtn";
 
 export const menuWrapper = css`
@@ -79,7 +79,7 @@ function PreferencesBtn(props) {
           }}
         >
           <ProfileBtn handleMenuClick={handleMenuClick} />
-          <Logout handleMenuClick={handleMenuClick} />
+          <LogoutBtn handleMenuClick={handleMenuClick} />
         </div>
       </div>
     </React.Fragment>
