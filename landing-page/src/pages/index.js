@@ -21,8 +21,6 @@ const hero = css`
 `
 
 const IndexPage = () => {
-  const [token, setToken] = useState(localStorage.getItem('token'))
-  if (token) window.location.replace('http://localhost:3006/')
   return (
     <Layout>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
