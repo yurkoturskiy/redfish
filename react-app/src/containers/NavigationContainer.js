@@ -7,13 +7,6 @@ import AppNavBar from "./application/AppNavBar";
 import logout from "../graphql/logout";
 
 function NavigationContainer(props) {
-  const logout = () => {
-    props.client.query({ query: logout });
-    localStorage.removeItem("token");
-    props.client.cache.reset();
-    props.history.push("/login");
-    console.log("logout");
-  };
   return <AppNavBar />;
 }
 

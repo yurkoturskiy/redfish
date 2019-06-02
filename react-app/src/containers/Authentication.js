@@ -58,7 +58,7 @@ function Authentication(props) {
         style={{ visibility: "hidden" }}
         id="landingFrame"
         onError={landingFrameOnError}
-        src="http://localhost:8000/key-iframe"
+        src="http://localhost:8000/iframe-key"
       />
     );
   }

@@ -3,6 +3,7 @@ import { graphql } from "react-apollo";
 import { Route, Switch } from "react-router-dom";
 // container components
 import Authentication from "./Authentication";
+import Logout from "./Logout";
 import Main from "./landing/MainContainer";
 import Login from "./auth/login/Login";
 import Registration from "./auth/registration/Registration";
@@ -42,6 +43,7 @@ function AutoRouter(props) {
           {/* auth required */}
           <Route path="/profile" component={Profile} />
           <Route path="/app" component={Application} />
+          <Route path="/logout" component={Logout} />
           {/* neutral */}
           <Route path="/product" component={Main} />
         </Switch>

@@ -15,11 +15,11 @@ const logoutQuery = gql`
 
 function LogoutBtn(props) {
   const logout = () => {
-    props.client.query({ query: logoutQuery });
-    localStorage.removeItem("token");
-    props.client.writeData({ data: { isAuth: false } });
-    props.history.push("/login");
-    console.log("logout");
+    // props.client.query({ query: logoutQuery });
+    // localStorage.removeItem("token");
+    // props.client.writeData({ data: { isAuth: false } });
+    props.history.push("/logout");
+    // console.log("logout");
     props.handleMenuClick();
   };
   return <div onClick={logout}>Logout</div>;
