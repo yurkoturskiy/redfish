@@ -1,7 +1,7 @@
 import React from "react";
 // container components
 import AutoRouter from "./AutoRouter";
-import NavigationContainer from "./NavigationContainer";
+import AppNavBar from "./application/AppNavBar";
 
 // global style
 import { css } from "linaria";
@@ -26,7 +26,7 @@ export const globals = css`
 function GlobalContainer() {
   return (
     <AutoRouter>
-      <NavigationContainer />
+      <AppNavBar />
     </AutoRouter>
   );
 }
