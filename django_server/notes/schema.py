@@ -58,15 +58,15 @@ class ColorNode(DjangoObjectType):
         return color
         
 class Query(object):
-    check_token = graphene.Boolean()
+    token_is_valid = graphene.Boolean()
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
     pinned_notes = DjangoFilterConnectionField(NoteNode)
     profile = DjangoFilterConnectionField(UserNode)
     all_colors = DjangoFilterConnectionField(ColorNode)
 
-    def resolve_check_token(self, info, **kwargs):
-        # Check if the token for a user exist
+    def resolve_token_is_valid(self, info, **kwargs):
+        # Check if the token for a user exist and is valid
         try:
             token = Token.objects.get(user=info.context.user)
         except Token.DoesNotExist:
