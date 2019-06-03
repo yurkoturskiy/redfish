@@ -1,4 +1,6 @@
 # cookbook/ingredients/schema.py
+import requests
+import json
 import graphene
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
@@ -255,8 +257,25 @@ class ReorderNote(relay.ClientIDMutation):
         else:
             return GraphQLError("You are not authenticated. Please login first")
 
+class Login(relay.ClientIDMutation):
+    class Input:
+        username = graphene.String(required=True)
+        password = graphene.String(required=True)
+
+    key = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        data = {
+            'username': input['username'],
+            'password': input['password']
+        }
+        response = requests.post('http://localhost:9000/rest-auth/login/', data=data)
+        data = json.loads(response.text)
+        return Login(data['key'])
 
 class Mutation(ObjectType):
+    login = Login.Field()
     add_note = AddNote.Field()
     update_notes_color = UpdateNotesColor.Field()
     update_note = UpdateNote.Field()
