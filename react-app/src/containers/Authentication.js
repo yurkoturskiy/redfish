@@ -1,29 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
 import appState from "../graphql/appState";
+import gql from "graphql-tag";
 
-const localKey = localStorage.getItem("token");
+const tokenIsValidQuery = gql`
+  query {
+    tokenIsValid
+  }
+`;
 
 function Authentication(props) {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [tokenIsValid, setTokenIsValid] = useState();
   const [iframeLandingIsMounted, setIframeLandingIsMounted] = useState();
   const [
     iframeLandingIsUnavailable,
     setIframeLandingIsUnavailable
   ] = useState();
-  const [keyIsReceived, setKeyIsReceived] = useState();
-  const [isAuthenticated, setIsAuthenticated] = useState();
-
-  const landingFrameOnError = () => {
-    setIframeLandingIsUnavailable(true);
-    window.location.replace("http://localhost:8000/login");
-  };
-
-  useEffect(() => {
-    // Set isAuthenticated to true if we already have key in the app local storage
-    if (localKey) {
-      props.client.writeData({ data: { isAuthenticated: true } });
-    }
-  });
 
   useEffect(() => {
     // Add key receiver
@@ -32,14 +25,11 @@ function Authentication(props) {
   }, []);
 
   const receiveKey = e => {
-    // Key receiver
-    var payload = JSON.parse(e.data);
+    // Key receiver from the landing's Iframe
+    var payload = JSON.parse(e.data); // Prepare data
     if (payload.key) {
       // Landing page has a key.
-      // Store it in the app's localstorage and set auth status to true
-      localStorage.setItem("token", payload.key);
-      console.log("token: " + localStorage.getItem("token"));
-      props.client.writeData({ data: { isAuthenticated: true } });
+      setToken(payload.key);
     } else {
       // Landing page has no key
       // Redirect to the login page
@@ -47,9 +37,37 @@ function Authentication(props) {
     }
   };
 
-  if (localKey) {
+  useEffect(() => {
+    // Check if token is valid
+    if (token) {
+      localStorage.setItem("token", token);
+      props.client.query({ query: tokenIsValidQuery }).then(res => {
+        setTokenIsValid(res.data.tokenIsValid);
+      });
+    }
+  }, [token, props.client]);
+
+  useEffect(() => {
+    // Make actions depends on token validity
+    if (tokenIsValid === true) {
+      // Provided token is valid. Allow access
+      localStorage.setItem("token", token);
+      console.log("token: " + localStorage.getItem("token"));
+      props.client.writeData({ data: { isAuthenticated: true } });
+    } else if (tokenIsValid === false) {
+      // Provided token is not valid
+      // Redirect to the login page
+      window.location.replace("http://localhost:8000/login");
+    }
+  }, [tokenIsValid, token, props.client]);
+
+  const landingFrameOnError = () => {
+    setIframeLandingIsUnavailable(true);
+    window.location.replace("http://localhost:8000/login");
+  };
+
+  if (token) {
     // We have already have a key and there is no need to mount landing's localstorage
-    console.log("token: " + localStorage.getItem("token"));
     return null;
   } else {
     return (
