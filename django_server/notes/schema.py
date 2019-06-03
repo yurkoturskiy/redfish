@@ -9,6 +9,9 @@ from .models import Note, Color
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
+# Exceptions
+from graphql import GraphQLError
+
 
 # Graphene will automatically map the Category model's fields onto the CategoryNode.
 # This is configured in the CategoryNode's Meta class (as you can see below)
@@ -34,19 +37,20 @@ class NoteNode(DjangoObjectType):
         if info.context.user == note.owner:
             return note
         # different owner. Not allowed
-        return None
+        return GraphQLError("Access denied")
 
 class UserNode(DjangoObjectType):
     class Meta:
         model = User
         filter_fields = ['username']
-        exclude_fields = ('password', 'is_superuser', 'is_staff',)
+        exclude_fields = ('password', 'is_superuser', 'is_staff', 'note_set')
         interfaces = (relay.Node, )
 
 class ColorNode(DjangoObjectType):
     class Meta:
         model = Color
         filter_fields = ['value']
+        exclude_fields = ('note_set')
         interfaces = (relay.Node,)
 
     @classmethod
@@ -61,31 +65,36 @@ class Query(object):
     token_is_valid = graphene.Boolean()
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
-    pinned_notes = DjangoFilterConnectionField(NoteNode)
-    profile = DjangoFilterConnectionField(UserNode)
+    profile = graphene.Field(UserNode)
     all_colors = DjangoFilterConnectionField(ColorNode)
 
     def resolve_token_is_valid(self, info, **kwargs):
         # Check if the token for a user exist and is valid
-        try:
-            token = Token.objects.get(user=info.context.user)
-        except Token.DoesNotExist:
-            return False
-        return token.user == info.context.user
+        if info.context.user.is_authenticated:
+            try:
+                token = Token.objects.get(user=info.context.user)
+            except Token.DoesNotExist:
+                return False
+            return token.user == info.context.user
+        else:
+            return GraphQLError("User is not authenticated")
 
     def resolve_all_notes(self, info, **kwargs):
         # context will reference to the Django request
-        if not info.context.user.is_authenticated:
-            return Note.objects.none()
-        else:
+        if info.context.user.is_authenticated:
             return Note.objects.filter(owner=info.context.user)
+        else:
+            return Note.objects.none()
 
     def resolve_profile(self, info):
         if info.context.user.is_authenticated:
-            return User.objects.filter(username=info.context.user)
+            print("return profiles")
+            return User.objects.get(username=info.context.user)
+        else:
+            return GraphQLError("You are not authenticated. Please login first")
 
     def resolve_all_colors(self, info):
-        return (Color.objects.all())
+        return Color.objects.all()
 
 #############
 # Mutations #
@@ -101,10 +110,12 @@ class AddNote(relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        if not info.context.user.is_authenticated:
-            return None
-        note = Note.objects.create(owner=info.context.user, **input)
-        return AddNote(new_note=note)
+        if info.context.user.is_authenticated:
+            note = Note.objects.create(owner=info.context.user, **input)
+            return AddNote(new_note=note)            
+        else:
+            return GraphQLError("You are not authenticated. Please login first")
+
 
 class UpdateNotesColor(relay.ClientIDMutation):
     class Input:
@@ -115,15 +126,18 @@ class UpdateNotesColor(relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        local_id = from_global_id(input['id'])[1]
-        try:
-            note = Note.objects.get(id=local_id, owner=info.context.user)
-        except Note.DoesNotExist:
-            return None
-        color = Color.objects.get(label=input['new_color'])
-        note.color = color
-        note.save()
-        return UpdateNotesColor(color)
+        if info.context.user.is_authenticated:
+            local_id = from_global_id(input['id'])[1]
+            try:
+                note = Note.objects.get(id=local_id, owner=info.context.user)
+            except Note.DoesNotExist:
+                return None
+            color = Color.objects.get(label=input['new_color'])
+            note.color = color
+            note.save()
+            return UpdateNotesColor(color)
+        else:
+            return GraphQLError("You are not authenticated. Please login first")
 
 
 class UpdateNote(relay.ClientIDMutation):
@@ -139,16 +153,19 @@ class UpdateNote(relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        local_id = from_global_id(input['id'])[1]
-        input.pop('id', None)
-        try:
-            notes = Note.objects.filter(id=local_id, owner=info.context.user)
-        except Note.DoesNotExist:
-            return None
-        if 'color' in input:
-            input['color'] = Color.objects.get(label=input['color'])
-        notes.update(**input)
-        return UpdateNote(notes[0])
+        if info.context.user.is_authenticated:
+            local_id = from_global_id(input['id'])[1]
+            input.pop('id', None)
+            try:
+                notes = Note.objects.filter(id=local_id, owner=info.context.user)
+            except Note.DoesNotExist:
+                return None
+            if 'color' in input:
+                input['color'] = Color.objects.get(label=input['color'])
+            notes.update(**input)
+            return UpdateNote(notes[0])
+        else:
+            return GraphQLError("You are not authenticated. Please login first")
 
 
 class DeleteNotes(relay.ClientIDMutation):
@@ -159,15 +176,18 @@ class DeleteNotes(relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        local_ids = [from_global_id(i)[1] for i in input['ids']]
-        try:
-            notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
-        except Note.DoesNotExist:
-            return None
-        snapshot = list(notes)
-        Note.objects.fill_gaps(notes)
-        notes.delete()
-        return DeleteNotes(snapshot)
+        if info.context.user.is_authenticated:
+            local_ids = [from_global_id(i)[1] for i in input['ids']]
+            try:
+                notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
+            except Note.DoesNotExist:
+                return None
+            snapshot = list(notes)
+            Note.objects.fill_gaps(notes)
+            notes.delete()
+            return DeleteNotes(snapshot)
+        else:
+            return GraphQLError("You are not authenticated. Please login first")
 
 
 class SwitchPinNotes(relay.ClientIDMutation):
@@ -184,25 +204,28 @@ class SwitchPinNotes(relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        local_ids = [from_global_id(i)[1] for i in input['ids']]
-        try:
-            notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
-        except Note.DoesNotExist:
-            return None
-        prevOrder = []
-        prevPinnedStatus = []
-        for index, note in enumerate(notes):
-            prevOrder.append(note.order)
-            prevPinnedStatus.append(note.pinned)
-            if input['action'] == "pin":
-                Note.objects.pin(note)
-            else:
-                Note.objects.unpin(note)
+        if info.context.user.is_authenticated:
+            local_ids = [from_global_id(i)[1] for i in input['ids']]
+            try:
+                notes = Note.objects.filter(id__in=local_ids, owner=info.context.user)
+            except Note.DoesNotExist:
+                return None
+            prevOrder = []
+            prevPinnedStatus = []
+            for index, note in enumerate(notes):
+                prevOrder.append(note.order)
+                prevPinnedStatus.append(note.pinned)
+                if input['action'] == "pin":
+                    Note.objects.pin(note)
+                else:
+                    Note.objects.unpin(note)
 
-        curPinnedStatus = [note.pinned for note in notes]
-        curOrder = [note.order for note in notes]
+            curPinnedStatus = [note.pinned for note in notes]
+            curOrder = [note.order for note in notes]
 
-        return SwitchPinNotes(input['action'], notes, prevPinnedStatus, curPinnedStatus, prevOrder, curOrder)
+            return SwitchPinNotes(input['action'], notes, prevPinnedStatus, curPinnedStatus, prevOrder, curOrder)
+        else:
+            return GraphQLError("You are not authenticated. Please login first")
 
 
 class ReorderNote(relay.ClientIDMutation):
@@ -218,16 +241,19 @@ class ReorderNote(relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
-        local_id = from_global_id(input['id'])[1]
-        try:
-            note = Note.objects.get(id=local_id, owner=info.context.user)
-        except Note.DoesNotExist:
-            return None
+        if info.context.user.is_authenticated:
+            local_id = from_global_id(input['id'])[1]
+            try:
+                note = Note.objects.get(id=local_id, owner=info.context.user)
+            except Note.DoesNotExist:
+                return None
 
-        old_order = note.order
-        new_order = input['new_order']
-        Note.objects.move(note, new_order)
-        return ReorderNote(note, new_order, old_order, note.pinned)
+            old_order = note.order
+            new_order = input['new_order']
+            Note.objects.move(note, new_order)
+            return ReorderNote(note, new_order, old_order, note.pinned)
+        else:
+            return GraphQLError("You are not authenticated. Please login first")
 
 
 class Mutation(ObjectType):
