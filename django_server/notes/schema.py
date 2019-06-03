@@ -7,10 +7,16 @@ from graphql_relay.node.node import from_global_id
 
 from .models import Note, Color
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 
 
 # Graphene will automatically map the Category model's fields onto the CategoryNode.
 # This is configured in the CategoryNode's Meta class (as you can see below)
+
+###########
+# Queries #
+###########
+
 class NoteNode(DjangoObjectType):
     class Meta:
         model = Note
@@ -52,11 +58,20 @@ class ColorNode(DjangoObjectType):
         return color
         
 class Query(object):
+    check_token = graphene.Boolean()
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
     pinned_notes = DjangoFilterConnectionField(NoteNode)
     profile = DjangoFilterConnectionField(UserNode)
     all_colors = DjangoFilterConnectionField(ColorNode)
+
+    def resolve_check_token(self, info, **kwargs):
+        # Check if the token for a user exist
+        try:
+            token = Token.objects.get(user=info.context.user)
+        except Token.DoesNotExist:
+            return False
+        return token.user == info.context.user
 
     def resolve_all_notes(self, info, **kwargs):
         # context will reference to the Django request
@@ -72,6 +87,9 @@ class Query(object):
     def resolve_all_colors(self, info):
         return (Color.objects.all())
 
+#############
+# Mutations #
+#############
 
 class AddNote(relay.ClientIDMutation):
 
