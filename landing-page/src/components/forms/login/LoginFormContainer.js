@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Formik } from 'formik'
-import axios from 'axios'
 
 import LoginForm from './LoginForm'
 
