@@ -312,9 +312,31 @@ class Registration(relay.ClientIDMutation):
             return None
 
 
+class PasswordReset(relay.ClientIDMutation):
+    class Input:
+        email = graphene.String(required=True)
+
+    detail = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        data = { 'email': input['email'] }
+        response = requests.post(
+            'http://localhost:9000/rest-auth/password/reset/', data=data
+        )
+        if response.status_code == 200:
+            data = json.loads(response.text)
+            return PasswordReset(data['detail'])
+        elif response.status_code == 400:
+            return GraphQLError(response.text)
+        else:
+            return None
+
+
 class Mutation(ObjectType):
     login = Login.Field()
     registration = Registration.Field()
+    password_reset = PasswordReset.Field()
     add_note = AddNote.Field()
     update_notes_color = UpdateNotesColor.Field()
     update_note = UpdateNote.Field()
