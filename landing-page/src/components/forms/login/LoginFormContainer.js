@@ -29,13 +29,11 @@ function LoginFormContainer(props) {
       .catch(error => {
         if (error.graphQLErrors[0]) {
           let error_message = JSON.parse(error.graphQLErrors[0].message)
-          console.log(error_message)
           setErrors(error_message)
           setStatus({ non_field_errors: error_message.non_field_errors })
         } else if (!error.graphQLErrors[0]) {
           setStatus({ non_field_errors: 'Something wrong with a server' })
           console.log('Something wrong with a server')
-          console.log(error.graphQLErrors)
         } else {
           console.log('Error', error.graphQLErrors)
         }
