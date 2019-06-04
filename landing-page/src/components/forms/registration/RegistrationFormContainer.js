@@ -1,10 +1,10 @@
 import React from 'react'
 import { Formik } from 'formik'
 import zxcvbn from 'zxcvbn'
-import FormsMaster from './FormsMaster'
-import RegistrationForm from '../components/forms/RegistrationForm'
+import FormsMaster from '../FormsMaster'
+import RegistrationForm from './RegistrationForm'
 
-class Registration extends FormsMaster {
+class RegistrationFormContainer extends FormsMaster {
   constructor(props) {
     super(props)
     this.endpoint = 'rest-auth/registration/'
@@ -66,4 +66,4 @@ class Registration extends FormsMaster {
   }
 }
 
-export default Registration
+export default RegistrationFormContainer

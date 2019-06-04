@@ -1,10 +1,10 @@
 import React from 'react'
 import { Formik } from 'formik'
 
-import FormsMaster from './FormsMaster'
-import LoginForm from '../components/forms/LoginForm'
+import FormsMaster from '../FormsMaster'
+import LoginForm from './LoginForm'
 
-class Login extends FormsMaster {
+class LoginFormContainer extends FormsMaster {
   constructor(props) {
     super(props)
     this.endpoint = 'rest-auth/login/'
@@ -44,4 +44,4 @@ class Login extends FormsMaster {
   }
 }
 
-export default Login
+export default LoginFormContainer

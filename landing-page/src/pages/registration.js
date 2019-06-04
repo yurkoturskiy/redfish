@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from '../components/layout'
-import Registration from '../containers/RegistrationContainer'
+import RegistrationFormContainer from '../components/forms/registration/RegistrationFormContainer'
 
 export default () => {
   return (
     <Layout>
-      <Registration />
+      <RegistrationFormContainer />
     </Layout>
   )
 }

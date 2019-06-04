@@ -2,12 +2,12 @@ import React from 'react'
 import { Form, Field } from 'formik'
 import { Link } from 'gatsby'
 
-import FormWrapper from './FormWrapper'
-import FormikMaterialTextField from './FormikMaterialTextField'
+import FormWrapper from '../FormWrapper'
+import FormikMaterialTextField from '../FormikMaterialTextField'
 // import Button from '@material/react-button';
 import Button from '@material-ui/core/Button'
-import FacebookAuth from './FacebookAuth'
-import GitHubAuth from './GitHubAuth'
+import FacebookAuth from '../FacebookAuth'
+import GitHubAuth from '../GitHubAuth'
 
 class LoginForm extends React.Component {
   constructor(props) {

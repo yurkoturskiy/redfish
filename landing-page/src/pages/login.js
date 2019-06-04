@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from '../components/layout'
-import Login from '../containers/LoginContainer'
+import LoginFormContainer from '../components/forms/login/LoginFormContainer'
 
 export default () => {
   return (
     <Layout>
-      <Login />
+      <LoginFormContainer />
     </Layout>
   )
 }

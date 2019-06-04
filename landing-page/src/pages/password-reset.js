@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from '../components/layout'
-import PasswordReset from '../containers/PasswordResetContainer'
+import PasswordResetFormContainer from '../components/forms/passwordReset/PasswordResetFormContainer'
 
 export default () => {
   return (
     <Layout>
-      <PasswordReset />
+      <PasswordResetFormContainer />
     </Layout>
   )
 }

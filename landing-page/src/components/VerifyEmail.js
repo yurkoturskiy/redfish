@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 // presentational components
-// actions
-import { verifyEmail, validateFormResponse } from '../../actions/restAuth'
 
 class VerifyEmail extends React.Component {
   constructor(props) {

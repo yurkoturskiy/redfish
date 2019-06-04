@@ -1,10 +1,10 @@
 import React from 'react'
 import { Formik } from 'formik'
 
-import FormsMaster from './FormsMaster'
-import PasswordResetConfirmForm from '../components/forms/PasswordResetConfirmForm'
+import FormsMaster from '../FormsMaster'
+import PasswordResetConfirmForm from './PasswordResetConfirmForm'
 
-class PasswordResetConfirm extends FormsMaster {
+class PasswordResetConfirmFormContainer extends FormsMaster {
   constructor(props) {
     super(props)
     this.endpoint = 'rest-auth/password/reset/confirm/'
@@ -45,4 +45,4 @@ class PasswordResetConfirm extends FormsMaster {
   }
 }
 
-export default PasswordResetConfirm
+export default PasswordResetConfirmFormContainer

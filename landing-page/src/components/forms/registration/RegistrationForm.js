@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Field } from 'formik'
-import FormikMaterialTextField from './FormikMaterialTextField'
-import FormWrapper from './FormWrapper'
+import FormikMaterialTextField from '../FormikMaterialTextField'
+import FormWrapper from '../FormWrapper'
 // import Button from '@material/react-button';
 import Button from '@material-ui/core/Button'
 
