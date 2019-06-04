@@ -1,31 +1,43 @@
 import React, { useState, useEffect } from 'react'
+import { useMutation } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
 import { Formik } from 'formik'
 import axios from 'axios'
 
 import LoginForm from './LoginForm'
 
+const SUBMIT_LOGIN = gql`
+  mutation login($username: String = "", $password: String = "") {
+    login(input: { username: $username, password: $password }) {
+      key
+    }
+  }
+`
+
 function LoginFormContainer(props) {
+  const [submitLogin, { error, data }] = useMutation(SUBMIT_LOGIN)
   const [endpoint] = useState('rest-auth/login/')
   const [isAuth, setIsAuth] = useState(false)
 
   const handleSubmit = (values, { setSubmitting, setErrors, setStatus }) => {
     let preparedValues = prepareValues(values)
-    postValues(preparedValues)
+    submitLogin({ variables: values })
       .then(response => {
         handleResponse(response)
         setSubmitting(false)
       })
       .catch(error => {
-        if (error.response) {
-          console.log(error.response.data)
-          setErrors(error.response.data)
-          setStatus({ non_field_errors: error.response.data.non_field_errors })
-        } else if (error.request) {
+        if (error.graphQLErrors[0]) {
+          let error_message = JSON.parse(error.graphQLErrors[0].message)
+          console.log(error_message)
+          setErrors(error_message)
+          setStatus({ non_field_errors: error_message.non_field_errors })
+        } else if (!error.graphQLErrors[0]) {
           setStatus({ non_field_errors: 'Something wrong with a server' })
           console.log('Something wrong with a server')
-          console.log(error.request)
+          console.log(error.graphQLErrors)
         } else {
-          console.log('Error', error.message)
+          console.log('Error', error.graphQLErrors)
         }
         setSubmitting(false)
       })
@@ -35,22 +47,14 @@ function LoginFormContainer(props) {
     return values
   }
 
-  const postValues = values => {
-    return axios({
-      method: 'post',
-      url: 'http://localhost:9000/' + endpoint,
-      data: values,
-    })
-  }
-
   const handleResponse = response => {
-    localStorage.setItem('token', response.data.key)
+    localStorage.setItem('token', response.data.login.key)
     setIsAuth(true)
     console.log('Token received and saved')
   }
   useEffect(() => {
     if (isAuth) {
-      window.location.replace('http://localhost:3006/')
+      window.location.replace(process.env.REDFISH_APP_URL)
     }
   })
 
