@@ -272,7 +272,12 @@ class Login(relay.ClientIDMutation):
         }
         response = requests.post('http://localhost:9000/rest-auth/login/', data=data)
         data = json.loads(response.text)
-        return Login(data['key'])
+        if response.status_code == 200:
+            return Login(data['key'])
+        elif response.status_code == 400:
+            return GraphQLError(response.text)
+        else:
+            return None
 
 class Mutation(ObjectType):
     login = Login.Field()
