@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
 
@@ -20,25 +20,23 @@ export const globals = css`
   }
 `
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
+function Layout({ children }) {
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
         }
       }
-    `}
-    render={data => (
-      <>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div>{children}</div>
-      </>
-    )}
-  />
-)
+    }
+  `)
+  return (
+    <React.Fragment>
+      <Header siteTitle={data.site.siteMetadata.title} />
+      <div>{children}</div>
+    </React.Fragment>
+  )
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
