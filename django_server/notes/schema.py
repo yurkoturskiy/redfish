@@ -41,6 +41,7 @@ class NoteNode(DjangoObjectType):
         # different owner. Not allowed
         return GraphQLError("Access denied")
 
+
 class UserNode(DjangoObjectType):
     class Meta:
         model = User
@@ -62,7 +63,8 @@ class ColorNode(DjangoObjectType):
         except cls._meta.model.DoesNotExist:
             return None
         return color
-        
+
+  
 class Query(object):
     token_is_valid = graphene.Boolean()
     note = relay.Node.Field(NoteNode)
@@ -257,6 +259,7 @@ class ReorderNote(relay.ClientIDMutation):
         else:
             return GraphQLError("You are not authenticated. Please login first")
 
+
 class Login(relay.ClientIDMutation):
     class Input:
         username = graphene.String(required=True)
@@ -279,8 +282,39 @@ class Login(relay.ClientIDMutation):
         else:
             return None
 
+
+class Registration(relay.ClientIDMutation):
+    class Input:
+        username = graphene.String(required=True)
+        email = graphene.String(required=True)
+        password1 = graphene.String(required=True)
+        password2 = graphene.String(required=True)
+
+    key = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        data = {
+            'username': input['username'],
+            'email': input['email'],
+            'password1': input['password1'],
+            'password2': input['password2'],
+        }
+        response = requests.post(
+            'http://localhost:9000/rest-auth/registration/', data=data
+        )
+        if response.status_code == 200:
+            data = json.loads(response.text)
+            return Registration(data['key'])
+        elif response.status_code == 400:
+            return GraphQLError(response.text)
+        else:
+            return None
+
+
 class Mutation(ObjectType):
     login = Login.Field()
+    registration = Registration.Field()
     add_note = AddNote.Field()
     update_notes_color = UpdateNotesColor.Field()
     update_note = UpdateNote.Field()
