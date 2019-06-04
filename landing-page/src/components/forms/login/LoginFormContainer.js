@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Formik } from 'formik'
-
+// Components
 import LoginForm from './LoginForm'
 
 const SUBMIT_LOGIN = gql`
@@ -19,7 +19,6 @@ function LoginFormContainer(props) {
   const [isAuth, setIsAuth] = useState(false)
 
   const handleSubmit = (values, { setSubmitting, setErrors, setStatus }) => {
-    let preparedValues = prepareValues(values)
     submitLogin({ variables: values })
       .then(response => {
         handleResponse(response)
@@ -40,15 +39,12 @@ function LoginFormContainer(props) {
       })
   }
 
-  const prepareValues = values => {
-    return values
-  }
-
   const handleResponse = response => {
     localStorage.setItem('token', response.data.login.key)
     setIsAuth(true)
     console.log('Token received and saved')
   }
+
   useEffect(() => {
     if (isAuth) {
       window.location.replace(process.env.REDFISH_APP_URL)
