@@ -283,6 +283,29 @@ class Login(relay.ClientIDMutation):
             return None
 
 
+class AuthWithFacebook(relay.ClientIDMutation):
+    class Input:
+        access_token = graphene.String(required=True)
+        # code = graphene.String()
+
+    key = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        print('input', input)
+        data = {
+            'access_token': input['access_token'],
+        }
+        response = requests.post('http://localhost:9000/rest-auth/facebook/', data=data)
+        data = json.loads(response.text)
+        if response.status_code == 200:
+            return AuthWithFacebook(data['key'])
+        elif response.status_code == 400:
+            return GraphQLError(response.text)
+        else:
+            return None
+
+
 class Registration(relay.ClientIDMutation):
     class Input:
         username = graphene.String(required=True)
@@ -386,6 +409,7 @@ class PasswordResetConfirm(relay.ClientIDMutation):
 
 class Mutation(ObjectType):
     login = Login.Field()
+    auth_with_facebook = AuthWithFacebook.Field()
     registration = Registration.Field()
     confirm_email = ConfirmEmail.Field()
     password_reset = PasswordReset.Field()
