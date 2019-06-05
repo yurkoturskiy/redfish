@@ -24,6 +24,11 @@ function Authentication(props) {
     return () => window.removeEventListener("message", receiveKey, false);
   }, []);
 
+  const redirectToLoginPage = () =>
+    window.location.replace(
+      `${process.env.REACT_APP_LANDING_DEV_HOST_NAME}/login`
+    );
+
   const receiveKey = e => {
     // Key receiver from the landing's Iframe
     var payload = JSON.parse(e.data); // Prepare data
@@ -33,7 +38,7 @@ function Authentication(props) {
     } else {
       // Landing page has no key
       // Redirect to the login page
-      window.location.replace("http://localhost:8000/login");
+      redirectToLoginPage();
     }
   };
 
@@ -51,19 +56,19 @@ function Authentication(props) {
     // Make actions depends on token validity
     if (tokenIsValid === true) {
       // Provided token is valid. Allow access
-      localStorage.setItem("token", token);
       console.log("token: " + localStorage.getItem("token"));
       props.client.writeData({ data: { isAuthenticated: true } });
     } else if (tokenIsValid === false) {
       // Provided token is not valid
       // Redirect to the login page
-      window.location.replace("http://localhost:8000/login");
+      localStorage.removeItem("token");
+      redirectToLoginPage();
     }
   }, [tokenIsValid, token, props.client]);
 
   const landingFrameOnError = () => {
     setIframeLandingIsUnavailable(true);
-    window.location.replace("http://localhost:8000/login");
+    redirectToLoginPage();
   };
 
   if (token) {
@@ -76,7 +81,7 @@ function Authentication(props) {
         style={{ visibility: "hidden" }}
         id="landingFrame"
         onError={landingFrameOnError}
-        src="http://localhost:8000/iframe-key"
+        src={`${process.env.REACT_APP_LANDING_DEV_HOST_NAME}/iframe-key`}
       />
     );
   }
