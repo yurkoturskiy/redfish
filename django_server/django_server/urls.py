@@ -31,8 +31,10 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
     # confirm email
+    url(r'^confirm-email/(?P<key>[-:\w]+)/$', 
+        accountEmailConfirm, name="confirm_email"), # Frontend confirmation
     url(r'^rest-auth/registration/account-confirm-email/(?P<key>[-:\w]+)/$', 
-        accountEmailConfirm, name="account_confirm_email"),
+        accountEmailConfirm, name="account_confirm_email"), # Backend confirmation
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
     re_path(r'^account-confirm-email/', VerifyEmailView.as_view(),
          name='account_email_verification_sent'),
