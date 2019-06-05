@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { withApollo } from "react-apollo";
-import appState from "../graphql/appState";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+// Queries
+import { IS_AUTHENTICATED, SWITCH_AUTHENTICATION } from "../graphql/queries";
 
-const tokenIsValidQuery = gql`
-  query {
-    tokenIsValid
+const TOKEN_IS_VALID = gql`
+  query tokenIsValid($key: String!) {
+    tokenIsValid(key: $key)
   }
 `;
 
 function Authentication(props) {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [tokenIsValid, setTokenIsValid] = useState();
   const [iframeLandingIsMounted, setIframeLandingIsMounted] = useState();
   const [
     iframeLandingIsUnavailable,
     setIframeLandingIsUnavailable
   ] = useState();
+
+  const { loading, error, data, refetch } = useQuery(TOKEN_IS_VALID, {
+    variables: { key: token }
+  });
+  const [switchAuthStatus] = useMutation(SWITCH_AUTHENTICATION);
 
   useEffect(() => {
     // Add key receiver
@@ -32,6 +37,7 @@ function Authentication(props) {
   const receiveKey = e => {
     // Key receiver from the landing's Iframe
     var payload = JSON.parse(e.data); // Prepare data
+    console.log("payload", payload);
     if (payload.key) {
       // Landing page has a key.
       setToken(payload.key);
@@ -41,38 +47,36 @@ function Authentication(props) {
       redirectToLoginPage();
     }
   };
-
+  console.log("token", token);
+  console.log("loading", loading);
+  console.log("error", error);
+  console.log("data", data);
   useEffect(() => {
     // Check if token is valid
     if (token) {
-      localStorage.setItem("token", token);
-      props.client
-        .query({ query: tokenIsValidQuery })
-        .then(res => {
-          setTokenIsValid(res.data.tokenIsValid);
-        })
-        .catch(() => setTokenIsValid(false));
+      refetch();
     }
-  }, [token, props.client]);
+  }, [token]);
 
   useEffect(() => {
     // Make actions depends on token validity
-    if (tokenIsValid === true) {
-      // Provided token is valid. Allow access
-      console.log("token: " + localStorage.getItem("token"));
-      console.log("Quering token validation");
-      props.client.writeData({ data: { isAuthenticated: true } });
-    } else if (tokenIsValid === false) {
-      // Provided token is not valid
-      // Redirect to the login page
-      localStorage.removeItem("token");
-      redirectToLoginPage();
+    if (!error && !loading && token) {
+      if (data.tokenIsValid === true) {
+        // Provided token is valid. Save it and allow access
+        localStorage.setItem("token", token);
+        switchAuthStatus({ variables: { status: true } });
+      } else if (data.tokenIsValid === false) {
+        // Provided token is not valid
+        // Redirect to the login page
+        localStorage.removeItem("token");
+        redirectToLoginPage();
+      }
     }
-  }, [tokenIsValid, token, props.client]);
+  }, [data, token, props.client]);
 
   const landingFrameOnError = () => {
     setIframeLandingIsUnavailable(true);
-    redirectToLoginPage();
+    // redirectToLoginPage();
   };
 
   if (token) {
@@ -91,4 +95,4 @@ function Authentication(props) {
   }
 }
 
-export default withApollo(Authentication);
+export default Authentication;

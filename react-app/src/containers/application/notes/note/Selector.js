@@ -1,29 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Mutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 import MaterialIcon from "@material/react-material-icon";
 // queries
 import { SWITCH_NOTES_SELECTOR } from "./../queries";
 
 function Selector(props) {
+  const [isSelected, setIsSelected] = useState(false);
+
+  const [switchNotesSelector] = useMutation(SWITCH_NOTES_SELECTOR, {
+    variables: { id: props.id }
+  });
+
+  const handleSelection = () => {
+    setIsSelected(!isSelected);
+    switchNotesSelector();
+  };
+
   return (
-    <Mutation mutation={SWITCH_NOTES_SELECTOR} variables={{ id: props.id }}>
-      {switchNotesSelector => (
-        <div
-          className="checkmark-container"
-          style={{
-            "--checkmark-background-color": props.isSelected ? "grey" : "white",
-            "--checkmark-opacity": props.isSelected ? 100 : 0
-          }}
-        >
-          <MaterialIcon
-            className="checkmark-material-icon"
-            onClick={switchNotesSelector}
-            icon="check_circle"
-          />
-        </div>
-      )}
-    </Mutation>
+    <div
+      className="checkmark-container"
+      style={{
+        "--checkmark-background-color": isSelected ? "grey" : "white",
+        "--checkmark-opacity": isSelected ? 100 : 0
+      }}
+    >
+      <MaterialIcon
+        className="checkmark-material-icon"
+        onClick={handleSelection}
+        icon="check_circle"
+      />
+    </div>
   );
 }
 

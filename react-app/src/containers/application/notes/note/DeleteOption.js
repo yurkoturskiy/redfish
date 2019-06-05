@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { css } from "linaria";
-import { Mutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 import MaterialIcon from "@material/react-material-icon";
 // queries
 import { ALL_NOTES, DELETE_NOTES } from "./../queries";
@@ -12,6 +12,7 @@ export const deleteOption = css`
 
 function DeleteOption(props) {
   const handleDeletion = (
+    // Update function
     cache,
     {
       data: {
@@ -61,20 +62,17 @@ function DeleteOption(props) {
     cache.writeQuery({ query: ALL_NOTES, data: cacheData });
   };
 
+  const [deleteNotes] = useMutation(DELETE_NOTES, {
+    variables: { ids: [props.node.id] },
+    update: handleDeletion
+  });
+
   return (
-    <Mutation
-      mutation={DELETE_NOTES}
-      update={handleDeletion}
-      variables={{ ids: [props.node.id] }}
-    >
-      {deleteNotes => (
-        <MaterialIcon
-          className={deleteOption}
-          onClick={deleteNotes}
-          icon="delete"
-        />
-      )}
-    </Mutation>
+    <MaterialIcon
+      className={deleteOption}
+      onClick={deleteNotes}
+      icon="delete"
+    />
   );
 }
 

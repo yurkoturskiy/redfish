@@ -6,6 +6,8 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { withClientState } from "apollo-link-state";
 import { RestLink } from "apollo-link-rest";
 import gql from "graphql-tag";
+// Queries
+import { IS_AUTHENTICATED } from "./graphql/queries";
 
 const cache = new InMemoryCache();
 
@@ -44,6 +46,12 @@ const apolloClient = new ApolloClient({
   cache,
   resolvers: {
     Mutation: {
+      switchAuthentication: (_, { status }, { cache }) => {
+        cache.writeData({
+          query: IS_AUTHENTICATED,
+          data: { isAuthenticated: status }
+        });
+      },
       switchNotesSelector: (_, { id }, { cache }) => {
         const query = gql`
           query {

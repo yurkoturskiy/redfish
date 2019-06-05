@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { css } from "linaria";
-import { Mutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 // queries
 import { ALL_NOTES, ADD_NOTE } from "./queries";
 
@@ -146,76 +146,73 @@ function AddNote() {
       Math.max(56, contentInputRef.current.scrollHeight + diff) + "px";
     setContent(event.target.value);
   };
+
+  const [addNote] = useMutation(ADD_NOTE, { update: updateCache });
+
   return (
-    <Mutation mutation={ADD_NOTE} update={updateCache}>
-      {(addNote, { data }) => (
-        <React.Fragment>
-          <div
-            className={wrapper}
-            style={{
-              "--add-note-wrapper-position": isActive ? "fixed" : "absolute",
-              "--add-note-wrapper-top": isActive ? "20vh" : "20px",
-              "--add-note-wrapper-box-shadow": isActive
-                ? "0px 3px 26px 0px rgba(0,0,0,0.3)"
-                : "0px 1px 1px 0px rgba(0,0,0,0.2)"
-            }}
-            onClick={() => setIsActive(true)}
-          >
-            <form
-              onSubmit={async e => {
-                e.preventDefault();
-                await addNote({
-                  variables: { title: title, content: content }
-                });
-                setIsActive(false);
-                reset();
-              }}
-            >
-              {isActive && (
-                <label className={titleLabel}>{title === "" && "Title"}</label>
-              )}
-              <textarea
-                className={titleInput}
-                style={{
-                  "--add-note-title-input-display": isActive ? "block" : "none"
-                }}
-                id="title"
-                value={title}
-                type="text"
-                onChange={e => onTitleChange(e)}
-                ref={titleInputRef}
-              />
-              <label className={contentLabel}>
-                {content === "" && "Take a note..."}
-              </label>
-              <textarea
-                className={contentInput}
-                data-adaptheight
-                id="content"
-                value={content}
-                type="text"
-                onChange={e => onContentChange(e)}
-                ref={contentInputRef}
-              />
-              <button
-                type="submit"
-                className={submitButton}
-                style={{
-                  "--add-note-submit-button-display": isActive
-                    ? "block"
-                    : "none"
-                }}
-              >
-                Add Nodo
-              </button>
-            </form>
-          </div>
+    <React.Fragment>
+      <div
+        className={wrapper}
+        style={{
+          "--add-note-wrapper-position": isActive ? "fixed" : "absolute",
+          "--add-note-wrapper-top": isActive ? "20vh" : "20px",
+          "--add-note-wrapper-box-shadow": isActive
+            ? "0px 3px 26px 0px rgba(0,0,0,0.3)"
+            : "0px 1px 1px 0px rgba(0,0,0,0.2)"
+        }}
+        onClick={() => setIsActive(true)}
+      >
+        <form
+          onSubmit={async e => {
+            e.preventDefault();
+            await addNote({
+              variables: { title: title, content: content }
+            });
+            setIsActive(false);
+            reset();
+          }}
+        >
           {isActive && (
-            <div className={background} onClick={() => setIsActive(false)} />
+            <label className={titleLabel}>{title === "" && "Title"}</label>
           )}
-        </React.Fragment>
+          <textarea
+            className={titleInput}
+            style={{
+              "--add-note-title-input-display": isActive ? "block" : "none"
+            }}
+            id="title"
+            value={title}
+            type="text"
+            onChange={e => onTitleChange(e)}
+            ref={titleInputRef}
+          />
+          <label className={contentLabel}>
+            {content === "" && "Take a note..."}
+          </label>
+          <textarea
+            className={contentInput}
+            data-adaptheight
+            id="content"
+            value={content}
+            type="text"
+            onChange={e => onContentChange(e)}
+            ref={contentInputRef}
+          />
+          <button
+            type="submit"
+            className={submitButton}
+            style={{
+              "--add-note-submit-button-display": isActive ? "block" : "none"
+            }}
+          >
+            Add Nodo
+          </button>
+        </form>
+      </div>
+      {isActive && (
+        <div className={background} onClick={() => setIsActive(false)} />
       )}
-    </Mutation>
+    </React.Fragment>
   );
 }
 

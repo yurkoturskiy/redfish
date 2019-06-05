@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { css } from "linaria";
-import { Mutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
+
 // queries
 import { ALL_NOTES, UPDATE_NOTES_COLOR } from "./../queries";
 
@@ -23,23 +24,21 @@ function ColorPoint(props) {
     });
     cache.writeQuery({ query: ALL_NOTES, data: cacheData });
   };
+
+  const [updateNotesColor] = useMutation(UPDATE_NOTES_COLOR, {
+    variables: { id: props.noteId, newColor: props.color.label },
+    update: updateNote
+  });
+
   return (
-    <Mutation
-      mutation={UPDATE_NOTES_COLOR}
-      update={updateNote}
-      variables={{ id: props.noteId, newColor: props.color.label }}
-    >
-      {(updateNotesColor, { data }) => (
-        <div
-          className={colorOption}
-          style={{ backgroundColor: `#${props.color.value}` }}
-          onClick={async e => {
-            e.preventDefault();
-            await updateNotesColor();
-          }}
-        />
-      )}
-    </Mutation>
+    <div
+      className={colorOption}
+      style={{ backgroundColor: `#${props.color.value}` }}
+      onClick={async e => {
+        e.preventDefault();
+        await updateNotesColor();
+      }}
+    />
   );
 }
 

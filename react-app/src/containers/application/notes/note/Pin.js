@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
-import { Mutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 // Queries
 import { ALL_NOTES, SWITCH_PIN_NOTES } from "../queries";
 // Context
 import { NoteNode } from "./Note";
-import { Cursors } from "../Notes";
 
 function Pin() {
   /* Icon for pin/unpin action */
   const node = useContext(NoteNode);
-  const cursors = useContext(Cursors);
   const updateCache = (cache, { data: { switchPinNotes } }) => {
     const cacheData = cache.readQuery({ query: ALL_NOTES });
     const {
@@ -48,18 +46,16 @@ function Pin() {
     });
     cache.writeQuery({ query: ALL_NOTES, data: cacheData });
   };
-  return (
-    <Mutation
-      mutation={SWITCH_PIN_NOTES}
-      variables={{
-        ids: [node.id],
-        action: node.pinned ? "unpin" : "pin"
-      }}
-      update={updateCache}
-    >
-      {switchPinNotes => <div className="pin" onClick={switchPinNotes} />}
-    </Mutation>
-  );
+
+  const [switchPinNotes] = useMutation(SWITCH_PIN_NOTES, {
+    variables: {
+      ids: [node.id],
+      action: node.pinned ? "unpin" : "pin"
+    },
+    update: updateCache
+  });
+
+  return <div className="pin" onClick={switchPinNotes} />;
 }
 
 export default Pin;

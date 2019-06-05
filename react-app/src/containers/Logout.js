@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
 import axios from "axios";
 
@@ -24,13 +23,8 @@ function Logout(props) {
       url: "http://localhost:9000/" + "rest-auth/logout/",
       headers: { authorization: `Token ${localStorage.getItem("token")}` }
     }).then(res => console.log("responese", res));
-    // props.client
-    //   .query({ query, variables: { key: localStorage.getItem("token") } })
-    //   .then(response => {
-    //     console.log(response);
-    //   });
+
     localStorage.removeItem("token");
-    // props.client.writeData({ data: { isAuthenticated: false } });
     window.addEventListener("message", landingFrameLogoutResponse, false);
     return () =>
       window.removeEventListener("message", landingFrameLogoutResponse, false);
@@ -44,7 +38,7 @@ function Logout(props) {
         "http://localhost:8000/"
       );
     }
-  }, [landingFrameIsMounted, props.client]);
+  }, [landingFrameIsMounted]);
   const landingFrameOnLoad = () => {
     console.log("frame is loaded");
   };
@@ -71,4 +65,4 @@ function Logout(props) {
   );
 }
 
-export default withApollo(Logout);
+export default Logout;
