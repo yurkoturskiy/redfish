@@ -1,6 +1,7 @@
 import rest_framework
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import requests
@@ -19,23 +20,15 @@ def api_root(request, format=None):
 
 def accountEmailConfirm(request, key):
 	''' Confirm user email and redirect to the email_confirm_status page'''
-	url = (
-		'https://' if request.is_secure() else 'http://'
-		+ request.META['HTTP_HOST'] 
-		+ '/rest-auth/registration/verify-email/'
-	)
+	protocol = 'https://' if request.is_secure() else 'http://'
+	app_domain = request.META['HTTP_HOST']
+	url = f'{protocol}{app_domain}/rest-auth/registration/verify-email/'
 	headers = {'content-type': 'application/json'}
 	data = {'key': key}
 	r = requests.post(url, data=json.dumps(data), headers=headers)
-	print(r.text)
-	# response = json.loads(r.text)
-	# print(response['detail'])
-	if r.status_code == 200:
-		status = 'ok'
-		return HttpResponseRedirect(reverse('email_confirm_status', args=(status,)))
-	else:
-		status = 'failed'
-		return HttpResponseRedirect(reverse('email_confirm_status', args=(status,)))
+	current_site = get_current_site(request)
+	status = 'ok' if r.status_code == 200 else 'failed'
+	return HttpResponseRedirect(f'http://{current_site}/confirm-email/status/{status}/')
 
 
 class FacebookLogin(SocialLoginView):
