@@ -66,22 +66,19 @@ class ColorNode(DjangoObjectType):
 
   
 class Query(object):
-    token_is_valid = graphene.Boolean()
+    token_is_valid = graphene.Boolean(key=graphene.String())
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
     profile = graphene.Field(UserNode)
     all_colors = DjangoFilterConnectionField(ColorNode)
 
-    def resolve_token_is_valid(self, info, **kwargs):
+    def resolve_token_is_valid(self, info, key):
         # Check if the token for a user exist and is valid
-        if info.context.user.is_authenticated:
-            try:
-                token = Token.objects.get(user=info.context.user)
-            except Token.DoesNotExist:
-                return False
-            return token.user == info.context.user
-        else:
+        try:
+            Token.objects.get(key=key)
+        except Token.DoesNotExist:
             return False
+        return True
 
     def resolve_all_notes(self, info, **kwargs):
         # context will reference to the Django request
