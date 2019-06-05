@@ -9,13 +9,11 @@ const Profile = () => (
     query={gql`
       {
         profile {
-          edges {
-            node {
-              id
-              username
-              email
-            }
-          }
+          id
+          username
+          email
+          firstName
+          lastName
         }
       }
     `}
@@ -27,15 +25,15 @@ const Profile = () => (
         return <p>Error :(</p>;
       }
       console.log(data);
-      return data.profile.edges.map(({ node }) => (
-        <div key={node.id}>
-          <p>{node.id}</p>
-          <p>{node.username}</p>
-          <p>{node.email}</p>
-          <p>{node.firstName}</p>
-          <p>{node.lastName}</p>
+      return (
+        <div key={data.profile.id}>
+          <p>{data.profile.id}</p>
+          <p>{data.profile.username}</p>
+          <p>{data.profile.email}</p>
+          <p>{data.profile.firstName}</p>
+          <p>{data.profile.lastName}</p>
         </div>
-      ));
+      );
     }}
   </Query>
 );
