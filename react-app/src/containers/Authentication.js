@@ -46,9 +46,12 @@ function Authentication(props) {
     // Check if token is valid
     if (token) {
       localStorage.setItem("token", token);
-      props.client.query({ query: tokenIsValidQuery }).then(res => {
-        setTokenIsValid(res.data.tokenIsValid);
-      });
+      props.client
+        .query({ query: tokenIsValidQuery })
+        .then(res => {
+          setTokenIsValid(res.data.tokenIsValid);
+        })
+        .catch(() => setTokenIsValid(false));
     }
   }, [token, props.client]);
 
@@ -57,6 +60,7 @@ function Authentication(props) {
     if (tokenIsValid === true) {
       // Provided token is valid. Allow access
       console.log("token: " + localStorage.getItem("token"));
+      console.log("Quering token validation");
       props.client.writeData({ data: { isAuthenticated: true } });
     } else if (tokenIsValid === false) {
       // Provided token is not valid
