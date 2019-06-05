@@ -81,7 +81,7 @@ class Query(object):
                 return False
             return token.user == info.context.user
         else:
-            return GraphQLError("User is not authenticated")
+            return False
 
     def resolve_all_notes(self, info, **kwargs):
         # context will reference to the Django request
