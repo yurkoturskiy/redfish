@@ -6,14 +6,14 @@ from graphene_django.views import GraphQLView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import status
 import json
 
 class AuthenticatedGraphQLView(GraphQLView):
   authentication_classes = [TokenAuthentication]
-  permission_classes = [IsAuthenticated]
+  permission_classes = [AllowAny]
 
   def authenticate_request(self, request):
     for auth_class in self.authentication_classes:
