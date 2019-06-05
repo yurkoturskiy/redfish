@@ -90,10 +90,7 @@ class NoteManager(models.Manager):
             self.fill_gaps([obj])
             obj.pinned = False
             # Get our current max order number
-            results = self.filter(owner=obj.owner).aggregate(Max('order'))
-            end_order = results['order__max'] + 1
-            if end_order is None:
-                end_order = 0
+            end_order = len(self.filter(owner=obj.owner, pinned=False))
             obj.order = end_order # Set order to the end of unpinned
             obj.save()
             self.move(obj, 0) # Move to the beginning
@@ -105,15 +102,8 @@ class NoteManager(models.Manager):
 
         with transaction.atomic():
             # Get our current max order number
-            results = self.filter(owner=kwargs['owner']).aggregate(Max('order'))
-
-            # Increment and use it for our new object
-            current_order = results['order__max'] + 1
-            if current_order is None:
-                current_order = 0
-
-            value = current_order
-            instance.order = value
+            end_order = len(self.filter(owner=kwargs['owner'], pinned=False))
+            instance.order = end_order
             instance.save()
             self.move(instance, 0) # move the order to 0
 
