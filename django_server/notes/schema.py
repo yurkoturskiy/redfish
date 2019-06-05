@@ -303,9 +303,31 @@ class Registration(relay.ClientIDMutation):
         response = requests.post(
             'http://localhost:9000/rest-auth/registration/', data=data
         )
-        if response.status_code == 200:
+        if response.status_code != 400:
             data = json.loads(response.text)
             return Registration(data['key'])
+        elif response.status_code == 400:
+            return GraphQLError(response.text)
+        else:
+            return None
+
+
+class ConfirmEmail(relay.ClientIDMutation):
+    class Input:
+        key = graphene.String(required=True)
+
+    detail = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        data = { 'key': input['key'] }
+        response = requests.post(
+            'http://localhost:9000/rest-auth/registration/verify-email/', 
+            data=data
+        )
+        if response.status_code != 400:
+            data = json.loads(response.text)
+            return ConfirmEmail(data['detail'])
         elif response.status_code == 400:
             return GraphQLError(response.text)
         else:
@@ -336,6 +358,7 @@ class PasswordReset(relay.ClientIDMutation):
 class Mutation(ObjectType):
     login = Login.Field()
     registration = Registration.Field()
+    confirm_email = ConfirmEmail.Field()
     password_reset = PasswordReset.Field()
     add_note = AddNote.Field()
     update_notes_color = UpdateNotesColor.Field()
