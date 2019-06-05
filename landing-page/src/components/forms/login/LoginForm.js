@@ -6,7 +6,7 @@ import FormWrapper from '../FormWrapper'
 import FormikMaterialTextField from '../FormikMaterialTextField'
 // import Button from '@material/react-button';
 import Button from '@material-ui/core/Button'
-import FacebookAuth from '../FacebookAuth'
+import AuthWithFacebook from '../AuthWithFacebook'
 import GitHubAuth from '../GitHubAuth'
 
 class LoginForm extends React.Component {
@@ -66,7 +66,7 @@ class LoginForm extends React.Component {
               Submit
             </Button>
           </div>
-          <FacebookAuth />
+          <AuthWithFacebook />
         </Form>
         <GitHubAuth />
       </FormWrapper>
