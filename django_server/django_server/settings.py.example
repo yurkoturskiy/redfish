@@ -26,28 +26,31 @@ SECRET_KEY = '$n2386guk2+4j@3+uqu^#np62$n6aickkg9onkuf%-!_z885z1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework',
-    'rest_framework.authtoken',
-    'snippets.apps.SnippetsConfig',
+    'notes',
+    'custom_django_rest_auth',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
     'rest_auth',
     'corsheaders',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
     'rest_auth.registration',
+    'graphene_django',
 ]
 
 SITE_ID = 1
@@ -95,7 +98,11 @@ ROOT_URLCONF = 'django_server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../react-app/build')],
+        'DIRS': [
+            os.path.join(BASE_DIR, '../react-app/build'),
+            # os.path.join(BASE_DIR, '../react-note-app/build'),
+            # os.path.join(BASE_DIR, '../landing-page/public'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,6 +117,9 @@ TEMPLATES = [
 
 STATICFILES_DIRS = [
   os.path.join(BASE_DIR, '../react-app/build/static'),
+  os.path.join(BASE_DIR, '../react-note-app/build/static'),
+  os.path.join(BASE_DIR, '../landing-page/public/'),
+  os.path.join(BASE_DIR, '../landing-page/public/static'),
 ]
 
 
@@ -174,3 +184,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+GRAPHENE = {
+    'SCHEMA': 'django_server.schema.schema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'custom_django_rest_auth.grapheneDRF.AuthenticatedGraphQLView',
+    ),
+}
+
+FIXTURE_DIRS = (
+   BASE_DIR, '/fixtures/',
+)
