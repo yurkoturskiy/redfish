@@ -7,6 +7,8 @@ from django.urls import reverse
 import requests
 import json
 # Social auth imports
+from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
 
@@ -33,3 +35,9 @@ def accountEmailConfirm(request, key):
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter
+
+
+class GithubLogin(SocialLoginView):
+    adapter_class = GitHubOAuth2Adapter
+    callback_url = "http://localhost:8000/"
+    client_class = OAuth2Client

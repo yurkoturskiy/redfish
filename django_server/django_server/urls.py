@@ -14,8 +14,7 @@ from rest_framework.documentation import include_docs_urls
 from rest_auth.registration.views import VerifyEmailView
 from custom_django_rest_auth.views import accountEmailConfirm
 # Social auth
-from custom_django_rest_auth.views import FacebookLogin
-
+from custom_django_rest_auth.views import FacebookLogin, GithubLogin
 
 API_TITLE = 'Pastebin API'
 API_DESCRIPTION = 'A Web API for django-rest-auth.'
@@ -49,5 +48,6 @@ urlpatterns = [
     path('app/', TemplateView.as_view(template_name='index.html'), name='index.html'),
     # Social auth
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
+    url(r'^rest-auth/github/$', GithubLogin.as_view(), name='github_login'),
     url(r'^accounts/', include('allauth.urls'), name='socialaccount_signup'),
 ]
