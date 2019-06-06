@@ -4,7 +4,7 @@ import { css } from "linaria";
 import { Mutation } from "react-apollo";
 import MaterialIcon from "@material/react-material-icon";
 // queries
-import { ALL_NOTES, DELETE_NOTES } from "./../queries";
+import { ALL_NOTES, DELETE_NOTES } from "../../../../graphql/queries";
 
 export const deleteOption = css`
   line-height: 48px;

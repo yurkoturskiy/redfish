@@ -4,7 +4,7 @@ import { css } from "linaria";
 import { Query } from "react-apollo";
 import MaterialIcon from "@material/react-material-icon";
 // queries
-import { ALL_COLORS } from "./../queries";
+import { ALL_COLORS } from "../../../../graphql/queries";
 // components
 import ColorPoint from "./ColorPoint";
 

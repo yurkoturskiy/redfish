@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { css } from "linaria";
 import { Mutation } from "react-apollo";
 // queries
-import { ALL_NOTES, UPDATE_NOTES_COLOR } from "./../queries";
+import { ALL_NOTES, UPDATE_NOTES_COLOR } from "../../../../graphql/queries";
 
 export const colorOption = css`
   box-shadow: inset 0px 0px 0px 2px rgba(255,255,255,1);

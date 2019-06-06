@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Mutation } from "react-apollo";
 // Queries
-import { ALL_NOTES, SWITCH_PIN_NOTES } from "../queries";
+import { ALL_NOTES, SWITCH_PIN_NOTES } from "../../../../graphql/queries";
 // Context
 import { NoteNode } from "./Note";
 import { Cursors } from "../Notes";

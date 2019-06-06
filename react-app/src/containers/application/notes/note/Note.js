@@ -13,7 +13,7 @@ import {
   SWITCH_NOTES_SELECTOR,
   DELETE_NOTES,
   SELECTED_NOTES
-} from "./../queries";
+} from "../../../../graphql/queries";
 
 export const container = css`
   width: 256px;

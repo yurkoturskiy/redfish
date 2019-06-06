@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Mutation } from "react-apollo";
 import MaterialIcon from "@material/react-material-icon";
 // queries
-import { SWITCH_NOTES_SELECTOR } from "./../queries";
+import { SWITCH_NOTES_SELECTOR } from "../../../../graphql/queries";
 
 function Selector(props) {
   return (

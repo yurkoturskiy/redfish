@@ -7,7 +7,11 @@ import DraggableMasonryLayout from "./DraggableMasonryLayout";
 import SelectedNotesOptionsBar from "./SelectedNotesOptionsBar/Container";
 import Topics from "./topics/Container";
 // queries
-import { ALL_NOTES, SELECTED_NOTES, REORDER_NOTE } from "./queries";
+import {
+  ALL_NOTES,
+  SELECTED_NOTES,
+  REORDER_NOTE
+} from "../../../graphql/queries";
 
 export const Cursors = React.createContext();
 

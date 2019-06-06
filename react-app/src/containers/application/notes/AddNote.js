@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { css } from "linaria";
 import { Mutation } from "react-apollo";
 // queries
-import { ALL_NOTES, ADD_NOTE } from "./queries";
+import { ALL_NOTES, ADD_NOTE } from "../../../graphql/queries";
 
 export const wrapper = css`
   position: var(--add-note-wrapper-position);
