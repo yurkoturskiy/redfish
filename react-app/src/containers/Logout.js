@@ -1,71 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
 import axios from "axios";
-
-export const query = gql`
-  query($key: String!) {
-    logout(input: { token: $key })
-      @rest(type: "Logout", method: "POST", path: "rest-auth/logout/") {
-      __typename
-    }
-  }
-`;
+// Queries
+import { LOGOUT } from "../graphql/queries";
 
 function Logout(props) {
-  const [landingFrameIsMounted, setLandingFrameIsMounted] = useState(false);
-  const [landingFrameIsUnavailable, setLandingFrameIsUnavailable] = useState(
-    false
-  );
+  /*
+   * This component live on /logout route
+   * The algorithm:
+   * - Send logout request
+   * - Remove token from the app's localStorage
+   * - Mount landing's iframe with postMessage channel
+   * --- if the iframe is failed to mount redirect to the landing
+   * --- if ok send request to delete token from landing's localStorage
+   * --- on response redirect to the landing page
+   */
+
+  const iframeRef = useRef();
+  const [landingFrameIsMounted, setLandingFrameIsMounted] = useState();
+  const [landingFrameIsUnavailable, setLandingFrameIsUnavailable] = useState();
+
   useEffect(() => {
-    console.log("loging out");
-    axios({
-      method: "post",
-      url: "http://localhost:9000/" + "rest-auth/logout/",
-      headers: { authorization: `Token ${localStorage.getItem("token")}` }
-    }).then(res => console.log("responese", res));
-    // props.client
-    //   .query({ query, variables: { key: localStorage.getItem("token") } })
-    //   .then(response => {
-    //     console.log(response);
-    //   });
+    // Logout request on componentDidMount
+    props.client.mutate({
+      mutation: LOGOUT,
+      variables: { key: localStorage.getItem("token") }
+    });
     localStorage.removeItem("token");
-    // props.client.writeData({ data: { isAuthenticated: false } });
-    window.addEventListener("message", landingFrameLogoutResponse, false);
+
+    // Add event listener for receiving delete token response from landing
+    window.addEventListener("message", landingFrameListener, false);
     return () =>
-      window.removeEventListener("message", landingFrameLogoutResponse, false);
+      // Cleanup event
+      window.removeEventListener("message", landingFrameListener, false);
   }, []);
+
   useEffect(() => {
-    if (landingFrameIsMounted) {
-      console.log("sending logout request");
-      let landingFrameElement = document.getElementById("landingFrame");
-      landingFrameElement.contentWindow.postMessage(
+    if (landingFrameIsUnavailable) redirectToLandingPage();
+
+    if (landingFrameIsMounted)
+      // Send request to remove token from the landing's localStorage
+      iframeRef.current.contentWindow.postMessage(
         "logout",
-        "http://localhost:8000/"
+        process.env.REACT_APP_LANDING_DEV_HOST_NAME
       );
-    }
-  }, [landingFrameIsMounted, props.client]);
-  const landingFrameOnLoad = () => {
-    console.log("frame is loaded");
-  };
+  }, [landingFrameIsMounted, landingFrameIsUnavailable, props.client]);
+
   const landingFrameOnError = () => setLandingFrameIsUnavailable(true);
-  const landingFrameLogoutResponse = e => {
-    console.log(e);
+
+  const landingFrameListener = e => {
     if (e.data === "mounted") setLandingFrameIsMounted(true);
-    if (e.data === "succeed") {
-      console.log("logout succeed");
-      window.location.replace("http://localhost:8000/");
-    }
+    if (e.data === "succeed") redirectToLandingPage();
   };
+
+  const redirectToLandingPage = () =>
+    window.location.replace(process.env.REACT_APP_LANDING_DEV_HOST_NAME);
+
   return (
     <React.Fragment>
       <div>logging out</div>
       <iframe
         style={{ visibility: "hidden" }}
-        id="landingFrame"
-        onLoad={landingFrameOnLoad}
+        ref={iframeRef}
         onError={landingFrameOnError}
-        src="http://localhost:8000/iframe-logout"
+        src={`${process.env.REACT_APP_LANDING_DEV_HOST_NAME}/iframe-logout`}
       />
     </React.Fragment>
   );
