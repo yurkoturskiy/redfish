@@ -4,12 +4,6 @@ import { Route, Switch } from "react-router-dom";
 // container components
 import Authentication from "./Authentication";
 import Logout from "./Logout";
-import Main from "./landing/MainContainer";
-import Login from "./auth/login/Login";
-import Registration from "./auth/registration/Registration";
-import EmailConfirmStatus from "./auth/registration/EmailConfirmStatus";
-import PasswordReset from "./auth/passwordReset/PasswordReset";
-import PasswordResetConfirm from "./auth/passwordReset/PasswordResetConfirm";
 import Application from "./application/Application";
 import Profile from "./profile/Profile";
 // graphql
@@ -27,25 +21,10 @@ function AutoRouter(props) {
       <React.Fragment>
         {props.children}
         <Switch>
-          {/* for not loged in users */}
           <Route exact path="/" component={Application} />
-          <Route path="/login" component={Login} />
-          <Route path="/registration" component={Registration} />
-          <Route
-            path="/email-confirm-status/:status/"
-            component={EmailConfirmStatus}
-          />
-          <Route exact path="/password-reset" component={PasswordReset} />
-          <Route
-            path="/password-reset/confirm/:uid/:token"
-            component={PasswordResetConfirm}
-          />
-          {/* auth required */}
           <Route path="/profile" component={Profile} />
           <Route path="/app" component={Application} />
           <Route path="/logout" component={Logout} />
-          {/* neutral */}
-          <Route path="/product" component={Main} />
         </Switch>
       </React.Fragment>
     );
