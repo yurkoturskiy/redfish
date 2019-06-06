@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 const query = gql`
-  query {
-    tokenIsValid
+  query tokenIsValid($key: String!) {
+    tokenIsValid(key: $key)
   }
 `
 
 function Authentication(props) {
-  const { loading, data } = useQuery(query)
+  const [key] = useState(localStorage.getItem('token'))
+  const { loading, data } = useQuery(query, {
+    variables: { key: key ? key : '' },
+  })
   useEffect(() => {
     if (data.tokenIsValid) window.location.replace(process.env.REDFISH_APP_URL)
     else localStorage.removeItem('token')

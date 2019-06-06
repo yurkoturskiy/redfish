@@ -4,8 +4,8 @@ import appState from "../graphql/appState";
 import gql from "graphql-tag";
 
 const tokenIsValidQuery = gql`
-  query {
-    tokenIsValid
+  query tokenIsValid($key: String!) {
+    tokenIsValid(key: $key)
   }
 `;
 
@@ -47,7 +47,7 @@ function Authentication(props) {
     if (token) {
       localStorage.setItem("token", token);
       props.client
-        .query({ query: tokenIsValidQuery })
+        .query({ query: tokenIsValidQuery, variables: { key: token } })
         .then(res => {
           setTokenIsValid(res.data.tokenIsValid);
         })
