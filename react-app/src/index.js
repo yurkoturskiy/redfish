@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 // container components
 import GlobalContainer from "./containers/GlobalContainer";
-import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloProvider } from "react-apollo";
 import { Router } from "react-router-dom";
 // others
 import * as serviceWorker from "./serviceWorker";

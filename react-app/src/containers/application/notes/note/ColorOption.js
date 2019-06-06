@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { css } from "linaria";
-import { useQuery } from "@apollo/react-hooks";
+import { Query } from "react-apollo";
 import MaterialIcon from "@material/react-material-icon";
 // queries
 import { ALL_COLORS } from "./../queries";
@@ -36,23 +36,22 @@ export const colorsBox = css`
 `;
 
 function ColorOption(props) {
-  const {
-    loading,
-    error,
-    data: { allColors }
-  } = useQuery(ALL_COLORS);
-
-  if (loading) return <p>loading</p>;
-  if (error) return <p>error</p>;
-
-  const colorOptions = allColors.edges.map(({ node }) => (
-    <ColorPoint key={node.id} color={node} noteId={props.node.id} />
-  ));
   return (
-    <div className={container}>
-      <div className={colorsBox}>{colorOptions}</div>
-      <MaterialIcon icon="color_lens" className={colorOptionIcon} />
-    </div>
+    <Query query={ALL_COLORS}>
+      {({ loading, error, data: { allColors } }) => {
+        if (loading) return <p>loading</p>;
+        if (error) return <p>error</p>;
+        const colorOptions = allColors.edges.map(({ node }) => (
+          <ColorPoint key={node.id} color={node} noteId={props.node.id} />
+        ));
+        return (
+          <div className={container}>
+            <div className={colorsBox}>{colorOptions}</div>
+            <MaterialIcon icon="color_lens" className={colorOptionIcon} />
+          </div>
+        );
+      }}
+    </Query>
   );
 }
 

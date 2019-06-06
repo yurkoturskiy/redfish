@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/react-hooks";
 import { css } from "linaria";
+import { Query } from "react-apollo";
 // Local components
 import DeselectAll from "./DeselectAll";
 import NumOfSelectedNotes from "./NumOfSelectedNotes";
-import { SELECTED_NOTES } from "../queries";
 
 // Linaria style
 const barWrapper = css`
@@ -18,12 +17,11 @@ const barWrapper = css`
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
 `;
 
-function SelectedNotesOptionsBar() {
-  const { data } = useQuery(SELECTED_NOTES);
+function SelectedNotesOptionsBar(props) {
   return (
     <div className={barWrapper}>
       <DeselectAll />
-      <NumOfSelectedNotes number={data.selectedNotes.length} />
+      <NumOfSelectedNotes number={props.selectedNotes.length} />
     </div>
   );
 }

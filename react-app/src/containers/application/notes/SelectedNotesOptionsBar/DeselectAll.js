@@ -1,5 +1,5 @@
 import React from "react";
-import { useMutation } from "@apollo/react-hooks";
+import { withApollo } from "react-apollo";
 import { css } from "linaria";
 
 const deselectAll = css`
@@ -22,4 +22,4 @@ function DeselectAll(props) {
   );
 }
 
-export default DeselectAll;
+export default withApollo(DeselectAll);
