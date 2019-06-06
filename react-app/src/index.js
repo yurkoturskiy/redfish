@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // container components
-import App from "./containers/App";
+import App from "./application/App";
 import { ApolloProvider } from "react-apollo";
 import { Router } from "react-router-dom";
 // others
