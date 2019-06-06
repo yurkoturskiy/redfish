@@ -280,6 +280,26 @@ class Login(relay.ClientIDMutation):
             return None
 
 
+class Logout(relay.ClientIDMutation):
+    class Input:
+        key = graphene.String(required=True)
+
+    detail = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        response = requests.post(
+            'http://localhost:9000/rest-auth/logout/',
+            headers={'authorization': f"Token {input['key']}"})
+        if response.status_code == 200:
+            data = json.loads(response.text)
+            return Logout(data['detail'])
+        elif response.status_code == 400:
+            return GraphQLError(response.text)
+        else:
+            return None
+
+
 class AuthWithFacebook(relay.ClientIDMutation):
     class Input:
         access_token = graphene.String(required=True)
@@ -406,6 +426,7 @@ class PasswordResetConfirm(relay.ClientIDMutation):
 
 class Mutation(ObjectType):
     login = Login.Field()
+    logout = Logout.Field()
     auth_with_facebook = AuthWithFacebook.Field()
     registration = Registration.Field()
     confirm_email = ConfirmEmail.Field()
