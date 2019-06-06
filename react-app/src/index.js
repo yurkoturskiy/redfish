@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // container components
-import GlobalContainer from "./containers/GlobalContainer";
+import App from "./containers/App";
 import { ApolloProvider } from "react-apollo";
 import { Router } from "react-router-dom";
 // others
@@ -12,7 +12,7 @@ import apolloClient from "./apolloClient";
 ReactDOM.render(
 	<ApolloProvider client={apolloClient}>
 		<Router history={history}>
-			<GlobalContainer />
+			<App />
 		</Router>
 	</ApolloProvider>,
 	document.getElementById("root")
