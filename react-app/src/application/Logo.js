@@ -15,8 +15,8 @@ export const logo = css`
 
 function Logo(props) {
   const redirect = () => {
-    if (props.history.location.pathname !== "/app") {
-      props.history.push("/app");
+    if (props.history.location.pathname !== "/") {
+      props.history.push("/");
     }
   };
   return (
