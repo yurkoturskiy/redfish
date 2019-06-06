@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { withApollo } from "react-apollo";
-import appState from "../graphql/appState";
 import gql from "graphql-tag";
 
 const tokenIsValidQuery = gql`
