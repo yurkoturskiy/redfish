@@ -5,3 +5,11 @@ export const IS_AUTHENTICATED = gql`
     isAuthenticated @client
   }
 `;
+
+export const LOGOUT = gql`
+  mutation logout($key: String!) {
+    logout(input: { key: $key }) {
+      detail
+    }
+  }
+`;
