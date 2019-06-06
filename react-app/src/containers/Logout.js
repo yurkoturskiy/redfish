@@ -10,47 +10,55 @@ function Logout(props) {
    * - Send logout request
    * - Remove token from the app's localStorage
    * - Mount landing's iframe with postMessage channel
-   * --- if the iframe is failed to mount redirect to the landing
-   * --- if ok send request to delete token from landing's localStorage
-   * --- on response redirect to the landing page
+   * --- if the iframe is failed: redirect to the landing
+   * --- if ok: send request to delete token from landing's localStorage
+   * --- on positive response redirect to the landing page
    */
 
-  const [landingFrameIsMounted, setLandingFrameIsMounted] = useState();
-  const [landingFrameIsUnavailable, setLandingFrameIsUnavailable] = useState();
+  const [landingIframeFailed, setLandingIframeFailed] = useState();
+  const [landingIframeIsMounted, setLandingIframeIsMounted] = useState();
+  const [landingIframeIsLoggedOut, setLandingIframeIsLoggedOut] = useState();
   const iframeRef = useRef();
 
   useEffect(() => {
-    // Logout request on componentDidMount
+    logoutRequest();
+    addLandingIframeMessageListener();
+    return () => removeLandingIframeMessageListener();
+  }, []);
+
+  useEffect(() => {
+    landingIframeFailed && redirectToLandingPage();
+    landingIframeIsMounted && landingLogoutRequest();
+    landingIframeIsLoggedOut && redirectToLandingPage();
+  }, [landingIframeIsMounted, landingIframeFailed, landingIframeIsLoggedOut]);
+
+  const logoutRequest = () => {
     props.client.mutate({
       mutation: LOGOUT,
       variables: { key: localStorage.getItem("token") }
     });
     localStorage.removeItem("token");
-
-    // Add event listener for receiving delete token response from landing
-    window.addEventListener("message", landingFrameListener, false);
-    return () =>
-      // Cleanup event
-      window.removeEventListener("message", landingFrameListener, false);
-  }, []);
-
-  useEffect(() => {
-    if (landingFrameIsUnavailable) redirectToLandingPage();
-
-    if (landingFrameIsMounted)
-      // Send request to remove token from the landing's localStorage
-      iframeRef.current.contentWindow.postMessage(
-        "logout",
-        process.env.REACT_APP_LANDING_DEV_HOST_NAME
-      );
-  }, [landingFrameIsMounted, landingFrameIsUnavailable]);
-
-  const landingFrameOnError = () => setLandingFrameIsUnavailable(true);
-
-  const landingFrameListener = e => {
-    if (e.data === "mounted") setLandingFrameIsMounted(true);
-    if (e.data === "succeed") redirectToLandingPage();
   };
+
+  const addLandingIframeMessageListener = () =>
+    window.addEventListener("message", landingIframeListener, false);
+
+  const removeLandingIframeMessageListener = () =>
+    window.removeEventListener("message", landingIframeListener, false);
+
+  const landingIframeListener = e => {
+    e.data === "mounted" && setLandingIframeIsMounted(true);
+    e.data === "succeed" && setLandingIframeIsLoggedOut(true);
+  };
+
+  const landingIframeOnError = () => setLandingIframeFailed(true);
+
+  const landingLogoutRequest = () =>
+    // Remove token from landing's localStorage
+    iframeRef.current.contentWindow.postMessage(
+      "logout",
+      process.env.REACT_APP_LANDING_DEV_HOST_NAME
+    );
 
   const redirectToLandingPage = () =>
     window.location.replace(process.env.REACT_APP_LANDING_DEV_HOST_NAME);
@@ -61,7 +69,7 @@ function Logout(props) {
       <iframe
         style={{ visibility: "hidden" }}
         ref={iframeRef}
-        onError={landingFrameOnError}
+        onError={landingIframeOnError}
         src={`${process.env.REACT_APP_LANDING_DEV_HOST_NAME}/iframe-logout`}
       />
     </React.Fragment>
