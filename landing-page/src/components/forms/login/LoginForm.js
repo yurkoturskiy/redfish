@@ -67,8 +67,8 @@ class LoginForm extends React.Component {
             </Button>
           </div>
           <AuthWithFacebook />
+          <AuthWithGitHub />
         </Form>
-        <AuthWithGitHub />
       </FormWrapper>
     )
   }
