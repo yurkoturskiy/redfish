@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { withApollo } from "react-apollo";
-import gql from "graphql-tag";
-import axios from "axios";
 // Queries
 import { LOGOUT } from "../graphql/queries";
 
 function Logout(props) {
   /*
-   * This component live on /logout route
+   * This component live on /logout route. Parent is an AutoRouter.js
    * The algorithm:
    * - Send logout request
    * - Remove token from the app's localStorage
@@ -17,9 +15,9 @@ function Logout(props) {
    * --- on response redirect to the landing page
    */
 
-  const iframeRef = useRef();
   const [landingFrameIsMounted, setLandingFrameIsMounted] = useState();
   const [landingFrameIsUnavailable, setLandingFrameIsUnavailable] = useState();
+  const iframeRef = useRef();
 
   useEffect(() => {
     // Logout request on componentDidMount
@@ -45,7 +43,7 @@ function Logout(props) {
         "logout",
         process.env.REACT_APP_LANDING_DEV_HOST_NAME
       );
-  }, [landingFrameIsMounted, landingFrameIsUnavailable, props.client]);
+  }, [landingFrameIsMounted, landingFrameIsUnavailable]);
 
   const landingFrameOnError = () => setLandingFrameIsUnavailable(true);
 
