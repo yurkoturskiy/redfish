@@ -5,7 +5,7 @@ import { setContext } from "apollo-link-context";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { withClientState } from "apollo-link-state";
 import { RestLink } from "apollo-link-rest";
-import gql from "graphql-tag";
+import resolvers from "./graphql/resolvers";
 
 const cache = new InMemoryCache();
 
@@ -42,33 +42,7 @@ const restLink = new RestLink({
 const apolloClient = new ApolloClient({
   link: ApolloLink.from([restLink, stateLink, authLink.concat(httpLink)]),
   cache,
-  resolvers: {
-    Mutation: {
-      switchNotesSelector: (_, { id }, { cache }) => {
-        const query = gql`
-          query {
-            selectedNotes @client
-          }
-        `;
-        const { selectedNotes } = cache.readQuery({ query });
-        var data;
-        if (selectedNotes.indexOf(id) === -1) {
-          // Select. Add note's ID to the global state
-          selectedNotes.push(id);
-          data = { selectedNotes };
-        } else {
-          // Deselect. Remove note's ID from the global state
-          data = {
-            selectedNotes: selectedNotes.filter(
-              selectedNoteID => id !== selectedNoteID
-            )
-          };
-        }
-        cache.writeData({ query, data });
-        return null;
-      }
-    }
-  }
+  resolvers
 });
 
 export default apolloClient;
