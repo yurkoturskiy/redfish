@@ -6,6 +6,12 @@ export const IS_AUTHENTICATED = gql`
   }
 `;
 
+export const TOKEN_IS_VALID = gql`
+  query tokenIsValid($key: String!) {
+    tokenIsValid(key: $key)
+  }
+`;
+
 export const LOGOUT = gql`
   mutation logout($key: String!) {
     logout(input: { key: $key }) {
