@@ -12,21 +12,23 @@ const AUTH_WITH_GITHUB = gql`
 `
 
 function AuthWithGitHub(props) {
-  const [isAuth, setIsAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState()
+  const [code, setCode] = useState()
   const [authWithGitHub, { error, data }] = useMutation(AUTH_WITH_GITHUB)
-  const [code, setCode] = useState(undefined)
 
   useEffect(() => {
-    if (code) {
-      authWithGitHub({ variables: { code } }).then(response => {
-        handleResponse(response)
-        console.log(response)
-      })
-    }
-    if (isAuth) {
-      window.location.replace(process.env.REDFISH_APP_URL)
-    }
+    code && sendAuthRequest()
+    isAuth && redirectToAppPage()
   }, [code, isAuth])
+
+  const sendAuthRequest = () =>
+    authWithGitHub({ variables: { code } }).then(response => {
+      handleResponse(response)
+      console.log(response)
+    })
+
+  const redirectToAppPage = () =>
+    window.location.replace(process.env.REDFISH_APP_URL)
 
   const handleResponse = response => {
     localStorage.setItem('token', response.data.authWithGithub.key)
@@ -39,13 +41,10 @@ function AuthWithGitHub(props) {
     setCode(response.code)
   }
 
-  const onFailure = response => {
-    console.log('GitHub failure response', response)
-  }
+  const onFailure = response => console.log('GitHub failure response', response)
 
   return (
     <div>
-      {' '}
       <GitHubLogin
         clientId="6aee15cdc641688b6f3e"
         onSuccess={responseGitHub}
