@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { css } from 'linaria'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import FacebookLogin from 'react-facebook-login'
+import SocialLogin from 'react-social-login'
+// Images
+import icon from '../../images/facebook-oauth-button-icon.svg'
 
 const AUTH_WITH_FACEBOOK = gql`
   mutation authWithFacebook($accessToken: String!) {
@@ -10,32 +13,58 @@ const AUTH_WITH_FACEBOOK = gql`
     }
   }
 `
+const facebookIcon = css`
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  left: 8px;
+  top: 8px;
+`
+
+const facebookButton = css`
+  position: relative;
+  border: 0px solid white;
+  background: #4267b2;
+  border-radius: 5px;
+  color: white;
+  height: 48px;
+  text-align: center;
+  width: 300px;
+  font-size: 16px;
+`
+
+function Icon(props) {
+  return <img src={icon} className={facebookIcon} />
+}
+
+const Button = ({ children, triggerLogin, ...props }) => (
+  <button onClick={() => triggerLogin()} {...props}>
+    {children}
+  </button>
+)
+
+const SocialButton = SocialLogin(Button)
 
 function AuthWithFacebook(props) {
   const [isAuth, setIsAuth] = useState(false)
   const [authWithFacebook, { error, data }] = useMutation(AUTH_WITH_FACEBOOK)
-  const [state, setState] = useState({
-    isLoggedIn: false,
-    userID: undefined,
-    name: undefined,
-    email: undefined,
-    picture: undefined,
-    accessToken: undefined,
-  })
+  const [accessToken, setAccessToken] = useState()
 
   useEffect(() => {
-    if (state.accessToken) {
-      authWithFacebook({ variables: { accessToken: state.accessToken } }).then(
-        response => {
-          handleResponse(response)
-          console.log(response)
-        }
-      )
-    }
-    if (isAuth) {
-      window.location.replace(process.env.REDFISH_APP_URL)
-    }
-  }, [state, isAuth])
+    accessToken && sendAuthenticationRequest()
+    isAuth && redirectToAppPage()
+  }, [accessToken, isAuth])
+
+  const sendAuthenticationRequest = () =>
+    authWithFacebook({ variables: { accessToken: accessToken } }).then(
+      response => {
+        handleResponse(response)
+        console.log(response)
+      }
+    )
+
+  const redirectToAppPage = () =>
+    window.location.replace(process.env.REDFISH_APP_URL)
 
   const handleResponse = response => {
     localStorage.setItem('token', response.data.authWithFacebook.key)
@@ -43,51 +72,25 @@ function AuthWithFacebook(props) {
     console.log('Token received and saved')
   }
 
-  const responseFacebook = response => {
+  const onLoginSuccess = response => {
     console.log(response)
-
-    setState({
-      isLoggedIn: true,
-      userID: response.userID,
-      name: response.name,
-      email: response.email,
-      picture: response.picture.data.url,
-      accessToken: response.accessToken,
-    })
+    setAccessToken(response._token.accessToken)
   }
 
-  const componentClicked = () => console.log('clicked')
+  const onLoginFailure = response => console.log(response)
 
-  let fbContent
-
-  if (state.isLoggedIn) {
-    fbContent = (
-      <div
-        style={{
-          width: '400px',
-          margin: 'auto',
-          background: '#f4f4f4',
-          padding: '20px',
-        }}
-      >
-        <img src={state.picture} alt={state.name} />
-        <h2>Welcome {state.name}</h2>
-        Email: {state.email}
-      </div>
-    )
-  } else {
-    fbContent = (
-      <FacebookLogin
+  return (
+    <div>
+      <SocialButton
+        provider="facebook"
         appId="432672034191065"
-        fields="name,email,picture"
-        onClick={componentClicked}
-        callback={responseFacebook}
-        textButton={props.children}
-      />
-    )
-  }
-
-  return <div>{fbContent}</div>
+        onLoginSuccess={onLoginSuccess}
+        onLoginFailure={onLoginFailure}
+      >
+        {props.children}
+      </SocialButton>
+    </div>
+  )
 }
 
 export default AuthWithFacebook
