@@ -82,6 +82,7 @@ function AuthWithFacebook(props) {
         fields="name,email,picture"
         onClick={componentClicked}
         callback={responseFacebook}
+        textButton={props.children}
       />
     )
   }

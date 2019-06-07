@@ -51,6 +51,7 @@ function AuthWithGitHub(props) {
         onSuccess={responseGitHub}
         onFailure={onFailure}
         redirectUri=""
+        buttonText={props.children}
       />
     </div>
   )
