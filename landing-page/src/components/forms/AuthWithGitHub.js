@@ -1,26 +1,3 @@
-// import React from 'react'
-// import { css } from 'linaria'
-
-// import GitHubLogin from 'react-github-login'
-
-// function AuthWithGitHub(props) {
-//   const onSuccess = response => console.log(response)
-//   const onFailure = response => console.log(response)
-
-//   return (
-//     <div style={{ position: 'absolute', top: '200px' }}>
-//       <GitHubLogin
-//         clientId="6aee15cdc641688b6f3e"
-//         onSuccess={onSuccess}
-//         onFailure={onFailure}
-//         redirectUri=""
-//       />
-//     </div>
-//   )
-// }
-
-// export default AuthWithGitHub
-
 import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
