@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
-import Header from './header'
+import Header from './header/Container'
 
 import { css } from 'linaria'
 import '@material/react-text-field/dist/text-field.css'
