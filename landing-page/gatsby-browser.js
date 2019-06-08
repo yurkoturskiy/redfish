@@ -5,7 +5,7 @@
  */
 
 // You can delete this file if you're not using it
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { ApolloProvider } from '@apollo/react-hooks'
 import apolloClient from './apolloClient'
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { css } from 'linaria'
 // Local components
 import Layout from '../components/layout'

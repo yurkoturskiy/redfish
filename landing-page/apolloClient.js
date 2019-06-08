@@ -5,7 +5,6 @@ import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { withClientState } from 'apollo-link-state'
 import { RestLink } from 'apollo-link-rest'
-import gql from 'graphql-tag'
 
 const cache = new InMemoryCache()
 

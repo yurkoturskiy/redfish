@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 function KeyToApp(props) {
-  const [key, setKey] = useState(localStorage.getItem('token'))
+  const [key] = useState(localStorage.getItem('token'))
   useEffect(() => {
     window.parent.postMessage(JSON.stringify({ key }), 'http://localhost:3006/')
   }, [])
