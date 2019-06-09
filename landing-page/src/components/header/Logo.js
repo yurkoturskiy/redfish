@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import icon from '../../images/redfish-color-logo.svg'
 import { css } from 'linaria'
 
@@ -13,7 +14,11 @@ export const logo = css`
 `
 
 function Logo(props) {
-  return <img className={logo} src={icon} height="44px" width="44px" />
+  return (
+    <Link to="/">
+      <img className={logo} src={icon} height="44px" width="44px" />
+    </Link>
+  )
 }
 
 export default Logo

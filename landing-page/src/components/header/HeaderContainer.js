@@ -1,4 +1,3 @@
-import { Link } from 'gatsby'
 import { css } from 'linaria'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -40,30 +39,20 @@ const navigation = css`
   }
 `
 
-const Header = ({ siteTitle }) => (
+const HeaderContainer = ({ siteTitle }) => (
   <nav className={navigation}>
-    <Link to="/">
-      <Logo />
-    </Link>
-    <Link to="/authorization">
-      <GoToAppBtn />
-    </Link>
-    <a
-      href="https://github.com/guandjoy/Redfish"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <GitHubBtn />
-    </a>
+    <Logo />
+    <GoToAppBtn />
+    <GitHubBtn />
   </nav>
 )
 
-Header.propTypes = {
+HeaderContainer.propTypes = {
   siteTitle: PropTypes.string,
 }
 
-Header.defaultProps = {
+HeaderContainer.defaultProps = {
   siteTitle: ``,
 }
 
-export default Header
+export default HeaderContainer

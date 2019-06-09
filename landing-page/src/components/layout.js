@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
-import Header from './header/Container'
+import HeaderContainer from './header/HeaderContainer'
 
 import { css } from 'linaria'
 import '@material/react-text-field/dist/text-field.css'
@@ -32,7 +32,7 @@ function Layout({ children }) {
   `)
   return (
     <React.Fragment>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <HeaderContainer siteTitle={data.site.siteMetadata.title} />
       <div>{children}</div>
     </React.Fragment>
   )
