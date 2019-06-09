@@ -3,6 +3,8 @@ import { css } from 'linaria'
 // Local components
 import AuthWithFacebook from './authentication/AuthWithFacebook'
 import AuthWithGitHub from './authentication/AuthWithGitHub'
+// Styled elements
+import Button from './styledUIElements/Button'
 
 const wrapper = css`
   width: 300px;
@@ -17,8 +19,12 @@ const wrapper = css`
 function AuthenticationContainer(props) {
   return (
     <div className={wrapper}>
+      <h5>Choose the way you want to be authorized</h5>
       <AuthWithFacebook>Continue with Facebook</AuthWithFacebook>
       <AuthWithGitHub>Continue with GitHub</AuthWithGitHub>
+      <p>Or via email</p>
+      <Button>Log in</Button>
+      <Button>Sign up</Button>
     </div>
   )
 }
