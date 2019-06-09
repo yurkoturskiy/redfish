@@ -9,14 +9,14 @@ import React from 'react'
 import { ApolloProvider } from '@apollo/react-hooks'
 import apolloClient from './apolloClient'
 
-import Authentication from './src/components/authentication'
+import OnStartAuthentication from './src/components/OnStartAuthentication'
 
 export const wrapRootElement = ({ element }) => {
   if (window.location.pathname.indexOf('iframe') === -1) {
     // Behave as usual if pathname is not for iframe
     return (
       <ApolloProvider client={apolloClient}>
-        <Authentication>{element}</Authentication>
+        <OnStartAuthentication>{element}</OnStartAuthentication>
       </ApolloProvider>
     )
   } else {
