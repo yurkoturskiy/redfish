@@ -17,7 +17,7 @@ const container = css`
   width: 100%;
 `
 
-function Hero(props) {
+function HeroContainer(props) {
   return (
     <div className={container}>
       <ContentWrapper>
@@ -33,4 +33,4 @@ function Hero(props) {
   )
 }
 
-export default Hero
+export default HeroContainer
