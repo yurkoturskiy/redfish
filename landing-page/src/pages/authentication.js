@@ -1,10 +1,12 @@
 import React from 'react'
 import Layout from '../components/layout'
+// Local components
+import AuthenticationContainer from '../components/AuthenticationContainer'
 
 export default () => {
   return (
     <Layout>
-      <div>Authorization</div>
+      <AuthenticationContainer />
     </Layout>
   )
 }
