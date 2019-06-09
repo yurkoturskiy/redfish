@@ -6,8 +6,8 @@ import FormWrapper from '../FormWrapper'
 import FormikMaterialTextField from '../FormikMaterialTextField'
 // import Button from '@material/react-button';
 import Button from '@material-ui/core/Button'
-import AuthWithFacebook from '../AuthWithFacebook'
-import AuthWithGitHub from '../AuthWithGitHub'
+import AuthWithFacebook from '../../authentication/AuthWithFacebook'
+import AuthWithGitHub from '../../authentication/AuthWithGitHub'
 
 class LoginForm extends React.Component {
   constructor(props) {
