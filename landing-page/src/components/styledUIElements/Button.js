@@ -1,22 +1,13 @@
 import React from 'react'
-import { css, cx } from 'linaria'
+import { styled } from 'linaria/react'
 
-const base = css`
+const Button = styled.button`
   display: inline-block;
-`
-
-const big = css`
   padding: 12px;
   margin: 8px;
   border-radius: 8px;
-`
-
-const filled = css`
+  border: 0;
   background-color: lightblue;
 `
-
-function Button(props) {
-  return <div className={cx(base, big, filled)}>{props.children}</div>
-}
 
 export default Button

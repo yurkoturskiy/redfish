@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../components/layout'
-import PasswordResetFormContainer from '../components/forms/passwordReset/PasswordResetFormContainer'
+import PasswordResetFormContainer from '../components/authentication/PasswordResetFormContainer'
 
 export default () => {
   return (
