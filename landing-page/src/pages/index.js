@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from 'linaria'
 // Local components
+import HeaderContainer from '../components/header/HeaderContainer'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import HeroContainer from '../components/HeroContainer'
@@ -15,10 +16,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-      <HeroContainer>
-        <div>Go to App</div>
-        <div>GitHub page</div>
-      </HeroContainer>
+      <HeroContainer />
       <div className={hero} style={{ background: 'grey' }}>
         <h1>Under the hood</h1>
       </div>
