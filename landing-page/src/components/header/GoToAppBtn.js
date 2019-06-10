@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 
 function GoToAppBtn(props) {
   return (
-    <Link to="/authentication">
+    <Link to="/authentication/navigate/">
       <div className="button">Go to app</div>
     </Link>
   )

@@ -19,7 +19,13 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/password-reset/*`, `/confirm-email/*`] },
+      options: {
+        prefixes: [
+          `/password-reset/*`,
+          `/confirm-email/*`,
+          `/authentication/*`,
+        ],
+      },
     },
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
