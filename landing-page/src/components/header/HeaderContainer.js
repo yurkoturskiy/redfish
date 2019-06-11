@@ -5,8 +5,6 @@ import { navigate } from '@reach/router'
 import Button from '@material/react-button'
 // Local components
 import Logo from './Logo'
-import GoToAppBtn from './GoToAppBtn'
-import GitHubBtn from './GitHubBtn'
 
 const navigation = css`
   position: absolute;
