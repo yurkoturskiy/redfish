@@ -5,8 +5,8 @@ import { navigate } from '@reach/router'
 // Local components
 import FormWrapper from '../../styledUIElements/FormWrapper'
 import FormikMaterialTextField from '../../styledUIElements/FormikMaterialTextField'
-// import Button from '@material/react-button';
-import Button from '@material-ui/core/Button'
+import Button from '@material/react-button'
+import Checkbox from '@material/react-checkbox'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -53,8 +53,8 @@ class LoginForm extends React.Component {
             {status && status.non_field_errors}
           </span>
           <div>
-            <input id="guest" type="checkbox" />
-            <label htmlFor="guest">guest user</label>
+            <Checkbox nativeControlId="guest-checkbox" />
+            <label htmlFor="guest-checkbox">guest user</label>
             <Link
               className="reset-password"
               to={'/authentication/password-reset'}
@@ -64,7 +64,6 @@ class LoginForm extends React.Component {
           </div>
           <div>
             <Button
-              variant="text"
               type="button"
               className="form-button"
               disabled={isSubmitting}
@@ -73,7 +72,7 @@ class LoginForm extends React.Component {
               Sign up
             </Button>
             <Button
-              variant="contained"
+              unelevated
               type="submit"
               className="form-button"
               disabled={isSubmitting}

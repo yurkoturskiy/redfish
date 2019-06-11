@@ -4,8 +4,7 @@ import { navigate } from '@reach/router'
 // Local components
 import FormikMaterialTextField from '../../styledUIElements/FormikMaterialTextField'
 import FormWrapper from '../../styledUIElements/FormWrapper'
-// import Button from '@material/react-button';
-import Button from '@material-ui/core/Button'
+import Button from '@material/react-button'
 
 class RegistrationForm extends React.Component {
   constructor(props) {
@@ -70,7 +69,6 @@ class RegistrationForm extends React.Component {
             {status && status.non_field_errors}
           </span>
           <Button
-            variant="text"
             type="button"
             className="form-button"
             disabled={isSubmitting}
@@ -79,7 +77,7 @@ class RegistrationForm extends React.Component {
             Login
           </Button>
           <Button
-            variant="contained"
+            unelevated
             type="submit"
             className="form-button"
             disabled={isSubmitting}

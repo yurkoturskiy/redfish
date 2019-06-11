@@ -2,8 +2,7 @@ import React from 'react'
 import { Form, Field } from 'formik'
 import FormikMaterialTextField from '../../styledUIElements/FormikMaterialTextField'
 import FormWrapper from '../../styledUIElements/FormWrapper'
-// import Button from '@material/react-button';
-import Button from '@material-ui/core/Button'
+import Button from '@material/react-button'
 
 class PasswordResetForm extends React.Component {
   constructor(props) {
@@ -32,12 +31,7 @@ class PasswordResetForm extends React.Component {
           type="email"
           component={FormikMaterialTextField}
         />
-        <Button
-          variant="text"
-          type="submit"
-          className="form-button"
-          disabled={isSubmitting}
-        >
+        <Button type="submit" className="form-button" disabled={isSubmitting}>
           Reset password
         </Button>
         <span>{status && status.non_field_errors}</span>
