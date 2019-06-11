@@ -342,6 +342,25 @@ class AuthWithGitHub(relay.ClientIDMutation):
             return None
 
 
+class AuthWithTwitter(relay.ClientIDMutation):
+    class Input:
+        code = graphene.String(required=True)
+
+    key = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **input):
+        data = {'code': input['code'],}
+        response = requests.post('http://localhost:9000/rest-auth/twitter/', data=data)
+        data = json.loads(response.text)
+        if response.status_code == 200:
+            return AuthWithTwitter(data['key'])
+        elif response.status_code == 400:
+            return GraphQLError(response.text)
+        else:
+            return None
+
+
 class Registration(relay.ClientIDMutation):
     class Input:
         username = graphene.String(required=True)
