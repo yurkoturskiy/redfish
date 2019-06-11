@@ -30,7 +30,9 @@ const facebookButton = css`
   height: 48px;
   text-align: center;
   width: 300px;
-  font-size: 16px;
+  font-size: 1rem;
+  display: block;
+  margin: 8px auto 8px auto;
 `
 
 function Icon(props) {
@@ -38,7 +40,7 @@ function Icon(props) {
 }
 
 const Button = ({ children, triggerLogin, ...props }) => (
-  <button onClick={() => triggerLogin()} {...props}>
+  <button className={facebookButton} onClick={() => triggerLogin()} {...props}>
     {children}
   </button>
 )

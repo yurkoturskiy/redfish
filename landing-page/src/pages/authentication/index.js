@@ -11,13 +11,14 @@ import PasswordResetFormContainer from '../../components/authentication/Password
 import PasswordResetConfirmFormContainer from '../../components/authentication/PasswordResetConfirmFormContainer'
 
 const wrapper = css`
-  width: 300px;
+  width: 512px;
   position: absolute;
   top: 20%;
   left: 50%;
   transform: translate(-50%);
-  padding: 24px;
   border: 1px solid lightgrey;
+  border-radius: 8px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
 `
 
 export default () => {

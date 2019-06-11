@@ -3,8 +3,8 @@ import { css } from 'linaria'
 
 const content = css`
   position: absolute;
-  top: 300px;
-  left: 180px;
+  top: 30vh;
+  left: 13vw;
   border: 1px solid grey;
 `
 

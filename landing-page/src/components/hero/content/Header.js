@@ -2,7 +2,8 @@ import React from 'react'
 import { css } from 'linaria'
 
 const header = css`
-  font-size: 40px;
+  font-size: 2.5rem;
+  font-weight: 400;
 `
 
 function Header(props) {
