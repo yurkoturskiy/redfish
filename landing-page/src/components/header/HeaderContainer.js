@@ -1,6 +1,8 @@
-import { css } from 'linaria'
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { css } from 'linaria'
+import { navigate } from '@reach/router'
+import Button from '@material/react-button'
 // Local components
 import Logo from './Logo'
 import GoToAppBtn from './GoToAppBtn'
@@ -42,8 +44,16 @@ const navigation = css`
 const HeaderContainer = ({ siteTitle }) => (
   <nav className={navigation}>
     <Logo />
-    <GoToAppBtn />
-    <GitHubBtn />
+    <Button onClick={() => navigate('/authentication/navigate')}>
+      Go to app
+    </Button>
+    <Button
+      onClick={() =>
+        window.open('https://github.com/guandjoy/Redfish', '_blank')
+      }
+    >
+      GitHub
+    </Button>
   </nav>
 )
 
