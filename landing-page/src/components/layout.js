@@ -7,13 +7,13 @@ import HeaderContainer from './header/HeaderContainer'
 import { css } from 'linaria'
 import '@material/react-text-field/dist/text-field.css'
 import '@material/react-button/dist/button.css'
+import '@material/react-checkbox/dist/checkbox.css'
 
 export const globals = css`
   :global() {
-    @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
     @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
     body {
-      font-family: 'Fira Sans', sans-serif;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
     }
