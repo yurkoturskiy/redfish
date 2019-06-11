@@ -73,9 +73,7 @@ function Authentication(props) {
 
   const refuse = () => {
     localStorage.removeItem("token");
-    window.location.replace(
-      `${process.env.REACT_APP_LANDING_DEV_HOST_NAME}/login`
-    );
+    window.location.replace(process.env.REACT_APP_DEV_AUTHENTICATION_URL);
   };
 
   if (token) {
@@ -87,7 +85,7 @@ function Authentication(props) {
       <iframe
         style={{ visibility: "hidden" }}
         onError={landingIframeOnError}
-        src={`${process.env.REACT_APP_LANDING_DEV_HOST_NAME}/iframe-key`}
+        src={process.env.REACT_APP_DEV_LANDING_IFRAME_KEY_URL}
       />
     );
   }
