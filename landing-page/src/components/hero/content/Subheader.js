@@ -2,7 +2,9 @@ import React from 'react'
 import { css } from 'linaria'
 
 const subheader = css`
-  font-size: 18px;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 28px 0 32px 25px;
 `
 
 function Subheader(props) {

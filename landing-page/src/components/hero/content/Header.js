@@ -3,7 +3,8 @@ import { css } from 'linaria'
 
 const header = css`
   font-size: 2.5rem;
-  font-weight: 400;
+  font-weight: 500;
+  margin: 0 0 0 25px;
 `
 
 function Header(props) {
