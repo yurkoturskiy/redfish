@@ -2,6 +2,13 @@ import React from 'react'
 import { css } from 'linaria'
 // Local components
 import GatsbySVG from './svgs/GatsbySVG'
+import {
+  GatsbyIcon,
+  ApolloIcon,
+  CreateReactAppIcon,
+  LinariaIcon,
+  GrapheneIcon,
+} from './svgs'
 
 const container = css`
   position: relative;
@@ -17,8 +24,10 @@ const card = css`
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 14px;
 `
-const purpose = css`
+const text = css`
   display: inline-block;
+`
+const purpose = css`
   font-size: 1, 125rem;
   font-style: normal;
   font-weight: 300;
@@ -26,7 +35,6 @@ const purpose = css`
 `
 
 const name = css`
-  display: inline-block;
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 500;
@@ -39,35 +47,47 @@ function DependenciesContainer() {
       <div>
         <h3>ReactJS frontend</h3>
         <div className={card}>
-          <GatsbySVG />
-          <h4 className={purpose}>Landing page</h4>
-          <h2 className={name}>GatsbyJS</h2>
+          <GatsbyIcon />
+          <div className={text}>
+            <h4 className={purpose}>Landing page</h4>
+            <h2 className={name}>GatsbyJS</h2>
+          </div>
         </div>
         <div className={card}>
-          <GatsbySVG />
-          <h4 className={purpose}>Queries</h4>
-          <h2 className={name}>Apollo GraphQL Client</h2>
+          <ApolloIcon />
+          <div className={text}>
+            <h4 className={purpose}>Queries</h4>
+            <h2 className={name}>Apollo GraphQL Client</h2>
+          </div>
         </div>
         <div className={card}>
-          <GatsbySVG />
-          <h4 className={purpose}>Application</h4>
-          <h2 className={name}>Create React App</h2>
+          <CreateReactAppIcon />
+          <div className={text}>
+            <h4 className={purpose}>Application</h4>
+            <h2 className={name}>Create React App</h2>
+          </div>
         </div>
         <div className={card}>
-          <GatsbySVG />
-          <h4 className={purpose}>CSS in JS</h4>
-          <h2 className={name}>Linaria</h2>
+          <LinariaIcon />
+          <div className={text}>
+            <h4 className={purpose}>CSS in JS</h4>
+            <h2 className={name}>Linaria</h2>
+          </div>
         </div>
         <h3>Django backend</h3>
         <div className={card}>
-          <GatsbySVG />
-          <h4 className={purpose}>GraphQL Server</h4>
-          <h2 className={name}>Graphene-Python</h2>
+          <GrapheneIcon />
+          <div className={text}>
+            <h4 className={purpose}>GraphQL Server</h4>
+            <h2 className={name}>Graphene-Python</h2>
+          </div>
         </div>
         <div className={card}>
           <GatsbySVG />
-          <h4 className={purpose}>Authentication</h4>
-          <h2 className={name}>django-rest-auth</h2>
+          <div className={text}>
+            <h4 className={purpose}>Authentication</h4>
+            <h2 className={name}>django-rest-auth</h2>
+          </div>
         </div>
       </div>
     </div>
