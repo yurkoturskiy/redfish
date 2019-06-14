@@ -11,3 +11,4 @@ tmux_setup.py
 test.py
 django_server/fixtures/*.json
 /design
+/video
