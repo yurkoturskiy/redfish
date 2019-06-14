@@ -11,7 +11,11 @@ const button = css`
 `
 
 function BrieflyAboutBtn(props) {
-  return <div className={button}>Briefly about</div>
+  return (
+    <div className={button} onClick={() => props.setDialog(true)}>
+      Briefly about
+    </div>
+  )
 }
 
 export default BrieflyAboutBtn

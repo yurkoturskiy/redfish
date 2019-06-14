@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { css } from 'linaria'
 // Local components
 //  * Content
 import ContentWrapper from './hero/ContentWrapper'
+import VideoDialog from './hero/content/VideoDialog'
 import Header from './hero/content/Header'
 import Subheader from './hero/content/Subheader'
 //  ** Action buttons
@@ -18,13 +19,15 @@ const container = css`
 `
 
 function HeroContainer(props) {
+  const [dialog, setDialog] = useState(false)
   return (
     <div className={container}>
       <ContentWrapper>
         <Header />
         <Subheader />
+        {dialog && <VideoDialog setDialog={setDialog} />}
         <ActionBtnsWrapper>
-          <BrieflyAboutBtn />
+          <BrieflyAboutBtn setDialog={setDialog} />
           <GoToAppBtn />
           <GitHubPageBtn />
         </ActionBtnsWrapper>
