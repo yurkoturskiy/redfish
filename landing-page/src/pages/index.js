@@ -6,6 +6,7 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import HeroContainer from '../components/HeroContainer'
 import Dependencies from '../components/dependencies/Container'
+import Tutorials from '../components/tutorials/Container'
 
 export const hero = css`
   position: relative;
@@ -19,6 +20,7 @@ const IndexPage = () => {
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <HeroContainer />
       <Dependencies />
+      <Tutorials />
     </Layout>
   )
 }
