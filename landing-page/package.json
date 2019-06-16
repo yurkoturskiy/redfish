@@ -54,6 +54,7 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "devDependencies": {
+    "eslint-config-react-app": "^4.0.1",
     "prettier": "^1.18.2"
   },
   "repository": {
