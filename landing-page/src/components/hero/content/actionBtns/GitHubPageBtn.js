@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 import Button from '@material/react-button'
 
 function GitHubPageBtn(props) {

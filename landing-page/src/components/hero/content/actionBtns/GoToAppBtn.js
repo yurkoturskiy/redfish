@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 import { navigate } from '@reach/router'
 import Button from '@material/react-button'
 

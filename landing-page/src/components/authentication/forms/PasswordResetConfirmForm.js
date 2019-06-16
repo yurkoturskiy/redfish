@@ -1,7 +1,6 @@
 import React from 'react'
 import { Form, Field } from 'formik'
 import FormikMaterialTextField from '../../styledUIElements/FormikMaterialTextField'
-import FormWrapper from '../../styledUIElements/FormWrapper'
 import Button from '@material/react-button'
 
 class PasswordResetConfirmForm extends React.Component {

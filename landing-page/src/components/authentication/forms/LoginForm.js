@@ -3,7 +3,6 @@ import { Form, Field } from 'formik'
 import { Link } from 'gatsby'
 import { navigate } from '@reach/router'
 // Local components
-import FormWrapper from '../../styledUIElements/FormWrapper'
 import FormikMaterialTextField from '../../styledUIElements/FormikMaterialTextField'
 import Button from '@material/react-button'
 import Checkbox from '@material/react-checkbox'

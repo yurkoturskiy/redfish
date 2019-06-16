@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import SocialLogin from 'react-social-login'
-// Images
-import icon from '../../images/facebook-oauth-button-icon.svg'
 
 const AUTH_WITH_FACEBOOK = gql`
   mutation authWithFacebook($accessToken: String!) {
@@ -12,13 +10,6 @@ const AUTH_WITH_FACEBOOK = gql`
       key
     }
   }
-`
-const facebookIcon = css`
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  left: 8px;
-  top: 8px;
 `
 
 const facebookButton = css`
@@ -34,10 +25,6 @@ const facebookButton = css`
   display: block;
   margin: 8px auto 8px auto;
 `
-
-function Icon(props) {
-  return <img src={icon} className={facebookIcon} />
-}
 
 const Button = ({ children, triggerLogin, ...props }) => (
   <button className={facebookButton} onClick={() => triggerLogin()} {...props}>
@@ -57,19 +44,19 @@ function AuthWithFacebook(props) {
     isAuth && redirectToAppPage()
   }, [accessToken, isAuth])
 
+  useEffect(() => {
+    data && handleResponse()
+  }, [data, error])
+
   const sendAuthenticationRequest = () =>
-    authWithFacebook({ variables: { accessToken: accessToken } }).then(
-      response => {
-        handleResponse(response)
-        console.log(response)
-      }
-    )
+    authWithFacebook({ variables: { accessToken: accessToken } })
 
   const redirectToAppPage = () =>
     window.location.replace(process.env.REDFISH_APP_URL)
 
-  const handleResponse = response => {
-    localStorage.setItem('token', response.data.authWithFacebook.key)
+  const handleResponse = () => {
+    console.log(data)
+    localStorage.setItem('token', data.authWithFacebook.key)
     setIsAuth(true)
     console.log('Token received and saved')
   }
@@ -91,6 +78,8 @@ function AuthWithFacebook(props) {
       >
         {props.children}
       </SocialButton>
+      {error &&
+        error.graphQLErrors.map(({ message }, i) => <h6 key={i}>{message}</h6>)}
     </div>
   )
 }

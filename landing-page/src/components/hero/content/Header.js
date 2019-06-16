@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 
 const header = css`
   font-size: 2.5rem;

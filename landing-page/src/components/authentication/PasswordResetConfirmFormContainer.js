@@ -25,9 +25,7 @@ const PASSWORD_RESET_CONFIRM = gql`
 `
 
 function PasswordResetConfirmFormContainer(props) {
-  const [passwordResetConfirm, { error, data }] = useMutation(
-    PASSWORD_RESET_CONFIRM
-  )
+  const [passwordResetConfirm] = useMutation(PASSWORD_RESET_CONFIRM)
   const [requestIsSucceed, setRequestIsSucceed] = useState(false)
 
   const prepareValues = values => {

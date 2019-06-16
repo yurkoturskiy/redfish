@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 // Local components
 //  * Content
 import ContentWrapper from './hero/ContentWrapper'

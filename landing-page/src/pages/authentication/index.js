@@ -1,6 +1,6 @@
 import React from 'react'
 import { Router } from '@reach/router'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 // Local components
 import Layout from '../../components/layout'
 import Navigator from '../../components/authentication/Navigator'

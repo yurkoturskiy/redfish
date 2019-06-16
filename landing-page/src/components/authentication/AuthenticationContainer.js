@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { navigate } from '@reach/router'
-import { Link } from 'gatsby'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 import Button from '@material/react-button'
 // Local components
 import AuthWithFacebook from './AuthWithFacebook'

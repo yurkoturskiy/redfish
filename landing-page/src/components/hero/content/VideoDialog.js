@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 
 const dialog = css`
   position: fixed;
@@ -27,6 +27,7 @@ function VideoDialog(props) {
     <React.Fragment>
       <div className={dialog}>
         <iframe
+          title="briefly-about"
           width="560"
           height="315"
           src="https://www.youtube.com/embed/yOM1nbqirQQ"

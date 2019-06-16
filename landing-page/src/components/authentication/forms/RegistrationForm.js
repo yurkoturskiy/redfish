@@ -3,7 +3,6 @@ import { Form, Field } from 'formik'
 import { navigate } from '@reach/router'
 // Local components
 import FormikMaterialTextField from '../../styledUIElements/FormikMaterialTextField'
-import FormWrapper from '../../styledUIElements/FormWrapper'
 import Button from '@material/react-button'
 
 class RegistrationForm extends React.Component {

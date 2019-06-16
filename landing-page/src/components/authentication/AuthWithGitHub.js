@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import GitHubLogin from 'react-github-login'
@@ -29,7 +29,7 @@ const githubButton = css`
 function AuthWithGitHub(props) {
   const [isAuth, setIsAuth] = useState()
   const [code, setCode] = useState()
-  const [authWithGitHub, { error, data }] = useMutation(AUTH_WITH_GITHUB)
+  const [authWithGitHub] = useMutation(AUTH_WITH_GITHUB)
 
   useEffect(() => {
     code && sendAuthRequest()

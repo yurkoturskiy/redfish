@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 import HeaderContainer from './header/HeaderContainer'
 
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 import '@material/react-text-field/dist/text-field.css'
 import '@material/react-button/dist/button.css'
 import '@material/react-checkbox/dist/checkbox.css'

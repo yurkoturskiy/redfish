@@ -16,8 +16,7 @@ const SUBMIT_LOGIN = gql`
 `
 
 function LoginFormContainer(props) {
-  const [submitLogin, { error, data }] = useMutation(SUBMIT_LOGIN)
-  const [endpoint] = useState('rest-auth/login/')
+  const [submitLogin] = useMutation(SUBMIT_LOGIN)
   const [isAuth, setIsAuth] = useState(false)
 
   const handleSubmit = (values, { setSubmitting, setErrors, setStatus }) => {

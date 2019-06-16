@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import icon from '../../images/redfish-color-logo.svg'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 
 export const logo = css`
   position: absolute;
@@ -16,7 +16,13 @@ export const logo = css`
 function Logo(props) {
   return (
     <Link to="/">
-      <img className={logo} src={icon} height="44px" width="44px" />
+      <img
+        className={logo}
+        src={icon}
+        alt="redfish-logo"
+        height="44px"
+        width="44px"
+      />
     </Link>
   )
 }

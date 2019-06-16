@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'linaria'
+import { css } from 'linaria' // eslint-disable-line
 
 const container = css`
   position: relative;
@@ -8,18 +8,27 @@ const container = css`
   background-color: #2e353b;
 `
 
+const video = css`
+  position: relative;
+  padding: 0px auto 0px auto;
+`
+
 function TutorialsContainer(props) {
   return (
     <div className={container}>
       <h2>Tutorials</h2>
-      <iframe
-        width="640"
-        height="360"
-        src="https://www.youtube.com/embed/videoseries?list=PLip1ThU0gOFb8GUDeuek69aalgyM4yQOI"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      />
+      <div>
+        <iframe
+          className={video}
+          title="tutorials"
+          width="640"
+          height="360"
+          src="https://www.youtube.com/embed/videoseries?list=PLip1ThU0gOFb8GUDeuek69aalgyM4yQOI"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </div>
     </div>
   )
 }
