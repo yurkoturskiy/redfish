@@ -8,7 +8,8 @@ import DialogWindow from "./DialogWindow";
 import Pin from "./Pin";
 
 export const container = css`
-  width: 256px;
+  position: relative;
+  width: 240px;
   margin: 8px;
   padding: 12px;
   box-shadow: var(--container-box-shadow);
@@ -57,10 +58,16 @@ export const container = css`
 
   .options {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--container-background-color);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    position: absolute;
+    width: 100%
+    bottom: 0;
     flex-direction: row;
-    height: 32px;
-    outline: 1px solid grey;
-    width: 100%;
+    height: 48px;
     left: 0;
     opacity: 0;
   }
@@ -96,10 +103,19 @@ export const container = css`
 
 export const title = css`
   font-size: 1.5em;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #5c5c5c;
 `;
 
 export const content = css`
-  font-size: 1em;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #3c3c3c;
 `;
 
 // Context
@@ -137,8 +153,6 @@ function Note(props) {
           <Selector isSelected={props.isSelected} id={props.node.id} />
           <Pin />
           <div onClick={() => setInEdit(true)}>
-            <p>{props.node.order}</p>
-            <p>{props.node.pinned ? "pinned" : "not pinned"}</p>
             {props.node.title && <h3 className={title}>{props.node.title}</h3>}
             {props.node.content && (
               <p className={content}>{props.node.content}</p>
