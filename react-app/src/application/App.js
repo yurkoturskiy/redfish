@@ -23,7 +23,7 @@ export const globals = css`
     @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
     body {
-      font-family: "Fira Sans", sans-serif;
+      font-family: "Roboto", sans-serif;
       margin: 0;
       padding: 0;
     }
