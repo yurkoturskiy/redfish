@@ -118,9 +118,6 @@ TEMPLATES = [
 
 STATICFILES_DIRS = [
   os.path.join(BASE_DIR, '../react-app/build/static'),
-  os.path.join(BASE_DIR, '../react-note-app/build/static'),
-  os.path.join(BASE_DIR, '../landing-page/public/'),
-  os.path.join(BASE_DIR, '../landing-page/public/static'),
 ]
 
 
