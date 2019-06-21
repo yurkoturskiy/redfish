@@ -19,7 +19,7 @@ const stateLink = withClientState({
 })
 
 const httpLink = createHttpLink({
-  uri: `http://${window.location.hostname}:9000/graphql`,
+  uri: process.env.REDFISH_GRAPHQL_API_URL,
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -35,7 +35,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const restLink = new RestLink({
-  uri: `http://${window.location.hostname}:9000/`,
+  uri: process.env.REDFISH_REST_URL,
 })
 
 const apolloClient = new ApolloClient({
