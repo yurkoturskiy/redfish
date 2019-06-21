@@ -60,7 +60,7 @@ SITE_ID = 1
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'YOUR GMAIL EMAIL example@gmail.com'
+EMAIL_HOST_USER = 'example@example.com' # GMail works fine
 EMAIL_HOST_PASSWORD = 'YOUR GMAIL APP PASSWORD. 2-step verification should be active'
 
 
