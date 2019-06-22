@@ -12,7 +12,7 @@ function LandingLogout(props) {
     if (e.data === 'logout') {
       console.log('logout request')
       localStorage.removeItem('token')
-      window.parent.postMessage('succeed', 'http://localhost:3006/')
+      window.parent.postMessage('succeed', process.env.REDFISH_APP_URL)
     }
   }
   return <div>Landing's iframe for deleting key from it's localStorage</div>
