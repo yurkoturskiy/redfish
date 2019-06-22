@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 function LandingLogout(props) {
   useEffect(() => {
-    window.parent.postMessage('mounted', 'http://localhost:3006/')
+    window.parent.postMessage('mounted', process.env.REDFISH_APP_URL)
     window.addEventListener('message', logoutRequestListener, false)
     return () =>
       window.removeEventListener('message', logoutRequestListener, false)
