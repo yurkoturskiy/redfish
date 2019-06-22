@@ -43,7 +43,7 @@ function LoginFormContainer(props) {
   const handleResponse = response => {
     localStorage.setItem('token', response.data.login.key)
     setIsAuth(true)
-    console.log('Token received and saved')
+    console.log('Token received and saved', localStorage.getItem('token'))
   }
 
   useEffect(() => {
