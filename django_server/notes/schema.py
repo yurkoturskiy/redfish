@@ -9,6 +9,7 @@ from graphql_relay.node.node import from_global_id
 
 from .models import Note, Color
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from rest_framework.authtoken.models import Token
 
 # Exceptions
@@ -270,7 +271,7 @@ class Login(relay.ClientIDMutation):
             'username': input['username'],
             'password': input['password']
         }
-        response = requests.post('http://localhost:9000/rest-auth/login/', data=data)
+        response = requests.post(f"{Site.objects.get_current().domain}/rest-auth/login/", data=data)
         data = json.loads(response.text)
         if response.status_code == 200:
             return Login(data['key'])
@@ -289,7 +290,7 @@ class Logout(relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
         response = requests.post(
-            'http://localhost:9000/rest-auth/logout/',
+            f"{Site.objects.get_current().domain}/rest-auth/logout/",
             headers={'authorization': f"Token {input['key']}"})
         if response.status_code == 200:
             data = json.loads(response.text)
@@ -313,7 +314,7 @@ class AuthWithFacebook(relay.ClientIDMutation):
         data = {
             'access_token': input['access_token'],
         }
-        response = requests.post('http://localhost:9000/rest-auth/facebook/', data=data)
+        response = requests.post(f"{Site.objects.get_current().domain}/rest-auth/facebook/", data=data)
         data = json.loads(response.text)
         if response.status_code == 200:
             return AuthWithFacebook(data['key'])
@@ -332,7 +333,7 @@ class AuthWithGitHub(relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
         data = {'code': input['code'],}
-        response = requests.post('http://localhost:9000/rest-auth/github/', data=data)
+        response = requests.post(f"{Site.objects.get_current().domain}/rest-auth/github/", data=data)
         data = json.loads(response.text)
         if response.status_code == 200:
             return AuthWithGitHub(data['key'])
@@ -351,7 +352,7 @@ class AuthWithTwitter(relay.ClientIDMutation):
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
         data = {'code': input['code'],}
-        response = requests.post('http://localhost:9000/rest-auth/twitter/', data=data)
+        response = requests.post(f"{Site.objects.get_current().domain}/rest-auth/twitter/", data=data)
         data = json.loads(response.text)
         if response.status_code == 200:
             return AuthWithTwitter(data['key'])
@@ -379,7 +380,7 @@ class Registration(relay.ClientIDMutation):
             'password2': input['password2'],
         }
         response = requests.post(
-            'http://localhost:9000/rest-auth/registration/', data=data
+            f"{Site.objects.get_current().domain}/rest-auth/registration/", data=data
         )
         if response.status_code != 400:
             data = json.loads(response.text)
@@ -400,7 +401,7 @@ class ConfirmEmail(relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, **input):
         data = { 'key': input['key'] }
         response = requests.post(
-            'http://localhost:9000/rest-auth/registration/verify-email/', 
+            f"{Site.objects.get_current().domain}/rest-auth/registration/verify-email/", 
             data=data
         )
         if response.status_code != 400:
@@ -422,7 +423,7 @@ class PasswordReset(relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, **input):
         data = { 'email': input['email'] }
         response = requests.post(
-            'http://localhost:9000/rest-auth/password/reset/', data=data
+            f"{Site.objects.get_current().domain}/rest-auth/password/reset/", data=data
         )
         if response.status_code == 200:
             data = json.loads(response.text)
@@ -451,7 +452,7 @@ class PasswordResetConfirm(relay.ClientIDMutation):
             'new_password2': input['new_password2'],
         }
         response = requests.post(
-            'http://localhost:9000/rest-auth/password/reset/confirm/', data=data
+            f"{Site.objects.get_current().domain}/rest-auth/password/reset/confirm/", data=data
         )
         if response.status_code == 200:
             data = json.loads(response.text)
