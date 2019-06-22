@@ -3,7 +3,8 @@ require('dotenv').config({
 })
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `Redfish`,
+    siteUrl: `https://redfish-project.gq/`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
   },
@@ -45,6 +46,13 @@ module.exports = {
         url: process.env.REDFISH_GRAPHQL_API_URL,
         typeName: `Redfish`,
         refetchInterval: 10,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://www.redfish-project.gq',
+        policy: [{ userAgent: '*', disallow: '/' }],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
