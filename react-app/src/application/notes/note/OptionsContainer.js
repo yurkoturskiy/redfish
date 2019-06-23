@@ -5,7 +5,7 @@ import DeleteOption from "./DeleteOption";
 import ColorOption from "./ColorOption";
 
 function OptionsContainer(props) {
-  const noteColorVariable = `--note-color-${props.node.color.toLowerCase()}`;
+  const noteColorVariable = `var(--note-color-${props.node.color.toLowerCase()})`;
   return (
     <div className="options" style={{ backgroundColor: noteColorVariable }}>
       <DeleteOption node={props.node} />

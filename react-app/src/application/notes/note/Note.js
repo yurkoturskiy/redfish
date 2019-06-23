@@ -59,15 +59,14 @@ export const container = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--container-background-color);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
     position: absolute;
-    width: 100%
-    bottom: 0;
+    width: 96%;
+    bottom: 4px;
+    left: 4px;
     flex-direction: row;
     height: 48px;
-    left: 0;
     opacity: 0;
   }
 
