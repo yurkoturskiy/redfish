@@ -12,14 +12,15 @@ import apolloClient from './apolloClient'
 import OnStartAuthentication from './src/components/OnStartAuthentication'
 
 export const wrapRootElement = ({ element }) => {
-  if (window.location.pathname.indexOf('iframe') === -1) {
-    // Behave as usual if pathname is not for iframe
+  if (
+    localStorage.getItem('token') &&
+    window.location.pathname.indexOf('iframe') === -1
+  )
+    // Validate token if exist in localStorage. Except iframe's pages
     return (
       <ApolloProvider client={apolloClient}>
         <OnStartAuthentication>{element}</OnStartAuthentication>
       </ApolloProvider>
     )
-  } else {
-    return <React.Fragment>{element}</React.Fragment>
-  }
+  return <ApolloProvider client={apolloClient}>{element}</ApolloProvider>
 }

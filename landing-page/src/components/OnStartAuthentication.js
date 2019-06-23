@@ -17,7 +17,7 @@ function OnStartAuthentication(props) {
     if (data.tokenIsValid) window.location.replace(process.env.REDFISH_APP_URL)
     else localStorage.removeItem('token')
   })
-  if (loading) return <div>loading...</div>
+  if (loading) return null
   if (data.tokenIsValid) return null
   return <React.Fragment>{props.children}</React.Fragment>
 }
