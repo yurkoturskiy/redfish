@@ -22,12 +22,9 @@ const separator = css`
 `
 
 const buttonsWrapper = css`
-  display: block;
+  display: flex;
+  justify-content: center;
   margin: 8px auto 8px auto;
-`
-
-const button = css`
-  display: block;
 `
 
 function AuthenticationContainer(props) {
@@ -40,16 +37,10 @@ function AuthenticationContainer(props) {
         <p>Or via email</p>
       </div>
       <div className={buttonsWrapper}>
-        <Button
-          className={button}
-          onClick={() => navigate('/authentication/login')}
-        >
+        <Button onClick={() => navigate('/authentication/login')}>
           Log in
         </Button>
-        <Button
-          className={button}
-          onClick={() => navigate('/authentication/signup')}
-        >
+        <Button onClick={() => navigate('/authentication/signup')}>
           Sign up
         </Button>
       </div>
