@@ -10,6 +10,7 @@ import Pin from "./Pin";
 export const container = css`
   position: relative;
   width: 240px;
+  min-height: 112px;
   margin: 8px;
   padding: 12px;
   box-shadow: var(--container-box-shadow);
@@ -108,6 +109,10 @@ export const title = css`
   color: #5c5c5c;
 `;
 
+export const contentContainer = css`
+  height: 100%;
+`;
+
 export const content = css`
   font-style: normal;
   font-weight: normal;
@@ -151,7 +156,7 @@ function Note(props) {
         >
           <Selector isSelected={props.isSelected} id={props.node.id} />
           <Pin />
-          <div onClick={() => setInEdit(true)}>
+          <div className={contentContainer} onClick={() => setInEdit(true)}>
             {props.node.title && <h3 className={title}>{props.node.title}</h3>}
             {props.node.content && (
               <p className={content}>{props.node.content}</p>
