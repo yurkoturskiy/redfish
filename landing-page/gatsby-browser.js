@@ -22,5 +22,4 @@ export const wrapRootElement = ({ element }) => {
         <OnStartAuthentication>{element}</OnStartAuthentication>
       </ApolloProvider>
     )
-  return <ApolloProvider client={apolloClient}>{element}</ApolloProvider>
 }
