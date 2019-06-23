@@ -41,8 +41,8 @@ function ColorOption(props) {
       {({ loading, error, data: { allColors } }) => {
         if (loading) return <p>loading</p>;
         if (error) return <p>error</p>;
-        const colorOptions = allColors.edges.map(({ node }) => (
-          <ColorPoint key={node.id} color={node} noteId={props.node.id} />
+        const colorOptions = allColors.map(color => (
+          <ColorPoint key={color} color={color} noteId={props.node.id} />
         ));
         return (
           <div className={container}>

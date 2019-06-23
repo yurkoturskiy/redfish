@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { css } from "linaria";
 import { Mutation } from "react-apollo";
@@ -13,6 +13,7 @@ export const colorOption = css`
 `;
 
 function ColorPoint(props) {
+  const color = `var(--note-color-${props.color.toLowerCase()}`;
   const updateNote = (cache, { data }) => {
     var cacheData = cache.readQuery({ query: ALL_NOTES });
     cacheData.allNotes.edges.map(edge => {
@@ -27,12 +28,12 @@ function ColorPoint(props) {
     <Mutation
       mutation={UPDATE_NOTES_COLOR}
       update={updateNote}
-      variables={{ id: props.noteId, newColor: props.color.label }}
+      variables={{ id: props.noteId, newColor: props.color }}
     >
       {(updateNotesColor, { data }) => (
         <div
           className={colorOption}
-          style={{ backgroundColor: `#${props.color.value}` }}
+          style={{ backgroundColor: color }}
           onClick={async e => {
             e.preventDefault();
             await updateNotesColor();
@@ -45,7 +46,7 @@ function ColorPoint(props) {
 
 ColorPoint.propTypes = {
   noteId: PropTypes.string,
-  color: PropTypes.object
+  color: PropTypes.string
 };
 
 export default ColorPoint;

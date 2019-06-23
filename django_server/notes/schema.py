@@ -4,10 +4,11 @@ import json
 import graphene
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
+from graphene_django.converter import convert_django_field_with_choices
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay.node.node import from_global_id
 
-from .models import Note, Color
+from .models import Note
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from rest_framework.authtoken.models import Token
@@ -50,28 +51,13 @@ class UserNode(DjangoObjectType):
         exclude_fields = ('password', 'is_superuser', 'is_staff', 'note_set')
         interfaces = (relay.Node, )
 
-class ColorNode(DjangoObjectType):
-    class Meta:
-        model = Color
-        filter_fields = ['value']
-        exclude_fields = ('note_set')
-        interfaces = (relay.Node,)
-
-    @classmethod
-    def get_node(cls, info, id):
-        try:
-            color = cls._meta.model.objects.get(id=id)
-        except cls._meta.model.DoesNotExist:
-            return None
-        return color
-
   
 class Query(object):
     token_is_valid = graphene.Boolean(key=graphene.String())
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
     profile = graphene.Field(UserNode)
-    all_colors = DjangoFilterConnectionField(ColorNode)
+    all_colors = graphene.List(graphene.String)
 
     def resolve_token_is_valid(self, info, key):
         # Check if the token for a user exist and is valid
@@ -96,7 +82,11 @@ class Query(object):
             return GraphQLError("You are not authenticated. Please login first")
 
     def resolve_all_colors(self, info):
-        return Color.objects.all()
+        colors = []
+        for color in Note.COLOR_CHOICES:
+            colors.append(color[0])
+        return colors
+
 
 #############
 # Mutations #
@@ -124,7 +114,7 @@ class UpdateNotesColor(relay.ClientIDMutation):
         id = graphene.ID(required=True)
         new_color = graphene.String(required=True)
 
-    new_color = graphene.Field(ColorNode)
+    new_color = graphene.String()
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
@@ -134,10 +124,9 @@ class UpdateNotesColor(relay.ClientIDMutation):
                 note = Note.objects.get(id=local_id, owner=info.context.user)
             except Note.DoesNotExist:
                 return None
-            color = Color.objects.get(label=input['new_color'])
-            note.color = color
+            note.color = input['new_color']
             note.save()
-            return UpdateNotesColor(color)
+            return UpdateNotesColor(input['new_color'])
         else:
             return GraphQLError("You are not authenticated. Please login first")
 

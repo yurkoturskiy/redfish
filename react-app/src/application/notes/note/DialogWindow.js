@@ -11,6 +11,7 @@ const wrapper = css`
     left: var(--card-pos-x);
     width: var(--card-width);
     height: var(--card-height);
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
     margin-left: 0px;
     opacity: 1;
   }
@@ -22,9 +23,10 @@ const wrapper = css`
     width: 800px;
     margin-left: -400px;
     height: auto;
+    box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
     transform: translateX(0);
     transition: opacity 300ms, transform 300ms, width 300ms, height 300ms,
-      left 300ms, top 300ms, margin-left 300ms;
+      left 300ms, top 300ms, margin-left 300ms, box-shadow 300ms;
   }
 
   .dialog-exit {
@@ -40,8 +42,9 @@ const wrapper = css`
     top: var(--card-pos-y);
     left: var(--card-pos-x);
     margin-left: 0px;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
     transition: opacity 300ms, transform 300ms, width 300ms, height 300ms,
-      left 300ms, top 300ms, margin-left 300ms;
+      left 300ms, top 300ms, margin-left 300ms, box-shadow 300ms;
   }
 `;
 
@@ -54,7 +57,6 @@ const dialogWindow = css`
   margin-left: -400px;
   z-index: 4;
   width: 800px;
-  background-color: white;
   border-radius: 6px;
   box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
 `;
@@ -70,6 +72,7 @@ const background = css`
 
 function DialogWindow(props) {
   const node = useContext(NoteNode);
+  var noteColorVariable = `var(--note-color-${node.color.toLowerCase()})`;
   const [cardWidth, setCardWidth] = useState();
   const [cardHeight, setCardHeight] = useState();
   const [cardPosX, setCardPosX] = useState();
@@ -114,7 +117,7 @@ function DialogWindow(props) {
       >
         <div
           className={dialogWindow}
-          style={{ backgroundColor: `#${node.color.value}` }}
+          style={{ backgroundColor: noteColorVariable }}
           id={`${node.id}-dialog`}
         >
           <h1>{node.title}</h1>

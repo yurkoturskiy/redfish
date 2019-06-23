@@ -37,11 +37,7 @@ export const ALL_NOTES = gql`
           edited
           pinned
           order
-          color {
-            id
-            label
-            value
-          }
+          color
         }
       }
     }
@@ -60,11 +56,7 @@ export const ADD_NOTE = gql`
         created
         edited
         order
-        color {
-          id
-          label
-          value
-        }
+        color
         __typename
       }
     }
@@ -91,26 +83,14 @@ export const SWITCH_NOTES_SELECTOR = gql`
 
 export const ALL_COLORS = gql`
   query {
-    allColors {
-      edges {
-        node {
-          id
-          label
-          value
-        }
-      }
-    }
+    allColors
   }
 `;
 
 export const UPDATE_NOTES_COLOR = gql`
   mutation updateNotesColor($id: ID!, $newColor: String!) {
     updateNotesColor(input: { id: $id, newColor: $newColor }) {
-      newColor {
-        id
-        label
-        value
-      }
+      newColor
     }
   }
 `;

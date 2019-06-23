@@ -22,6 +22,16 @@ export const globals = css`
     @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
     @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
+    :root {
+      --note-color-white: white;
+      --note-color-red: #f28b82;
+      --note-color-orange: #ffd34f;
+      --note-color-yellow: #fff476;
+      --note-color-green: #cdff90;
+      --note-color-blue: #afcbfa;
+      --note-color-violet: #d7aefc;
+    }
+
     body {
       font-family: "Roboto", sans-serif;
       margin: 0;

@@ -14,7 +14,6 @@ export const container = css`
   padding: 12px;
   box-shadow: var(--container-box-shadow);
   border-radius: 6px;
-  background-color: var(--container-background-color);
   transition: box-shadow 0.2s;
   opacity: var(--opacity);
 
@@ -124,10 +123,11 @@ export const NoteNode = React.createContext();
 function Note(props) {
   const [inEdit, setInEdit] = useState(false);
   const [visible, setVisible] = useState(true);
+  var noteColorVariable = `var(--note-color-${props.node.color.toLowerCase()})`;
   const switchVisibility = () => {
     setVisible(visible => !visible);
   };
-
+  const containerBorderWidth = props.node.color !== "WHITE" ? "0px" : "1px";
   return (
     <NoteNode.Provider value={props.node}>
       <DialogWindow
@@ -139,10 +139,10 @@ function Note(props) {
           {...props.draggableItem}
           className={container}
           style={{
-            "--container-background-color": `#${props.node.color.value}`,
+            backgroundColor: noteColorVariable,
             "--container-box-shadow": `inset 0 0 0 ${
               props.isSelected ? 2 : 0
-            }pt #3E3E3E, 0 0 0 1px #E3E3E3`,
+            }pt #3E3E3E, 0 0 0 ${containerBorderWidth} #E3E3E3`,
             "--container-box-shadow-hover": `inset 0 0 0 ${
               props.isSelected ? 2 : 0
             }pt #3E3E3E, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)`,
