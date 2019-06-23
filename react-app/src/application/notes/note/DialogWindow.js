@@ -32,13 +32,11 @@ const wrapper = css`
   .dialog-exit {
     opacity: 1;
     width: 800px;
-    height: var(--dialog-height);
   }
 
   .dialog-exit-active {
     opacity: 1;
     width: var(--card-width);
-    height: var(--card-height);
     top: var(--card-pos-y);
     left: var(--card-pos-x);
     margin-left: 0px;
