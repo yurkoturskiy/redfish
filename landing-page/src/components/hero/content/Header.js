@@ -2,9 +2,12 @@ import React from 'react'
 import { css } from 'linaria' // eslint-disable-line
 
 const header = css`
-  font-size: 2.5rem;
-  font-weight: 500;
-  margin: 0 0 0 25px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 56px;
+  margin: 0 0 0 12px;
+  color: #444444;
 `
 
 function Header(props) {

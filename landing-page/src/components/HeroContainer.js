@@ -15,7 +15,6 @@ import GoToAppBtn from './hero/content/actionBtns/GoToAppBtn'
 const container = css`
   position: relative;
   height: 100vh;
-  width: 100%;
 `
 
 function HeroContainer(props) {

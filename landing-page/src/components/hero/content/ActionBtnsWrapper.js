@@ -4,6 +4,7 @@ import { css } from 'linaria' // eslint-disable-line
 const wrapper = css`
   display: flex;
   align-items: center;
+  margin: 0 0 0 -12px;
 `
 
 function ActionBtnsWrapper(props) {
