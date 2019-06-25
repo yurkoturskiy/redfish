@@ -128,6 +128,10 @@ function Note(props) {
   const [inEdit, setInEdit] = useState(false);
   const [visible, setVisible] = useState(true);
   var noteColorVariable = `var(--note-color-${props.node.color.toLowerCase()})`;
+  var contentText = props.node.content.slice(
+    0,
+    process.env.REACT_APP_CARDS_CONTENT_SYMBOLS_NUM
+  );
   const switchVisibility = () => {
     setVisible(visible => !visible);
   };
@@ -158,9 +162,7 @@ function Note(props) {
           <Pin />
           <div className={contentContainer} onClick={() => setInEdit(true)}>
             {props.node.title && <h3 className={title}>{props.node.title}</h3>}
-            {props.node.content && (
-              <p className={content}>{props.node.content}</p>
-            )}
+            {props.node.content && <p className={content}>{contentText}</p>}
           </div>
           <OptionsContainer node={props.node} />
         </div>

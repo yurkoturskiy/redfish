@@ -37,6 +37,7 @@ const wrapper = css`
   .dialog-exit-active {
     opacity: 1;
     width: var(--card-width);
+    max-height: var(--card-height);
     top: var(--card-pos-y);
     left: var(--card-pos-x);
     margin-left: 0px;
@@ -48,6 +49,7 @@ const wrapper = css`
 
 const dialogWindow = css`
   position: fixed;
+  overflow: hidden;
   height: auto;
   top: 0;
   left: 50%;
