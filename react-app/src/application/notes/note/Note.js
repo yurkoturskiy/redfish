@@ -82,8 +82,8 @@ export const container = css`
     width: 18px;
     border-radius: 12px;
     background-color: var(--checkmark-background-color);
-    top: 0;
-    left: 0;
+    top: -8px;
+    left: -8px;
     opacity: var(--checkmark-opacity);
     transition: opacity 0.4s, background-color 0.2s;
   }
@@ -128,10 +128,7 @@ function Note(props) {
   const [inEdit, setInEdit] = useState(false);
   const [visible, setVisible] = useState(true);
   var noteColorVariable = `var(--note-color-${props.node.color.toLowerCase()})`;
-  var contentText = props.node.content.slice(
-    0,
-    process.env.REACT_APP_CARDS_CONTENT_SYMBOLS_NUM
-  );
+  var contentText = props.node.content.replace(/^(.{500}[^\s]*).*/, "$1"); // Cut content text
   const switchVisibility = () => {
     setVisible(visible => !visible);
   };
