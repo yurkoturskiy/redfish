@@ -64,7 +64,6 @@ function Notes(props) {
           if (!data.allNotes.edges[index].node.pinned)
             notPinnedCards.push(card);
         });
-        console.log("not pinned cards", notPinnedCards);
 
         return (
           <Cursors.Provider value={cursors}>
