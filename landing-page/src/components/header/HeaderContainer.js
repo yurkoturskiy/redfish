@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from 'linaria' // eslint-disable-line
-import { navigate } from '@reach/router'
+import { navigate } from 'gatsby'
 import Button from '@material/react-button'
 // Local components
 import Logo from './Logo'

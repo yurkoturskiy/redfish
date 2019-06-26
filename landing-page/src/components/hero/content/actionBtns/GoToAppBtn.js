@@ -1,6 +1,6 @@
 import React from 'react'
 import { css } from 'linaria' // eslint-disable-line
-import { navigate } from '@reach/router'
+import { navigate } from 'gatsby'
 import Button from '@material/react-button'
 
 function GoToAppBtn(props) {

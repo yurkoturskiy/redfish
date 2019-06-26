@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Field } from 'formik'
 import { Link } from 'gatsby'
-import { navigate } from '@reach/router'
+import { navigate } from 'gatsby'
 // Local components
 import FormikMaterialTextField from '../../styledUIElements/FormikMaterialTextField'
 import Button from '@material/react-button'
