@@ -16,6 +16,11 @@ const block = css`
   width: 447px;
   border: 1px solid #444;
   border-radius: 8px;
+
+  /* Hide for small screens */
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
 `
 
 const input = css`
