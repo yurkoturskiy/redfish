@@ -4,12 +4,14 @@ import { css } from 'linaria'
 import ClipboardIcon from '../../../images/ClipboardIcon'
 
 const block = css`
+  /* position */
   position: absolute;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
   bottom: 48px;
+  /* style */
   height: 30px;
   width: 447px;
   border: 1px solid #444;
@@ -27,7 +29,7 @@ const input = css`
   width: 412px;
   background-color: transparent;
   caret-color: transparent;
-
+  /* text */
   font-family: Fira Mono;
   font-style: normal;
   font-weight: normal;
@@ -36,18 +38,21 @@ const input = css`
 `
 
 const allert = css`
+  /* position */
   position: absolute;
   top: -28px;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 4px;
   left: 0;
   right: 0;
-  width: 64px;
+  /* style */
   background-color: yellow;
+  border-radius: 4px;
+  width: 64px;
+  padding: 4px;
+  /* text */
   text-align: center;
   font-size: 0.75rem;
-  padding: 4px;
 `
 
 function GitClone() {
@@ -68,7 +73,7 @@ function GitClone() {
         className={input}
         id="git-clone"
         type="text"
-        value="git clone https://github.com/guandjoy/Redfish.git"
+        defaultValue="git clone https://github.com/guandjoy/Redfish.git"
       />
       {isCopied && <div className={allert}>Copied</div>}
     </div>
