@@ -16,6 +16,11 @@ const container = css`
   width: 816px;
   background-color: white;
 `
+
+const header = css`
+  text-align: center;
+`
+
 const cardsWrapper = css`
   display: flex;
   justify-content: center;
@@ -50,6 +55,7 @@ const name = css`
 function DependenciesContainer() {
   return (
     <div className={container}>
+      <h2 className={header}>Main dependencies</h2>
       <div>
         <h3>ReactJS frontend</h3>
         <div className={cardsWrapper}>
