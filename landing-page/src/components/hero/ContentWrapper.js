@@ -4,11 +4,19 @@ import { css } from 'linaria' // eslint-disable-line
 const content = css`
   position: absolute;
   top: 30vh;
-  left: 18.18%;
-  outline: 1px solid grey;
+  left: calc(18.18% - var(--gutter) / 2);
 
-  @media screen and (max-width: 1440px) {
-    left: 9.09%;
+  @media screen and (max-width: 1439px) and (min-width: 801px) {
+    left: calc(9.09% - var(--gutter) / 2);
+  }
+
+  @media screen and (max-width: 800px) and (min-width: 541px) {
+    left: var(--gutter);
+  }
+
+  @media screen and (max-width: 540px) {
+    left: 0;
+    right: 0;
   }
 `
 
