@@ -31,9 +31,9 @@ function VideoDialog(props) {
           width="560"
           height="315"
           src="https://www.youtube.com/embed/yOM1nbqirQQ"
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         />
       </div>
       <div className={background} onClick={() => props.setDialog(false)} />

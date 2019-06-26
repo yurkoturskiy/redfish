@@ -24,9 +24,9 @@ function TutorialsContainer(props) {
           width="640"
           height="360"
           src="https://www.youtube.com/embed/videoseries?list=PLip1ThU0gOFb8GUDeuek69aalgyM4yQOI"
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
         />
       </div>
     </div>
