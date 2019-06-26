@@ -11,6 +11,7 @@ import ActionBtnsWrapper from './hero/content/ActionBtnsWrapper'
 import BrieflyAboutBtn from './hero/content/actionBtns/BrieflyAboutBtn'
 import GitHubPageBtn from './hero/content/actionBtns/GitHubPageBtn'
 import GoToAppBtn from './hero/content/actionBtns/GoToAppBtn'
+import GitClone from './hero/content/GitClone'
 
 const container = css`
   position: relative;
@@ -31,6 +32,7 @@ function HeroContainer(props) {
           <GitHubPageBtn />
         </ActionBtnsWrapper>
       </ContentWrapper>
+      <GitClone />
     </div>
   )
 }
