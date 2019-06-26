@@ -13,6 +13,21 @@ export const globals = css`
   :global() {
     @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
     @import url('https://fonts.googleapis.com/css?family=Fira+Mono&display=swap');
+
+    :root {
+      --gutter: 24px;
+      --columns: 12;
+
+      @media screen and (max-width: 800px) and (min-width: 415px) {
+        --columns: 8;
+      }
+
+      @media screen and (max-width: 414px) {
+        --columns: 4;
+        --gutter: 16px;
+      }
+    }
+
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
