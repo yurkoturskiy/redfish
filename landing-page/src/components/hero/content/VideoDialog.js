@@ -13,6 +13,12 @@ const dialog = css`
   z-index: 6;
 `
 
+const video = css`
+  /* Inherit size from dialog */
+  width: 100%;
+  height: 100%;
+`
+
 const background = css`
   position: fixed;
   top: 0;
@@ -30,9 +36,8 @@ function VideoDialog(props) {
     <React.Fragment>
       <div className={dialog}>
         <iframe
+          className={video}
           title="briefly-about"
-          width="560"
-          height="315"
           src="https://www.youtube.com/embed/yOM1nbqirQQ"
           frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
