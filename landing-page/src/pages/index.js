@@ -5,6 +5,7 @@ import SEO from '../components/seo'
 import HeroContainer from '../components/HeroContainer'
 import Dependencies from '../components/dependencies/Container'
 import Tutorials from '../components/tutorials/Container'
+import Contribute from '../components/contribute/Container'
 
 const IndexPage = () => {
   return (
@@ -13,6 +14,7 @@ const IndexPage = () => {
       <HeroContainer />
       <Dependencies />
       <Tutorials />
+      <Contribute />
     </Layout>
   )
 }
