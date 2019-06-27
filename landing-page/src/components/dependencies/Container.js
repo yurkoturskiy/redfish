@@ -12,9 +12,12 @@ import {
 const container = css`
   position: relative;
   margin: 0 auto 0 auto;
-  height: 100vh;
   width: 856px;
   background-color: white;
+
+  @media screen and (max-width: 900px) {
+    width: 768px;
+  }
 `
 
 const header = css`
@@ -24,6 +27,10 @@ const header = css`
 
 const content = css`
   margin: 20px;
+
+  @media screen and (max-width: 900px) {
+    margin: 12px;
+  }
 `
 
 const section = css`
@@ -33,6 +40,7 @@ const section = css`
   .bullet {
     display: inline-block;
     margin-left: 4px;
+    margin-bottom: 1px;
     height: 12px;
     width: 12px;
     border-radius: 6px;
@@ -46,6 +54,19 @@ const section = css`
     line-height: 23px;
 
     color: #869ba7;
+  }
+
+  @media screen and (max-width: 900px) {
+    .bullet {
+      height: 10px;
+      width: 10px;
+    }
+
+    h3 {
+      font-size: 18px;
+      line-height: 21px;
+      margin: 4px 0 0 8px;
+    }
   }
 `
 
@@ -63,6 +84,11 @@ const card = css`
   background-color: white;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 14px;
+
+  @media screen and (max-width: 900px) {
+    width: 348px;
+    height: 112px;
+  }
 `
 
 const icon = css`
@@ -71,11 +97,13 @@ const icon = css`
   left: 32px;
   width: 64px;
   height: 64px;
+
+  @media screen and (max-width: 900px) {
+    top: 24px;
+    left: 24px;
+  }
 `
 
-const text = css`
-  display: inline-block;
-`
 const purpose = css`
   position: absolute;
   top: 38px;
@@ -87,6 +115,14 @@ const purpose = css`
   /* identical to box height */
 
   color: #555555;
+
+  @media screen and (max-width: 900px) {
+    top: 34px;
+    left: 104px;
+
+    font-size: 14px;
+    line-height: 16px;
+  }
 `
 
 const name = css`
@@ -99,6 +135,15 @@ const name = css`
   line-height: 28px;
 
   color: #555555;
+
+  @media screen and (max-width: 900px) {
+    bottom: 32px;
+    left: 104px;
+
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+  }
 `
 
 function DependenciesContainer() {
