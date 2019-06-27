@@ -12,6 +12,7 @@ import '@material/react-checkbox/dist/checkbox.css'
 export const globals = css`
   :global() {
     @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+    @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,700&display=swap');
     @import url('https://fonts.googleapis.com/css?family=Fira+Mono&display=swap');
 
     :root {
