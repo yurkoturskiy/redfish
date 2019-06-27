@@ -42,16 +42,6 @@ const navigation = css`
 const HeaderContainer = ({ siteTitle }) => (
   <nav className={navigation}>
     <Logo />
-    <Button onClick={() => navigate('/authentication/navigate')}>
-      Go to app
-    </Button>
-    <Button
-      onClick={() =>
-        window.open('https://github.com/guandjoy/Redfish', '_blank')
-      }
-    >
-      GitHub
-    </Button>
   </nav>
 )
 
