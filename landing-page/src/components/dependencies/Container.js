@@ -15,8 +15,12 @@ const container = css`
   width: 856px;
   background-color: white;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) and (min-width: 768px) {
     width: 768px;
+  }
+
+  @media screen and (max-width: 767px) and (min-width: 500px) {
+    width: 100%;
   }
 `
 
@@ -60,7 +64,7 @@ const section = css`
     color: #869ba7;
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) and (min-width: 768px) {
     .bullet {
       height: 10px;
       width: 10px;
@@ -70,6 +74,19 @@ const section = css`
       font-size: 18px;
       line-height: 21px;
       margin: 4px 0 0 8px;
+    }
+  }
+
+  media screen and (max-width: 767px) and (min-width: 500px) {
+    .bullet {
+      height: 8px;
+      width: 8px;
+    }
+
+    h3 {
+      font-size: 16px;
+      line-height: 19px;
+      margin: 4px 0 0 6px;
     }
   }
 `
@@ -89,9 +106,21 @@ const card = css`
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 14px;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) and (min-width: 768px) {
     width: 348px;
     height: 112px;
+  }
+
+  @media screen and (max-width: 767px) and (min-width: 580px) {
+    width: calc(50% - 24px);
+    height: 88px;
+    border-radius: 8px;
+  }
+
+  @media screen and (max-width: 579px) and (min-width: 500px) {
+    width: calc(50% - 24px);
+    height: 68px;
+    border-radius: 8px;
   }
 `
 
@@ -102,9 +131,23 @@ const icon = css`
   width: 64px;
   height: 64px;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) and (min-width: 768px) {
     top: 24px;
     left: 24px;
+  }
+
+  @media screen and (max-width: 767px) and (min-width: 580px) {
+    height: 48px;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+  }
+
+  @media screen and (max-width: 579px) and (min-width: 500px) {
+    height: 36px;
+    width: 36px;
+    top: 16px;
+    left: 16px;
   }
 `
 
@@ -120,12 +163,28 @@ const purpose = css`
 
   color: #555555;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) and (min-width: 768px) {
     top: 34px;
     left: 104px;
 
     font-size: 14px;
     line-height: 16px;
+  }
+
+  @media screen and (max-width: 767px) and (min-width: 580px) {
+    top: 24px;
+    left: 80px;
+
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  @media screen and (max-width: 579px) and (min-width: 500px) {
+    top: 18px;
+    left: 64px;
+
+    font-size: 12px;
+    line-height: 14px;
   }
 `
 
@@ -140,13 +199,29 @@ const name = css`
 
   color: #555555;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) and (min-width: 768px) {
     bottom: 32px;
     left: 104px;
 
     font-weight: 500;
     font-size: 22px;
     line-height: 26px;
+  }
+
+  @media screen and (max-width: 767px) and (min-width: 580px) {
+    bottom: 26px;
+    left: 80px;
+
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media screen and (max-width: 579px) and (min-width: 500px) {
+    bottom: 16px;
+    left: 64px;
+
+    font-size: 14px;
+    line-height: 16px;
   }
 `
 
