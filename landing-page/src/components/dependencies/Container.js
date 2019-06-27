@@ -22,7 +22,11 @@ const container = css`
 
 const header = css`
   text-align: center;
-  color: #444;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+
+  color: #444444;
 `
 
 const content = css`

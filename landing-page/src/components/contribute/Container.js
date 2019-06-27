@@ -8,10 +8,20 @@ const content = css`
 
 const header = css`
   text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+
+  color: #444444;
 `
 
 const paragraph = css`
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
   text-align: center;
+
+  color: #444444;
 `
 
 function ContributeContainer() {
