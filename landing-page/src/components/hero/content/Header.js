@@ -5,7 +5,7 @@ const header = css`
   margin: 0;
   margin-left: var(--gutter);
   margin-right: var(--gutter);
-  color: #444444;
+  color: var(--green-eight);
 
   /*******************/
   /* Adapt text size */

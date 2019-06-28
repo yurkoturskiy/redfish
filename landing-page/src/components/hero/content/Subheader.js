@@ -3,6 +3,7 @@ import { css } from 'linaria' // eslint-disable-line
 
 const subheader = css`
   margin: 28px 0 32px var(--gutter);
+  color: var(--green-eight);
 
   /*******************/
   /* Adapt text size */
