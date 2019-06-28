@@ -15,7 +15,8 @@ import GitClone from './hero/content/GitClone'
 
 const container = css`
   position: relative;
-  height: 100vh;
+  height: 86vh;
+  background-color: var(--red-two);
 `
 
 function HeroContainer(props) {
