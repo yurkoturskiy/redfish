@@ -19,6 +19,12 @@ export const globals = css`
       --gutter: 24px;
       --columns: 12;
 
+      --green-two: #d0eedb;
+      --green-seven: #304538;
+      --green-eight: #344239;
+      --green-nine: #2b352f;
+      --green-ten: #151615;
+
       @media screen and (max-width: 800px) and (min-width: 415px) {
         --columns: 8;
       }
@@ -33,6 +39,7 @@ export const globals = css`
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
+      color: var(--green-eight);
     }
   }
 `
