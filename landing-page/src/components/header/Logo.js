@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import icon from '../../images/redfish-color-logo.svg'
-import RedfishLogoOutline from '../../images/RedfishLogoOutline'
+import RedfishLogoSolid from '../../images/RedfishLogoSolid'
 import { css } from 'linaria' // eslint-disable-line
 
 export const logo = css`
@@ -11,6 +11,10 @@ export const logo = css`
   top: 32px;
   left: calc(18.18% + var(--gutter) / 2);
 
+  svg {
+    fill: var(--green-eight);
+  }
+
   span {
     display: inline-block;
     vertical-align: top;
@@ -18,7 +22,7 @@ export const logo = css`
     font-weight: bold;
     font-size: 18px;
     line-height: 21px;
-    color: #444444;
+    color: var(--green-eight);
   }
 
   @media screen and (max-width: 1439px) and (min-width: 801px) {
@@ -41,7 +45,7 @@ function Logo(props) {
   return (
     <Link to="/">
       <div className={logo}>
-        <RedfishLogoOutline />
+        <RedfishLogoSolid />
         <span>Redfish</span>
       </div>
     </Link>
