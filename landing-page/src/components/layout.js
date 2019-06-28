@@ -19,6 +19,7 @@ export const globals = css`
       --gutter: 24px;
       --columns: 12;
 
+      --red-two: #ffedeb;
       --green-two: #d0eedb;
       --green-seven: #304538;
       --green-eight: #344239;
