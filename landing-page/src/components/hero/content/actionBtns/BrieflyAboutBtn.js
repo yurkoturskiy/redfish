@@ -13,14 +13,16 @@ const button = css`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   border: 0;
   padding: 0;
-  --mdc-theme-primary: #444;
+  background-color: white;
+  --mdc-theme-primary: var(--green-nine);
+  --mdc-theme-on-primary: var(--green-two);
 
   .mdc-button__icon {
     position: absolute;
     left: 32px;
     height: 29px;
     width: 29px;
-    fill: #595959;
+    fill: var(--green-ten);
     padding-bottom: 2px;
   }
 
@@ -59,6 +61,7 @@ function BrieflyAboutBtn(props) {
   return (
     <Button
       className={button}
+      raised
       icon={leftIcon}
       onClick={() => props.setDialog(true)}
     >
