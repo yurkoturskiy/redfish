@@ -57,13 +57,7 @@ const header = css`
 `
 
 function Header(props) {
-  return (
-    <h1 className={header}>
-      Fullstack Boilerplate
-      <br />
-      <span> Web Application</span>
-    </h1>
-  )
+  return <h1 className={header}>Fullstack Boilerplate Web&nbsp;Application</h1>
 }
 
 export default Header
