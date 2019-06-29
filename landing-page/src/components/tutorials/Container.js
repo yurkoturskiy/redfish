@@ -33,7 +33,9 @@ const element = css`
 function TutorialsContainer(props) {
   return (
     <div className={container}>
-      <h2 className={header}>Tutorials</h2>
+      <h2 className={header} id="tutorials">
+        Tutorials
+      </h2>
       <div className={content}>
         <div className={element}>
           01<span>Install</span>
