@@ -17,19 +17,19 @@ const header = css`
   line-height: 56px;
 
   @media screen and (max-width: 800px) and (min-width: 415px) {
-    font-size: 40px;
+    font-size: 2.5rem;
     line-height: 47px;
   }
 
   @media screen and (max-width: 414px) and (min-width: 321px) {
     font-weight: 500;
-    font-size: 28px;
+    font-size: 1.75rem;
     line-height: 33px;
   }
 
   @media screen and (max-width: 320px) {
     font-weight: 500;
-    font-size: 24px;
+    font-size: 1.5rem;
     line-height: 28px;
   }
 
