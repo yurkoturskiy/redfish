@@ -7,7 +7,7 @@ import PlayIcon from '../../../../images/PlayIcon'
 const button = css`
   position: relative;
   height: 88px;
-  width: 245px;
+  width: 229px;
   border-radius: 44px;
   background: #ffffff;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
@@ -19,20 +19,21 @@ const button = css`
 
   .mdc-button__icon {
     position: absolute;
-    left: 32px;
-    height: 29px;
-    width: 29px;
-    fill: var(--green-ten);
+    left: 36px;
+    height: 24px;
+    width: 16px;
+    fill: var(--green-two);
     padding-bottom: 2px;
   }
 
   .mdc-button__label {
+    position: absolute;
+    left: 76px;
     font-weight: 300;
     font-size: 1.125rem;
     letter-spacing: 0;
     line-height: 88px;
     text-transform: initial;
-    margin-left: 16px;
   }
 
   /* Adapt size */
