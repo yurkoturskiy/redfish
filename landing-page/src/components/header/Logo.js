@@ -7,9 +7,9 @@ import { css } from 'linaria' // eslint-disable-line
 export const logo = css`
   /* Adapt position */
 
-  position: absolute;
+  position: relative;
   top: 32px;
-  left: calc(18.18% + var(--gutter) / 2);
+  left: var(--col-two);
 
   svg {
     fill: var(--green-eight);

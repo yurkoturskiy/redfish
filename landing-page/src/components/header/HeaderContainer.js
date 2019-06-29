@@ -9,11 +9,9 @@ import Logo from './Logo'
 const navigation = css`
   position: absolute;
   width: 100%;
-  float: right;
-  display: flex;
-  justify-content: flex-end;
   z-index: 1;
-  background-color: rgba(255, 255, 255, 0);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
 
   a {
     text-decoration: none;
