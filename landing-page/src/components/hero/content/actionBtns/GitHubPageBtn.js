@@ -1,6 +1,5 @@
 import React from 'react'
-import { css } from 'linaria' // eslint-disable-line
-import Button from '@material/react-button'
+import Button from '../../../styledUIElements/Button'
 
 function GitHubPageBtn(props) {
   return (
@@ -8,8 +7,9 @@ function GitHubPageBtn(props) {
       onClick={() =>
         window.open('https://github.com/guandjoy/Redfish', '_blank')
       }
+      romb
     >
-      GitHub Page
+      GitHub
     </Button>
   )
 }

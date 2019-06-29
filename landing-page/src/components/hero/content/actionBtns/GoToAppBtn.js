@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'linaria' // eslint-disable-line
 import { navigate } from 'gatsby'
-import Button from '@material/react-button'
+import Button from '../../../styledUIElements/Button'
 
 function GoToAppBtn(props) {
   return (
