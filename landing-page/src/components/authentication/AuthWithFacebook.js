@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { css } from 'styled-components'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import SocialLogin from 'react-social-login'
@@ -12,22 +11,8 @@ const AUTH_WITH_FACEBOOK = gql`
   }
 `
 
-const facebookButton = `
-  position: relative;
-  border: 0px solid white;
-  background: #4267b2;
-  border-radius: 5px;
-  color: white;
-  height: 48px;
-  text-align: center;
-  width: 300px;
-  font-size: 1rem;
-  display: block;
-  margin: 8px auto 8px auto;
-`
-
 const Button = ({ children, triggerLogin, ...props }) => (
-  <button css={facebookButton} onClick={() => triggerLogin()} {...props}>
+  <button className="facebook-button" onClick={() => triggerLogin()} {...props}>
     {children}
   </button>
 )

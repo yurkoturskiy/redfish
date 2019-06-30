@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import GitHubLogin from 'react-github-login'
@@ -52,24 +51,10 @@ function AuthWithGitHub(props) {
         onFailure={onFailure}
         redirectUri=""
         buttonText={props.children}
-        className={props.className}
+        className="github-button"
       />
     </div>
   )
 }
-
-const StyledComp = styled(AuthWithGitHub)`
-  position: relative;
-  border: 0px solid white;
-  background: #333333;
-  border-radius: 5px;
-  color: white;
-  height: 48px;
-  text-align: center;
-  width: 300px;
-  font-size: 1rem;
-  display: block;
-  margin: 8px auto 8px auto;
-`
 
 export default AuthWithGitHub

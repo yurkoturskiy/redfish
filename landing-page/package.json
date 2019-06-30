@@ -18,7 +18,6 @@
     "apollo-link-rest": "^0.7.3",
     "apollo-link-state": "^0.4.2",
     "axios": "^0.18.1",
-    "babel-plugin-styled-components": "^1.10.4",
     "formik": "^1.5.7",
     "gatsby": "^2.11.5",
     "gatsby-image": "^2.2.3",
@@ -29,7 +28,6 @@
     "gatsby-plugin-react-helmet": "^3.1.0",
     "gatsby-plugin-robots-txt": "^1.4.0",
     "gatsby-plugin-sharp": "^2.2.1",
-    "gatsby-plugin-styled-components": "^3.1.0",
     "gatsby-source-filesystem": "^2.1.1",
     "gatsby-source-graphql": "^2.1.0",
     "gatsby-transformer-remark": "^2.5.0",
@@ -41,7 +39,6 @@
     "react-github-login": "^1.0.3",
     "react-helmet": "^5.2.1",
     "react-social-login": "^3.4.4",
-    "styled-components": "^4.3.2",
     "zxcvbn": "^4.4.2"
   },
   "keywords": [

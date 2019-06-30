@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 // Local components
 //  * Content
 import ContentWrapper from './hero/ContentWrapper'
@@ -16,19 +15,18 @@ import TutorialsBtn from './hero/content/actionBtns/TutorialsBtn'
 //  ** Others
 import GitClone from './hero/content/GitClone'
 
-const HeroContainer = ({ className }) => {
+const HeroContainer = () => {
   const [dialog, setDialog] = useState(false)
   return (
-    <div className={className}>
+    <div className="hero-container">
       <Image />
       <ContentWrapper>
         <Header />
         <Subheader />
-
         {dialog && <VideoDialog setDialog={setDialog} />}
         <ActionBtnsWrapper>
           <BrieflyAboutBtn setDialog={setDialog} />
-          <div className="buttons">
+          <div className="buttons-wrapper">
             <GoToAppBtn />
             <TutorialsBtn />
             <GitHubPageBtn />
@@ -40,16 +38,4 @@ const HeroContainer = ({ className }) => {
   )
 }
 
-const StyledComp = styled(HeroContainer)`
-  position: relative;
-  height: 86vh;
-  background-color: var(--red-two);
-  padding-left: var(--grid-margin);
-  padding-right: var(--grid-margin);
-
-  .buttons {
-    margin-left: 28px;
-  }
-`
-
-export default StyledComp
+export default HeroContainer
