@@ -1,7 +1,16 @@
 import React from 'react'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 
-const subheader = css`
+function Subheader({ className }) {
+  return (
+    <h2 className={className}>
+      <span id="blue">ReactJS</span> <span id="red">GraphQL</span>{' '}
+      <span id="green">Django</span>
+    </h2>
+  )
+}
+
+const StyledComp = styled(Subheader)`
   margin: 28px 0 32px var(--gutter);
 
   #blue {
@@ -47,13 +56,4 @@ const subheader = css`
   }
 `
 
-function Subheader(props) {
-  return (
-    <h2 className={subheader}>
-      <span id="blue">ReactJS</span> <span id="red">GraphQL</span>{' '}
-      <span id="green">Django</span>
-    </h2>
-  )
-}
-
-export default Subheader
+export default StyledComp

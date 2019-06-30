@@ -1,7 +1,13 @@
 import React from 'react'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 
-const header = css`
+function Header({ className }) {
+  return (
+    <h1 className={className}>Fullstack Boilerplate Web&nbsp;Application</h1>
+  )
+}
+
+const StyledComp = styled(Header)`
   margin: 0;
   margin-left: var(--gutter);
   margin-right: var(--gutter);
@@ -56,8 +62,4 @@ const header = css`
   }
 `
 
-function Header(props) {
-  return <h1 className={header}>Fullstack Boilerplate Web&nbsp;Application</h1>
-}
-
-export default Header
+export default StyledComp

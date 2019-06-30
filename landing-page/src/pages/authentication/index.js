@@ -1,6 +1,6 @@
 import React from 'react'
 import { Router } from '@reach/router'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 // Local components
 import Layout from '../../components/layout'
 import Navigator from '../../components/authentication/Navigator'
@@ -10,21 +10,10 @@ import RegistrationFormContainer from '../../components/authentication/Registrat
 import PasswordResetFormContainer from '../../components/authentication/PasswordResetFormContainer'
 import PasswordResetConfirmFormContainer from '../../components/authentication/PasswordResetConfirmFormContainer'
 
-const wrapper = css`
-  width: 512px;
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%);
-  border: 1px solid lightgrey;
-  border-radius: 8px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-`
-
-export default () => {
+const AuthenticationIndex = ({ className }) => {
   return (
     <Layout>
-      <div className={wrapper}>
+      <div className={className}>
         <Router>
           <Navigator path="authentication/navigate" />
           <AuthenticationContainer path="authentication" />
@@ -37,3 +26,16 @@ export default () => {
     </Layout>
   )
 }
+
+const StyledComp = styled(AuthenticationIndex)`
+  width: 512px;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+`
+
+export default StyledComp

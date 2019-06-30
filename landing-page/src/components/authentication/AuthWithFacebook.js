@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { css } from 'linaria' // eslint-disable-line
+import { css } from 'styled-components'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import SocialLogin from 'react-social-login'
@@ -12,7 +12,7 @@ const AUTH_WITH_FACEBOOK = gql`
   }
 `
 
-const facebookButton = css`
+const facebookButton = `
   position: relative;
   border: 0px solid white;
   background: #4267b2;
@@ -27,7 +27,7 @@ const facebookButton = css`
 `
 
 const Button = ({ children, triggerLogin, ...props }) => (
-  <button className={facebookButton} onClick={() => triggerLogin()} {...props}>
+  <button css={facebookButton} onClick={() => triggerLogin()} {...props}>
     {children}
   </button>
 )

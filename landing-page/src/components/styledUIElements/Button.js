@@ -1,7 +1,16 @@
 import React from 'react'
-import { css } from 'linaria'
+import styled from 'styled-components'
 
-const style = css`
+function Button(props) {
+  return (
+    <button className={props.className} {...props}>
+      <span>{props.children}</span>
+      <div className={`dot ${props.romb && 'romb'}`} />
+    </button>
+  )
+}
+
+const StyledComp = styled(Button)`
   position: relative;
   display: inline-block;
   padding: 12px;
@@ -46,13 +55,4 @@ const style = css`
   }
 `
 
-function Button(props) {
-  return (
-    <button className={style} {...props}>
-      <span>{props.children}</span>
-      <div className={`dot ${props.romb && 'romb'}`} />
-    </button>
-  )
-}
-
-export default Button
+export default StyledComp

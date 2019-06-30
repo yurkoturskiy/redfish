@@ -1,12 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 import { navigate } from 'gatsby'
 import Button from '@material/react-button'
 // Local components
 import Logo from './Logo'
 
-const navigation = css`
+const HeaderContainer = ({ siteTitle, className }) => (
+  <nav className={className}>
+    <Logo />
+  </nav>
+)
+
+HeaderContainer.propTypes = {
+  siteTitle: PropTypes.string,
+}
+
+HeaderContainer.defaultProps = {
+  siteTitle: ``,
+}
+
+const StyledComp = styled(HeaderContainer)`
   position: absolute;
   width: 100%;
   z-index: 1;
@@ -37,18 +51,4 @@ const navigation = css`
   }
 `
 
-const HeaderContainer = ({ siteTitle }) => (
-  <nav className={navigation}>
-    <Logo />
-  </nav>
-)
-
-HeaderContainer.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-HeaderContainer.defaultProps = {
-  siteTitle: ``,
-}
-
-export default HeaderContainer
+export default StyledComp

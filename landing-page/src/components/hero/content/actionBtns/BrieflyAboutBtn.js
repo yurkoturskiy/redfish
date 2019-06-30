@@ -1,10 +1,24 @@
 import React from 'react'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 import Button from '@material/react-button'
 // Local components
 import PlayIcon from '../../../../images/PlayIcon'
 
-const button = css`
+function BrieflyAboutBtn({ className, setDialog }) {
+  const leftIcon = <PlayIcon />
+  return (
+    <Button
+      className={className}
+      raised
+      icon={leftIcon}
+      onClick={() => setDialog(true)}
+    >
+      Briefly about
+    </Button>
+  )
+}
+
+const StyledComp = styled(BrieflyAboutBtn)`
   position: relative;
   height: 88px;
   width: 229px;
@@ -16,6 +30,12 @@ const button = css`
   background-color: white;
   --mdc-theme-primary: var(--green-nine);
   --mdc-theme-on-primary: var(--green-two);
+
+  .mdc-button {
+    height: 88px;
+    width: 229px;
+    border-radius: 44px;
+  }
 
   .mdc-button__icon {
     position: absolute;
@@ -57,18 +77,4 @@ const button = css`
   }
 `
 
-function BrieflyAboutBtn(props) {
-  const leftIcon = <PlayIcon />
-  return (
-    <Button
-      className={button}
-      raised
-      icon={leftIcon}
-      onClick={() => props.setDialog(true)}
-    >
-      Briefly about
-    </Button>
-  )
-}
-
-export default BrieflyAboutBtn
+export default StyledComp

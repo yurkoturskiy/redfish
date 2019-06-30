@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 // Local components
 //  * Content
 import ContentWrapper from './hero/ContentWrapper'
@@ -16,22 +16,10 @@ import TutorialsBtn from './hero/content/actionBtns/TutorialsBtn'
 //  ** Others
 import GitClone from './hero/content/GitClone'
 
-const container = css`
-  position: relative;
-  height: 86vh;
-  background-color: var(--red-two);
-  padding-left: var(--grid-margin);
-  padding-right: var(--grid-margin);
-`
-
-const buttons = css`
-  margin-left: 28px;
-`
-
-function HeroContainer(props) {
+const HeroContainer = ({ className }) => {
   const [dialog, setDialog] = useState(false)
   return (
-    <div className={container}>
+    <div className={className}>
       <Image />
       <ContentWrapper>
         <Header />
@@ -40,7 +28,7 @@ function HeroContainer(props) {
         {dialog && <VideoDialog setDialog={setDialog} />}
         <ActionBtnsWrapper>
           <BrieflyAboutBtn setDialog={setDialog} />
-          <div className={buttons}>
+          <div className="buttons">
             <GoToAppBtn />
             <TutorialsBtn />
             <GitHubPageBtn />
@@ -52,4 +40,16 @@ function HeroContainer(props) {
   )
 }
 
-export default HeroContainer
+const StyledComp = styled(HeroContainer)`
+  position: relative;
+  height: 86vh;
+  background-color: var(--red-two);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+
+  .buttons {
+    margin-left: 28px;
+  }
+`
+
+export default StyledComp

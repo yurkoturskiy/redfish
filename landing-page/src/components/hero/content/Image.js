@@ -1,9 +1,13 @@
 import React from 'react'
-import { css } from 'linaria'
+import styled from 'styled-components'
 // Local components
 import HeroImage from '../../../images/HeroImage'
 
-const style = css`
+function Image({ className }) {
+  return <HeroImage className={className} />
+}
+
+const StyledComp = styled(Image)`
   position: absolute;
   right: calc(100% / 12 * 2 + var(--gutter));
   top: 0;
@@ -24,8 +28,4 @@ const style = css`
   }
 `
 
-function Image(props) {
-  return <HeroImage className={style} />
-}
-
-export default Image
+export default StyledComp

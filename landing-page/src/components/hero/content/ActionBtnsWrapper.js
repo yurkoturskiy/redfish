@@ -1,7 +1,11 @@
 import React from 'react'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 
-const wrapper = css`
+function ActionBtnsWrapper({ className, children }) {
+  return <div className={className}>{children}</div>
+}
+
+const StyledComp = styled(ActionBtnsWrapper)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -12,8 +16,4 @@ const wrapper = css`
   }
 `
 
-function ActionBtnsWrapper(props) {
-  return <div className={wrapper}>{props.children}</div>
-}
-
-export default ActionBtnsWrapper
+export default StyledComp

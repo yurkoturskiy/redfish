@@ -1,9 +1,13 @@
 import React from 'react'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 
 import '@material/react-text-field/dist/text-field.css'
 
-const wrapper = css`
+function FormWrapper(props) {
+  return <div className={props.className}>{props.children}</div>
+}
+
+const StyledComp = styled(FormWrapper)`
   height: 100vh;
   width: 100%;
   background: #f0f0f0;
@@ -85,8 +89,4 @@ const wrapper = css`
   }
 `
 
-function FormWrapper(props) {
-  return <div className={wrapper}>{props.children}</div>
-}
-
-export default FormWrapper
+export default StyledComp

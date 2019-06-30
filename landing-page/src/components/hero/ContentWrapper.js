@@ -1,7 +1,11 @@
 import React from 'react'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 
-const content = css`
+function ContentWrapper({ className, children }) {
+  return <div className={className}>{children}</div>
+}
+
+const StyledComp = styled(ContentWrapper)`
   position: relative;
   z-index: 2;
   top: 30vh;
@@ -22,8 +26,4 @@ const content = css`
   }
 `
 
-function ContentWrapper(props) {
-  return <div className={content}>{props.children}</div>
-}
-
-export default ContentWrapper
+export default StyledComp

@@ -2,9 +2,20 @@ import React from 'react'
 import { Link } from 'gatsby'
 import icon from '../../images/redfish-color-logo.svg'
 import RedfishLogoSolid from '../../images/RedfishLogoSolid'
-import { css } from 'linaria' // eslint-disable-line
+import styled from 'styled-components'
 
-export const logo = css`
+function Logo({ className }) {
+  return (
+    <Link to="/">
+      <div className={className}>
+        <RedfishLogoSolid />
+        <span>Redfish</span>
+      </div>
+    </Link>
+  )
+}
+
+const StyledComp = styled(Logo)`
   /* Adapt position */
 
   position: relative;
@@ -41,15 +52,4 @@ export const logo = css`
   }
 `
 
-function Logo(props) {
-  return (
-    <Link to="/">
-      <div className={logo}>
-        <RedfishLogoSolid />
-        <span>Redfish</span>
-      </div>
-    </Link>
-  )
-}
-
-export default Logo
+export default StyledComp
