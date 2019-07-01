@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Redirect } from '@reach/router'
 import { navigate } from 'gatsby'
 
 function Navigator(props) {
@@ -13,7 +12,7 @@ function Navigator(props) {
     url = '/authentication'
   else if (lastAuthAction === 'login') url = '/authentication/login'
   else if (lastAuthAction === 'signup') url = '/authentication/signup'
-  navigate(url)
+  navigate(url, { replace: true })
 
   return null
 }
