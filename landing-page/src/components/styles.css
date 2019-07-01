@@ -418,6 +418,7 @@ body {
 
 .header-container .logo {
   position: relative;
+  display: inline-block;
   top: 32px;
   left: var(--col-two);
 }
