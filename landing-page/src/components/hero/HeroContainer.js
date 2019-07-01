@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 // Local components
 //  * Content
-import ContentWrapper from './hero/ContentWrapper'
-import VideoDialog from './hero/content/VideoDialog'
-import Header from './hero/content/Header'
-import Subheader from './hero/content/Subheader'
-import Image from './hero/content/Image'
+import ContentWrapper from './ContentWrapper'
+import VideoDialog from './content/VideoDialog'
+import Header from './content/Header'
+import Subheader from './content/Subheader'
+import Image from './content/Image'
 //  ** Action buttons
-import ActionBtnsWrapper from './hero/content/ActionBtnsWrapper'
-import BrieflyAboutBtn from './hero/content/actionBtns/BrieflyAboutBtn'
-import GitHubPageBtn from './hero/content/actionBtns/GitHubPageBtn'
-import GoToAppBtn from './hero/content/actionBtns/GoToAppBtn'
-import TutorialsBtn from './hero/content/actionBtns/TutorialsBtn'
+import ActionBtnsWrapper from './content/ActionBtnsWrapper'
+import BrieflyAboutBtn from './content/actionBtns/BrieflyAboutBtn'
+import GitHubPageBtn from './content/actionBtns/GitHubPageBtn'
+import GoToAppBtn from './content/actionBtns/GoToAppBtn'
+import TutorialsBtn from './content/actionBtns/TutorialsBtn'
 //  ** Others
-import GitClone from './hero/content/GitClone'
+import GitClone from './content/GitClone'
 
 const HeroContainer = () => {
   const [dialog, setDialog] = useState(false)

@@ -1,0 +1,66 @@
+/*
+**************************************************
+***************** Authentication *****************
+**************************************************
+*/
+
+.authentication-container {
+  width: 512px;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.authentication .header {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #aaaeb8;
+  text-align: center;
+  margin: 0px;
+  padding: 16px 0 8px 0;
+}
+
+.authentication .separator {
+  display: block;
+  margin: 8px auto 8px auto;
+  text-align: center;
+}
+
+.authentication .buttonsWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 8px auto 8px auto;
+}
+
+.facebook-button {
+  position: relative;
+  border: 0px solid white;
+  background: #4267b2;
+  border-radius: 5px;
+  color: white;
+  height: 48px;
+  text-align: center;
+  width: 300px;
+  font-size: 1rem;
+  display: block;
+  margin: 8px auto 8px auto;
+}
+
+.github-button {
+  position: relative;
+  border: 0px solid white;
+  background: #333333;
+  border-radius: 5px;
+  color: white;
+  height: 48px;
+  text-align: center;
+  width: 300px;
+  font-size: 1rem;
+  display: block;
+  margin: 8px auto 8px auto;
+}
+

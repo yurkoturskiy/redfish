@@ -1,0 +1,372 @@
+/*
+**************************************************
+***************** Hero Container *****************
+**************************************************
+*/
+
+.hero-container {
+  position: relative;
+  height: 86vh;
+  background-color: var(--red-two);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+}
+
+.hero-container .buttons-wrapper {
+  margin-left: 28px;
+}
+
+/*
+***********************
+*** Content wrapper ***
+***********************
+*/
+
+.hero-container .content {
+  position: relative;
+  z-index: 2;
+  top: 30vh;
+  left: calc(var(--col-two) - var(--gutter));
+  width: calc((100% / var(--columns)) * 8);
+}
+
+@media screen and (max-width: 1439px) and (min-width: 801px) {
+  .hero-container .content {
+    left: calc(100% / var(--columns) - var(--gutter) / 2);
+  }
+}
+
+@media screen and (max-width: 800px) and (min-width: 541px) {
+  .hero-container .content {
+    left: var(--gutter);
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .hero-container .content {
+    left: 0;
+    right: 0;
+  }
+}
+
+/*
+*************
+*** Image ***
+*************
+*/
+
+.hero-container .image {
+  position: absolute;
+  right: calc(100% / 12 * 2 + var(--gutter));
+  top: 0;
+  bottom: 0;
+  margin: auto 0 auto 0;
+  z-index: 0;
+}
+
+@media screen and (max-width: 1439px) and (min-width: 801px) {
+  .hero-container .image {
+    right: calc(100% / var(--columns) - var(--gutter) / 2);
+  }
+}
+
+@media screen and (max-width: 800px) and (min-width: 541px) {
+  .hero-container .image {
+    right: var(--gutter);
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .hero-container .image {
+    right: 0;
+  }
+}
+
+/*
+**************
+*** Header ***
+**************
+*/
+
+.content .header {
+  margin: 0;
+  margin-left: var(--gutter);
+  margin-right: var(--gutter);
+  color: var(--green-eight);
+
+  /* text */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 56px;
+}
+
+/* Adapt text size */
+@media screen and (max-width: 800px) and (min-width: 415px) {
+  .content .header {
+    font-size: 2.5rem;
+    line-height: 47px;
+  }
+}
+
+@media screen and (max-width: 414px) and (min-width: 321px) {
+  .content .header {
+    font-weight: 500;
+    font-size: 1.75rem;
+    line-height: 33px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .content .header {
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 28px;
+  }
+}
+
+/* Adapt text-alight */
+@media screen and (max-width: 540px) {
+  .content .header {
+    text-align: center;
+  }
+}
+
+/*
+*****************
+*** Subheader ***
+*****************
+*/
+
+.content .subheader {
+  margin: 28px 0 32px var(--gutter);
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 1.3125rem;
+}
+
+.content .subheader #blue {
+  color: var(--blue);
+}
+
+.content .subheader #red {
+  color: var(--red);
+}
+
+.content .subheader #green {
+  color: var(--green);
+}
+
+/* Adapt text size */
+@media screen and (max-width: 800px) and (min-width: 415px) {
+  .content .subheader {
+    font-size: 1rem;
+    line-height: 1.1875rem;
+  }
+}
+
+@media screen and (max-width: 414px) and (min-width: 321px) {
+  .content .subheader {
+    font-size: 14px;
+    line-height: 0.875rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .content .subheader {
+    font-size: 0.75rem;
+    line-height: 0.875rem;
+  }
+}
+
+/* Adapt text-align */
+@media screen and (max-width: 540px) {
+  .content .subheader {
+    text-align: center;
+  }
+}
+
+/*
+********************
+*** Video Dialog ***
+********************
+*/
+
+.content .video-dialog {
+}
+
+.content .video-dialog .iframe-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 560px;
+  height: 315px;
+  margin: auto;
+  z-index: 6;
+}
+
+.content .video-dialog iframe {
+  /* Inherit size from dialog */
+  width: inherit;
+  height: inherit;
+}
+
+.content .video-dialog .background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.6;
+  z-index: 5;
+  overflow: hidden;
+}
+
+/*
+******************************
+*** Action buttons wrapper ***
+******************************
+*/
+
+.content .action-buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+}
+
+@media screen and (max-width: 540px) {
+  .content .action-buttons-wrapper {
+    flex-direction: column;
+  }
+}
+
+/*
+****************************
+*** Briefly about button ***
+****************************
+*/
+
+.briefly-about.mdc-button.mdc-button--raised {
+  height: 88px;
+  width: 229px;
+  border-radius: 44px;
+  --mdc-theme-primary: var(--green-nine);
+  --mdc-theme-on-primary: var(--green-two);
+}
+
+.briefly-about .mdc-button__icon {
+  position: absolute;
+  left: 36px;
+  height: 24px;
+  width: 16px;
+  fill: var(--green-two);
+  padding-bottom: 2px;
+}
+
+.briefly-about .mdc-button__label {
+  position: absolute;
+  left: 76px;
+  font-weight: 300;
+  font-size: 1.125rem;
+  letter-spacing: 0;
+  line-height: 88px;
+  text-transform: initial;
+}
+
+@media screen and (max-width: 800px) {
+  .briefly-about.mdc-button.mdc-button--raised {
+    height: 72px;
+    width: 200px;
+    border-radius: 36px;
+  }
+
+  .briefly-about .mdc-button__icon {
+    height: 22px;
+    width: 22px;
+    left: 24px;
+  }
+
+  .briefly-about .mdc-button__label {
+    font-size: 1rem;
+    line-height: 72px;
+    margin-left: 8px;
+  }
+}
+
+/*
+*****************
+*** Git clone ***
+*****************
+*/
+
+.git-clone {
+  /* position */
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: 48px;
+  /* style */
+  height: 30px;
+  width: 447px;
+  border: 1px solid #444;
+  border-radius: 8px;
+}
+
+/* Hide for small screens */
+@media screen and (max-width: 700px) {
+  .git-clone {
+    display: none;
+  }
+}
+
+.git-clone input {
+  display: inline-block;
+  margin: 0;
+  color: #444;
+  line-height: 30px;
+  padding: 0 7px 0 4px;
+  margin: 0;
+  border: 0;
+  width: 412px;
+  background-color: transparent;
+  caret-color: transparent;
+  /* text */
+  font-family: Fira Mono;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.git-clone .allert {
+  /* position */
+  position: absolute;
+  top: -28px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  /* style */
+  background-color: yellow;
+  border-radius: 4px;
+  width: 64px;
+  padding: 4px;
+  /* text */
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.git-clone .icon {
+  height: 16px;
+  width: 16px;
+  margin-left: 8px;
+  vertical-align: middle;
+  fill: #444;
+}
+

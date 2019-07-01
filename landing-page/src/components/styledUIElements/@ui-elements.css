@@ -1,0 +1,144 @@
+/*
+******************************************************
+***************** Styled UI Elements *****************
+******************************************************
+*/
+
+/*
+******************
+*** Dot button ***
+******************
+*/
+
+.dot-button {
+  position: relative;
+  display: inline-block;
+  padding: 12px;
+  border-radius: 8px;
+  border: 0;
+  background: transparent;
+  margin: 23px 20px 0 20px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.dot-button span {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.dot-button .dot {
+  /* positioning */
+  margin: auto;
+  height: 4px;
+  width: 4px;
+  background: var(--green-eight);
+  border-radius: 4px;
+  margin: 12px auto 7px auto;
+  transition: width 0.2s, height 0.2s, margin 0.2s, border-radius 0.2s;
+}
+
+.dot-button .romb.dot {
+  transform: rotate(45deg);
+  border-radius: 0;
+}
+
+.dot-button:hover .dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 32px;
+  margin: 5px auto 0 auto;
+}
+
+.dot-button:hover .romb.dot {
+  border-radius: 0;
+}
+
+/*
+********************
+*** Form wrapper ***
+********************
+*/
+
+.form-wrapper {
+  height: 100vh;
+  width: 100%;
+  background: #f0f0f0;
+}
+
+.form-wrapper form {
+  width: 300px;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.form-wrapper h3 {
+  color: #444;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.form-wrapper label {
+  font-size: 1em;
+  color: #444;
+}
+
+.form-wrapper input,
+select {
+  width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.form-wrapper input[type='submit'] {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-wrapper input[type='submit']:hover {
+  background-color: #45a049;
+}
+
+.form-wrapper input[type='submit']:disabled {
+  background-color: #45a049;
+  color: #93d098;
+}
+
+.form-wrapper .input-container {
+  width: 100%;
+}
+
+.form-wrapper .form-button {
+  float: right;
+}
+.form-wrapper .text-field {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.form-wrapper .non-fields-error {
+  color: red;
+  font-size: 0.8em;
+}
+
+.form-wrapper .subform-container {
+  height: 36px;
+
+  padding-left: 16px;
+}
+
+.form-wrapper .reset-password {
+  height: 36px;
+  font-size: 0.8em;
+  line-height: 36px;
+  text-align: center;
+}

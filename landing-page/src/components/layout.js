@@ -4,7 +4,16 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 import HeaderContainer from './header/HeaderContainer'
 
-import './styles.css'
+// Local styles
+import './@global-styles.css'
+import './tutorials/@tutorials.css'
+import './hero/@hero.css'
+import './styledUIElements/@ui-elements.css'
+import './header/@header.css'
+import './dependencies/@dependencies.css'
+import './contribute/@contribute.css'
+import './authentication/@authentication.css'
+// External styles
 import '@material/react-text-field/dist/text-field.css'
 import '@material/react-button/dist/button.css'
 import '@material/react-checkbox/dist/checkbox.css'

@@ -2,7 +2,7 @@ import React from 'react'
 // Local components
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import HeroContainer from '../components/HeroContainer'
+import HeroContainer from '../components/hero/HeroContainer'
 import Dependencies from '../components/dependencies/Container'
 import Tutorials from '../components/tutorials/Container'
 import Contribute from '../components/contribute/Container'

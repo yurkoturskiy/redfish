@@ -6,7 +6,7 @@ import {
   CreateReactAppIcon,
   LinariaIcon,
   GrapheneIcon,
-} from './svgs'
+} from './icons'
 
 function DependenciesContainer() {
   return (

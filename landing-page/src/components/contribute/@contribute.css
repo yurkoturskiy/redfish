@@ -1,0 +1,29 @@
+/*
+**********************************************
+***************** Contribute *****************
+**********************************************
+*/
+
+.contribute-container {
+  width: 560px;
+  margin: 0 auto 0 auto;
+}
+
+.contribute-container h2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+
+  color: #444444;
+}
+
+.contribute-container p {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+
+  color: #444444;
+}
+
