@@ -402,9 +402,10 @@ body {
 */
 
 .header-container {
-  position: absolute;
-  width: 100%;
   z-index: 1;
+  position: absolute;
+  left: 0;
+  right: 0;
   padding-left: var(--grid-margin);
   padding-right: var(--grid-margin);
 }
