@@ -6,14 +6,12 @@
 
 .hero-container {
   position: relative;
-  height: 86vh;
+  height: 860px;
+  max-height: 100vh;
+  min-height: 480px;
   background-color: var(--red-two);
   padding-left: var(--grid-margin);
   padding-right: var(--grid-margin);
-}
-
-.hero-container .buttons-wrapper {
-  margin-left: 28px;
 }
 
 /*
@@ -23,29 +21,23 @@
 */
 
 .hero-container .content {
+  display: inline-block;
   position: relative;
   z-index: 2;
   top: 30vh;
   left: calc(var(--col-two) - var(--gutter));
-  width: calc((100% / var(--columns)) * 8);
 }
 
-@media screen and (max-width: 1439px) and (min-width: 801px) {
+@media screen and (max-width: 1280px) and (min-width: 961px) {
   .hero-container .content {
-    left: calc(100% / var(--columns) - var(--gutter) / 2);
+    left: calc(var(--col-one) - var(--gutter));
   }
 }
 
-@media screen and (max-width: 800px) and (min-width: 541px) {
+@media screen and (max-width: 960px) {
   .hero-container .content {
-    left: var(--gutter);
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .hero-container .content {
-    left: 0;
-    right: 0;
+    top: 24vh;
+    left: var(--col-zero);
   }
 }
 
@@ -57,13 +49,41 @@
 
 .hero-container .image {
   position: absolute;
-  right: calc(100% / 12 * 2 + var(--gutter));
+  right: var(--col-two);
   top: 0;
   bottom: 0;
   margin: auto 0 auto 0;
   z-index: 0;
+  height: 80%;
 }
 
+/* Adapt position from right */
+@media screen and (max-width: 1640px) and (min-width: 1281px) {
+  .hero-container .image {
+    right: var(--col-one);
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .hero-container .image {
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .hero-container .image {
+    right: auto;
+    top: auto;
+    bottom: 0;
+    right: 0;
+    max-width: 100%;
+    align-content: end;
+    margin: auto 0 auto 0;
+    z-index: 0;
+    max-height: 70vh;
+  }
+}
+/*
 @media screen and (max-width: 1439px) and (min-width: 801px) {
   .hero-container .image {
     right: calc(100% / var(--columns) - var(--gutter) / 2);
@@ -80,7 +100,7 @@
   .hero-container .image {
     right: 0;
   }
-}
+}*/
 
 /*
 **************
@@ -100,34 +120,20 @@
   line-height: 56px;
 }
 
-/* Adapt text size */
-@media screen and (max-width: 800px) and (min-width: 415px) {
+/* Smaller text size for phones */
+@media screen and (max-width: 539px) and (min-width: 360px) {
   .content .header {
-    font-size: 2.5rem;
-    line-height: 47px;
+    font-size: 2rem;
+    line-height: 2.3125rem;
   }
 }
 
-@media screen and (max-width: 414px) and (min-width: 321px) {
-  .content .header {
-    font-weight: 500;
-    font-size: 1.75rem;
-    line-height: 33px;
-  }
-}
-
-@media screen and (max-width: 320px) {
+/* Smaller-smaller text-size for small phones */
+@media screen and (max-width: 359px) {
   .content .header {
     font-weight: 500;
     font-size: 1.5rem;
-    line-height: 28px;
-  }
-}
-
-/* Adapt text-alight */
-@media screen and (max-width: 540px) {
-  .content .header {
-    text-align: center;
+    line-height: 1.75rem;
   }
 }
 
@@ -156,32 +162,20 @@
   color: var(--green);
 }
 
-/* Adapt text size */
-@media screen and (max-width: 800px) and (min-width: 415px) {
+/* Smaller text size for phones */
+/*@media screen and (max-width: 539px) and (min-width: 360px) {
   .content .subheader {
-    font-size: 1rem;
-    line-height: 1.1875rem;
+    font-size: 2rem;
+    line-height: 2.3125rem;
   }
-}
+}*/
 
-@media screen and (max-width: 414px) and (min-width: 321px) {
+/* Smaller-smaller text-size for small phones */
+@media screen and (max-width: 359px) {
   .content .subheader {
-    font-size: 14px;
-    line-height: 0.875rem;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .content .subheader {
-    font-size: 0.75rem;
-    line-height: 0.875rem;
-  }
-}
-
-/* Adapt text-align */
-@media screen and (max-width: 540px) {
-  .content .subheader {
-    text-align: center;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1rem;
   }
 }
 
@@ -226,20 +220,32 @@
 
 /*
 ******************************
-*** Action buttons wrapper ***
+*** Action buttons wrappers ***
 ******************************
 */
 
 .content .action-buttons-wrapper {
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
+  justify-content: flex-start;
   align-items: center;
   margin: 0;
 }
 
-@media screen and (max-width: 540px) {
+.hero-container .dot-buttons-wrapper {
+  display: inline-block;
+  margin-left: 28px;
+}
+
+/* Switch to vertical align */
+@media screen and (max-width: 960px) {
   .content .action-buttons-wrapper {
-    flex-direction: column;
+    display: inline-block;
+  }
+
+  .hero-container .dot-buttons-wrapper {
+    margin-top: 28px;
+    margin-left: 0;
+    display: block;
   }
 }
 
@@ -251,7 +257,7 @@
 
 .briefly-about.mdc-button.mdc-button--raised {
   height: 88px;
-  width: 229px;
+  width: 225px;
   border-radius: 44px;
   --mdc-theme-primary: var(--green-nine);
   --mdc-theme-on-primary: var(--green-two);
@@ -268,7 +274,7 @@
 
 .briefly-about .mdc-button__label {
   position: absolute;
-  left: 76px;
+  left: 72px;
   font-weight: 300;
   font-size: 1.125rem;
   letter-spacing: 0;
@@ -276,7 +282,7 @@
   text-transform: initial;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 539px) {
   .briefly-about.mdc-button.mdc-button--raised {
     height: 72px;
     width: 200px;
@@ -368,4 +374,3 @@
   vertical-align: middle;
   fill: #444;
 }
-
