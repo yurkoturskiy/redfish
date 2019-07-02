@@ -11,8 +11,8 @@
 */
 
 .dot-button {
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 12px;
   border-radius: 8px;
   border: 0;
@@ -30,7 +30,6 @@
 
 .dot-button .dot {
   /* positioning */
-  margin: auto;
   height: 4px;
   width: 4px;
   background: var(--green-eight);
@@ -53,6 +52,32 @@
 
 .dot-button:hover .romb.dot {
   border-radius: 0;
+}
+
+/* Switch to vertical align */
+@media screen and (max-width: 960px) {
+  .dot-button {
+    display: block;
+    margin: 12px 0 12px 30px;
+    padding: 4px 4px 4px 0;
+    text-align: left;
+  }
+
+  .dot-button .dot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto 0 auto 9px;
+  }
+
+  .dot-button:hover .dot {
+    margin: auto 0 auto 2px;
+  }
+
+  .dot-button span {
+    margin-left: 44px;
+  }
 }
 
 /*
