@@ -13,6 +13,7 @@
   --columns: 12;
 
   --grid-unit: calc(100% / var(--columns));
+  --col-zero: var(--half-gutter));
   --col-one: calc(var(--grid-unit) + var(--half-gutter));
   --col-two: calc(var(--grid-unit) * 2 + var(--half-gutter));
   --col-three: calc(var(--grid-unit) * 3 + var(--half-gutter));
