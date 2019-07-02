@@ -12,3 +12,4 @@ test.py
 django_server/fixtures/*.json
 /design
 /video
+/private-data

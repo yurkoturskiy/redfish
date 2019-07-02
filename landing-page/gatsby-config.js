@@ -1,6 +1,32 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
+
+const dynamicPlugins = []
+// pick data from 3 months ago
+const startDate = new Date()
+startDate.setMonth(startDate.getMonth() - 3)
+if (
+  process.env.CLIENT_EMAIL &&
+  process.env.PRIVATE_KEY &&
+  process.env.GA_VIEW_ID
+) {
+  dynamicPlugins.push({
+    resolve: `gatsby-plugin-guess-js`,
+    options: {
+      GAViewID: process.env.GA_VIEW_ID,
+      jwt: {
+        client_email: process.env.CLIENT_EMAIL,
+        private_key: process.env.PRIVATE_KEY,
+      },
+      period: {
+        startDate,
+        endDate: new Date(),
+      },
+    },
+  })
+}
+
 module.exports = {
   siteMetadata: {
     title: `Redfish`,
@@ -20,25 +46,9 @@ module.exports = {
         // Setting this parameter is also optional
         respectDNT: true,
         // Avoids sending pageview hits from custom paths
-        exclude: ['/do-not-track/me/too/'],
-        // Any additional create only fields (optional)
         sampleRate: 5,
         siteSpeedSampleRate: 10,
         cookieDomain: 'redfish-project.gq',
-      },
-    },
-
-    {
-      resolve: 'gatsby-plugin-guess-js',
-      options: {
-        // Find the view id in the GA admin in a section labeled "views"
-        GAViewID: `197896564`,
-        minimumThreshold: 0.03,
-        // The "period" for fetching analytic data.
-        period: {
-          startDate: new Date('2018-1-1'),
-          endDate: new Date(),
-        },
       },
     },
     {
@@ -105,5 +115,5 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
-  ],
+  ].concat(dynamicPlugins),
 }
