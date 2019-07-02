@@ -10,6 +10,12 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-preconnect',
+      options: {
+        domains: ['https://redfish-project.gq'],
+      },
+    },
+    {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
         fonts: [
