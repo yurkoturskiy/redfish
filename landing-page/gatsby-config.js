@@ -10,9 +10,35 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: 'gatsby-plugin-preconnect',
+      resolve: `gatsby-plugin-google-analytics`,
       options: {
-        domains: ['https://redfish-project.gq'],
+        trackingId: 'UA-143192738-1',
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        exclude: ['/do-not-track/me/too/'],
+        // Any additional create only fields (optional)
+        sampleRate: 5,
+        siteSpeedSampleRate: 10,
+        cookieDomain: 'redfish-project.gq',
+      },
+    },
+
+    {
+      resolve: 'gatsby-plugin-guess-js',
+      options: {
+        // Find the view id in the GA admin in a section labeled "views"
+        GAViewID: `197896564`,
+        minimumThreshold: 0.03,
+        // The "period" for fetching analytic data.
+        period: {
+          startDate: new Date('2018-1-1'),
+          endDate: new Date(),
+        },
       },
     },
     {
