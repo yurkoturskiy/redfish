@@ -1,12 +1,12 @@
 import React from 'react'
-import { navigate } from 'gatsby'
+import { navigate, Link } from 'gatsby'
 import Button from '../../../styledUIElements/Button'
 
 function GoToAppBtn(props) {
   return (
-    <Button onClick={() => navigate('/authentication/navigate')}>
-      Go to app
-    </Button>
+    <Link to="/authentication/navigate">
+      <Button>Go to app</Button>
+    </Link>
   )
 }
 
