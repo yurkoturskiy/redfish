@@ -27,6 +27,8 @@
 }
 
 .header-container .logo svg {
+  height: 58px;
+  width: 48px;
   fill: var(--green-eight);
 }
 
@@ -42,24 +44,27 @@
 
 /* Adaptivity */
 
-@media screen and (max-width: 1439px) and (min-width: 801px) {
+@media screen and (max-width: 1280px) and (min-width: 961px) {
   .header-container .logo {
-    left: calc(9.09% + var(--gutter) / 2);
+    left: var(--col-one);
   }
 }
 
-@media screen and (max-width: 800px) and (min-width: 541px) {
+@media screen and (max-width: 960px) {
   .header-container .logo {
-    left: calc(var(--gutter) * 2);
+    left: var(--gutter);
   }
 }
 
-@media screen and (max-width: 540px) {
-  .header-container .logo {
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+@media screen and (max-width: 359px) {
+  .header-container .logo svg {
+    height: 29px;
+    width: 24px;
+  }
+
+  .header-container .logo span {
+    font-size: 12px;
+    line-height: 14px;
+    margin: 8px 0 7px 6px;
   }
 }
-
