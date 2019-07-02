@@ -4,9 +4,11 @@ import Button from '../../../styledUIElements/Button'
 
 function GoToAppBtn(props) {
   return (
-    <Link to="/authentication/navigate">
-      <Button>Go to app</Button>
-    </Link>
+    <Button
+      onClick={() => navigate('/authentication/navigate', { replace: true })}
+    >
+      Go to app
+    </Button>
   )
 }
 
