@@ -6,18 +6,22 @@
 
 .dependencies-wrapper {
   position: relative;
-  margin: 0 auto 0 auto;
+  margin: 72px auto 0 auto;
   width: 856px;
   background-color: white;
 }
 
-.dependencies-wrapper h2 {
-  text-align: center;
+.dependencies-wrapper #dependencies-header {
+  margin: 0;
   font-weight: bold;
-  font-size: 36px;
-  line-height: 42px;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
 
-  color: #444444;
+  color: rgba(255, 74, 100, 0.68);
+
+  text-shadow: 0px 1px 24px rgba(255, 74, 100, 0.4),
+    0px 0px 8px rgba(151, 82, 92, 0.17);
 }
 
 .dependencies-wrapper .content {
@@ -43,14 +47,21 @@
 .section h3 {
   display: inline-block;
   margin: 12px 0 0 12px;
-  font-weight: 300;
-  font-size: 1.25rem;
-  line-height: 23px;
-
-  color: #869ba7;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
 }
 
-/* Cards */
+.section#react-section h3 {
+  color: var(--blue);
+}
+.section#django-section h3 {
+  color: var(--green);
+}
+
+/*************/
+/*** Cards ***/
+/*************/
 
 .dependencies-wrapper .cardsWrapper {
   display: flex;
@@ -64,8 +75,31 @@
   width: 384px;
   height: 128px;
   background-color: white;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 14px;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+
+  background: #ffffff;
+  /* Redfish Blue */
+  box-sizing: border-box;
+}
+
+/* Set border and shadow */
+.cardsWrapper#react-cards .card {
+  box-shadow: inset 0px 0px 0px 3px var(--blue),
+    0px 1px 3px rgba(56, 71, 94, 0.57);
+}
+.cardsWrapper#react-cards .card:hover {
+  box-shadow: inset 0px 0px 0px 3px var(--blue),
+    0px 1px 4px rgba(56, 71, 94, 0.57), 0px 4px 12px rgba(255, 74, 100, 0.22);
+}
+.cardsWrapper#django-cards .card {
+  box-shadow: inset 0px 0px 0px 3px var(--green),
+    0px 1px 3px rgba(56, 71, 94, 0.57);
+}
+.cardsWrapper#django-cards .card:hover {
+  box-shadow: inset 0px 0px 0px 3px var(--green),
+    0px 1px 4px rgba(56, 71, 94, 0.57), 0px 4px 12px rgba(255, 74, 100, 0.22);
 }
 
 .card .icon {
@@ -75,7 +109,6 @@
   width: 64px;
   height: 64px;
 }
-
 .card .purpose {
   position: absolute;
   top: 38px;
@@ -88,7 +121,6 @@
 
   color: #555555;
 }
-
 .card .name {
   position: absolute;
   left: 112px;
@@ -231,4 +263,3 @@
     line-height: 16px;
   }
 }
-

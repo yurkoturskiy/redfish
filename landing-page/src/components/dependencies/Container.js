@@ -11,13 +11,13 @@ import {
 function DependenciesContainer() {
   return (
     <div className="dependencies-wrapper">
-      <h2>Main dependencies</h2>
+      <h2 id="dependencies-header">Main dependencies</h2>
       <div className="content">
-        <div className="section">
+        <div className="section" id="react-section">
           <div className="bullet" style={{ backgroundColor: '#1D79FF' }} />
-          <h3>ReactJS frontend</h3>
+          <h3 id="">ReactJS</h3>
         </div>
-        <div className="cardsWrapper">
+        <div className="cardsWrapper" id="react-cards">
           <div className="card">
             <GatsbyIcon className="icon" />
             <h4 className="purpose">Landing page</h4>
@@ -39,11 +39,11 @@ function DependenciesContainer() {
             <h2 className="name">Linaria</h2>
           </div>
         </div>
-        <div className="section">
+        <div className="section" id="django-section">
           <div className="bullet" style={{ backgroundColor: '#1DB355' }} />
-          <h3>Django backend</h3>
+          <h3>Django</h3>
         </div>
-        <div className="cardsWrapper">
+        <div className="cardsWrapper" id="django-cards">
           <div className="card">
             <GrapheneIcon className="icon" />
             <h4 className="purpose">GraphQL Server</h4>
