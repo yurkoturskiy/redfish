@@ -6,6 +6,7 @@ import HeroContainer from '../components/hero/HeroContainer'
 import Dependencies from '../components/dependencies/Container'
 import Tutorials from '../components/tutorials/Container'
 import Contribute from '../components/contribute/Container'
+import FooterConteiner from '../components/footer/Container'
 
 const IndexPage = () => {
   return (
@@ -15,6 +16,7 @@ const IndexPage = () => {
       <Dependencies />
       <Tutorials />
       <Contribute />
+      <FooterConteiner />
     </Layout>
   )
 }

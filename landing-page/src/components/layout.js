@@ -13,6 +13,7 @@ import './header/@header.css'
 import './dependencies/@dependencies.css'
 import './contribute/@contribute.css'
 import './authentication/@authentication.css'
+import './footer/@footer.css'
 // External styles
 import '@material/react-text-field/dist/text-field.css'
 import '@material/react-button/dist/button.css'

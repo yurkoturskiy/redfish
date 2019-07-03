@@ -1,0 +1,32 @@
+.footer-wrapper {
+  position: relative;
+  height: 92px;
+  padding: 0;
+  margin-top: 74px;
+}
+
+.footer-wrapper .content {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 960px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto 0 auto;
+}
+
+.footer-wrapper .footer-pattern {
+  position: absolute;
+  bottom: 0;
+}
+
+.footer-wrapper .icons {
+  margin-left: auto;
+  z-index: 2;
+  bottom: 20px;
+}
+
+.footer-wrapper .icon {
+  margin: 0;
+}
