@@ -1,7 +1,6 @@
 import React from 'react'
 // Local components
 import FooterPattern from '../../images/FooterPattern'
-import FooterLogo from '../../images/FooterLogo'
 import TwitterIcon from '../../images/TwitterIcon'
 import GitHubIcon from '../../images/GitHubIcon'
 
