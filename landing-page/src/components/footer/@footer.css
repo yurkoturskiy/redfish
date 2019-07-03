@@ -2,31 +2,47 @@
   position: relative;
   height: 92px;
   padding: 0;
-  margin-top: 74px;
+  margin-top: 92px;
 }
 
 .footer-wrapper .content {
   display: flex;
-  justify-content: flex-start;
+  position: absolute;
+  justify-content: center;
+  align-items: flex-end;
   width: 100%;
   max-width: 960px;
-  bottom: 0;
   left: 0;
   right: 0;
+  bottom: 64px;
   margin: 0 auto 0 auto;
 }
 
 .footer-wrapper .footer-pattern {
   position: absolute;
   bottom: 0;
+  height: 64px;
+}
+
+.footer-wrapper .logo {
+  z-index: 2;
+  margin-left: var(--gutter);
+  margin-bottom: 16px;
 }
 
 .footer-wrapper .icons {
-  margin-left: auto;
   z-index: 2;
-  bottom: 20px;
 }
 
 .footer-wrapper .icon {
-  margin: 0;
+  fill: var(--red);
+  margin: 0 12px 22px 12px;
+}
+
+.footer-wrapper .icon:hover {
+  fill: var(--green-eight);
+}
+
+#twitter-footer {
+  margin-bottom: 26px;
 }
