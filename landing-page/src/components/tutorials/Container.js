@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../styledUIElements/Button'
 
 function TutorialsContainer() {
   return (
@@ -26,6 +27,7 @@ function TutorialsContainer() {
           </span>
         </div>
       </div>
+      <Button>View on YouTube</Button>
     </div>
   )
 }
