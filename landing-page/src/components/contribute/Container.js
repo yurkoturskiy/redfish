@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../styledUIElements/Button'
 
 function ContributeContainer() {
   return (
@@ -8,7 +9,7 @@ function ContributeContainer() {
         Redfish is belong to open source community. We have what to improve, so
         feel free to participate.
       </p>
-      <button>Send email</button>
+      <Button id="send-email">Send email</Button>
     </div>
   )
 }

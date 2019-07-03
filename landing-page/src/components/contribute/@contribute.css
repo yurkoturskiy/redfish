@@ -5,8 +5,12 @@
 */
 
 .contribute-container {
-  width: 560px;
-  margin: 0 auto 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: calc(100% - var(--gutter) * 2);
+  max-width: 560px;
+  margin: 85px auto 0 auto;
 }
 
 .contribute-container #contribute-header {
@@ -27,4 +31,7 @@
   text-align: center;
 
   color: #444444;
+}
+
+#send-email {
 }
