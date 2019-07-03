@@ -31,7 +31,8 @@
 }
 
 .tutorials-container .element {
-  width: 408px;
+  width: calc(100% - var(--gutter) * 2);
+  max-width: 408px;
   height: 64px;
   margin: 32px auto 32px auto;
   background: #ffffff;
