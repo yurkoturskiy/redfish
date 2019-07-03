@@ -17,6 +17,7 @@ export const container = css`
   border-radius: 6px;
   transition: box-shadow 0.2s;
   opacity: var(--opacity);
+  background-color: var(--note-color);
 
   @media (max-width: 767px) {
     /* Extra small */
@@ -48,8 +49,14 @@ export const container = css`
     top: 12px;
     height: 24px;
     width: 24px;
-    background-color: pink;
+    background-color: var(--note-color);
     opacity: 0;
+    fill: var(--pin-icon-color);
+    transition: opacity 0.2s, fill 0.2s;
+  }
+
+  .pin:hover {
+    fill: var(--pin-icon-color-hover);
   }
 
   &:hover .pin {
@@ -144,7 +151,7 @@ function Note(props) {
           {...props.draggableItem}
           className={container}
           style={{
-            backgroundColor: noteColorVariable,
+            "--note-color": noteColorVariable,
             "--container-box-shadow": `inset 0 0 0 ${
               props.isSelected ? 2 : 0
             }pt #3E3E3E, 0 0 0 ${containerBorderWidth} #E3E3E3`,

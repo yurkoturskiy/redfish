@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 import { Mutation } from "react-apollo";
+// Local components
+import PinIconFilled from "../../../static/PinIconFilled";
+import PinIconOutlined from "../../../static/PinIconOutlined";
 // Queries
 import { ALL_NOTES, SWITCH_PIN_NOTES } from "../../../graphql/queries";
 // Context
@@ -55,7 +58,13 @@ function Pin() {
       }}
       update={updateCache}
     >
-      {switchPinNotes => <div className="pin" onClick={switchPinNotes} />}
+      {switchPinNotes =>
+        node.pinned ? (
+          <PinIconFilled className="pin" onClick={switchPinNotes} />
+        ) : (
+          <PinIconOutlined className="pin" onClick={switchPinNotes} />
+        )
+      }
     </Mutation>
   );
 }

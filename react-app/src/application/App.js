@@ -23,6 +23,19 @@ export const globals = css`
     @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
     :root {
+      --grey-01: #e6e6e6;
+      --grey-02: #cccccc;
+      --grey-03: #b2b2b2;
+      --grey-04: #999999;
+      --grey-05: #808080;
+      --grey-06: #666666;
+      --grey-07: #4c4c4c;
+      --grey-08: #333333;
+      --grey-09: #1a1a1a;
+
+      --pin-icon-color: rgba(0, 0, 0, 0.4);
+      --pin-icon-color-hover: rgba(0, 0, 0, 0.8);
+
       --note-color-white: white;
       --note-color-red: #f28b82;
       --note-color-orange: #ffd34f;
