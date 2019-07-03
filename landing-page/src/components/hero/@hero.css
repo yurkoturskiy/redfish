@@ -9,6 +9,7 @@
   height: 860px;
   max-height: 100vh;
   min-height: 480px;
+  border-bottom: 2px solid var(--green);
   background-color: var(--red-two);
   padding-left: var(--grid-margin);
   padding-right: var(--grid-margin);
