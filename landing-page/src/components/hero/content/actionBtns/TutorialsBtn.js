@@ -3,7 +3,7 @@ import Button from '../../../styledUIElements/Button'
 
 function TutorialsBtn(props) {
   const scrollToTutorials = e => {
-    let tutorialsHeader = document.getElementById('tutorials')
+    let tutorialsHeader = document.getElementById('tutorials-header')
 
     console.log(window.pageYOffset)
     let scroll =

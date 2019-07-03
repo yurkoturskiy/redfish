@@ -7,16 +7,19 @@
 .tutorials-container {
   position: relative;
   background-color: white;
+  margin-top: 64px;
 }
 
-.tutorials-container h2 {
-  margin: 0 auto 0 auto;
-  text-align: center;
+.tutorials-container #tutorials-header {
+  margin: 0;
   font-weight: bold;
-  font-size: 36px;
-  line-height: 42px;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
 
-  color: #444444;
+  color: rgba(29, 179, 85, 0.7);
+
+  text-shadow: 0px 4px 12px rgba(29, 179, 85, 0.2);
 }
 
 .tutorial-container .content {
@@ -26,9 +29,33 @@
 .tutorials-container .element {
   width: 408px;
   height: 64px;
-  margin: 16px auto 16px auto;
+  margin: 32px auto 32px auto;
   background: #ffffff;
-  border: 1px solid #e3e3e3;
+  border: 1px solid var(--red);
   box-sizing: border-box;
+  cursor: pointer;
   border-radius: 8px;
+  transition: box-shadow 0.2s;
+}
+
+.tutorials-container .element:hover {
+  border: 1px solid var(--red);
+  box-shadow: 0px 2px 8px rgba(29, 179, 85, 0.7),
+    0px 1px 1px rgba(41, 57, 47, 0.5);
+}
+
+.tutorials-container .element span {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 64px;
+  padding-left: 20px;
+  display: inline-block;
+  /* Green 8 */
+  color: #344239;
+}
+
+.tutorials-container .element span strong {
+  font-weight: bold;
+  font-size: 24px;
+  padding-right: 18px;
 }
