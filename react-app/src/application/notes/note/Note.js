@@ -105,8 +105,8 @@ export const container = css`
     width: 18px;
     border-radius: 12px;
     background-color: var(--checkmark-background-color);
-    top: -8px;
-    left: -8px;
+    top: -6px;
+    left: -6px;
     opacity: var(--checkmark-opacity);
     transition: opacity 0.4s, background-color 0.2s;
   }
@@ -116,7 +116,7 @@ export const container = css`
   }
 
   .checkmark-material-icon {
-    transform: translate(-3px, -3px);
+    transform: translate(-3px, -8px);
     font-size: 24px;
     fill: #3e3e3e;
     user-select: none;
