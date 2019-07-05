@@ -12,7 +12,10 @@ export const container = css`
   position: relative;
   height: 32px;
   width: 32px;
-  outline: 1px solid red;
+
+  .material-icons {
+    line-height: 32px;
+  }
 `;
 
 export const colorOptionIcon = css`
@@ -29,7 +32,7 @@ export const colorsBox = css`
   background-color: white;
   border-radius: 8px;
 
-  .${container}:hover & {
+  .options-icon:hover & {
     display: flex;
     flex-wrap: wrap;
   }
@@ -45,7 +48,7 @@ function ColorOption(props) {
           <ColorPoint key={color} color={color} noteId={props.node.id} />
         ));
         return (
-          <div className={container}>
+          <div className="options-icon">
             <div className={colorsBox}>{colorOptions}</div>
             <MaterialIcon icon="color_lens" className={colorOptionIcon} />
           </div>

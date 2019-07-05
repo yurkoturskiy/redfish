@@ -74,12 +74,28 @@ export const container = css`
     bottom: 4px;
     left: 4px;
     flex-direction: row;
+    text-align: center;
     height: 48px;
     opacity: 0;
   }
 
   &:hover .options {
     opacity: 100;
+  }
+
+  .options-icon {
+    position: relative;
+    height: 32px;
+    width: 32px;
+  }
+
+  .material-icons {
+    line-height: 32px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .material-icons:hover {
+    color: rgba(0, 0, 0, 0.9);
   }
 
   .checkmark-container {

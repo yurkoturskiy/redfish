@@ -7,7 +7,16 @@ import MaterialIcon from "@material/react-material-icon";
 import { ALL_NOTES, DELETE_NOTES } from "../../../graphql/queries";
 
 export const deleteOption = css`
-  line-height: 48px;
+  vertical-align: middle;
+`;
+
+export const container = css`
+  position: relative;
+  height: 32px;
+  width: 32px;
+  outline: 1px solid red;
+  text-align: center;
+  vertical-align: middle;
 `;
 
 function DeleteOption(props) {
@@ -68,11 +77,13 @@ function DeleteOption(props) {
       variables={{ ids: [props.node.id] }}
     >
       {deleteNotes => (
-        <MaterialIcon
-          className={deleteOption}
-          onClick={deleteNotes}
-          icon="delete"
-        />
+        <div className="options-icon">
+          <MaterialIcon
+            className={deleteOption}
+            onClick={deleteNotes}
+            icon="delete"
+          />
+        </div>
       )}
     </Mutation>
   );
