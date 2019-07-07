@@ -1,14 +1,15 @@
 import React from "react";
 import { css } from "linaria";
 
+const wrapper = css``;
+
 export const colorsBox = css`
   display: none;
   position: absolute;
-  top: -40px;
+  top: -36px;
   left: 0;
   transform: translate(-50%, 0);
-  z-index: 4;
-
+  box-sizing: border-box;
   padding: 3px;
   height: 36px;
   background-color: white;
@@ -22,18 +23,22 @@ export const colorsBox = css`
   }
 `;
 
-export const arrow = css`
+export const triangle = css`
   position: absolute;
   display: none;
-  z-index: 3;
-  width: 8px;
-  height: 8px;
-  top: -8px;
+  width: 0;
+  height: 0;
+  top: 0;
   left: 50%;
+  border: 4px solid black;
   border-radius: 2px;
-  transform: translate(-50%, 0) rotate(45deg);
-  background-color: white;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-color: transparent transparent white white;
+
+  box-sizing: border-box;
+  transform: translate(-50%, 0) rotate(-45deg);
+  transform-origin: 0 0;
+
+  box-shadow: -2px 2px 2px rgba(0, 0, 0, 0.15);
 
   .options-icon:hover & {
     display: inline-block;
@@ -42,9 +47,9 @@ export const arrow = css`
 
 function ColorsBox(props) {
   return (
-    <div>
+    <div className={wrapper}>
       <div className={colorsBox}>{props.children}</div>
-      <div className={arrow} />
+      <div className={triangle} />
     </div>
   );
 }
