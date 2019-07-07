@@ -7,6 +7,7 @@ import MaterialIcon from "@material/react-material-icon";
 import { ALL_COLORS } from "../../../graphql/queries";
 // components
 import ColorPoint from "./ColorPoint";
+import ColorsBox from "./ColorsBox";
 
 export const container = css`
   position: relative;
@@ -22,22 +23,6 @@ export const colorOptionIcon = css`
   line-height: 32px;
 `;
 
-export const colorsBox = css`
-  display: none;
-  position: absolute;
-  top: 0;
-  transform: translate(0, -100px);
-  height: 100px;
-  width: 100px;
-  background-color: white;
-  border-radius: 8px;
-
-  .options-icon:hover & {
-    display: flex;
-    flex-wrap: wrap;
-  }
-`;
-
 function ColorOption(props) {
   return (
     <Query query={ALL_COLORS}>
@@ -49,7 +34,7 @@ function ColorOption(props) {
         ));
         return (
           <div className="options-icon">
-            <div className={colorsBox}>{colorOptions}</div>
+            <ColorsBox>{colorOptions}</ColorsBox>
             <MaterialIcon icon="color_lens" className={colorOptionIcon} />
           </div>
         );
