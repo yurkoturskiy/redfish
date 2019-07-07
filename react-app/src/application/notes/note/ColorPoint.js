@@ -6,7 +6,6 @@ import { Mutation } from "react-apollo";
 import { ALL_NOTES, UPDATE_NOTES_COLOR } from "../../../graphql/queries";
 
 export const colorOption = css`
-  box-shadow: inset 0px 0px 0px 2px rgba(255, 255, 255, 1);
   height: 24px;
   width: 24px;
   margin: 3px;
