@@ -11,6 +11,7 @@ const wrapper = css`
     left: var(--card-pos-x);
     width: var(--card-width);
     height: var(--card-height);
+    max-height: var(--card-height);
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
     margin-left: 0px;
     opacity: 1;
