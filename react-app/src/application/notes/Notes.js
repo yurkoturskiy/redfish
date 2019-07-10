@@ -3,7 +3,7 @@ import React from "react";
 import { Query, graphql, Mutation } from "react-apollo";
 // local components
 import Note from "./note/Note";
-import DraggableMasonryLayout from "./DraggableMasonryLayout";
+import DraggableMasonryLayout from "react-universal-dnd-layout";
 import SelectedNotesOptionsBar from "./SelectedNotesOptionsBar/Container";
 import Topics from "./topics/Container";
 // queries
