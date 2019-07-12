@@ -1,4 +1,4 @@
-/venv
+venv
 *.sqlite*
 migrations
 __pycache__
