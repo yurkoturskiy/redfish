@@ -56,6 +56,8 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "devDependencies": {
+    "docz": "^1.2.0",
+    "docz-theme-default": "^1.2.0",
     "eslint-config-react-app": "^4.0.1",
     "prettier": "^1.18.2"
   },
