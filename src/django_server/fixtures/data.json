@@ -1,0 +1,110 @@
+[
+{
+  "model": "notes.color",
+  "pk": 1,
+  "fields": {
+    "label": "red",
+    "value": "FF0000"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "uhvq3g4tz0opgo2bu4x4qbxoa6revrgw",
+  "fields": {
+    "session_data": "ZDQxOGZhZTE2ODQ2YjIxYWYzOTQwNmY2NTExZTlhNjllYjAzNWNjOTp7Il9hdXRoX3VzZXJfaWQiOiIzMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiOTRkMzc5MmExZWRjODQwYzQ1YTVmYjYzMjgyZmQ5YjQwYTYzMThkOSJ9",
+    "expire_date": "2019-04-19T13:56:29.157Z"
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 1,
+  "fields": {
+    "domain": "example.com",
+    "name": "example.com"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 31,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$yiUBSfVGDjU5$Ss/rNQ+TaRYgO1the7M6M/wxcULNzqVWM7AD5u1hZW8=",
+    "last_login": "2019-04-05T13:56:04.151Z",
+    "is_superuser": true,
+    "username": "guandjoy",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-04-05T13:48:38.986Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 32,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$d5tZUfo64knV$BqB/XNsvZdUA7PTvHdCjZXfH1ydcs/o8URqQ0yqsV2M=",
+    "last_login": "2019-04-05T13:56:29.144Z",
+    "is_superuser": false,
+    "username": "someuser",
+    "first_name": "",
+    "last_name": "",
+    "email": "lenin2005@ukr.net",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2019-04-05T13:55:43.209Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "authtoken.token",
+  "pk": "28cc4687ff183d504630941b87b5da8344c56fbf",
+  "fields": {
+    "user": 32,
+    "created": "2019-04-05T13:55:43.388Z"
+  }
+},
+{
+  "model": "authtoken.token",
+  "pk": "59941dfcbdec830df500b5199df09a087ff0b4b3",
+  "fields": {
+    "user": 31,
+    "created": "2019-04-05T13:52:35.742Z"
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 26,
+  "fields": {
+    "user": 32,
+    "email": "lenin2005@ukr.net",
+    "verified": true,
+    "primary": true
+  }
+},
+{
+  "model": "notes.note",
+  "pk": 1,
+  "fields": {
+    "title": "sd",
+    "content": "asfd",
+    "color": 1,
+    "pinned": false,
+    "owner": 31
+  }
+},
+{
+  "model": "notes.note",
+  "pk": 2,
+  "fields": {
+    "title": "asdf",
+    "content": "awefawef",
+    "color": null,
+    "pinned": false,
+    "owner": 32
+  }
+}
+]
