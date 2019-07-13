@@ -7,31 +7,35 @@ You can deploy the Django server in differents ways. We don't do anything specif
 * accounts on [ZEIT](https://zeit.co/) and [AWS](https://aws.amazon.com/).
 * installed [npm](https://www.npmjs.com/get-npm) and [python3.7](https://www.python.org/downloads/).
 ### 1.2. Install `now`:
-```
-$ npm install -g now
+```console
+npm install -g now
 ```
 _Make sure `now` have been installed:_
-```
-$ now --version
+```console
+now --version
 ```
 ### 1.3. Clone Redfish and navigate to the `django_server` directory:
+```console
+git clone https://github.com/guandjoy/redfish.git
 ```
-$ git clone https://github.com/guandjoy/redfish.git
-$ cd redfish/src/django_server
+```console
+cd redfish/src/django_server
 ```
 ### 1.4. Create virtual environment
 - Install `virtualenv` using `pip`:
-```
-$ python3.7 -m pip install virtualenv
+```console
+python3.7 -m pip install virtualenv
 ```
 - Create and activate virtual environment:
+```console
+virtualenv -p python3.7 venv
 ```
-$ virtualenv -p python3.7 venv
-$ source venv/bin/activate
+```console
+source venv/bin/activate
 ```
 ### 1.5. Install dependencies:
-```shell
-$ pip install -r requirements.txt
+```console
+pip install -r requirements.txt
 ```
 ## 2. Create [S3 bucket](https://s3.console.aws.amazon.com/s3/) service
 S3 service is the place where we going to collect static.
@@ -44,11 +48,11 @@ _Note: Make sure you turned on 2-step verification. Google restrict app password
 - Press `Generate`
 - Save the password. _Should be something like "vcnstblmegxxkvkf"_
 ## 4. Setup settings.py
-* Rename `settings.example.py` to `settings.py`:
+### 4.1. Rename `settings.example.py` to `settings.py`:
+```console
+mv django_server/settings.example.py django_server/settings.py
 ```
-$ mv django_server/settings.example.py django_server/settings.py
-```
-* Setup gmail SMTP server in `settings.py`.
+### 4.2. Setup GMail SMTP server in `settings.py`.
 ```python
 # .../django_server/django_server/settings.py
 ...
@@ -58,5 +62,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'example@example.com' # GMail works fine
 EMAIL_HOST_PASSWORD = 'YOUR GOOGLE APP PASSWORD. 2-step verification should be active'
+...
+```
+### 4.3. Specify S3 bucket name
+```python
+# .../django_server/django_server/settings.py
+...
+S3_BUCKET = "name-of-your-s3-bucket"
 ...
 ```
