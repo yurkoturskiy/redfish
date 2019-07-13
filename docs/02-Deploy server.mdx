@@ -1,6 +1,6 @@
 # Deploy server
 
-You can deploy the Django server in differents ways. We don't do anything specific here. But in this tutorial we will explane how to do so using [ZEIT Now](https://zeit.co/) and [AWS](https://aws.amazon.com/).
+In this tutorial, we explain how to deploy the Redfish server using [ZEIT Now](https://zeit.co/) and [AWS](https://aws.amazon.com/). However, you can deploy the Django server in another way. 
 
 ## 1. Setup environmet
 ### 1.1. Make sure you have:
@@ -38,37 +38,67 @@ $ source venv/bin/activate
 ```console
 $ pip install -r requirements.txt
 ```
-## 2. Create [S3 bucket](https://s3.console.aws.amazon.com/s3/) service
-S3 service is the place where we going to collect static.
-## 3. Create Google mail app passwords:
-- Go to google app passwords: https://myaccount.google.com/apppasswords \
-_Note: Make sure you turned on 2-step verification. Google restrict app passwords for users who don't._
-- Select app: `mail`
-- Select device: `Other (custom name)`
-- Fill the name, e.g., `redfish-django-server`.
-- Press `Generate`
-- Save the password. _Should be something like "vcnstblmegxxkvkf"_
-## 4. Setup settings.py
-### 4.1. Rename `settings.example.py` to `settings.py`:
+### 1.6. Rename `settings.example.py` to `settings.py`:
 ```console
 $ mv django_server/settings.example.py django_server/settings.py
 ```
-### 4.2. Setup GMail SMTP server in `settings.py`.
+## 2. Setup AWS
+### 2.1. Provide AWS Region
+* Go to [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) and copy the value of your region;
+* Paste it to the `settings.py` file:
 ```python
 # .../django_server/django_server/settings.py
 ...
-# gmail setup
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'example@example.com' # GMail works fine
-EMAIL_HOST_PASSWORD = 'YOUR GOOGLE APP PASSWORD. 2-step verification should be active'
+# The AWS region to connect to.
+AWS_REGION = "eu-central-1"
 ...
 ```
-### 4.3. Specify S3 bucket name
+### 2.2. Create AWS credentials.
+* Go to [IAM Management Console](https://console.aws.amazon.com/iam/home?#/users) and __create a new user__ with __Programmatic access__.
+* Create a group with __AmazonRDSFullAccess__ and __AmazonS3FullAccess__ policies and add created user there.
+* Copy __Access Key ID__ and __Secret Access Key__ and paste them into `settings.py` file
+```python
+# .../django_server/django_server/settings.py
+...
+# The AWS access key to use.
+AWS_ACCESS_KEY_ID = "AKIAR2BBJGZAVGG2RF6A"
+
+# The AWS secret access key to use.
+AWS_SECRET_ACCESS_KEY = "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"
+...
+```
+### 2.2. Create [S3 bucket](https://s3.console.aws.amazon.com/s3/) service
+S3 service is the place where we going to collect static files. \
+#### Permissions block public access settings (bucket settings):
+- [ ] Block all public access
+- [ ] Block public access to buckets and objects granted through new access control lists (ACLs)
+- [ ] Block public access to buckets and objects granted through any access control lists (ACLs)
+- [x] Block public access to buckets and objects granted through new public bucket policies
+- [x] Block public and cross-account access to buckets and objects through any public bucket policies
+* Copy the name of the S3 bucket and paste it to `settings.py` file:
 ```python
 # .../django_server/django_server/settings.py
 ...
 S3_BUCKET = "name-of-your-s3-bucket"
 ...
 ```
+### 2.3. Create RDS database service
+
+## 3. Create Google mail app passwords and setup SMTP server:
+- Go to google app passwords: https://myaccount.google.com/apppasswords \
+_Note: Make sure you turned on 2-step verification. Google restrict app passwords for users who don't._
+- Select app: `mail`;
+- Select device: `Other (custom name)`;
+- Fill the name, e.g., `redfish-django-server`;
+- Press `Generate` button;
+- Copy the `password` to the `settings.py` file and provide your `GMail email`:
+```python
+# .../django_server/django_server/settings.py
+...
+EMAIL_HOST_USER = 'example@gmail.com'
+EMAIL_HOST_PASSWORD = 'vcnstblmegxxkvkf'
+...
+```
+- Save the password. _Should be something like "vcnstblmegxxkvkf"_;
+
+_* Provided credentials are not real and exposed only for demonstration purposes._
