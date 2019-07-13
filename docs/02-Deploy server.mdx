@@ -1,8 +1,8 @@
-# Deploy server
+# Deploy django server with ZEIT Now and AWS
 
 In this tutorial, we explain how to deploy the Redfish server using [ZEIT Now](https://zeit.co/) and [AWS](https://aws.amazon.com/). However, you can deploy the Django server in another way. 
 
-## 1. Setup environmet
+## 1. Setup environment
 ### 1.1. Make sure you have:
 * accounts on [ZEIT](https://zeit.co/) and [AWS](https://aws.amazon.com/).
 * installed [npm](https://www.npmjs.com/get-npm) and [python3.7](https://www.python.org/downloads/).
@@ -44,10 +44,9 @@ $ mv django_server/settings.example.py django_server/settings.py
 ```
 ## 2. Setup AWS
 ### 2.1. Provide AWS Region
-* Go to [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) and copy the value of your region;
-* Paste it to the `settings.py` file:
+* Go to [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html), copy and paste the value of your region into the `settings.py` file;
 ```python
-# .../django_server/django_server/settings.py
+# settings.py
 ...
 # The AWS region to connect to.
 AWS_REGION = "eu-central-1"
@@ -58,7 +57,7 @@ AWS_REGION = "eu-central-1"
 * Create a group with __AmazonRDSFullAccess__ and __AmazonS3FullAccess__ policies and add created user there.
 * Copy __Access Key ID__ and __Secret Access Key__ and paste them into `settings.py` file
 ```python
-# .../django_server/django_server/settings.py
+# settings.py
 ...
 # The AWS access key to use.
 AWS_ACCESS_KEY_ID = "AKIAR2BBJGZAVGG2RF6A"
@@ -67,22 +66,23 @@ AWS_ACCESS_KEY_ID = "AKIAR2BBJGZAVGG2RF6A"
 AWS_SECRET_ACCESS_KEY = "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"
 ...
 ```
-### 2.2. Create [S3 bucket](https://s3.console.aws.amazon.com/s3/) service
-S3 service is the place where we going to collect static files. \
-#### Permissions block public access settings (bucket settings):
+### 2.2. Setup [S3 bucket](https://s3.console.aws.amazon.com/s3/):
+S3 service is the place where we collect static files. \
+* Create S3 service with next __Permissions block public access settings (bucket settings)__:
 - [ ] Block all public access
 - [ ] Block public access to buckets and objects granted through new access control lists (ACLs)
 - [ ] Block public access to buckets and objects granted through any access control lists (ACLs)
 - [x] Block public access to buckets and objects granted through new public bucket policies
 - [x] Block public and cross-account access to buckets and objects through any public bucket policies
-* Copy the name of the S3 bucket and paste it to `settings.py` file:
+* Copy and Paste the name of the S3 bucket to the `settings.py` file:
 ```python
-# .../django_server/django_server/settings.py
+# settings.py
 ...
 S3_BUCKET = "name-of-your-s3-bucket"
 ...
 ```
-### 2.3. Create RDS database service
+### 2.3. Setup [RDS database](https://console.aws.amazon.com/rds/):
+* Create PostgreSQL database
 
 ## 3. Create Google mail app passwords and setup SMTP server:
 - Go to google app passwords: https://myaccount.google.com/apppasswords \
@@ -93,7 +93,7 @@ _Note: Make sure you turned on 2-step verification. Google restrict app password
 - Press `Generate` button;
 - Copy the `password` to the `settings.py` file and provide your `GMail email`:
 ```python
-# .../django_server/django_server/settings.py
+# settings.py
 ...
 EMAIL_HOST_USER = 'example@gmail.com'
 EMAIL_HOST_PASSWORD = 'vcnstblmegxxkvkf'
