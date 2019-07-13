@@ -82,8 +82,23 @@ S3_BUCKET = "name-of-your-s3-bucket"
 ...
 ```
 ### 2.3. Setup [RDS database](https://console.aws.amazon.com/rds/):
-* Create PostgreSQL database
-
+* [Create](https://console.aws.amazon.com/rds/home) PostgreSQL database
+* Set `DATABASES` in the `settings.py` file:
+```python
+# settings.py
+...
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'redfish-database-1', # dbname
+        'USER': 'postgres', # master username
+        'PASSWORD': 'oWdpawvro4zPdxzVobch', # master password
+        'HOST': 'redfish-database-1.c7awambotayj.eu-central-1.rds.amazonaws.com', # Endpoint
+        'PORT': '5432',
+    }
+}
+...
+```
 ## 3. Create Google mail app passwords and setup SMTP server:
 - Go to google app passwords: https://myaccount.google.com/apppasswords \
 _Note: Make sure you turned on 2-step verification. Google restrict app passwords for users who don't._
@@ -91,7 +106,7 @@ _Note: Make sure you turned on 2-step verification. Google restrict app password
 - Select device: `Other (custom name)`;
 - Fill the name, e.g., `redfish-django-server`;
 - Press `Generate` button;
-- Copy the `password` to the `settings.py` file and provide your `GMail email`:
+- Copy and paste the `password` to the `settings.py` file and provide your `GMail email`:
 ```python
 # settings.py
 ...
@@ -99,6 +114,5 @@ EMAIL_HOST_USER = 'example@gmail.com'
 EMAIL_HOST_PASSWORD = 'vcnstblmegxxkvkf'
 ...
 ```
-- Save the password. _Should be something like "vcnstblmegxxkvkf"_;
 
 _* Provided credentials are not real and exposed only for demonstration purposes._
