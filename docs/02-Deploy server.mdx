@@ -1,3 +1,62 @@
 # Deploy server
 
-You can deploy the Django server in differents ways. We don't do anything specific here. But in this tutorial we will explane how to do so using [ZEIT Now](https://zeit.co/) and [AWS](https://aws.amazon.com/). Make sure you are registered there.
+You can deploy the Django server in differents ways. We don't do anything specific here. But in this tutorial we will explane how to do so using [ZEIT Now](https://zeit.co/) and [AWS](https://aws.amazon.com/).
+
+## 1. Setup environmet
+### 1.1. Make sure you have:
+* accounts on [ZEIT](https://zeit.co/) and [AWS](https://aws.amazon.com/).
+* installed [npm](https://www.npmjs.com/get-npm) and [python3.7](https://www.python.org/downloads/).
+### 1.2. Install `now`:
+```
+$ npm install -g now
+```
+_Make sure `now` have been installed:_
+```
+$ now --version
+```
+### 1.3. Clone Redfish and navigate to the `django_server` directory:
+```
+$ git clone https://github.com/guandjoy/redfish.git
+$ cd redfish/src/django_server
+```
+### 1.4. Create virtual environment
+- Install `virtualenv` using `pip`:
+```
+$ python3.7 -m pip install virtualenv
+```
+- Create and activate virtual environment:
+```
+$ virtualenv -p python3.7 venv
+$ source venv/bin/activate
+```
+### 1.5. Install dependencies:
+```shell
+$ pip install -r requirements.txt
+```
+## 2. Create [S3 bucket](https://s3.console.aws.amazon.com/s3/) service
+S3 service is the place where we going to collect static.
+## 3. Create Google mail app passwords:
+- Go to google app passwords: https://myaccount.google.com/apppasswords \
+_Note: Make sure you turned on 2-step verification. Google restrict app passwords for users who don't._
+- Select app: `mail`
+- Select device: `Other (custom name)`
+- Fill the name, e.g., `redfish-django-server`.
+- Press `Generate`
+- Save the password. _Should be something like "vcnstblmegxxkvkf"_
+## 4. Setup settings.py
+* Rename `settings.example.py` to `settings.py`:
+```
+$ mv django_server/settings.example.py django_server/settings.py
+```
+* Setup gmail SMTP server in `settings.py`.
+```python
+# .../django_server/django_server/settings.py
+...
+# gmail setup
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'example@example.com' # GMail works fine
+EMAIL_HOST_PASSWORD = 'YOUR GOOGLE APP PASSWORD. 2-step verification should be active'
+...
+```
