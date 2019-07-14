@@ -63,15 +63,26 @@ $ python manage.py migrate
 
 ## Start development servers
 We have three development servers here: __Django, Create React App, and GatsbyJS__. You can start them withing 3 console windows, or, as we highly recommend, withing [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
+
+### Start withing terminal windows
+* Prepare 3 terminal instances
+* Start django server:
+```console
+$ python manage.py runserver 0.0.0.0:9000
+```
+* Start 
 ### Start with [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
 We already created a python script, which creates tmux windows and start Django, CRA, and GatsbyJS development servers. 
-* Execute the `tmux_setup.py` script with a `python` version `>=3.6`
+* Execute the `tmux_setup.py` script with `python>=3.6`
 ```console
 $ python tmux_setup.py
 ```
-* Some keys combination to play with:
-   * `ctrl+b` `w` - navigate through windows;
+* Some basics to play with:
+   * `ctrl+b` `w` - navigate through windows using `up` and `down` arrow keys;
    * `ctrl+b` `d` - close tmux, but save session (minimize);
    * `ctrl+d` - terminate tmux and session;
-   * `$ tmux a` - go back to tmux after minimizing it;
+   * `$ tmux a` - back to tmux after minimize it;
    * `ctrl+b` `[` - scroll through the content. Use `up` and `down` arrow keys and `esc` to exit mode;
+   * `ctrl+b` `c` - create new window
+
+_Note: Learn more how to use it here: http://man.openbsd.org/OpenBSD-current/man1/tmux.1_
