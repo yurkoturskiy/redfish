@@ -6,7 +6,6 @@ __pycache__
 *.pyo
 settings.json
 settings.py
-tmux_setup.py
 *.sublime-*
 test.py
 django_server/fixtures/*.json
