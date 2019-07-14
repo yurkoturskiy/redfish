@@ -1,13 +1,10 @@
-# Setup development environment
-
-
+# Step 1. Setup development environment
 ## Prerequisites
 * Make sure you have:
    * [python3.7](https://www.python.org/downloads/)
    * [npm](https://www.npmjs.com/get-npm)
    * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-   
-## Getting started.
+## 1. Getting started
 * Go to [Redfish page](https://github.com/guandjoy/redfish) and fork the repo
 * Go to settings and change the __Repository name__ to a name of your application
 * Clone a new repo locally with __ssh__: 
@@ -18,9 +15,8 @@ _Note: We recommend to use ssh, so you don't need to setup credentials._
 ```console
 $ cd name-of-app/src/django_server
 ```
-
-## Setup Django server
-### Setup [virtual environment](https://virtualenv.pypa.io/en/latest/)
+## 2. Setup Django server
+### 2.1. Setup [virtual environment](https://virtualenv.pypa.io/en/latest/)
 * Install, create, and start [virtual environment](https://virtualenv.pypa.io/en/latest/):
 ```console
 $ python3.7 -m pip install virtualenv
@@ -32,12 +28,12 @@ $ source venv/bin/activate
 $ python -V
 Python 3.7.1
 ```
-### Install dependencies
+### 2.2. Install dependencies
 ```console
 $ pip install -r requirements.txt
 ```
-### Setup settings.py
-* Copy and rename `settings.dev.py` file to `settings.py` inside of the `django_server` app folder:
+### 2.3. Setup settings.py
+* Copy and rename `settings.dev.py` file as `settings.py` inside of the `django_server` app folder:
 ```console
 $ cp django_server/settings.dev.py django_server/settings.py
 ```
@@ -52,26 +48,31 @@ kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@
 # settings.py
 SECRET_KEY = 'kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@'
 ```
-### Prepare for the start
+### 2.4. Prepare for the start
 * Make migrations and migrate from the root `django_server` directory:
 ```console
 $ python manage.py makemigrations
 ...
 $ python manage.py migrate
 ```
-
-
-## Start development servers
+## 3. Start development servers
 We have three development servers here: __Django, Create React App, and GatsbyJS__. You can start them withing 3 console windows, or, as we highly recommend, withing [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
 
-### Start withing terminal windows
+### 3.1. Start with terminal windows
 * Prepare 3 terminal instances
-* Start django server:
+* Start `django_server`:
 ```console
 $ python manage.py runserver 0.0.0.0:9000
 ```
-* Start 
-### Start with [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
+* Start `react-app` development server:
+```console
+$ npm start
+```
+* Start `landing-page` development server:
+```console
+$ gatsby develop
+```
+### 3.2. Start with [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
 We already created a python script, which creates tmux windows and start Django, CRA, and GatsbyJS development servers. 
 * Execute the `tmux_setup.py` script with `python>=3.6`
 ```console
@@ -85,4 +86,4 @@ $ python tmux_setup.py
    * `ctrl+b` `[` - scroll through the content. Use `up` and `down` arrow keys and `esc` to exit mode;
    * `ctrl+b` `c` - create new window
 
-_Note: Learn more how to use it here: http://man.openbsd.org/OpenBSD-current/man1/tmux.1_
+* Read [tmux man](http://man.openbsd.org/OpenBSD-current/man1/tmux.1)
