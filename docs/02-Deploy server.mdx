@@ -1,46 +1,57 @@
-# Deploy django server with ZEIT Now and AWS
+# Step 2. Set up production build
+## Prerequisites:
+* Setup local development environment. Otherwise go to Step 1.
+* Have accounts on GitHub, [ZEIT](https://zeit.co/) and [AWS](https://aws.amazon.com/).
 
-In this tutorial, we explain how to deploy the Redfish server using [ZEIT Now](https://zeit.co/) and [AWS](https://aws.amazon.com/). However, you can deploy the Django server in another way. 
+In this tutorial, we explain how to deploy the Redfish server using GitHub private repo, [ZEIT Now](https://zeit.co/), and [AWS](https://aws.amazon.com/). _You can deploy the Django server in another way._
 
-## 1. Setup environment
-### 1.1. Make sure you have:
-* accounts on [GitHub](https://github.com/), [ZEIT](https://zeit.co/) and [AWS](https://aws.amazon.com/).
-* installed [npm](https://www.npmjs.com/get-npm) and [python3.7](https://www.python.org/downloads/).
-### 1.2. Install `now`:
+## 1. Set up GitHub private production repository
+ZEIT Now is able to run apps from GitHub. Once we deploy changes to GitHub it automaticaly update the server. To keep our credentials save, we should deploy them to a private repository.
+* [Create](https://github.com/new) empty GitHub private repository
+* Add `production` remote to your local development environment and make sure you have both `origin` and `production` remotes:
 ```console
-$ npm install -g now
+$ git remote add production https://github.com/username/app-name-production.git
+$ git remote -v
+origin  git@github.com:username/app-name.git (fetch)
+origin  git@github.com:username/app-name.git (push)
+production      git@github.com:username/app-name-production.git (fetch)
+production      git@github.com:username/app-name-production.git (push)
 ```
-_Make sure `now` have been installed:_
+* Push your local development instance to production rep:
 ```console
-$ now --version
-15.8.0
+$ git push production master
 ```
-### 1.3. Clone Redfish and navigate to the `django_server` directory:
-```console
-$ git clone https://github.com/guandjoy/redfish.git
+Now you should see files inside production repo on GitHub.
+## 2. Prepare `settings.py` file
+* Go to `app-name-production/src/django_server/django_server/` folder in production repo on GitHub website;
+* Open `settings.prod.py` file and copy the content to the clipboard;
+* Create new `settings.py` file in the same directory, and paste the content from the clipboard;
+* Keep it open for further edits.
+
+_WARNING NOTE: Do not pull this rep from your development environment. Otherwise, git overrides your settings.py file and may cause a leak of credentials. \
+You are free to use `git pull` without specifying a remote, since it pulls only origin remote._
+* Generate SECRET_KEY:
+```python
+$ python redfish/generate_secret_key.py
+Paste the next string to the settings.py SECRET_KEY constant
+kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@
 ```
-```console
-$ cd redfish/src/django_server
+* Copy and paste it to the `settings.py`:
+```python
+# settings.py
+SECRET_KEY = 'kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@'
 ```
-### 1.4. Create virtual environment
-- Install `virtualenv` using `pip`:
+* Open `settings.py` file at your dev environment:
 ```console
-$ python3.7 -m pip install virtualenv
+$ vim django_server/settings.py
 ```
-- Create and activate virtual environment:
-```console
-$ virtualenv -p python3.7 venv
-```
-```console
-$ source venv/bin/activate
-```
-### 1.5. Install dependencies:
-```console
-$ pip install -r requirements.txt
-```
-### 1.6. Rename `settings.example.py` to `settings.py`:
-```console
-$ mv django_server/settings.example.py django_server/settings.py
+* Copy the email SMTP setup section and paste to the production `settings.py` on GitHub:
+```python
+# settings.py
+...
+EMAIL_HOST_USER = 'example@gmail.com'
+EMAIL_HOST_PASSWORD = 'vcnstblmegxxkvkf'
+...
 ```
 ## 2. Setup AWS
 ### 2.1. Provide AWS Region
@@ -99,20 +110,6 @@ DATABASES = {
 }
 ...
 ```
-## 3. Create Google mail app passwords and setup SMTP server:
-- Go to google app passwords: https://myaccount.google.com/apppasswords \
-_Note: Make sure you turned on 2-step verification. Google restrict app passwords for users who don't._
-- Select app: `mail`;
-- Select device: `Other (custom name)`;
-- Fill the name, e.g., `redfish-django-server`;
-- Press `Generate` button;
-- Copy and paste the `password` to the `settings.py` file and provide your `GMail email`:
-```python
-# settings.py
-...
-EMAIL_HOST_USER = 'example@gmail.com'
-EMAIL_HOST_PASSWORD = 'vcnstblmegxxkvkf'
-...
-```
+
 
 _* Provided credentials are not real and exposed only for demonstration purposes._
