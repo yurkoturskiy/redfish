@@ -66,8 +66,8 @@ SITE_ID = 1
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'guandjoy@gmail.com'
-EMAIL_HOST_PASSWORD = 'tbbxpwvpnbbnsdza'
+EMAIL_HOST_USER = 'example@gmail.com'
+EMAIL_HOST_PASSWORD = 'tbbeqrspnppnxdza'
 
 
 # LOGIN_REDIRECT_URL='/'
@@ -138,8 +138,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'redfish-database-1', # dbname
         'USER': 'postgres', # master username
-        'PASSWORD': 'oWdpvuiki4gLdxzVobch', # master password
-        'HOST': 'redfish-database-1.c7fqrmwomayj.eu-central-1.rds.amazonaws.com', # Endpoint
+        'PASSWORD': 'oWdpvdqwv4gLdasWobch', # master password
+        'HOST': 'redfish-database-1.c7fqrmxdqwyj.eu-central-1.rds.amazonaws.com', # Endpoint
         'PORT': '5432',
     }
 }
@@ -201,17 +201,17 @@ FIXTURE_DIRS = (
 AWS_REGION = "eu-central-1"
 
 # The AWS access key to use.
-AWS_ACCESS_KEY_ID = "AKIAR2BBJGVFWPP2RF6W"
+AWS_ACCESS_KEY_ID = "AKIAR2BBJGVFVDD2RF6V"
 
 # The AWS secret access key to use.
-AWS_SECRET_ACCESS_KEY = "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"
+AWS_SECRET_ACCESS_KEY = "G55aSpC0xUeR5/QwoH0kgkXl1w5zSgkVzwaTHOrs"
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # AWS S3 settings
-S3_BUCKET = "now-staticfiles1234" # Put the name of your S3 bucket here
+S3_BUCKET = "redfish-static-files" # Put the name of your S3 bucket here
 STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
 AWS_S3_BUCKET_NAME_STATIC = S3_BUCKET
 STATIC_URL = "https://%s.s3.amazonaws.com/" % S3_BUCKET
