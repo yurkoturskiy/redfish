@@ -47,7 +47,22 @@ kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@
 # settings.py
 SECRET_KEY = 'kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@'
 ```
-### 2.4. Apply migrations
+### 2.4. Create Google mail app password and setup SMTP server:
+- Go to google app passwords: https://myaccount.google.com/apppasswords \
+_Note: Make sure you turned on 2-step verification. Google restrict app passwords for users who don't._
+- Select app: `mail`;
+- Select device: `Other (custom name)`;
+- Fill the name, e.g., `redfish-django-server`;
+- Press `Generate` button;
+- Copy and paste the `password` to the `settings.py` file and provide your `GMail email`:
+```python
+# settings.py
+...
+EMAIL_HOST_USER = 'example@gmail.com'
+EMAIL_HOST_PASSWORD = 'vcnstblmegxxkvkf'
+...
+```
+### 2.5. Apply migrations
 ```console
 $ python manage.py migrate
 ```
