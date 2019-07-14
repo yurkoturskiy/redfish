@@ -1,1 +1,77 @@
-# Install Redfish locally
+# Setup development environment
+
+
+## Prerequisites
+* Make sure you have:
+   * [python3.7](https://www.python.org/downloads/)
+   * [npm](https://www.npmjs.com/get-npm)
+   * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+   
+## Getting started.
+* Go to [Redfish page](https://github.com/guandjoy/redfish) and fork the repo
+* Go to settings and change the __Repository name__ to a name of your application
+* Clone a new repo locally with __ssh__: 
+`git clone git@github.com:username/your-app-name.git`\
+Or use __https__ `git clone https://github.com/username/your-app-name.git`\
+_Note: We recommend to use ssh, so you don't need to setup credentials._
+* Go to the root `django_server` directory:
+```console
+$ cd name-of-app/src/django_server
+```
+
+## Setup Django server
+### Setup [virtual environment](https://virtualenv.pypa.io/en/latest/)
+* Install, create, and start [virtual environment](https://virtualenv.pypa.io/en/latest/):
+```console
+$ python3.7 -m pip install virtualenv
+...
+$ virtualenv -p python3.7 venv
+...
+$ source venv/bin/activate
+...
+$ python -V
+Python 3.7.1
+```
+### Install dependencies
+```console
+$ pip install -r requirements.txt
+```
+### Setup settings.py
+* Copy and rename `settings.dev.py` file to `settings.py` inside of the `django_server` app folder:
+```console
+$ cp django_server/settings.dev.py django_server/settings.py
+```
+* Generate `SECRET_KEY`:
+```console
+$ python ../manage.py generate_secret_key
+Paste the next string to the settings.py SECRET_KEY constant
+kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@
+```
+* Copy and paste it to the `SECRET_KEY` constant inside of the `settings.py` file:
+```python
+# settings.py
+SECRET_KEY = 'kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@'
+```
+### Prepare for the start
+* Make migrations and migrate from the root `django_server` directory:
+```console
+$ python manage.py makemigrations
+...
+$ python manage.py migrate
+```
+
+
+## Start development servers
+We have three development servers here: __Django, Create React App, and GatsbyJS__. You can start them withing 3 console windows, or, as we highly recommend, withing [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
+### Start with [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
+We already created a python script, which creates tmux windows and start Django, CRA, and GatsbyJS development servers. 
+* Execute the `tmux_setup.py` script with a `python` version `>=3.6`
+```console
+$ python tmux_setup.py
+```
+* Some keys combination to play with:
+   * `ctrl+b` `w` - navigate through windows;
+   * `ctrl+b` `d` - close tmux, but save session (minimize);
+   * `ctrl+d` - terminate tmux and session;
+   * `$ tmux a` - go back to tmux after minimizing it;
+   * `ctrl+b` `[` - scroll through the content. Use `up` and `down` arrow keys and `esc` to exit mode;
