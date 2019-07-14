@@ -26,15 +26,12 @@ $ python3.7 -m pip install virtualenv
 $ virtualenv -p python3.7 venv
 ...
 $ source venv/bin/activate
-...
-$ python -V
-Python 3.7.1
 ```
 ### 2.2. Install dependencies
 ```console
 $ pip install -r requirements.txt
 ```
-### 2.3. Setup settings.py
+### 2.3. Prepare settings.py
 * Copy and rename `settings.dev.py` file as `settings.py` inside of the `django_server` app folder:
 ```console
 $ cp django_server/settings.dev.py django_server/settings.py
@@ -54,14 +51,14 @@ SECRET_KEY = 'kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@'
 ```console
 $ python manage.py migrate
 ```
-## 3. Setup `react-app`
-* Go to `src/react-app` directory and install dependencies:
+## 3. Install `react-app` dependencies
 ```console
+$ cd ../react-app/
 $ npm install
 ```
-## 4. Setup `landing-page`
-* Go to `src/landing-page` directory and install dependencies:
+## 4. Install `landing-page` dependencies
 ```console
+$ cd ../landing-page/
 $ npm install
 ```
 ## 5. Start development servers
