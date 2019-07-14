@@ -15,16 +15,20 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$n2386guk2+4j@3+uqu^#np62$n6aickkg9onkuf%-!_z885z1'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+# SECURITY WARNING: don't leave default values. Override them with your credentials
+SUPER_USER_INITIAL_CREDENTIALS = {
+    'username': 'admin',
+    'password': 'adminpass'
+}
 
 ALLOWED_HOSTS = ['*']
 
@@ -33,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'notes',
+    'redfish',
     'custom_django_rest_auth',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +57,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'rest_auth.registration',
     'graphene_django',
+    'django_s3_storage',
 ]
 
 SITE_ID = 1
@@ -60,8 +66,8 @@ SITE_ID = 1
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'example@example.com' # GMail works fine
-EMAIL_HOST_PASSWORD = 'YOUR GMAIL APP PASSWORD. 2-step verification should be active'
+EMAIL_HOST_USER = 'guandjoy@gmail.com'
+EMAIL_HOST_PASSWORD = 'tbbxpwvpnbbnsdza'
 
 
 # LOGIN_REDIRECT_URL='/'
@@ -129,10 +135,15 @@ WSGI_APPLICATION = 'django_server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'redfish-database-1', # dbname
+        'USER': 'postgres', # master username
+        'PASSWORD': 'oWdpvuiki4gLdxzVobch', # master password
+        'HOST': 'redfish-database-1.c7fqrmwomayj.eu-central-1.rds.amazonaws.com', # Endpoint
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
@@ -167,15 +178,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
        'rest_framework.authentication.TokenAuthentication',
@@ -194,3 +196,22 @@ GRAPHENE = {
 FIXTURE_DIRS = (
    BASE_DIR, '/fixtures/',
 )
+
+# The AWS region to connect to.
+AWS_REGION = "eu-central-1"
+
+# The AWS access key to use.
+AWS_ACCESS_KEY_ID = "AKIAR2BBJGVFWPP2RF6W"
+
+# The AWS secret access key to use.
+AWS_SECRET_ACCESS_KEY = "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"
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.1/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# AWS S3 settings
+S3_BUCKET = "now-staticfiles1234" # Put the name of your S3 bucket here
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+AWS_S3_BUCKET_NAME_STATIC = S3_BUCKET
+STATIC_URL = "https://%s.s3.amazonaws.com/" % S3_BUCKET
