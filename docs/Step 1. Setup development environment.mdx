@@ -6,14 +6,14 @@
    * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 ## 1. Getting started
 * Go to [Redfish page](https://github.com/guandjoy/redfish) and fork the repo
-* Go to settings and change the __Repository name__ to a name of your application
+* In settings change the __Repository name__ to a name of your application
 * Clone a new repo locally with __ssh__: 
 ```console
 $ git clone git@github.com:username/your-app-name.git
 ```
 Or use __https__: `git clone https://github.com/username/your-app-name.git`\
 _Note: We recommend to use ssh, so you don't need to setup credentials._
-* Go to the root `django_server` directory:
+* Go to the root of `django_server`:
 ```console
 $ cd name-of-app/src/django_server
 ```
@@ -41,7 +41,7 @@ $ cp django_server/settings.dev.py django_server/settings.py
 ```
 * Generate `SECRET_KEY`:
 ```console
-$ python ../manage.py generate_secret_key
+$ python redfish/generate_secret_key.py
 Paste the next string to the settings.py SECRET_KEY constant
 kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@
 ```
@@ -50,17 +50,24 @@ kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@
 # settings.py
 SECRET_KEY = 'kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@'
 ```
-### 2.4. Prepare for the start
-* Make migrations and migrate from the root `django_server` directory:
+### 2.4. Apply migrations
 ```console
-$ python manage.py makemigrations
-...
 $ python manage.py migrate
 ```
-## 3. Start development servers
+## 3. Setup `react-app`
+* Go to `src/react-app` directory and install dependencies:
+```console
+$ npm install
+```
+## 4. Setup `landing-page`
+* Go to `src/landing-page` directory and install dependencies:
+```console
+$ npm install
+```
+## 5. Start development servers
 We have three development servers here: __Django, Create React App, and GatsbyJS__. You can start them withing 3 console windows, or, as we highly recommend, withing [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
 
-### 3.1. Start with terminal windows
+### 5.1. Start with terminal windows
 * Prepare 3 terminal instances
 * Start `django_server`:
 ```console
@@ -74,7 +81,7 @@ $ npm start
 ```console
 $ gatsby develop
 ```
-### 3.2. Start with [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
+### 5.2. Start with [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
 We already made a python script, which creates tmux windows and start Django, CRA, and GatsbyJS development servers. 
 _Note: Make sure your virtual environment is located in `/src/django_server/venv` folder_
 * Execute the `tmux_setup.py` script with `python>=3.6`
@@ -88,4 +95,10 @@ $ python tmux_setup.py
    * `ctrl+d` - terminate tmux and session;
    * `ctrl+b` `[` - scroll through the content. Use `up` and `down` arrow keys and `esc` to exit mode;
    * `ctrl+b` `c` - create new window.
+### Avaliable endpoints:
+* http://localhost:8000/ - landing page
+* http://localhost:3006/ - application
+* http://localhost:9000/graphql - IDE for exploring GraphQL
 
+## You are ready to develop!
+That's it. Note that this step is a prerequisite to the next step, where we learn how to set up production build.
