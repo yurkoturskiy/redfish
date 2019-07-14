@@ -8,8 +8,10 @@
 * Go to [Redfish page](https://github.com/guandjoy/redfish) and fork the repo
 * Go to settings and change the __Repository name__ to a name of your application
 * Clone a new repo locally with __ssh__: 
-`git clone git@github.com:username/your-app-name.git`\
-Or use __https__ `git clone https://github.com/username/your-app-name.git`\
+```console
+$ git clone git@github.com:username/your-app-name.git
+```
+Or use __https__: `git clone https://github.com/username/your-app-name.git`\
 _Note: We recommend to use ssh, so you don't need to setup credentials._
 * Go to the root `django_server` directory:
 ```console
@@ -73,17 +75,17 @@ $ npm start
 $ gatsby develop
 ```
 ### 3.2. Start with [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
-We already created a python script, which creates tmux windows and start Django, CRA, and GatsbyJS development servers. 
+We already made a python script, which creates tmux windows and start Django, CRA, and GatsbyJS development servers. 
+_Note: Make sure your virtual environment is located in `/src/django_server/venv` folder_
 * Execute the `tmux_setup.py` script with `python>=3.6`
 ```console
 $ python tmux_setup.py
 ```
 * Some basics to play with:
    * `ctrl+b` `w` - navigate through windows using `up` and `down` arrow keys;
-   * `ctrl+b` `d` - close tmux, but save session (minimize);
-   * `ctrl+d` - terminate tmux and session;
+   * `ctrl+b` `d` - minimize tmux and save session;
    * `$ tmux a` - back to tmux after minimize it;
+   * `ctrl+d` - terminate tmux and session;
    * `ctrl+b` `[` - scroll through the content. Use `up` and `down` arrow keys and `esc` to exit mode;
-   * `ctrl+b` `c` - create new window
-
+   * `ctrl+b` `c` - create new window.
 * Read [tmux man](http://man.openbsd.org/OpenBSD-current/man1/tmux.1)
