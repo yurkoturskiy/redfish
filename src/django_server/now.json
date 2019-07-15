@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "django_server",
+  "builds": [{
+    "src": "django_server/wsgi.py",
+    "use": "@ardnt/now-python-wsgi"
+  }],
+  "routes" : [{
+    "src" : "/(.*)", "dest":"/django_server/wsgi.py"
+  }]
+}
