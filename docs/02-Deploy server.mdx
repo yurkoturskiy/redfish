@@ -8,9 +8,12 @@ In this tutorial, we explain how to deploy the Redfish server using GitHub priva
 ## 1. Set up GitHub private production repository
 ZEIT Now is able to run apps from GitHub. Once we deploy changes to GitHub it automaticaly update the server. To keep our credentials save, we should deploy them to a private repository.
 * [Create](https://github.com/new) empty GitHub private repository
-* Add `production` remote to your local development environment and make sure you have both `origin` and `production` remotes:
+* Add `production` remote to your local development environment:
 ```console
 $ git remote add production https://github.com/username/app-name-production.git
+```
+* Make sure you have both `origin` and `production` remotes:
+```console
 $ git remote -v
 origin  git@github.com:username/app-name.git (fetch)
 origin  git@github.com:username/app-name.git (push)
@@ -22,14 +25,17 @@ production      git@github.com:username/app-name-production.git (push)
 $ git push production master
 ```
 Now you should see files inside production repo on GitHub.
+
+
+_WARNING NOTE: Do not pull this rep from your development environment. Otherwise, git overrides your settings.py file and may cause a leak of credentials. \
+You are free to use `git pull` without specifying a remote, since it pulls only origin remote._
 ## 2. Prepare `settings.py` file
 * Go to `app-name-production/src/django_server/django_server/` folder in production repo on GitHub website;
 * Open `settings.prod.py` file and copy the content to the clipboard;
 * Create new `settings.py` file in the same directory, and paste the content from the clipboard;
 * Keep it open for further edits.
 
-_WARNING NOTE: Do not pull this rep from your development environment. Otherwise, git overrides your settings.py file and may cause a leak of credentials. \
-You are free to use `git pull` without specifying a remote, since it pulls only origin remote._
+
 * Generate `SECRET_KEY`:
 ```console
 $ python redfish/generate_secret_key.py
