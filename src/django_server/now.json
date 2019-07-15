@@ -1,11 +1,17 @@
 {
   "version": 2,
   "name": "django_server",
-  "builds": [{
-    "src": "django_server/wsgi.py",
-    "use": "@ardnt/now-python-wsgi"
-  }],
-  "routes" : [{
-    "src" : "/(.*)", "dest":"/django_server/wsgi.py"
-  }]
+  "builds": [
+    {
+      "src": "index.py",
+      "use": "@ardnt/now-python-wsgi",
+      "config": { "runtime": "python3.7" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 }
