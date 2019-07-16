@@ -72,6 +72,7 @@ module.exports = {
         prefixes: [`/confirm-email/*`, `/authentication/*`],
       },
     },
+    `gatsby-plugin-mdx`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
