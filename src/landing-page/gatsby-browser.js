@@ -8,6 +8,7 @@
 import React from 'react'
 import { ApolloProvider } from '@apollo/react-hooks'
 import apolloClient from './apolloClient'
+require('prism-themes/themes/prism-atom-dark.css')
 
 import OnStartAuthentication from './src/components/OnStartAuthentication'
 

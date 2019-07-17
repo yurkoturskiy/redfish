@@ -1,4 +1,5 @@
 import React from 'react'
+import { navigate } from 'gatsby'
 import Button from '../../../styledUIElements/Button'
 
 function TutorialsBtn(props) {
@@ -20,7 +21,7 @@ function TutorialsBtn(props) {
       behavior: 'smooth',
     })
   }
-  return <Button onClick={e => scrollToTutorials(e)}>Tutorials</Button>
+  return <Button onClick={e => navigate('/docs')}>Tutorials</Button>
 }
 
 export default TutorialsBtn

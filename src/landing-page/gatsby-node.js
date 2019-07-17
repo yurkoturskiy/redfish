@@ -1,36 +1,47 @@
-const path = require(`path`)
+const path = require('path')
 
-exports.createPages = ({ actions, graphql }) => {
+exports.createPages = ({ graphql, actions }) => {
+  // Destructure the createPage function from the actions object
   const { createPage } = actions
 
-  const blogPostTemplate = path.resolve(`src/templates/blogTemplate.js`)
-
-  return graphql(`
-    {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
-        edges {
-          node {
-            frontmatter {
-              path
+  return new Promise((resolve, reject) => {
+    resolve(
+      graphql(
+        `
+          {
+            allMdx {
+              edges {
+                node {
+                  id
+                  frontmatter {
+                    path
+                  }
+                }
+              }
             }
           }
+        `
+      ).then(result => {
+        // this is some boilerlate to handle errors
+        if (result.errors) {
+          console.error(result.errors)
+          reject(result.errors)
         }
-      }
-    }
-  `).then(result => {
-    if (result.errors) {
-      return Promise.reject(result.errors)
-    }
 
-    return result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      createPage({
-        path: node.frontmatter.path,
-        component: blogPostTemplate,
-        context: {}, // additional data can be passed via context
+        // We'll call `createPage` for each result
+        result.data.allMdx.edges.forEach(({ node }) => {
+          createPage({
+            // This is the slug we created before
+            // (or `node.frontmatter.slug`)
+            path: node.frontmatter.path,
+            // This component will wrap our MDX content
+            component: path.resolve(`src/components/docs/template.js`),
+            // We can use the values in this context in
+            // our page layout component
+            context: { id: node.id },
+          })
+        })
       })
-    })
+    )
   })
 }

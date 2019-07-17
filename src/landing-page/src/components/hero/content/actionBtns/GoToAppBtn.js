@@ -1,5 +1,5 @@
 import React from 'react'
-import { navigate, Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import Button from '../../../styledUIElements/Button'
 
 function GoToAppBtn(props) {
