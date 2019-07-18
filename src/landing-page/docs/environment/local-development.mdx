@@ -1,10 +1,14 @@
 ---
-path: 'docs/setup-development-environment'
-title: 'Setup development environment'
+path: 'docs/environment/local-development'
+title: 'Local development'
 order: 1
+section: 'environment'
+sectionOrder: 1
 ---
 
-# Step 1. Setup development environment
+# Local development
+
+In this section we start with the base. We are going to set up local development environment with a GitHub public repository, so you could share your code with community and keep sensitive data safe.
 
 ## Prerequisites
 
@@ -23,7 +27,7 @@ order: 1
 $ git clone git@github.com:username/your-app-name.git
 ```
 
-Or use **https**: `git clone https://github.com/username/your-app-name.git`\
+Or use **https**: `git clone https://github.com/username/your-app-name.git` <br/>
 _Note: We recommend to use ssh, so you don't need to setup credentials._
 
 - Go to the root of `django_server`:
@@ -54,10 +58,10 @@ $ pip install -r requirements.txt
 
 ### 2.3. Prepare settings.py
 
-- Copy and rename `settings.dev.py` file as `settings.py` inside of the `django_server` app folder:
+- Dublicate and rename `settings.local.py` file as `settings.py` withing the `django_server` app folder:
 
 ```shell
-$ cp django_server/settings.dev.py django_server/settings.py
+$ cp django_server/settings.local.py django_server/settings.py
 ```
 
 - Generate `SECRET_KEY`:
@@ -97,6 +101,13 @@ EMAIL_HOST_PASSWORD = 'vcnstblmegxxkvkf'
 
 ```shell
 $ python manage.py migrate
+```
+
+### 2.6. Create a superuser
+
+```shell
+$ python manage.py createsuperuser
+Provide username and password
 ```
 
 ## 3. Install `react-app` dependencies
@@ -162,6 +173,16 @@ $ python tmux_setup.py
 - http://localhost:8000/ - landing page
 - http://localhost:3006/ - application
 - http://localhost:9000/graphql - IDE for exploring GraphQL
+- http://localhost:9000/admin - Django admin
+
+### Change site's domain and display name
+
+Redfish sends emails for users and there is should be a proper link. So please do the next:
+
+- Login to the django admin `http://localhost:9000/admin`
+- Go to `Sites` and edit first instance
+- Domain name set to `http://localhost:9000` and Display name to `localhost:9000`
+- Click save
 
 ## You are ready to develop!
 
