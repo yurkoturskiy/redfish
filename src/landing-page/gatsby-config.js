@@ -152,7 +152,7 @@ module.exports = {
       resolve: `gatsby-source-graphql`,
       options: {
         fieldName: `redfish`,
-        url: process.env.REDFISH_GRAPHQL_API_URL,
+        url: process.env.SERVER_URL + process.env.GRAPHQL_ENDPOINT,
         typeName: `Redfish`,
         refetchInterval: 10,
       },
@@ -160,7 +160,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://www.redfish-project.gq',
+        host: process.env.LANDING_URL,
         policy: [{ userAgent: '*', disallow: '/' }],
       },
     },

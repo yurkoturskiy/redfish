@@ -36,8 +36,7 @@ function AuthWithFacebook(props) {
   const sendAuthenticationRequest = () =>
     authWithFacebook({ variables: { accessToken: accessToken } })
 
-  const redirectToAppPage = () =>
-    window.location.replace(process.env.REDFISH_APP_URL)
+  const redirectToAppPage = () => window.location.replace(process.env.APP_URL)
 
   const handleResponse = () => {
     console.log(data)
