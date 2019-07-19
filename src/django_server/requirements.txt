@@ -29,7 +29,6 @@ MarkupSafe==1.1.1
 oauthlib==3.0.2
 Pillow==6.1.0
 pip-upgrade-outdated==1.5
-pkg-resources==0.0.0
 promise==2.2.1
 Pygments==2.4.2
 python-dateutil==2.8.0
