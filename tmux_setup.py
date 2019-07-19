@@ -15,12 +15,12 @@ shell(f"tmux send-keys -t redfish:django-server 'cd {APP_PATH}/src/django_server
 shell(f"tmux send-keys -t redfish:django-server 'source venv/bin/activate' C-m")
 shell(f"tmux send-keys -t redfish:django-server 'python manage.py runserver 0.0.0.0:9000' C-m")
 # run react-app dev server
-shell(f"tmux new-window -t redfish -n react-app -c {APP_PATH}/react-app -d")
-shell(f"tmux send-keys -t redfish:react-app 'cd {APP_PATH}/react-app' C-m")
+shell(f"tmux new-window -t redfish -n react-app -c {APP_PATH}/src/react-app -d")
+shell(f"tmux send-keys -t redfish:react-app 'cd {APP_PATH}/src/react-app' C-m")
 shell(f"tmux send-keys -t redfish:react-app 'npm start' C-m")
 # run landing-page dev server
-shell(f"tmux new-window -t redfish -n landing-page -c {APP_PATH}/landing-page -d")
-shell(f"tmux send-keys -t redfish:landing-page 'cd {APP_PATH}/landing-page' C-m")
+shell(f"tmux new-window -t redfish -n landing-page -c {APP_PATH}/src/landing-page -d")
+shell(f"tmux send-keys -t redfish:landing-page 'cd {APP_PATH}/src/landing-page' C-m")
 shell(f"tmux send-keys -t redfish:landing-page 'npm start' C-m")
 # create window for git commands
 shell(f"tmux new-window -t redfish -n console -c {APP_PATH} ")
