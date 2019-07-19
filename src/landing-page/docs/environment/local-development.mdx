@@ -21,19 +21,10 @@ In this section we start with the base. We are going to set up local development
 
 - Go to [Redfish page](https://github.com/guandjoy/redfish) and fork the repo
 - In settings change the **Repository name** to a name of your application
-- Clone a new repo locally with **ssh**:
+- Clone a new repo locally:
 
 ```shell
 $ git clone git@github.com:username/your-app-name.git
-```
-
-Or use **https**: `git clone https://github.com/username/your-app-name.git` <br/>
-_Note: We recommend to use ssh, so you don't need to setup credentials._
-
-- Go to the root of `django_server`:
-
-```shell
-$ cd name-of-app/src/django_server
 ```
 
 ## 2. Setup Django server
@@ -45,6 +36,7 @@ $ cd name-of-app/src/django_server
 ```shell
 $ python3.7 -m pip install virtualenv
 ...
+$ cd src/django_server/
 $ virtualenv -p python3.7 venv
 ...
 $ source venv/bin/activate
@@ -134,18 +126,21 @@ We have three development servers here: **Django, Create React App, and GatsbyJS
 - Start `django_server`:
 
 ```shell
+$ cd src/django_server/
 $ python manage.py runserver 0.0.0.0:9000
 ```
 
 - Start `react-app` development server:
 
 ```shell
+$ cd src/react-app/
 $ npm start
 ```
 
 - Start `landing-page` development server:
 
 ```shell
+$ cd src/landing-page/
 $ gatsby develop
 ```
 
@@ -154,7 +149,7 @@ $ gatsby develop
 We already made a python script, which creates tmux windows and start Django, CRA, and GatsbyJS development servers.
 _Note: Make sure your virtual environment is located in `/src/django_server/venv` folder_
 
-- Execute the `tmux_setup.py` script with `python>=3.6`
+- Execute the `tmux_setup.py` script withing the root directory:
 
 ```shell
 $ python tmux_setup.py
@@ -168,13 +163,6 @@ $ python tmux_setup.py
   - `ctrl+b` `[` - scroll through the content. Use `up` and `down` arrow keys and `esc` to exit mode;
   - `ctrl+b` `c` - create new window.
 
-### Avaliable endpoints:
-
-- http://localhost:8000/ - landing page
-- http://localhost:3006/ - application
-- http://localhost:9000/graphql - IDE for exploring GraphQL
-- http://localhost:9000/admin - Django admin
-
 ### Change site's domain and display name
 
 Redfish sends emails for users and there is should be a proper link. So please do the next:
@@ -187,3 +175,10 @@ Redfish sends emails for users and there is should be a proper link. So please d
 ## You are ready to develop!
 
 That's it. Note that this step is a prerequisite to the next step, where we learn how to set up production build.
+
+### Avaliable endpoints:
+
+- http://localhost:8000/ - landing page
+- http://localhost:3006/ - application
+- http://localhost:9000/graphql - IDE for exploring GraphQL
+- http://localhost:9000/admin - Django admin
