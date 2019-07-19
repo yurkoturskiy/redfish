@@ -12,7 +12,7 @@ def shell(command):
 # run django server
 shell(f"tmux new -s redfish -n django-server -c {APP_PATH}/src/django_server -d")
 shell(f"tmux send-keys -t redfish:django-server 'cd {APP_PATH}/src/django_server' C-m")
-shell(f"tmux send-keys -t redfish:django-server 'source {APP_PATH}/venv/bin/activate' C-m")
+shell(f"tmux send-keys -t redfish:django-server 'source venv/bin/activate' C-m")
 shell(f"tmux send-keys -t redfish:django-server 'python manage.py runserver 0.0.0.0:9000' C-m")
 # run react-app dev server
 shell(f"tmux new-window -t redfish -n react-app -c {APP_PATH}/react-app -d")
