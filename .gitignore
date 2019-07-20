@@ -5,7 +5,6 @@ __pycache__
 *.pyc
 *.pyo
 settings.json
-settings.py
 *.sublime-*
 test.py
 django_server/fixtures/*.json
