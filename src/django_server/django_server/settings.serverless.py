@@ -105,11 +105,7 @@ ROOT_URLCONF = 'django_server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, '../react-app/build'),
-            # os.path.join(BASE_DIR, '../react-note-app/build'),
-            # os.path.join(BASE_DIR, '../landing-page/public'),
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,12 +118,7 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, '../react-app/build/static'),
-]
-
-
-WSGI_APPLICATION = 'django_server.wsgi.application'
+WSGI_APPLICATION = 'django_server.wsgi_prod.application'
 
 
 # Database

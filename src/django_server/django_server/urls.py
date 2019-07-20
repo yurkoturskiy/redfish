@@ -5,7 +5,6 @@ from django.views.generic import TemplateView
 
 # GraphQL
 from django.views.decorators.csrf import csrf_exempt
-# from graphene_django.views import GraphQLView # For public GraphiQL
 from custom_django_rest_auth.grapheneDRF import AuthenticatedGraphQLView # For privat GraphiQL
 
 from rest_framework.schemas import get_schema_view
@@ -21,14 +20,14 @@ API_DESCRIPTION = 'A Web API for django-rest-auth.'
 schema_view = get_schema_view(title=API_TITLE)
 
 urlpatterns = [
-    path('schema/', schema_view),
     path('admin/', admin.site.urls),
-    # path('app/', TemplateView.as_view(template_name='react-note-app-index.html'), name='index.html'),
-    # url(r'^app/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', appAuth, name='app'),)
-    url(r'^graphql', csrf_exempt(AuthenticatedGraphQLView.as_view(graphiql=True))), # Private graphiQL url
-    # url(r'^graphql', csrf_exempt(GraphQLView.as_view(graphiql=True))), # Public GraphiQL url
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # GraphQL
+    path('', csrf_exempt(AuthenticatedGraphQLView.as_view(graphiql=True))), # Private graphiQL url
+    path('graphql/', csrf_exempt(AuthenticatedGraphQLView.as_view(graphiql=True))), # Private graphiQL url
+    # REST Api
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
+    path('schema/', schema_view),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # confirm email
     url(r'^confirm-email/(?P<key>[-:\w]+)/$', 
         accountEmailConfirm, name="confirm_email"), # Frontend confirmation
@@ -44,8 +43,6 @@ urlpatterns = [
     path('email-confirm-status/<str:status>/', 
         TemplateView.as_view(template_name="index.html"),
         name='email_confirm_status'),
-    path('', TemplateView.as_view(template_name='index.html'), name='index.html'),
-    path('app/', TemplateView.as_view(template_name='index.html'), name='index.html'),
     # Social auth
     url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url(r'^rest-auth/github/$', GithubLogin.as_view(), name='github_login'),
