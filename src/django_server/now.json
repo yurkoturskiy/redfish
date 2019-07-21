@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "name": "django_server",
+  "name": "redfish-django-server-productin",
   "builds": [
     {
-      "src": "index.py",
+      "src": "django_server/wsgi/production.py",
       "use": "@ardnt/now-python-wsgi",
-      "config": { "runtime": "python3.7" }
+      "config": { "maxLambdaSize": "15mb" }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "django_server/wsgi/production.py"
     }
   ]
 }

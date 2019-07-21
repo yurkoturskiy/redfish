@@ -13,25 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-# SECURITY WARNING: don't leave default values. Override them with your credentials
-SUPER_USER_INITIAL_CREDENTIALS = {
-    'username': 'admin',
-    'password': 'adminpass'
-}
-
-ALLOWED_HOSTS = ['*']
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Application definition
 
@@ -67,7 +49,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'example@gmail.com'
-EMAIL_HOST_PASSWORD = 'tbbeqrspnppnxdza'
+EMAIL_HOST_PASSWORD = 'remawewnziabpjvc'
 
 
 # LOGIN_REDIRECT_URL='/'
@@ -117,24 +99,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'django_server.wsgi_prod.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'redfish-database-1', # dbname
-        'USER': 'postgres', # master username
-        'PASSWORD': 'oWdpvdqwv4gLdasWobch', # master password
-        'HOST': 'redfish-database-1.c7fqrmxdqwyj.eu-central-1.rds.amazonaws.com', # Endpoint
-        'PORT': '5432',
-    }
-}
-
 
 
 # Password validation
@@ -188,21 +152,6 @@ FIXTURE_DIRS = (
    BASE_DIR, '/fixtures/',
 )
 
-# The AWS region to connect to.
-AWS_REGION = "eu-central-1"
-
-# The AWS access key to use.
-AWS_ACCESS_KEY_ID = "AKIAR2BBJGVFVDD2RF6V"
-
-# The AWS secret access key to use.
-AWS_SECRET_ACCESS_KEY = "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"
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-# AWS S3 settings
-S3_BUCKET = "redfish-static-files" # Put the name of your S3 bucket here
-STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
-AWS_S3_BUCKET_NAME_STATIC = S3_BUCKET
-STATIC_URL = "https://%s.s3.amazonaws.com/" % S3_BUCKET
