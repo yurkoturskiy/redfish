@@ -3,8 +3,8 @@ import { useStaticQuery, graphql, Link } from 'gatsby'
 
 function SectionWrapper({ name, children }) {
   return (
-    <div>
-      {name && <h2>{name}</h2>}
+    <div className="section">
+      {name && <h2 className="name">{name}</h2>}
       {children}
     </div>
   )
@@ -50,13 +50,15 @@ export default function SideBar(props) {
       sections[sectionOrder] = { name: section, items: [] }
     let item = (
       <Link to={edge.node.frontmatter.path}>
-        <p>{edge.node.frontmatter.title}</p>
+        <li className="link">{edge.node.frontmatter.title}</li>
       </Link>
     )
     !unlisted && sections[sectionOrder].items.push(item)
   })
   sections = sections.map(section => (
-    <SectionWrapper name={section.name}>{section.items}</SectionWrapper>
+    <SectionWrapper name={section.name}>
+      <ul className="links">{section.items}</ul>
+    </SectionWrapper>
   ))
-  return <div>{sections}</div>
+  return <div className="sections">{sections}</div>
 }

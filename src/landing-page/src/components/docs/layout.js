@@ -18,7 +18,7 @@ function Layout({ children }) {
   return (
     <div className="docs">
       <SideBar />
-      <div>{children}</div>
+      {children}
     </div>
   )
 }
