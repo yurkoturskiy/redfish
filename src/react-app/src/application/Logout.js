@@ -57,11 +57,11 @@ function Logout(props) {
     // Request removing token from landing's localStorage
     iframeRef.current.contentWindow.postMessage(
       "logout",
-      process.env.REACT_APP_LANDING_HOST_NAME
+      process.env.REACT_APP_LANDING_URL
     );
 
   const redirectToLandingPage = () =>
-    window.location.replace(process.env.REACT_APP_LANDING_HOST_NAME);
+    window.location.replace(process.env.REACT_APP_LANDING_URL);
 
   return (
     <React.Fragment>
@@ -70,7 +70,10 @@ function Logout(props) {
         style={{ visibility: "hidden" }}
         ref={iframeRef}
         onError={landingIframeOnError}
-        src={`${process.env.REACT_APP_LANDING_HOST_NAME}/iframe-logout`}
+        src={
+          process.env.REACT_APP_LANDING_URL +
+          process.env.REACT_APP_LANDING_IFRAME_LOGOUT_ENDPOINT
+        }
       />
     </React.Fragment>
   );

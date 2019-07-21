@@ -20,7 +20,7 @@ const stateLink = withClientState({
 });
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_URL
+  uri: process.env.REACT_APP_SERVER_URL + process.env.REACT_APP_GRAPHQL_ENDPOINT
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -36,7 +36,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const restLink = new RestLink({
-  uri: process.env.REACT_APP_REST_URL
+  uri: process.env.REACT_APP_SERVER_URL
 });
 
 const apolloClient = new ApolloClient({
