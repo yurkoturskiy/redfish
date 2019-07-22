@@ -15,6 +15,6 @@
     }
   ],
   "env": {
-    "ENVIRONMENT": "production"
+    "ENV": "production"
   }
 }

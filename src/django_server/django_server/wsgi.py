@@ -8,27 +8,19 @@ https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/
 """
 
 import os
-from django_server.env import ENV_PROD_VARIABLES, ENV_DEV_VARIABLES
 from django.core.wsgi import get_wsgi_application
 
-
-def set_production():
-	print('set production environment')
-	os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_server.settings.production')
-	os.environ.update(ENV_PROD_VARIABLES) # export prod env variables
-
-def set_development():
-	print('set development environment')
-	os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_server.settings.development')
-	os.environ.update(ENV_DEV_VARIABLES) # export dev env variables
-
 try:
-	environment = os.environ['ENVIRONMENT']
-	if environment == 'production':
-		set_production()
-	else:
-		set_development()
+	environment = os.environ['ENV']
 except:
-	set_development()
+	environment = 'development'
+
+# Import env variables
+exec(f'from django_server.env import {environment} as env_variables')
+print(f'set {environment} environment')
+# Set settings depends on environment
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'django_server.settings.{environment}')
+# Set env variables
+os.environ.update(env_variables)
 
 application = get_wsgi_application()
