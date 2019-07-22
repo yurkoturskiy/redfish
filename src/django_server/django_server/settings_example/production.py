@@ -1,3 +1,4 @@
+import os
 from django_server.settings.common import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -6,9 +7,7 @@ SECRET_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.now.sh']
-
-WSGI_APPLICATION = 'django_server.wsgi.production.application'
+ALLOWED_HOSTS = ['.now.sh', os.environ['LANDING_URL'], os.environ['APPLICATION_URL']]
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases

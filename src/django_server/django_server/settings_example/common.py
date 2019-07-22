@@ -44,7 +44,9 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-# gmail setup
+WSGI_APPLICATION = 'django_server.wsgi.application'
+
+# SMTP setup. 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

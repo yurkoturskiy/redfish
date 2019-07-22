@@ -7,7 +7,7 @@ ENV_DEV_VARIABLES = {
 
 # Production environment variables
 ENV_PROD_VARIABLES = {
-	'SERVER_URL': 'http://server.redfish-project.gq',
+	'SERVER_URL': 'https://redfish-server-prod.guandjoy.now.sh',
 	'LANDING_URL': 'https://redfish-project.gq',
 	'APPLICATION_URL': 'https://app.redfish-project.gq'
 }

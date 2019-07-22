@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "name": "redfish-django-server-productin",
+  "name": "redfish-server-prod",
   "builds": [
     {
-      "src": "django_server/wsgi/production.py",
+      "src": "django_server/wsgi.py",
       "use": "@ardnt/now-python-wsgi",
       "config": { "maxLambdaSize": "15mb" }
     }
@@ -11,7 +11,10 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "django_server/wsgi/production.py"
+      "dest": "django_server/wsgi.py"
     }
-  ]
+  ],
+  "env": {
+    "ENVIRONMENT": "production"
+  }
 }

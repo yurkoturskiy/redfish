@@ -25,10 +25,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
-WSGI_APPLICATION = 'django_server.wsgi.development.application'
-
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 

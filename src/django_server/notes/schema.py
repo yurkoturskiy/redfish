@@ -1,6 +1,4 @@
 # cookbook/ingredients/schema.py
-import requests
-import json
 import graphene
 import os
 from graphene import relay, ObjectType
@@ -10,9 +8,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_relay.node.node import from_global_id
 
 from .models import Note
-from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
-from rest_framework.authtoken.models import Token
+
 
 # Exceptions
 from graphql import GraphQLError
@@ -45,29 +41,11 @@ class NoteNode(DjangoObjectType):
         # different owner. Not allowed
         return GraphQLError("Access denied")
 
-
-class UserNode(DjangoObjectType):
-    class Meta:
-        model = User
-        filter_fields = ['username']
-        exclude_fields = ('password', 'is_superuser', 'is_staff', 'note_set')
-        interfaces = (relay.Node, )
-
   
 class Query(object):
-    token_is_valid = graphene.Boolean(key=graphene.String())
     note = relay.Node.Field(NoteNode)
     all_notes = DjangoFilterConnectionField(NoteNode)
-    profile = graphene.Field(UserNode)
     all_colors = graphene.List(graphene.String)
-
-    def resolve_token_is_valid(self, info, key):
-        # Check if the token for a user exist and is valid
-        try:
-            Token.objects.get(key=key)
-        except Token.DoesNotExist:
-            return False
-        return True
 
     def resolve_all_notes(self, info, **kwargs):
         # context will reference to the Django request
@@ -75,13 +53,6 @@ class Query(object):
             return Note.objects.filter(owner=info.context.user)
         else:
             return Note.objects.none()
-
-    def resolve_profile(self, info):
-        if info.context.user.is_authenticated:
-            print("return profiles")
-            return User.objects.get(username=info.context.user)
-        else:
-            return GraphQLError("You are not authenticated. Please login first")
 
     def resolve_all_colors(self, info):
         colors = []
@@ -249,222 +220,10 @@ class ReorderNote(relay.ClientIDMutation):
             return GraphQLError("You are not authenticated. Please login first")
 
 
-class Login(relay.ClientIDMutation):
-    class Input:
-        username = graphene.String(required=True)
-        password = graphene.String(required=True)
 
-    key = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        data = {
-            'username': input['username'],
-            'password': input['password']
-        }
-        response = requests.post(f"{SERVER_URL}/rest-auth/login/", data=data)
-        data = json.loads(response.text)
-        if response.status_code == 200:
-            return Login(data['key'])
-        elif response.status_code == 400:
-            return GraphQLError(response.text)
-        else:
-            return None
-
-
-class Logout(relay.ClientIDMutation):
-    class Input:
-        key = graphene.String(required=True)
-
-    detail = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        response = requests.post(
-            f"{SERVER_URL}/rest-auth/logout/",
-            headers={'authorization': f"Token {input['key']}"})
-        if response.status_code == 200:
-            data = json.loads(response.text)
-            return Logout(data['detail'])
-        elif response.status_code == 400:
-            return GraphQLError(response.text)
-        else:
-            return None
-
-
-class AuthWithFacebook(relay.ClientIDMutation):
-    class Input:
-        access_token = graphene.String(required=True)
-        # code = graphene.String()
-
-    key = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        print('input', input)
-        data = {
-            'access_token': input['access_token'],
-        }
-        response = requests.post(f"{SERVER_URL}/rest-auth/facebook/", data=data)
-        data = json.loads(response.text)
-        if response.status_code == 200:
-            return AuthWithFacebook(data['key'])
-        elif response.status_code == 400:
-            return GraphQLError(response.text)
-        else:
-            return None
-
-
-class AuthWithGitHub(relay.ClientIDMutation):
-    class Input:
-        code = graphene.String(required=True)
-
-    key = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        data = {'code': input['code'],}
-        response = requests.post(f"{SERVER_URL}/rest-auth/github/", data=data)
-        data = json.loads(response.text)
-        if response.status_code == 200:
-            return AuthWithGitHub(data['key'])
-        elif response.status_code == 400:
-            return GraphQLError(response.text)
-        else:
-            return None
-
-
-class AuthWithTwitter(relay.ClientIDMutation):
-    class Input:
-        code = graphene.String(required=True)
-
-    key = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        data = {'code': input['code'],}
-        response = requests.post(f"{SERVER_URL}/rest-auth/twitter/", data=data)
-        data = json.loads(response.text)
-        if response.status_code == 200:
-            return AuthWithTwitter(data['key'])
-        elif response.status_code == 400:
-            return GraphQLError(response.text)
-        else:
-            return None
-
-
-class Registration(relay.ClientIDMutation):
-    class Input:
-        username = graphene.String(required=True)
-        email = graphene.String(required=True)
-        password1 = graphene.String(required=True)
-        password2 = graphene.String(required=True)
-
-    key = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        data = {
-            'username': input['username'],
-            'email': input['email'],
-            'password1': input['password1'],
-            'password2': input['password2'],
-        }
-        response = requests.post(
-            f"{SERVER_URL}/rest-auth/registration/", data=data
-        )
-        if response.status_code != 400:
-            data = json.loads(response.text)
-            return Registration(data['key'])
-        elif response.status_code == 400:
-            return GraphQLError(response.text)
-        else:
-            return None
-
-
-class ConfirmEmail(relay.ClientIDMutation):
-    class Input:
-        key = graphene.String(required=True)
-
-    detail = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        data = { 'key': input['key'] }
-        response = requests.post(
-            f"{SERVER_URL}/rest-auth/registration/verify-email/", 
-            data=data
-        )
-        if response.status_code != 400:
-            data = json.loads(response.text)
-            return ConfirmEmail(data['detail'])
-        elif response.status_code == 400:
-            return GraphQLError(response.text)
-        else:
-            return None
-
-
-class PasswordReset(relay.ClientIDMutation):
-    class Input:
-        email = graphene.String(required=True)
-
-    detail = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        print('input', input)
-        data = { 'email': input['email'] }
-        response = requests.post(
-            f"{SERVER_URL}/rest-auth/password/reset/", data=data
-        )
-        print('response', response.text)
-        if response.status_code == 200:
-            data = json.loads(response.text)
-            return PasswordReset(data['detail'])
-        elif response.status_code == 400:
-            return GraphQLError(response.text)
-        else:
-            return None
-
-
-class PasswordResetConfirm(relay.ClientIDMutation):
-    class Input:
-        uid = graphene.String(required=True)
-        token = graphene.String(required=True)
-        new_password1 = graphene.String(required=True)
-        new_password2 = graphene.String(required=True)
-
-    detail = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        data = { 
-            'uid': input['uid'],
-            'token': input['token'],
-            'new_password1': input['new_password1'],
-            'new_password2': input['new_password2'],
-        }
-        response = requests.post(
-            f"{SERVER_URL}/rest-auth/password/reset/confirm/", data=data
-        )
-        if response.status_code == 200:
-            data = json.loads(response.text)
-            return PasswordResetConfirm(data['detail'])
-        elif response.status_code == 400:
-            return GraphQLError(response.text)
-        else:
-            return None
 
 
 class Mutation(ObjectType):
-    login = Login.Field()
-    logout = Logout.Field()
-    auth_with_facebook = AuthWithFacebook.Field()
-    auth_with_github = AuthWithGitHub.Field()
-    registration = Registration.Field()
-    confirm_email = ConfirmEmail.Field()
-    password_reset = PasswordReset.Field()
-    password_reset_confirm = PasswordResetConfirm.Field()
     add_note = AddNote.Field()
     update_notes_color = UpdateNotesColor.Field()
     update_note = UpdateNote.Field()
