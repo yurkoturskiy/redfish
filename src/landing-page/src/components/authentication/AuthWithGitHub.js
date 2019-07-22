@@ -27,7 +27,8 @@ function AuthWithGitHub(props) {
       console.log(response)
     })
 
-  const redirectToAppPage = () => window.location.replace(process.env.APP_URL)
+  const redirectToAppPage = () =>
+    window.location.replace(process.env.GATSBY_APP_URL)
 
   const handleResponse = response => {
     localStorage.setItem('token', response.data.authWithGithub.key)

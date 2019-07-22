@@ -14,7 +14,7 @@ function OnStartAuthentication(props) {
     variables: { key: key ? key : '' },
   })
   useEffect(() => {
-    if (data.tokenIsValid) window.location.replace(process.env.APP_URL)
+    if (data.tokenIsValid) window.location.replace(process.env.GATSBY_APP_URL)
     else localStorage.removeItem('token')
   })
   if (loading) return null

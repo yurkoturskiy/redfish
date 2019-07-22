@@ -48,7 +48,7 @@ function LoginFormContainer(props) {
 
   useEffect(() => {
     if (isAuth) {
-      window.location.replace(process.env.APP_URL)
+      window.location.replace(process.env.GATSBY_APP_URL)
     }
   })
 

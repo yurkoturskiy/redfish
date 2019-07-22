@@ -19,7 +19,7 @@ const stateLink = withClientState({
 })
 
 const httpLink = createHttpLink({
-  uri: process.env.SERVER_URL + process.env.GRAPHQL_ENDPOINT,
+  uri: process.env.GATSBY_SERVER_URL + process.env.GATSBY_GRAPHQL_ENDPOINT,
 })
 
 const authLink = setContext((_, { headers }) => {

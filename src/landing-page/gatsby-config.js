@@ -7,18 +7,18 @@ const dynamicPlugins = []
 const startDate = new Date()
 startDate.setMonth(startDate.getMonth() - 3)
 if (
-  process.env.CLIENT_EMAIL &&
-  process.env.PRIVATE_KEY &&
-  process.env.GA_VIEW_ID
+  process.env.GATSBY_CLIENT_EMAIL &&
+  process.env.GATSBY_PRIVATE_KEY &&
+  process.env.GATSBY_GA_VIEW_ID
 ) {
   dynamicPlugins.push({
     resolve: `gatsby-plugin-guess-js`,
     options: {
-      GAViewID: process.env.GA_VIEW_ID,
+      GAViewID: process.env.GATSBY_GA_VIEW_ID,
       jwt: {
-        client_email: process.env.CLIENT_EMAIL,
-        client_id: process.env.CLIENT_ID,
-        private_key: process.env.PRIVATE_KEY,
+        client_email: process.env.GATSBY_CLIENT_EMAIL,
+        client_id: process.env.GATSBY_CLIENT_ID,
+        private_key: process.env.GATSBY_PRIVATE_KEY,
       },
       period: {
         startDate,
@@ -152,7 +152,8 @@ module.exports = {
       resolve: `gatsby-source-graphql`,
       options: {
         fieldName: `redfish`,
-        url: process.env.SERVER_URL + process.env.GRAPHQL_ENDPOINT,
+        url:
+          process.env.GATSBY_SERVER_URL + process.env.GATSBY_GRAPHQL_ENDPOINT,
         typeName: `Redfish`,
         refetchInterval: 10,
       },
@@ -160,7 +161,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: process.env.LANDING_URL,
+        host: process.env.GATSBY_LANDING_URL,
         policy: [{ userAgent: '*', disallow: '/' }],
       },
     },
