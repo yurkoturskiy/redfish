@@ -9,13 +9,21 @@ import * as serviceWorker from "./serviceWorker";
 import history from "./history";
 import apolloClient from "./apolloClient";
 
+// Set env variables
+let activeEnv =
+  process.env.REACT_APP_ENV || process.env.NODE_ENV || "development";
+require("dotenv").config({
+  path: `.env.${activeEnv}`
+});
+activeEnv !== "production" && console.log(activeEnv, "environment");
+
 ReactDOM.render(
-	<ApolloProvider client={apolloClient}>
-		<Router history={history}>
-			<App />
-		</Router>
-	</ApolloProvider>,
-	document.getElementById("root")
+  <ApolloProvider client={apolloClient}>
+    <Router history={history}>
+      <App />
+    </Router>
+  </ApolloProvider>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
