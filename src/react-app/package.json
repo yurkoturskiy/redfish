@@ -39,7 +39,7 @@
   "scripts": {
     "start": "PORT=3006 HOST=0.0.0.0 craco start",
     "build": "craco build",
-    "build:staging": "env-cmd .env.staging craco build",
+    "build:staging": "env-cmd .env.staging npm run build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
