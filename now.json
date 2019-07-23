@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "name": "redfish-server",
+  "builds": [
+    {
+      "src": "src/django_server/django_server/wsgi.py",
+      "use": "@ardnt/now-python-wsgi",
+      "config": { "maxLambdaSize": "15mb" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/django_server/django_server/wsgi.py"
+    }
+  ],
+  "env": {
+    "ENV": "production"
+  }
+}
