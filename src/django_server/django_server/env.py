@@ -15,6 +15,6 @@ production = {
 # Staging environment variables
 staging = {
 	'SERVER_URL': 'https://redfish-server-staging.guandjoy.now.sh',
-	'LANDING_URL': 'https://redfish-project.gq',
-	'APPLICATION_URL': 'https://app.redfish-project.gq'	
+	'LANDING_URL': 'https://staging.redfish-project.gq',
+	'APPLICATION_URL': 'https://app.staging.redfish-project.gq'	
 }

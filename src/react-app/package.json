@@ -18,6 +18,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "dotenv": "^8.0.0",
+    "env-cmd": "^9.0.3",
     "formik": "^1.5.7",
     "graphql": "^14.3.1",
     "history": "^4.9.0",
@@ -38,6 +39,7 @@
   "scripts": {
     "start": "PORT=3006 HOST=0.0.0.0 craco start",
     "build": "craco build",
+    "build:staging": "env-cmd -f .env.staging craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
