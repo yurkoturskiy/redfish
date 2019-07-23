@@ -10,12 +10,7 @@ import history from "./history";
 import apolloClient from "./apolloClient";
 
 // Set env variables
-let activeEnv =
-  process.env.REACT_APP_ENV || process.env.NODE_ENV || "development";
-require("dotenv").config({
-  path: `.env.${activeEnv}`
-});
-activeEnv !== "production" && console.log(activeEnv, "environment");
+console.log("landing ulr:", process.env.REACT_APP_LANDING_URL);
 
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
