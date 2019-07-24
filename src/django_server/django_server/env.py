@@ -21,7 +21,7 @@ staging = {
 
 # Master branch env variables
 master = {
-	'SERVER_URL': 'https://redfish-server-prod.guandjoy.now.sh',
+	'SERVER_URL': 'https://redfish-server.guandjoy.now.sh',
 	'LANDING_URL': 'https://redfish-project.gq',
 	'APPLICATION_URL': 'https://app.redfish-project.gq'
 }
