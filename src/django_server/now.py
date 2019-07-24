@@ -51,7 +51,7 @@ envrironment_as_branch = eval(now_config['env']['ENV_AS_BRANCH']) if not environ
 
 # set active branch name
 repo = Repo(search_parent_directories=True)
-branch_name = repo.active_branch
+branch_name = str(repo.active_branch)
 
 # add mark to name
 now_name_mark = f"-{branch_name}" if branch_name != "master" else ""
