@@ -49,8 +49,9 @@ now_env_name_default = str(now_config['name'])
 repo = Repo(search_parent_directories=True)
 branch_name = repo.active_branch
 
-# add suffix to name
-now_name = f'{now_env_name_default}-{branch_name}'
+# add mark to name
+now_name_mark = f"-{branch_name}" if branch_name != "master" else ""
+now_name = now_env_name_default + now_name_mark
 
 # set django environment
 environment = branch_name if not environment_arg else environment_arg
