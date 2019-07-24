@@ -11,9 +11,9 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 try:
-	environment = os.environ['ENV']
+	environment = os.environ['DJANGO_ENV']
 except:
-	environment = 'development'
+	environment = 'local'
 
 # Import env variables
 exec(f'from django_server.env import {environment} as env_variables')

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "redfish-server-prod",
+  "name": "redfish-server",
   "builds": [
     {
       "src": "django_server/wsgi.py",
@@ -15,6 +15,6 @@
     }
   ],
   "env": {
-    "ENV": "production"
+    "DJANGO_ENV": "master"
   }
 }
