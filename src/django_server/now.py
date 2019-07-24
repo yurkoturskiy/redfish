@@ -33,18 +33,18 @@ from subprocess import run
 # path where this script is located
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
-# read now.json file
-with open(f'{DIR_PATH}/now.json', 'r') as now_file:
-    now_file_content = now_file.read()
-    now_config = json.loads(now_file_content)
-
 # Check if environment argument is given
 try:
 	environment_arg = sys.argv[1]
 except:
 	environment_arg = False
 
-# get name from now.json
+# get values from now.json
+with open(f'{DIR_PATH}/now.json', 'r') as now_file:
+	# read now.json file
+    now_file_content = now_file.read()
+    now_config = json.loads(now_file_content)
+
 now_env_name_default = now_config['name']
 default_environment = now_config['env']['DJANGO_ENV']
 envrironment_as_branch = eval(now_config['env']['ENV_AS_BRANCH']) if not environment_arg else False
@@ -83,4 +83,4 @@ print(f'command: {command}')
 print('executing...')
 
 # execute command
-# run(command, shell=True, check=True)
+run(command, shell=True, check=True)

@@ -20,6 +20,7 @@ try:
 	environment_as_branch = eval(os.environ['ENV_AS_BRANCH'])
 except:
 	environment_as_branch = False
+	environment = False
 
 
 if environment_as_branch:
@@ -27,6 +28,7 @@ if environment_as_branch:
 	try:
 		# Set environment as the branch that the app was deployed using
 		github_branch = os.environ['NOW_GITHUB_COMMIT_REF']
+		print("Deploying from GitHub...")
 		environment = github_branch
 	except:
 		environment = False
@@ -36,6 +38,7 @@ if environment_as_branch:
 	try:
 		# Set environment as the branch that the app was deployed using
 		gitlab_branch = os.environ['GITLAB_COMMIT_REF']
+		print("Deploying from GitLab...")
 		environment = gitlab_branch
 	except:
 		environment = False
@@ -46,6 +49,7 @@ if not environment:
 	try:
 		# If local `now` deployment
 		environment = os.environ['DJANGO_ENV']
+		print("Deploying locally...")
 	except:
 		# If local `manage.py` runserver
 		environment = 'local'
@@ -61,7 +65,7 @@ os.environ.update(env_variables)
 
 
 # Logging
-print(f'set {environment} environment')
+print(f'Set {environment} environment')
 
 
 application = get_wsgi_application()
