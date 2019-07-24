@@ -1,10 +1,11 @@
 import React from 'react'
 
 function Button(props) {
+  const romb = props.romb === 'true'
   return (
     <button className="dot-button" {...props}>
       <span>{props.children}</span>
-      <div className={`dot ${props.romb && 'romb'}`} />
+      <div className={`dot ${romb && 'romb'}`} />
     </button>
   )
 }

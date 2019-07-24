@@ -56,7 +56,9 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
+    "build:staging": "GATSBY_ENV=staging npm run build",
     "develop": "gatsby develop --host=0.0.0.0",
+    "develop:remote": "GATSBY_ENV=devremote npm run develop",
     "start": "npm run develop",
     "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""

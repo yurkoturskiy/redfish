@@ -7,7 +7,7 @@ function GitHubPageBtn(props) {
       onClick={() =>
         window.open('https://github.com/guandjoy/Redfish', '_blank')
       }
-      romb
+      romb="true"
     >
       GitHub
     </Button>
