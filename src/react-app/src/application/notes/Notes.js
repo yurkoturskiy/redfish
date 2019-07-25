@@ -7,11 +7,11 @@ import DraggableMasonryLayout from "react-universal-dnd-layout";
 import SelectedNotesOptionsBar from "./SelectedNotesOptionsBar/Container";
 import Topics from "./topics/Container";
 // queries
-import { ALL_NOTES, SELECTED_NOTES, REORDER_NOTE } from "../../graphql/queries";
+import { ALL_NOTES, REORDER_NOTE } from "../../graphql/queries";
 
 export const Cursors = React.createContext();
 
-function Notes(props) {
+function Notes() {
   const updateNotesOrder = (cache, { data: { reorderNote } }) => {
     var cacheData = cache.readQuery({ query: ALL_NOTES });
     var { oldOrder, newOrder, pinned } = reorderNote;
@@ -39,7 +39,7 @@ function Notes(props) {
   };
   return (
     <Query query={ALL_NOTES}>
-      {({ loading, error, data, fetchMore }) => {
+      {({ loading, error, data }) => {
         if (loading) return <p>Loading...</p>;
         if (error) {
           console.log(error);
