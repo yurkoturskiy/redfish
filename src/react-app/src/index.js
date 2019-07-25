@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import * as log from "loglevel";
 // container components
 import App from "./application/App";
 import { ApolloProvider } from "react-apollo";
@@ -10,7 +11,9 @@ import history from "./history";
 import apolloClient from "./apolloClient";
 
 // Set env variables
-console.log("landing ulr:", process.env.REACT_APP_LANDING_URL);
+log.setLevel(process.env.REACT_APP_LOG_LEVEL);
+log.info("landing ulr:", process.env.REACT_APP_LANDING_URL);
+log.info("server url:", process.env.REACT_APP_SERVER_URL);
 
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
