@@ -11,9 +11,7 @@ import history from "./history";
 import apolloClient from "./apolloClient";
 
 // Set env variables
-console.log("landing ulr:", process.env.REACT_APP_LANDING_URL);
-
-log.setLevel("debug");
+log.setLevel(process.env.REACT_APP_LOG_LEVEL);
 
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
