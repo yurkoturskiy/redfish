@@ -52,7 +52,7 @@ function Notes(props) {
             order={note.node.order}
             node={note.node}
             number={index + 1}
-            isSelected={props.selectedNotes.indexOf(note.node.id) !== -1}
+            isSelected={data.selectedNotes.indexOf(note.node.id) !== -1}
           />
         ));
         var pinnedCards = [];
@@ -67,8 +67,8 @@ function Notes(props) {
 
         return (
           <Cursors.Provider value={cursors}>
-            {props.selectedNotes.length > 0 && (
-              <SelectedNotesOptionsBar selectedNotes={props.selectedNotes} />
+            {data.selectedNotes.length > 0 && (
+              <SelectedNotesOptionsBar selectedNotes={data.selectedNotes} />
             )}
             <Mutation mutation={REORDER_NOTE} update={updateNotesOrder}>
               {reorderNote => (
@@ -109,30 +109,6 @@ function Notes(props) {
                             }
                           });
                         }}
-                        onEndlineEnter={() => {
-                          if (data.allNotes.pageInfo.hasNextPage) {
-                            fetchMore({
-                              query: ALL_NOTES,
-                              variables: {
-                                cursor: data.allNotes.pageInfo.endCursor
-                              },
-                              updateQuery: (
-                                prevResult,
-                                { fetchMoreResult }
-                              ) => {
-                                if (!fetchMoreResult) return prevResult;
-                                let mix = prevResult;
-                                mix.allNotes.pageInfo =
-                                  fetchMoreResult.allNotes.pageInfo;
-                                mix.allNotes.edges = [
-                                  ...prevResult.allNotes.edges,
-                                  ...fetchMoreResult.allNotes.edges
-                                ];
-                                return mix;
-                              }
-                            });
-                          }
-                        }}
                       >
                         {notPinnedCards}
                       </DraggableMasonryLayout>
@@ -149,8 +125,4 @@ function Notes(props) {
   );
 }
 
-export default graphql(SELECTED_NOTES, {
-  props: ({ data: { selectedNotes } }) => ({
-    selectedNotes
-  })
-})(Notes);
+export default Notes;
