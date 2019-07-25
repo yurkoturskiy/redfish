@@ -6,10 +6,11 @@ import json
 import sys, os, django
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR) #here store is root folder(means parent).
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings.development")
 django.setup()
 
 from django.contrib.auth.models import User
+from notes.models import Note
 
 RECORDS_AMOUNT = 100 # for each user
 FILE_NAME = 'notes.json'
@@ -30,11 +31,12 @@ def create_notes():
 					"fields": {
 						"title": "",
 						"content": r.text,
-						"color": None,
+						"color": "WHITE",
 						"pinned": False,
 						"owner": user.pk
 					}
 				}
+				Note.objects.create(title="", content=r.text, color="WHITE", pinned=False, owner=user)
 				fishes.append(fish)
 				print(f'{json.dumps(fish, indent=4)}')
 			else:
