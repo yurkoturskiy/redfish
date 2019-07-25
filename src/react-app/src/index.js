@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import * as log from "loglevel";
 // container components
 import App from "./application/App";
 import { ApolloProvider } from "react-apollo";
@@ -11,6 +12,8 @@ import apolloClient from "./apolloClient";
 
 // Set env variables
 console.log("landing ulr:", process.env.REACT_APP_LANDING_URL);
+
+log.setLevel("debug");
 
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
