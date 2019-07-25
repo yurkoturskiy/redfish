@@ -21,8 +21,9 @@ export const LOGOUT = gql`
 `;
 
 export const ALL_NOTES = gql`
-  query AllNotes($amount: Int = 20, $cursor: String) {
-    allNotes(first: $amount, after: $cursor) {
+  query AllNotes {
+    selectedNotes @client
+    allNotes {
       pageInfo {
         endCursor
         hasNextPage
@@ -92,12 +93,6 @@ export const UPDATE_NOTES_COLOR = gql`
     updateNotesColor(input: { id: $id, newColor: $newColor }) {
       newColor
     }
-  }
-`;
-
-export const SELECTED_NOTES = gql`
-  query {
-    selectedNotes @client
   }
 `;
 
