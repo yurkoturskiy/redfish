@@ -15,6 +15,7 @@
     }
   ],
   "env": {
+    "PROD_BRANCH": "master",
     "DJANGO_ENV": "master",
     "ENV_AS_BRANCH": "True"
   }

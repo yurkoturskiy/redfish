@@ -25,62 +25,44 @@ command: now -n redfish-server-development -e DJANGO_ENV=staging
 '''
 
 import os
-import sys
 import json
+import argparse
 from git import Repo
 from subprocess import run
 
-# path where this script is located
+SCRIPT_DESCRIPTION = "Prepare and execute `now` command with custom name and environment variables."
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
+REPO = Repo(search_parent_directories=True)
+BRANCH_NAME = str(REPO.active_branch)
 
-# Check if environment argument is given
-try:
-	environment_arg = sys.argv[1]
-except:
-	environment_arg = False
+# Script interface
+interface = argparse.ArgumentParser(description=SCRIPT_DESCRIPTION)
+interface.add_argument('--mark', default=BRANCH_NAME, help="custom mark (`branch name` by default)")
+interface.add_argument('--env', default=BRANCH_NAME, help="custom environment (`branch name` by default)")
+INPUT = interface.parse_args()
 
-# get values from now.json
+# Get values from now.json
 with open(f'{DIR_PATH}/now.json', 'r') as now_file:
-	# read now.json file
     now_file_content = now_file.read()
-    now_config = json.loads(now_file_content)
+    NOW_CONFIG = json.loads(now_file_content)
+NOW_ENV_NAME_DEFAULT = NOW_CONFIG['name']
+DEFAULT_ENVIRONMENT = NOW_CONFIG['env']['DJANGO_ENV']
+PROD_BRANCH = NOW_CONFIG['env']['PROD_BRANCH']
+ENV_AS_BRANCH = eval(NOW_CONFIG['env']['ENV_AS_BRANCH'])
 
-now_env_name_default = now_config['name']
-default_environment = now_config['env']['DJANGO_ENV']
-envrironment_as_branch = eval(now_config['env']['ENV_AS_BRANCH']) if not environment_arg else False
+def logging():
+	print('envrironment as branch:', ENV_AS_BRANCH)
+	print(f'branch: {BRANCH_NAME}')
+	print(f'name: {now_name}')
+	print(f'environment: {environment}')
+	print(f'command: {now_command}')
+	print('executing...')
 
-# set active branch name
-repo = Repo(search_parent_directories=True)
-branch_name = str(repo.active_branch)
+if __name__ == '__main__':
+	mark = f'-{INPUT.mark}' if INPUT.mark != PROD_BRANCH else ""
+	now_name = NOW_ENV_NAME_DEFAULT + mark
+	environment = INPUT.env if ENV_AS_BRANCH else DEFAULT_ENVIRONMENT
+	now_command = f'now -n {now_name} -e DJANGO_ENV={environment}'
+	logging()
+	run(now_command, shell=True, check=True)
 
-# add mark to name
-now_name_mark = f"-{branch_name}" if branch_name != "master" else ""
-now_name = now_env_name_default + now_name_mark
-
-# set django environment
-if environment_arg:
-	# environment as first argument
-	environment = environment_arg
-elif not envrironment_as_branch:
-	# environment as DJANGO_ENV at now.json
-	environment = default_environment
-else:
-	# environment as active branch
-	environment = branch_name
-
-# set DJANGO_ENV env variable for wsgi.py purposes
-DJANGO_ENV = f'DJANGO_ENV={environment}'
-
-# prepare now command
-command = f'now -n {now_name} -e {DJANGO_ENV}'
-
-# logging
-print('envrironment as branch:', envrironment_as_branch)
-print(f'branch: {branch_name}')
-print(f'name: {now_name}')
-print(f'environment: {environment}')
-print(f'command: {command}')
-print('executing...')
-
-# execute command
-run(command, shell=True, check=True)
