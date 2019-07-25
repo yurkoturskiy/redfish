@@ -12,6 +12,8 @@ import apolloClient from "./apolloClient";
 
 // Set env variables
 log.setLevel(process.env.REACT_APP_LOG_LEVEL);
+log.info("landing ulr:", process.env.REACT_APP_LANDING_URL);
+log.info("server url:", process.env.REACT_APP_SERVER_URL);
 
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>

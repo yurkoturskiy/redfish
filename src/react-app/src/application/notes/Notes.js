@@ -1,5 +1,6 @@
 // external
 import React from "react";
+import * as log from "loglevel";
 import { Query, graphql, Mutation } from "react-apollo";
 // local components
 import Note from "./note/Note";
@@ -15,7 +16,7 @@ function Notes() {
   const updateNotesOrder = (cache, { data: { reorderNote } }) => {
     var cacheData = cache.readQuery({ query: ALL_NOTES });
     var { oldOrder, newOrder, pinned } = reorderNote;
-    cacheData.allNotes.edges.map(edge => {
+    cacheData.allNotes.edges = cacheData.allNotes.edges.map(edge => {
       if (edge.node.pinned === pinned) {
         // Drag withing pinned or unpinned span
         if (oldOrder < newOrder) {
@@ -35,8 +36,10 @@ function Notes() {
       }
       return edge;
     });
+    log.info("update notes order");
     cache.writeQuery({ query: ALL_NOTES, data: cacheData });
   };
+  log.info("render notes");
   return (
     <Query query={ALL_NOTES}>
       {({ loading, error, data }) => {
@@ -45,6 +48,7 @@ function Notes() {
           console.log(error);
           return <p>Error :(</p>;
         }
+        log.info("handle allNotes data query");
         const cursors = data.allNotes.edges.map(note => note.cursor);
         const noteComponents = data.allNotes.edges.map((note, index) => (
           <Note
