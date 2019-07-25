@@ -22,6 +22,7 @@ export const LOGOUT = gql`
 
 export const ALL_NOTES = gql`
   query AllNotes {
+    selectedNotes @client
     allNotes {
       pageInfo {
         endCursor
@@ -92,12 +93,6 @@ export const UPDATE_NOTES_COLOR = gql`
     updateNotesColor(input: { id: $id, newColor: $newColor }) {
       newColor
     }
-  }
-`;
-
-export const SELECTED_NOTES = gql`
-  query {
-    selectedNotes @client
   }
 `;
 
