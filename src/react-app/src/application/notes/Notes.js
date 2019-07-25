@@ -109,30 +109,6 @@ function Notes(props) {
                             }
                           });
                         }}
-                        onEndlineEnter={() => {
-                          if (data.allNotes.pageInfo.hasNextPage) {
-                            fetchMore({
-                              query: ALL_NOTES,
-                              variables: {
-                                cursor: data.allNotes.pageInfo.endCursor
-                              },
-                              updateQuery: (
-                                prevResult,
-                                { fetchMoreResult }
-                              ) => {
-                                if (!fetchMoreResult) return prevResult;
-                                let mix = prevResult;
-                                mix.allNotes.pageInfo =
-                                  fetchMoreResult.allNotes.pageInfo;
-                                mix.allNotes.edges = [
-                                  ...prevResult.allNotes.edges,
-                                  ...fetchMoreResult.allNotes.edges
-                                ];
-                                return mix;
-                              }
-                            });
-                          }
-                        }}
                       >
                         {notPinnedCards}
                       </DraggableMasonryLayout>

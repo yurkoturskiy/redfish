@@ -21,8 +21,8 @@ export const LOGOUT = gql`
 `;
 
 export const ALL_NOTES = gql`
-  query AllNotes($amount: Int = 20, $cursor: String) {
-    allNotes(first: $amount, after: $cursor) {
+  query AllNotes {
+    allNotes {
       pageInfo {
         endCursor
         hasNextPage
