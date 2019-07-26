@@ -124,8 +124,6 @@ class UpdateNote(relay.ClientIDMutation):
                 notes = Note.objects.filter(id=local_id, owner=info.context.user)
             except Note.DoesNotExist:
                 return None
-            if 'color' in input:
-                input['color'] = Color.objects.get(label=input['color'])
             notes.update(**input)
             return UpdateNote(notes[0])
         else:

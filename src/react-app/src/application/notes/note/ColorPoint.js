@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as log from "loglevel";
 import PropTypes from "prop-types";
 import { css } from "linaria";
 import { Mutation } from "react-apollo";
 // queries
-import { ALL_NOTES, UPDATE_NOTES_COLOR } from "../../../graphql/queries";
+import { ALL_NOTES, UPDATE_COLOR } from "../../../graphql/queries";
+// context
+import { NoteNode } from "./Note";
 
 export const colorOption = css`
   height: 24px;
@@ -15,24 +17,21 @@ export const colorOption = css`
 
 function ColorPoint(props) {
   const color = `var(--note-color-${props.color.toLowerCase()}`;
-  const updateNote = (cache, { data }) => {
-    var cacheData = cache.readQuery({ query: ALL_NOTES });
-    log.debug("allNotes cache data before color update", cacheData);
-    cacheData.allNotes.edges = cacheData.allNotes.edges.map(edge => {
-      if (edge.node.id === props.noteId) {
-        edge.node.color = data.updateNotesColor.newColor;
-      }
-      return edge;
-    });
-    log.debug("New allNotes data to write", cacheData);
-    log.info("Update allNotes cache with new color");
-    cache.writeQuery({ query: ALL_NOTES, data: cacheData });
-  };
+  const node = useContext(NoteNode);
   return (
     <Mutation
-      mutation={UPDATE_NOTES_COLOR}
-      update={updateNote}
-      variables={{ id: props.noteId, newColor: props.color }}
+      mutation={UPDATE_COLOR}
+      variables={{ id: props.noteId, color: props.color }}
+      optimisticResponse={{
+        updateNote: {
+          newNote: {
+            ...node,
+            color: props.color,
+            __typename: "NoteNode"
+          },
+          __typename: "UpdateNotePayload"
+        }
+      }}
     >
       {(updateNotesColor, { data }) => (
         <div
