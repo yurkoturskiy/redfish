@@ -41,6 +41,7 @@
     "start": "HOST=0.0.0.0 craco start",
     "develop:remote": "env-cmd -f .env.devremote npm start",
     "build": "craco build",
+    "build:devlocal": "env-cmd -f .env.development npm run build",
     "build:devremote": "env-cmd -f .env.devremote npm run build",
     "build:staging": "env-cmd -f .env.staging craco build",
     "test": "craco test",
