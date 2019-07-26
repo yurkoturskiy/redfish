@@ -1,4 +1,5 @@
 import React from "react";
+import * as log from "loglevel";
 import PropTypes from "prop-types";
 import { css } from "linaria";
 import { Mutation } from "react-apollo";
@@ -30,6 +31,7 @@ function DeleteOption(props) {
   ) => {
     var cacheData = cache.readQuery({ query: ALL_NOTES });
     // remaping notes with correct cursors
+    log.info("deletedNotes", deletedNotes);
     var deletedNotesIDs = [];
     deletedNotes.forEach(note => {
       deletedNotesIDs.push(note.id);
@@ -75,6 +77,12 @@ function DeleteOption(props) {
       mutation={DELETE_NOTES}
       update={handleDeletion}
       variables={{ ids: [props.node.id] }}
+      optimisticResponse={{
+        deleteNotes: {
+          deletedNotes: [{ id: props.node.id, __typename: "NoteNode" }],
+          __typename: "DeleteNotesPayload"
+        }
+      }}
     >
       {deleteNotes => (
         <div className="options-icon">
