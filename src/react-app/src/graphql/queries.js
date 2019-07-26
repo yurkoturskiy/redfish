@@ -1,5 +1,21 @@
 import gql from "graphql-tag";
 
+var fragments = {
+  note: gql`
+    fragment Note on NoteNode {
+      id
+      title
+      content
+      created
+      edited
+      pinned
+      order
+      color
+      __typename
+    }
+  `
+};
+
 export const IS_AUTHENTICATED = gql`
   query {
     isAuthenticated @client
@@ -20,10 +36,10 @@ export const LOGOUT = gql`
   }
 `;
 
-export const ALL_NOTES = gql`
-  query AllNotes {
+export const NOTES_COMPONENT = gql`
+  query AllNotes($amount: Int = 20, $cursor: String) {
     selectedNotes @client
-    allNotes {
+    allNotes(first: $amount, after: $cursor) {
       pageInfo {
         endCursor
         hasNextPage
@@ -31,18 +47,48 @@ export const ALL_NOTES = gql`
       edges {
         cursor
         node {
-          id
-          title
-          content
-          created
-          edited
-          pinned
-          order
-          color
+          ...Note
         }
       }
     }
   }
+  ${fragments.note}
+`;
+
+export const NUM_OF_PINNED_UNPINNED_NOTES = gql`
+  query {
+    numOfPinnedNotes @client
+    numOfNotPinnedNotes @client
+  }
+`;
+
+export const ALL_NOTES = gql`
+  query AllNotes($amount: Int = 20, $cursor: String) {
+    allNotes(first: $amount, after: $cursor) {
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+      edges {
+        cursor
+        node {
+          ...Note
+        }
+      }
+    }
+  }
+  ${fragments.note}
+`;
+
+export const UPDATE_COLOR = gql`
+  mutation UpdateNote($id: ID!, $color: String) {
+    updateNote(input: { id: $id, color: $color }) {
+      newNote {
+        ...Note
+      }
+    }
+  }
+  ${fragments.note}
 `;
 
 export const ADD_NOTE = gql`
@@ -50,18 +96,11 @@ export const ADD_NOTE = gql`
     addNote(input: { title: $title, content: $content }) {
       clientMutationId
       newNote {
-        id
-        title
-        content
-        pinned
-        created
-        edited
-        order
-        color
-        __typename
+        ...Note
       }
     }
   }
+  ${fragments.note}
 `;
 
 export const DELETE_NOTES = gql`
@@ -69,8 +108,6 @@ export const DELETE_NOTES = gql`
     deleteNotes(input: { ids: $ids }) {
       deletedNotes {
         id
-        title
-        content
       }
     }
   }

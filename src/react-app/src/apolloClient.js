@@ -11,7 +11,9 @@ const cache = new InMemoryCache();
 
 const defaultState = () => ({
   isAuthenticated: false,
-  selectedNotes: []
+  selectedNotes: [],
+  numOfPinnedNotes: 0,
+  numOfNotPinnedNotes: 0
 });
 
 const stateLink = withClientState({
