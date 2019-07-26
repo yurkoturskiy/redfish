@@ -1,72 +1,79 @@
 import React, { useContext } from "react";
-import { Mutation } from "react-apollo";
+import * as log from "loglevel";
+import { Mutation, Query, withApollo } from "react-apollo";
 // Local components
 import PinIconFilled from "../../../static/PinIconFilled";
 import PinIconOutlined from "../../../static/PinIconOutlined";
 // Queries
-import { ALL_NOTES, SWITCH_PIN_NOTES } from "../../../graphql/queries";
+import {
+  ALL_NOTES,
+  SWITCH_PIN_NOTES,
+  NUM_OF_PINNED_UNPINNED_NOTES
+} from "../../../graphql/queries";
 // Context
 import { NoteNode } from "./Note";
 
-function Pin() {
+function Pin(props) {
   /* Icon for pin/unpin action */
   const node = useContext(NoteNode);
-  const updateCache = (cache, { data: { switchPinNotes } }) => {
-    const cacheData = cache.readQuery({ query: ALL_NOTES });
-    const {
-      action, // "pin" or "unpin"
-      prevPinnedStatus, // [true, false]
-      curPinnedStatus, // [false, false]
-      prevOrder, // [2, 9]
-      curOrder // [4, 5]
-    } = switchPinNotes;
-    cacheData.allNotes.edges.map(edge => {
-      // Iterate through all notes in cache
-      prevPinnedStatus.forEach((prevPinnedSts, index) => {
-        // Get index and iterate through received status arrays
-        if (
-          edge.node.pinned === prevPinnedStatus[index] &&
-          edge.node.order === prevOrder[index]
-        ) {
-          // Update note with changed pinned status
-          edge.node.pinned = curPinnedStatus[index];
-          edge.node.order = curOrder[index];
-          return edge; // Prevent further ordering changes
-        }
-        if (action === "unpin") {
-          // Update ordering on unpinning
-          if (!edge.node.pinned) edge.node.order += 1;
-          if (edge.node.pinned && edge.node.order > prevOrder[index])
-            edge.node.order -= 1;
-        }
-        if (action === "pin") {
-          // Update ordering on pinning
-          if (!edge.node.pinned && edge.node.order > prevOrder[index])
-            edge.node.order -= 1;
-        }
-      });
+  const doPin = (mutation, data) => {
+    var cacheData = props.client.readQuery({ query: ALL_NOTES });
+    cacheData.allNotes.edges = cacheData.allNotes.edges.map(edge => {
+      if (edge.node.id === node.id) {
+        edge.node.pinned = true;
+        edge.node.order = data.numOfPinnedNotes;
+      }
+      if (!edge.node.pinned && edge.node.order > node.order) {
+        edge.node.order -= 1;
+      }
       return edge;
     });
-    cache.writeQuery({ query: ALL_NOTES, data: cacheData });
+    mutation();
+    props.client.writeQuery({ query: ALL_NOTES, data: cacheData });
+  };
+  const doUnpin = mutation => {
+    var cacheData = props.client.readQuery({ query: ALL_NOTES });
+    cacheData.allNotes.edges = cacheData.allNotes.edges.map(edge => {
+      if (!edge.node.pinned && edge.node.id !== node.id) {
+        edge.node.order += 1;
+      } else if (edge.node.pinned && edge.node.order > node.order) {
+        edge.node.order -= 1;
+      } else if (edge.node.id === node.id) {
+        edge.node.pinned = false;
+        edge.node.order = 0;
+      }
+      return edge;
+    });
+    mutation();
+    props.client.writeQuery({ query: ALL_NOTES, data: cacheData });
   };
   return (
-    <Mutation
-      mutation={SWITCH_PIN_NOTES}
-      variables={{
-        ids: [node.id],
-        action: node.pinned ? "unpin" : "pin"
-      }}
-      update={updateCache}
-    >
-      {switchPinNotes =>
-        node.pinned ? (
-          <PinIconFilled className="pin" onClick={switchPinNotes} />
-        ) : (
-          <PinIconOutlined className="pin" onClick={switchPinNotes} />
-        )
-      }
-    </Mutation>
+    <Query query={NUM_OF_PINNED_UNPINNED_NOTES}>
+      {({ data }) => (
+        <Mutation
+          mutation={SWITCH_PIN_NOTES}
+          variables={{
+            ids: [node.id],
+            action: node.pinned ? "unpin" : "pin"
+          }}
+        >
+          {switchPinNotes =>
+            node.pinned ? (
+              <PinIconFilled
+                className="pin"
+                onClick={() => doUnpin(switchPinNotes, data)}
+              />
+            ) : (
+              <PinIconOutlined
+                className="pin"
+                onClick={() => doPin(switchPinNotes, data)}
+              />
+            )
+          }
+        </Mutation>
+      )}
+    </Query>
   );
 }
 
-export default Pin;
+export default withApollo(Pin);
