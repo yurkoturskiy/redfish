@@ -36,10 +36,35 @@ export const LOGOUT = gql`
   }
 `;
 
-export const ALL_NOTES = gql`
-  query AllNotes {
+export const NOTES_COMPONENT = gql`
+  query AllNotes($amount: Int = 20, $cursor: String) {
     selectedNotes @client
-    allNotes {
+    allNotes(first: $amount, after: $cursor) {
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+      edges {
+        cursor
+        node {
+          ...Note
+        }
+      }
+    }
+  }
+  ${fragments.note}
+`;
+
+export const NUM_OF_PINNED_UNPINNED_NOTES = gql`
+  query {
+    numOfPinnedNotes @client
+    numOfNotPinnedNotes @client
+  }
+`;
+
+export const ALL_NOTES = gql`
+  query AllNotes($amount: Int = 20, $cursor: String) {
+    allNotes(first: $amount, after: $cursor) {
       pageInfo {
         endCursor
         hasNextPage
@@ -83,8 +108,6 @@ export const DELETE_NOTES = gql`
     deleteNotes(input: { ids: $ids }) {
       deletedNotes {
         id
-        title
-        content
       }
     }
   }
