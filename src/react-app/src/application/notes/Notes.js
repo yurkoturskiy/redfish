@@ -17,33 +17,6 @@ import {
 export const Cursors = React.createContext();
 
 function Notes(props) {
-  const updateNotesOrder = (cache, { data: { reorderNote } }) => {
-    log.debug("reorderNote", reorderNote);
-    var cacheData = cache.readQuery({ query: ALL_NOTES });
-    var { oldOrder, newOrder, pinned } = reorderNote;
-    cacheData.allNotes.edges = cacheData.allNotes.edges.map(edge => {
-      if (edge.node.pinned === pinned) {
-        // Drag withing pinned or unpinned span
-        if (oldOrder < newOrder) {
-          // Drag toward the end
-          if (edge.node.order > oldOrder && edge.node.order <= newOrder) {
-            edge.node.order -= 1;
-          } else if (edge.node.order === oldOrder) edge.node.order = newOrder;
-        }
-        if (oldOrder > newOrder) {
-          // Drag toward the start
-          if (edge.node.order < oldOrder && edge.node.order >= newOrder) {
-            edge.node.order += 1;
-          } else if (edge.node.order === oldOrder) {
-            edge.node.order = newOrder;
-          }
-        }
-      }
-      return edge;
-    });
-    log.info("update notes order");
-    cache.writeQuery({ query: ALL_NOTES, data: cacheData });
-  };
   log.info("render notes");
   return (
     <Query query={NOTES_COMPONENT}>
@@ -77,12 +50,16 @@ function Notes(props) {
         var numOfNotes = data.allNotes.edges.length;
         var numOfPinnedNotes = pinnedCards.length;
         var numOfNotPinnedNotes = notPinnedCards.length;
+        var allNotesLoaded = !data.allNotes.pageInfo.hasNextPage;
         props.client.writeData({
           data: {
             numOfPinnedNotes,
-            numOfNotPinnedNotes
+            numOfNotPinnedNotes,
+            allNotesLoaded
           }
         });
+        const pinnedHeader = <h3>Pinned</h3>;
+        const notPinnedHeader = <h3>Others</h3>;
         return (
           <Cursors.Provider value={cursors}>
             {data.selectedNotes.length > 0 && (
@@ -94,10 +71,8 @@ function Notes(props) {
                   {pinnedCards.length !== 0 && (
                     /* Pinned notes */
                     <React.Fragment>
-                      <div>
-                        <h3>Pinned</h3>
-                      </div>
                       <DraggableMasonryLayout
+                        header={pinnedHeader}
                         onRearrange={(dragItem, newOrder, allItems) => {
                           log.debug("all layout items", allItems);
                           let reorder = props.client.readQuery({
@@ -126,10 +101,8 @@ function Notes(props) {
                   {notPinnedCards.length !== 0 && (
                     /* Not pinned notes */
                     <React.Fragment>
-                      <div>
-                        <h3>Not pinned</h3>
-                      </div>
                       <DraggableMasonryLayout
+                        header={numOfPinnedNotes > 0 && notPinnedHeader}
                         reverse={true}
                         onRearrange={(dragItem, newOrder, allItems) => {
                           log.debug("all layout items", allItems);
@@ -152,7 +125,10 @@ function Notes(props) {
                           });
                         }}
                         onEndlineEnter={() => {
+                          log.info("endline");
+                          /* Pagination. Infinite scroll */
                           if (data.allNotes.pageInfo.hasNextPage) {
+                            log.info("load more notes");
                             var oldList = props.client.readQuery({
                               query: ALL_NOTES
                             });
@@ -178,7 +154,6 @@ function Notes(props) {
                                   data: newList
                                 });
                               });
-                            console.log("endline");
                           }
                         }}
                       >
