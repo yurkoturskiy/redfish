@@ -13,7 +13,8 @@ const defaultState = () => ({
   isAuthenticated: false,
   selectedNotes: [],
   numOfPinnedNotes: 0,
-  numOfNotPinnedNotes: 0
+  numOfNotPinnedNotes: 0,
+  allNotesLoaded: false
 });
 
 const stateLink = withClientState({

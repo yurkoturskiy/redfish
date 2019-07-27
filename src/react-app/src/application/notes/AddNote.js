@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
+import * as log from "loglevel";
 import { css } from "linaria";
 import { Mutation } from "react-apollo";
 // queries
-import { ALL_NOTES, ADD_NOTE } from "../../graphql/queries";
+import { ALL_NOTES, ADD_NOTE, ALL_NOTES_LOADED } from "../../graphql/queries";
 
 export const wrapper = css`
   position: var(--add-note-wrapper-position);
@@ -87,6 +88,9 @@ const updateCache = (
   }
 ) => {
   const cacheData = cache.readQuery({ query: ALL_NOTES });
+  const { allNotesLoaded } = cache.readQuery({ query: ALL_NOTES_LOADED });
+  log.debug("new note, cache", cacheData);
+  log.info("allNotesLoaded", allNotesLoaded);
   // remember cursors
   var allCursors = [];
   cacheData.allNotes.edges.forEach(edge => {
@@ -101,7 +105,7 @@ const updateCache = (
   // include new edge as first item
   // and exclude the last one without the cursor
   cacheData.allNotes.edges.unshift(newEdge);
-  cacheData.allNotes.edges.pop();
+  !allNotesLoaded ? cacheData.allNotes.edges.pop() : allCursors.push("none");
   // Shift order by one for existed notes and reset cursors for all
   cacheData.allNotes.edges.map((edge, index) => {
     if (edge !== newEdge && !edge.node.pinned) edge.node.order += 1;
