@@ -62,6 +62,12 @@ export const NUM_OF_PINNED_UNPINNED_NOTES = gql`
   }
 `;
 
+export const ALL_NOTES_LOADED = gql`
+  query {
+    allNotesLoaded @client
+  }
+`;
+
 export const ALL_NOTES = gql`
   query AllNotes($amount: Int = 20, $cursor: String) {
     allNotes(first: $amount, after: $cursor) {
