@@ -73,14 +73,25 @@ function Notes(props) {
                     <React.Fragment>
                       <DraggableMasonryLayout
                         header={pinnedHeader}
+                        key="layout-for-pinned-notes"
                         onRearrange={(dragItem, newOrder, allItems) => {
+                          log.info("rearrange pinned notes");
                           log.debug("all layout items", allItems);
                           let reorder = props.client.readQuery({
                             query: ALL_NOTES
                           });
-                          for (let i = 0; i < numOfPinnedNotes; i++)
-                            reorder.allNotes.edges[i].node.order =
-                              allItems[i].order;
+                          for (let a = 0; a < allItems.length; a++) {
+                            for (let b = 0; b < numOfNotes; b++) {
+                              if (
+                                reorder.allNotes.edges[b].node.id ===
+                                allItems[a].id
+                              ) {
+                                reorder.allNotes.edges[b].node.order =
+                                  allItems[a].order;
+                                break;
+                              }
+                            }
+                          }
                           log.debug("reorder", reorder);
                           props.client.writeQuery({
                             query: ALL_NOTES,
@@ -104,14 +115,25 @@ function Notes(props) {
                       <DraggableMasonryLayout
                         header={numOfPinnedNotes > 0 && notPinnedHeader}
                         reverse={true}
+                        key="layout-for-not-pinned-notes"
                         onRearrange={(dragItem, newOrder, allItems) => {
+                          log.info("rearrange not pinned notes");
                           log.debug("all layout items", allItems);
                           let reorder = props.client.readQuery({
                             query: ALL_NOTES
                           });
-                          for (let i = numOfPinnedNotes; i < numOfNotes; i++)
-                            reorder.allNotes.edges[i].node.order =
-                              allItems[i - numOfPinnedNotes].order;
+                          for (let a = 0; a < allItems.length; a++) {
+                            for (let b = 0; b < numOfNotes; b++) {
+                              if (
+                                reorder.allNotes.edges[b].node.id ===
+                                allItems[a].id
+                              ) {
+                                reorder.allNotes.edges[b].node.order =
+                                  allItems[a].order;
+                                break;
+                              }
+                            }
+                          }
                           log.debug("reorder", reorder);
                           props.client.writeQuery({
                             query: ALL_NOTES,
