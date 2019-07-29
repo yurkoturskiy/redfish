@@ -98,10 +98,22 @@ export const UPDATE_COLOR = gql`
 `;
 
 export const ADD_NOTE = gql`
-  mutation AddNote($title: String, $content: String) {
-    addNote(input: { title: $title, content: $content }) {
+  mutation AddNote(
+    $color: String
+    $title: String
+    $content: String
+    $pinned: Boolean
+  ) {
+    addNote(
+      input: {
+        color: $color
+        title: $title
+        content: $content
+        pinned: $pinned
+      }
+    ) {
       clientMutationId
-      newNote {
+      note {
         ...Note
       }
     }
@@ -128,6 +140,33 @@ export const SWITCH_NOTES_SELECTOR = gql`
 export const ALL_COLORS = gql`
   query {
     allColors
+  }
+`;
+
+export const UPDATE_NOTE = gql`
+  mutation UpdateNote(
+    $id: ID!
+    $color: String
+    $title: String
+    $content: String
+    $pinned: Boolean
+    $order: Int
+  ) {
+    updateNote(
+      input: {
+        id: $id
+        color: $color
+        title: $title
+        content: $content
+        pinned: $pinned
+        order: $order
+      }
+    ) {
+      newNote {
+        id
+        edited
+      }
+    }
   }
 `;
 

@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import * as log from "loglevel";
+import debounce from "lodash/debounce";
 import { css } from "linaria";
-import { Mutation } from "react-apollo";
+import { Mutation, withApollo } from "react-apollo";
 // queries
 import { ALL_NOTES, ADD_NOTE, ALL_NOTES_LOADED } from "../../graphql/queries";
 
@@ -79,17 +80,13 @@ export const submitButton = css`
   display: var(--add-note-submit-button-display);
 `;
 
-const updateCache = (
-  cache,
-  {
-    data: {
-      addNote: { newNote }
-    }
-  }
-) => {
+const updateCache = (cache, { data }) => {
+  log.info("new note", data);
   const cacheData = cache.readQuery({ query: ALL_NOTES });
-  const { allNotesLoaded } = cache.readQuery({ query: ALL_NOTES_LOADED });
-  log.debug("new note, cache", cacheData);
+  const { allNotesLoaded } = cache.readQuery({
+    query: ALL_NOTES_LOADED
+  });
+  log.debug("all notes cache", cacheData);
   log.info("allNotesLoaded", allNotesLoaded);
   // remember cursors
   var allCursors = [];
@@ -99,7 +96,7 @@ const updateCache = (
   // new edge prototype
   var newEdge = {
     cursor: undefined, // setup in the reset cursors section
-    node: newNote,
+    node: Object.assign({}, data.addNote.note),
     __typename: "NoteNodeEdge"
   };
   // include new edge as first item
@@ -115,18 +112,62 @@ const updateCache = (
   cache.writeQuery({ query: ALL_NOTES, data: cacheData });
 };
 
-function AddNote() {
+function AddNote(props) {
+  // Node state
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [isActive, setIsActive] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const [color, setColor] = useState("WHITE");
+  // Misc
+  const [isActive, setIsActive] = useState();
+  const [deactivate, setDeactivate] = useState(false);
   const contentInputRef = useRef();
   const titleInputRef = useRef();
+
   const reset = () => {
+    log.info("reset addNote component");
     setTitle("");
     setContent("");
+    setColor("WHITE");
+    setPinned(false);
     titleInputRef.current.style.height = "56px";
     contentInputRef.current.style.height = "56px";
   };
+
+  useEffect(() => {
+    if (isActive) {
+      // Initiate note creation
+    } else {
+      setDeactivate(false);
+      reset();
+    }
+  }, [isActive, reset]);
+
+  useEffect(() => {
+    if (deactivate) {
+      if (!title && !content) {
+        setIsActive(false);
+      } else {
+        log.info("send update, update cache, and deactivate");
+        addNote();
+        setIsActive(false);
+      }
+    }
+  }, [deactivate, content, title, addNote]);
+
+  const addNote = () => {
+    props.client.mutate({
+      mutation: ADD_NOTE,
+      variables: {
+        color,
+        title,
+        content,
+        pinned
+      },
+      update: updateCache
+    });
+  };
+
   const onTitleChange = event => {
     var outerHeight = parseInt(
       window.getComputedStyle(titleInputRef.current).height,
@@ -150,76 +191,66 @@ function AddNote() {
     setContent(event.target.value);
   };
   return (
-    <Mutation mutation={ADD_NOTE} update={updateCache}>
-      {(addNote, { data }) => (
-        <React.Fragment>
-          <div
-            className={wrapper}
-            style={{
-              "--add-note-wrapper-position": isActive ? "fixed" : "absolute",
-              "--add-note-wrapper-top": isActive ? "20vh" : "20px",
-              "--add-note-wrapper-box-shadow": isActive
-                ? "0px 3px 26px 0px rgba(0,0,0,0.3)"
-                : "0px 1px 1px 0px rgba(0,0,0,0.2)"
-            }}
-            onClick={() => setIsActive(true)}
-          >
-            <form
-              onSubmit={async e => {
-                e.preventDefault();
-                await addNote({
-                  variables: { title: title, content: content }
-                });
-                setIsActive(false);
-                reset();
-              }}
-            >
-              {isActive && (
-                <label className={titleLabel}>{title === "" && "Title"}</label>
-              )}
-              <textarea
-                className={titleInput}
-                style={{
-                  "--add-note-title-input-display": isActive ? "block" : "none"
-                }}
-                id="title"
-                value={title}
-                type="text"
-                onChange={e => onTitleChange(e)}
-                ref={titleInputRef}
-              />
-              <label className={contentLabel}>
-                {content === "" && "Take a note..."}
-              </label>
-              <textarea
-                className={contentInput}
-                data-adaptheight
-                id="content"
-                value={content}
-                type="text"
-                onChange={e => onContentChange(e)}
-                ref={contentInputRef}
-              />
-              <button
-                type="submit"
-                className={submitButton}
-                style={{
-                  "--add-note-submit-button-display": isActive
-                    ? "block"
-                    : "none"
-                }}
-              >
-                Add Nodo
-              </button>
-            </form>
-          </div>
+    <React.Fragment>
+      <div
+        className={wrapper}
+        style={{
+          "--add-note-wrapper-position": isActive ? "fixed" : "absolute",
+          "--add-note-wrapper-top": isActive ? "20vh" : "20px",
+          "--add-note-wrapper-box-shadow": isActive
+            ? "0px 3px 26px 0px rgba(0,0,0,0.3)"
+            : "0px 1px 1px 0px rgba(0,0,0,0.2)"
+        }}
+        onClick={() => setIsActive(true)}
+      >
+        <form
+          onSubmit={async e => {
+            e.preventDefault();
+            setDeactivate(true);
+          }}
+        >
           {isActive && (
-            <div className={background} onClick={() => setIsActive(false)} />
+            <label className={titleLabel}>{title === "" && "Title"}</label>
           )}
-        </React.Fragment>
+          <textarea
+            className={titleInput}
+            style={{
+              "--add-note-title-input-display": isActive ? "block" : "none"
+            }}
+            id="title"
+            value={title}
+            type="text"
+            onChange={e => onTitleChange(e)}
+            ref={titleInputRef}
+          />
+          <label className={contentLabel}>
+            {content === "" && "Take a note..."}
+          </label>
+          <textarea
+            className={contentInput}
+            data-adaptheight
+            id="content"
+            value={content}
+            type="text"
+            onChange={e => onContentChange(e)}
+            ref={contentInputRef}
+          />
+          <button
+            type="submit"
+            className={submitButton}
+            style={{
+              "--add-note-submit-button-display": isActive ? "block" : "none"
+            }}
+          >
+            Close
+          </button>
+        </form>
+      </div>
+      {isActive && (
+        <div className={background} onClick={() => setDeactivate(true)} />
       )}
-    </Mutation>
+    </React.Fragment>
   );
 }
 
-export default AddNote;
+export default withApollo(AddNote);
