@@ -151,7 +151,12 @@ function Note(props) {
   const [inEdit, setInEdit] = useState(false);
   const [visible, setVisible] = useState(true);
   var noteColorVariable = `var(--note-color-${props.node.color.toLowerCase()})`;
-  var contentText = props.node.content.replace(/^(.{500}[^\s]*).*/, "$1"); // Cut content text
+  var cutText = (text, numOfSymbols) => {
+    let regex = new RegExp(`^(.{${numOfSymbols}}[^s]*).*`);
+    return text === null ? "" : text.replace(regex, "$1");
+  };
+  var contentText = cutText(props.node.content, 500);
+  var titleText = cutText(props.node.title, 50);
   const switchVisibility = () => {
     setVisible(visible => !visible);
   };
@@ -181,7 +186,7 @@ function Note(props) {
           <Selector isSelected={props.isSelected} id={props.node.id} />
           <Pin />
           <div className={contentContainer} onClick={() => setInEdit(true)}>
-            {props.node.title && <h3 className={title}>{props.node.title}</h3>}
+            {props.node.title && <h3 className={title}>{titleText}</h3>}
             {props.node.content && <p className={content}>{contentText}</p>}
           </div>
           <OptionsContainer node={props.node} />
