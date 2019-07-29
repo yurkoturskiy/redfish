@@ -1,6 +1,7 @@
 # cookbook/ingredients/schema.py
 import graphene
 import os
+from django.db.models import Q
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.converter import convert_django_field_with_choices
@@ -50,7 +51,7 @@ class Query(object):
     def resolve_all_notes(self, info, **kwargs):
         # context will reference to the Django request
         if info.context.user.is_authenticated:
-            return Note.objects.filter(owner=info.context.user)
+            return Note.objects.filter(owner=info.context.user).exclude(Q(title=None)| Q(title=""), Q(content=None) | Q(content=""))
         else:
             return Note.objects.none()
 
@@ -68,16 +69,18 @@ class Query(object):
 class AddNote(relay.ClientIDMutation):
 
     class Input:
-        title = graphene.String(required=False)
-        content = graphene.String(required=False)
+        title = graphene.String(default_value="")
+        content = graphene.String(default_value="")
+        color = graphene.String(default_value="WHITE")
+        pinned = graphene.Boolean(default_value=False)
 
-    new_note = graphene.Field(NoteNode)
+    note = graphene.Field(NoteNode)
 
     @classmethod
     def mutate_and_get_payload(cls, root, info, **input):
         if info.context.user.is_authenticated:
             note = Note.objects.create(owner=info.context.user, **input)
-            return AddNote(new_note=note)            
+            return AddNote(note=note)
         else:
             return GraphQLError("You are not authenticated. Please login first")
 
