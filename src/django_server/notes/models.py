@@ -38,4 +38,4 @@ class Note(models.Model):
 	objects = NoteManager()
 
 	def __str__(self):
-		return self.title if self.title else f'id: {self.id}'
+		return self.title if self.title else str(self.id)
