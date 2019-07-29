@@ -1,6 +1,6 @@
 # based on https://www.revsys.com/tidbits/keeping-django-model-objects-ordered/
 from django.db import models, transaction
-from django.db.models import F, Max
+from django.db.models import F, Max, Q
 from django.contrib.auth.models import User
 
 class NoteManager(models.Manager):
@@ -9,7 +9,7 @@ class NoteManager(models.Manager):
     def reorder_by(self, field):
         users = User.objects.all()
         for user in users:
-            qs = self.get_queryset().filter(owner=user).order_by(field)
+            qs = self.get_queryset().filter(owner=user).exclude(Q(title=None)| Q(title=""), Q(content=None) | Q(content="")).order_by(field)
 
             for index, note in enumerate(qs.filter(pinned=True)):
                 # pinned on top
