@@ -7,7 +7,7 @@ const paragraph = css`
 `;
 
 function NumOfSelectedNotes(props) {
-  return <p className={paragraph}>items selected: {props.number}</p>;
+  return <p className={paragraph}>{props.number} selected</p>;
 }
 
 export default NumOfSelectedNotes;

@@ -3,10 +3,12 @@ import { css } from "linaria";
 // Local components
 import DeselectAll from "./DeselectAll";
 import NumOfSelectedNotes from "./NumOfSelectedNotes";
+import ControlIcons from "./ControlIcons";
 
 // Linaria style
 const barWrapper = css`
   position: fixed;
+  display: flex;
   top: 0;
   left: 0;
   z-index: 4;
@@ -21,6 +23,7 @@ function SelectedNotesOptionsBar(props) {
     <div className={barWrapper}>
       <DeselectAll />
       <NumOfSelectedNotes number={props.selectedNotes.length} />
+      <ControlIcons selectedNotes={props.selectedNotes} />
     </div>
   );
 }
