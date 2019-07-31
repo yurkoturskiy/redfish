@@ -39,8 +39,15 @@ class NoteManager(models.Manager):
         qs = self.get_queryset()
         
         with transaction.atomic():
-            for obj in objects:
-                qs.filter(order__gt=obj.order, owner=obj.owner, pinned=obj.pinned).update(order=F('order') - 1)
+            for index, obj in enumerate(objects):
+                try:
+                    notes_to_update_order = qs.filter(order__gt=obj.order, order__lt=objects[index + 1].order ,owner=obj.owner, pinned=obj.pinned)
+                except:
+                    notes_to_update_order = qs.filter(order__gt=obj.order, owner=obj.owner, pinned=obj.pinned)
+                finally:
+                    notes_to_update_order.update(order=F('order') - (index + 1))
+            
+
 
 
     def move(self, obj, new_order):

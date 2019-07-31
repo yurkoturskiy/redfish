@@ -6,7 +6,6 @@ import { Query, graphql, Mutation, withApollo } from "react-apollo";
 import Note from "./note/Note";
 import DraggableMasonryLayout from "react-universal-dnd-layout";
 import SelectedNotesOptionsBar from "./SelectedNotesOptionsBar/Container";
-import Topics from "./topics/Container";
 // queries
 import {
   ALL_NOTES,
@@ -186,7 +185,6 @@ function Notes(props) {
                 </React.Fragment>
               )}
             </Mutation>
-            <Topics />
           </Cursors.Provider>
         );
       }}
