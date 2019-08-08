@@ -1,0 +1,76 @@
+.hero-container {
+  position: relative;
+  height: 860px;
+  max-height: 100vh;
+  min-height: 480px;
+  border-bottom: 2px solid var(--green);
+  background-color: white;
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+}
+
+/*
+***********************
+*** Content wrapper ***
+***********************
+*/
+
+.hero-container .content {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  top: 30vh;
+  left: calc(var(--col-two) - var(--gutter));
+}
+
+@media screen and (max-width: 1280px) and (min-width: 961px) {
+  .hero-container .content {
+    left: calc(var(--col-one) - var(--gutter));
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .hero-container .content {
+    top: 24vh;
+    left: var(--col-zero);
+  }
+}
+
+.content .header {
+  margin: 0;
+  margin-left: var(--gutter);
+  margin-right: var(--gutter);
+
+  /* text */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 56px;
+}
+
+#graphql-tag {
+  position: absolute;
+
+  color: red;
+}
+
+#graphql-blob {
+  position: absolute;
+  right: var(--col-two);
+}
+
+#graphql-blob svg {
+  width: 600px;
+  height: 600px;
+  fill: var(--red);
+  opacity: 0.6;
+}
+
+#graphql-blob h2 {
+  z-index: 2;
+  left: 128px;
+
+  position: absolute;
+  padding: auto;
+  line-height: 600px;
+}
