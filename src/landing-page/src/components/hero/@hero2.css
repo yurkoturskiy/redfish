@@ -3,7 +3,6 @@
   height: 860px;
   max-height: 100vh;
   min-height: 480px;
-  border-bottom: 2px solid var(--green);
   background-color: white;
   padding-left: var(--grid-margin);
   padding-right: var(--grid-margin);
@@ -43,34 +42,86 @@
 
   /* text */
   font-style: normal;
-  font-weight: bold;
-  font-size: 3rem;
+  font-weight: black;
+  font-size: 5rem;
   line-height: 56px;
 }
 
-#graphql-tag {
+/**********
+/* Blobs */
+#blobs h2 {
+  font-size: 0.75rem;
+  color: var(--green-eight);
+}
+
+/* Django blob */
+
+#django-blob {
+  z-index: 1;
   position: absolute;
-
-  color: red;
+  right: var(--col-five);
+  bottom: 0%;
 }
 
-#graphql-blob {
-  position: absolute;
-  right: var(--col-two);
+#django-blob svg {
+  width: 400px;
+  height: 400px;
+  fill: #77d199;
 }
 
-#graphql-blob svg {
-  width: 600px;
-  height: 600px;
-  fill: var(--red);
-  opacity: 0.6;
-}
-
-#graphql-blob h2 {
+#django-blob h2 {
   z-index: 2;
   left: 128px;
 
   position: absolute;
   padding: auto;
-  line-height: 600px;
+  line-height: 400px;
+}
+
+/****************/
+/* GraphQL blob */
+
+#graphql-blob {
+  position: absolute;
+  right: var(--col-two);
+  bottom: 0%;
+}
+
+#graphql-blob svg {
+  width: 600px;
+  height: 600px;
+  fill: #ff92a2;
+}
+
+#graphql-blob h2 {
+  z-index: 2;
+  left: 128px;
+  bottom: 128px;
+
+  position: absolute;
+  padding: auto;
+}
+
+/****************/
+/* ReactJS blob */
+
+#react-blob {
+  position: absolute;
+  right: var(--col-three);
+  top: 10%;
+}
+
+#react-blob svg {
+  width: 400px;
+  height: 400px;
+  fill: #77afff;
+}
+
+#react-blob h2 {
+  z-index: 2;
+  left: 128px;
+
+  position: absolute;
+  padding: auto;
+  line-height: 400px;
 }

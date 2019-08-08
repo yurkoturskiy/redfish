@@ -22,7 +22,7 @@ var pathsParameters = {
     {
       type: 'radial',
       distance: [0.6, 1],
-      round: [0.4, 1],
+      round: [0.6, 1],
     },
     {
       type: 'radial',
@@ -38,21 +38,50 @@ var pathsParameters = {
 }
 
 function Blobs(props) {
-  const animateValue = animateLayer(animateParameters, pathsParameters)
-  console.log(animateValue)
+  const djangoBlob = animateLayer(animateParameters, pathsParameters)
+  const graphqlBlob = animateLayer(animateParameters, pathsParameters)
+  const reactBlob = animateLayer(animateParameters, pathsParameters)
   return (
-    <div id="graphql-blob">
-      <h2>GraphQL</h2>
-      <svg width="200px" height="200px" viewBox="0 0 200 200">
-        <path>
-          <animate
-            attributeName="d"
-            dur="200000ms"
-            repeatCount="indefinite"
-            values={animateValue}
-          />
-        </path>
-      </svg>
+    <div id="blobs">
+      <div id="django-blob">
+        <h2>Django</h2>
+        <svg width="200px" height="200px" viewBox="0 0 200 200">
+          <path>
+            <animate
+              attributeName="d"
+              dur="200000ms"
+              repeatCount="indefinite"
+              values={djangoBlob}
+            />
+          </path>
+        </svg>
+      </div>
+      <div id="graphql-blob">
+        <h2>GraphQL</h2>
+        <svg width="200px" height="200px" viewBox="0 0 200 200">
+          <path>
+            <animate
+              attributeName="d"
+              dur="200000ms"
+              repeatCount="indefinite"
+              values={graphqlBlob}
+            />
+          </path>
+        </svg>
+      </div>
+      <div id="react-blob">
+        <h2>ReactJS</h2>
+        <svg width="200px" height="200px" viewBox="0 0 200 200">
+          <path>
+            <animate
+              attributeName="d"
+              dur="200000ms"
+              repeatCount="indefinite"
+              values={reactBlob}
+            />
+          </path>
+        </svg>
+      </div>
     </div>
   )
 }
