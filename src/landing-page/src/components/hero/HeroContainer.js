@@ -31,7 +31,6 @@ const HeroContainer = () => {
           </div>
         </ActionBtnsWrapper>
       </ContentWrapper>
-      <GitClone />
     </div>
   )
 }
