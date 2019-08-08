@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 // Local components
 //  * Content
+import Blobs from './content/Blobs'
 import ContentWrapper from './ContentWrapper'
 import VideoDialog from './content/VideoDialog'
 import Header from './content/Header'
@@ -19,10 +20,9 @@ const HeroContainer = () => {
   const [dialog, setDialog] = useState(false)
   return (
     <div className="hero-container">
-      <Image />
+      <Blobs />
       <ContentWrapper>
         <Header />
-        <Subheader />
         {dialog && <VideoDialog setDialog={setDialog} />}
         <ActionBtnsWrapper>
           <BrieflyAboutBtn setDialog={setDialog} />
