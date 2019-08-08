@@ -5,8 +5,6 @@ import Blobs from './content/Blobs'
 import ContentWrapper from './ContentWrapper'
 import VideoDialog from './content/VideoDialog'
 import Header from './content/Header'
-import Subheader from './content/Subheader'
-import Image from './content/Image'
 //  ** Action buttons
 import ActionBtnsWrapper from './content/ActionBtnsWrapper'
 import BrieflyAboutBtn from './content/actionBtns/BrieflyAboutBtn'
