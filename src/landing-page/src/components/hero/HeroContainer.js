@@ -12,7 +12,6 @@ import GitHubPageBtn from './content/actionBtns/GitHubPageBtn'
 import GoToAppBtn from './content/actionBtns/GoToAppBtn'
 import TutorialsBtn from './content/actionBtns/TutorialsBtn'
 //  ** Others
-import GitClone from './content/GitClone'
 
 const HeroContainer = () => {
   const [dialog, setDialog] = useState(false)
