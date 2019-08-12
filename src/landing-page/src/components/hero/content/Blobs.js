@@ -2,7 +2,7 @@ import React from 'react'
 import { animateLayer } from 'svg-curveto'
 
 var animateParameters = {
-  numOfKeyPaths: 10,
+  numOfKeyPaths: 20,
   loop: true,
 }
 
@@ -39,6 +39,7 @@ var pathsParameters = {
 
 function Blobs(props) {
   const djangoBlob = animateLayer(animateParameters, pathsParameters)
+  console.log('django blob', djangoBlob)
   const graphqlBlob = animateLayer(animateParameters, pathsParameters)
   const reactBlob = animateLayer(animateParameters, pathsParameters)
   return (
@@ -51,7 +52,7 @@ function Blobs(props) {
               attributeName="d"
               dur="200000ms"
               repeatCount="indefinite"
-              values={djangoBlob}
+              values={djangoBlob.dValues}
             />
           </path>
         </svg>
@@ -64,7 +65,7 @@ function Blobs(props) {
               attributeName="d"
               dur="200000ms"
               repeatCount="indefinite"
-              values={graphqlBlob}
+              values={graphqlBlob.dValues}
             />
           </path>
         </svg>
@@ -77,7 +78,7 @@ function Blobs(props) {
               attributeName="d"
               dur="200000ms"
               repeatCount="indefinite"
-              values={reactBlob}
+              values={reactBlob.dValues}
             />
           </path>
         </svg>
