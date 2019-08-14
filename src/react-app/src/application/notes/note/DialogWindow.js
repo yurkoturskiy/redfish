@@ -1,9 +1,34 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { css } from "linaria";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 // Context
 import { NoteNode } from "./Note";
+
+export const titleInput = css`
+  display: var(--add-note-title-input-display);
+  vertical-align: top;
+  padding: 16px 20px 16px 20px;
+  border: 0px;
+  border-radius: 6px;
+  font-size: 16px;
+  height: 56px;
+  resize: none;
+  width: 500px;
+  background: transparent;
+`;
+
+export const contentInput = css`
+  vertical-align: top;
+  padding: 16px 20px 16px 20px;
+  border: 0px;
+  border-radius: 6px;
+  width: 500px;
+  font-size: 16px;
+  resize: none;
+  heigth: 56px;
+  background: transparent;
+`;
 
 const wrapper = css`
   .dialog-enter {
@@ -21,8 +46,8 @@ const wrapper = css`
     opacity: 1;
     left: 50%;
     top: 200px;
-    width: 800px;
-    margin-left: -400px;
+    width: 500px;
+    margin-left: -250px;
     height: auto;
     box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
     transform: translateX(0);
@@ -32,7 +57,7 @@ const wrapper = css`
 
   .dialog-exit {
     opacity: 1;
-    width: 800px;
+    width: 500px;
   }
 
   .dialog-exit-active {
@@ -55,9 +80,9 @@ const dialogWindow = css`
   top: 0;
   left: 50%;
   top: 200px;
-  margin-left: -400px;
+  margin-left: -250px;
   z-index: 4;
-  width: 800px;
+  width: 500px;
   border-radius: 6px;
   box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
 `;
@@ -79,6 +104,10 @@ function DialogWindow(props) {
   const [cardPosX, setCardPosX] = useState();
   const [cardPosY, setCardPosY] = useState();
   const [dialogHeight, setDialogHeight] = useState();
+  const [title, setTitle] = useState(node.title);
+  const [content, setContent] = useState(node.content);
+  const contentInputRef = useRef();
+  const titleInputRef = useRef();
   useEffect(() => {
     const element = document.getElementById(node.id);
     setCardHeight(`${element.offsetHeight}px`);
@@ -97,6 +126,37 @@ function DialogWindow(props) {
       return dialogHeight;
     });
   }, [props, dialogHeight, node.id]);
+
+  useEffect(() => {
+    if (props.inEdit) {
+      var outerHeight = parseInt(
+        window.getComputedStyle(titleInputRef.current).height,
+        10
+      );
+      var diff = outerHeight - titleInputRef.current.clientHeight;
+      titleInputRef.current.style.height = 0;
+      titleInputRef.current.style.height =
+        Math.max(56, titleInputRef.current.scrollHeight + diff) + "px";
+    }
+  }, [title, titleInputRef, props.inEdit]);
+
+  useEffect(() => {
+    if (props.inEdit) {
+      var outerHeight = parseInt(
+        window.getComputedStyle(contentInputRef.current).height,
+        10
+      );
+      var diff = outerHeight - contentInputRef.current.clientHeight;
+      contentInputRef.current.style.height = 0;
+      contentInputRef.current.style.height =
+        Math.max(56, contentInputRef.current.scrollHeight + diff) + "px";
+    }
+  }, [content, contentInputRef, props.inEdit]);
+
+  const onTitleChange = event => setTitle(event.target.value);
+
+  const onContentChange = event => setContent(event.target.value);
+
   return (
     <div
       className={wrapper}
@@ -121,8 +181,22 @@ function DialogWindow(props) {
           style={{ backgroundColor: noteColorVariable }}
           id={`${node.id}-dialog`}
         >
-          <h1>{node.title}</h1>
-          <p>{node.content}</p>
+          <form>
+            <textarea
+              className={titleInput}
+              onChange={e => onTitleChange(e)}
+              type="text"
+              value={title}
+              ref={titleInputRef}
+            />
+            <textarea
+              className={contentInput}
+              onChange={e => onContentChange(e)}
+              type="text"
+              value={content}
+              ref={contentInputRef}
+            />
+          </form>
         </div>
       </CSSTransition>
       {props.inEdit && (
