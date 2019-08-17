@@ -1,5 +1,5 @@
 import React from 'react'
-import { animateLayer } from 'svg-curveto'
+import { morphing } from 'svg-curveto'
 
 var animateParameters = {
   numOfKeyPaths: 20,
@@ -38,10 +38,10 @@ var pathsParameters = {
 }
 
 function Blobs(props) {
-  const djangoBlob = animateLayer(animateParameters, pathsParameters)
+  const djangoBlob = morphing(animateParameters, pathsParameters)
   console.log('django blob', djangoBlob)
-  const graphqlBlob = animateLayer(animateParameters, pathsParameters)
-  const reactBlob = animateLayer(animateParameters, pathsParameters)
+  const graphqlBlob = morphing(animateParameters, pathsParameters)
+  const reactBlob = morphing(animateParameters, pathsParameters)
   return (
     <div id="blobs">
       <div id="django-blob">
