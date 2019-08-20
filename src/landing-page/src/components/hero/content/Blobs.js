@@ -1,5 +1,5 @@
 import React from 'react'
-import { morphing } from 'svg-curveto'
+import { morphing } from 'primitivo-svg'
 
 var animateParameters = {
   numOfKeyPaths: 20,
