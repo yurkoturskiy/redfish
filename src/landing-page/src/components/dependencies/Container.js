@@ -7,11 +7,12 @@ import {
   LinariaIcon,
   GrapheneIcon,
 } from './icons'
+import Background from './Background'
 
 function DependenciesContainer() {
   return (
     <div className="dependencies-wrapper">
-      <h2 id="dependencies-header">Main dependencies</h2>
+      <Background />
       <div className="content">
         <div className="section" id="react-section">
           <div className="bullet" style={{ backgroundColor: '#1D79FF' }} />
