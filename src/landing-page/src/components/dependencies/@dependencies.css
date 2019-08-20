@@ -7,8 +7,17 @@
 .dependencies-wrapper {
   position: relative;
   margin: 72px auto 0 auto;
-  width: 856px;
+  outline: 1px solid green;
+  height: 1000px;
   background-color: white;
+}
+
+.dependencies-wrapper .background {
+  width: 100%;
+  height: 100%;
+  outline: 1px solid red;
+  position: absolute;
+  left: 0;
 }
 
 .dependencies-wrapper #dependencies-header {
