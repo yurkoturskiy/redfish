@@ -87,28 +87,16 @@
   border-radius: 14px;
   transition: box-shadow 0.2s;
   cursor: pointer;
+  /*box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);*/
 
   background: #ffffff;
   /* Redfish Blue */
   box-sizing: border-box;
 }
 
-/* Set border and shadow */
-.cardsWrapper#react-cards .card {
-  box-shadow: inset 0px 0px 0px 3px var(--blue),
-    0px 1px 3px rgba(56, 71, 94, 0.57);
-}
-.cardsWrapper#react-cards .card:hover {
-  box-shadow: inset 0px 0px 0px 3px var(--blue),
-    0px 1px 4px rgba(56, 71, 94, 0.57), 0px 4px 12px rgba(255, 74, 100, 0.22);
-}
-.cardsWrapper#django-cards .card {
-  box-shadow: inset 0px 0px 0px 3px var(--green),
-    0px 1px 3px rgba(56, 71, 94, 0.57);
-}
-.cardsWrapper#django-cards .card:hover {
-  box-shadow: inset 0px 0px 0px 3px var(--green),
-    0px 1px 4px rgba(56, 71, 94, 0.57), 0px 4px 12px rgba(255, 74, 100, 0.22);
+.cardsWrapper .card:hover {
+  box-shadow: 0px 1px 4px rgba(56, 71, 94, 0.57),
+    0px 4px 12px rgba(255, 74, 100, 0.22);
 }
 
 .card .icon {
