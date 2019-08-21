@@ -48,7 +48,7 @@ const paths = () => {
   var set = []
   for (let i = 0; i < 10; i++) {
     let x = -100 + i * 45
-    let y = -200 + i * 40
+    let y = i * 40
     let width = 1920 - i * (1920 / 10)
     let height = 1920 - i * (1920 / 10)
     let centerX = width / 2
@@ -95,7 +95,7 @@ var a = paths()
 var pathsSVG = a.map((path, index) => {
   return (
     <path
-      stroke={index === a.length - 1 ? '#1D79FF' : '#1D79FF'}
+      stroke={index === a.length - 1 ? '#1D79FF' : 'black'}
       strokeWidth="1"
       fill="#1D79FF"
       fillOpacity={index === a.length - 1 ? '1' : '0'}
