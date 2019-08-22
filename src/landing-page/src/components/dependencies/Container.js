@@ -15,7 +15,6 @@ function DependenciesContainer() {
       <Background />
       <div className="content">
         <div className="section" id="react-section">
-          <div className="bullet" style={{ backgroundColor: '#1D79FF' }} />
           <h3 id="">ReactJS</h3>
         </div>
         <div className="cardsWrapper" id="react-cards">
@@ -41,7 +40,6 @@ function DependenciesContainer() {
           </div>
         </div>
         <div className="section" id="django-section">
-          <div className="bullet" style={{ backgroundColor: '#1DB355' }} />
           <h3>Django</h3>
         </div>
         <div className="cardsWrapper" id="django-cards">
