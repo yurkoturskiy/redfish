@@ -5,19 +5,20 @@
 */
 
 .dependencies-wrapper {
-  position: relative;
-  margin: 0 auto 0 auto;
-  outline: 1px solid green;
-  height: 1000px;
+  /*outline: 1px solid green;*/
   background-color: white;
 }
 
 .dependencies-wrapper .background {
   width: 100%;
-  height: 100%;
-  outline: 1px solid red;
+  max-width: 1920px;
+  margin: 0 auto 0 auto;
+  height: 1440px;
+  /*outline: 1px solid red;*/
   position: absolute;
-  left: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 65vh;
 }
 
 .dependencies-wrapper #dependencies-header {
@@ -34,7 +35,10 @@
 }
 
 .dependencies-wrapper .content {
-  margin: 20px;
+  /*outline: 1px solid pink;*/
+  margin: 0 auto 0 auto;
+  padding: 384px 0 256px 0;
+  width: 856px;
 }
 
 .dependencies-wrapper .section {
@@ -87,7 +91,7 @@
   border-radius: 14px;
   transition: box-shadow 0.2s;
   cursor: pointer;
-  /*box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);*/
+  box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);
 
   background: #ffffff;
   /* Redfish Blue */
