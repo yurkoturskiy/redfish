@@ -1,6 +1,5 @@
 .hero-container {
-  position: relative;
-  height: 860px;
+  height: 70vh;
   max-height: 100vh;
   min-height: 480px;
   background-color: white;
@@ -60,7 +59,7 @@
   z-index: 1;
   position: absolute;
   right: var(--col-five);
-  bottom: 0%;
+  bottom: 10%;
 }
 
 #django-blob svg {
@@ -84,7 +83,7 @@
 #graphql-blob {
   position: absolute;
   right: var(--col-two);
-  bottom: 0%;
+  bottom: 10%;
 }
 
 #graphql-blob svg {
