@@ -1,9 +1,10 @@
 import React from 'react'
-import Button from '../../../styledUIElements/Button'
+import Button from '@material/react-button'
 
 function GitHubPageBtn(props) {
   return (
     <Button
+      className="material-button"
       onClick={() =>
         window.open('https://github.com/guandjoy/Redfish', '_blank')
       }

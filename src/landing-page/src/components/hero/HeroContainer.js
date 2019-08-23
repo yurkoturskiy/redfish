@@ -23,7 +23,7 @@ const HeroContainer = () => {
         {dialog && <VideoDialog setDialog={setDialog} />}
         <ActionBtnsWrapper>
           <BrieflyAboutBtn setDialog={setDialog} />
-          <div className="dot-buttons-wrapper">
+          <div className="buttons-wrapper">
             <GoToAppBtn />
             <TutorialsBtn />
             <GitHubPageBtn />

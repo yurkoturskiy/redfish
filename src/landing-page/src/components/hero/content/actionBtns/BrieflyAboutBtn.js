@@ -7,8 +7,8 @@ function BrieflyAboutBtn({ setDialog }) {
   const leftIcon = <PlayIcon />
   return (
     <Button
-      className="briefly-about"
-      raised
+      id="briefly-about"
+      className="material-button"
       icon={leftIcon}
       onClick={() => setDialog(true)}
     >

@@ -43,7 +43,62 @@
   font-style: normal;
   font-weight: black;
   font-size: 5rem;
-  line-height: 56px;
+  line-height: 72px;
+}
+
+.mdc-button {
+  text-transform: none;
+}
+
+.content .material-button {
+  background-color: transparent;
+  font-size: 1.25rem;
+  font-weight: normal;
+  color: black;
+  --mdc-theme-primary: black;
+  text-transform: capitalize;
+  letter-spacing: 0;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: var(--gutter);
+  border: none;
+  cursor: pointer;
+}
+
+.material-button .mdc-button__icon {
+  z-index: 0;
+  fill: var(--green-two);
+  padding-bottom: 2px;
+}
+
+#briefly-about {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.content .material-button svg {
+  height: 24px;
+  width: 24px;
+  fill: var(--red);
+}
+
+.content .buttons-wrapper {
+  display: flex;
+
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.content .simple-button {
+  background-color: transparent;
+  font-size: 1.25rem;
+  border: none;
+  margin: 8px var(--gutter) 8px var(--gutter);
+  padding-left: 0;
+}
+
+.content .simple-button:hover {
+  cursor: pointer;
 }
 
 /**********
@@ -65,7 +120,7 @@
 #django-blob svg {
   width: 400px;
   height: 400px;
-  fill: #77d199;
+  fill: #22d163;
 }
 
 #django-blob h2 {
@@ -89,7 +144,7 @@
 #graphql-blob svg {
   width: 600px;
   height: 600px;
-  fill: #ff92a2;
+  fill: #ff546c;
 }
 
 #graphql-blob h2 {
@@ -113,7 +168,7 @@
 #react-blob svg {
   width: 400px;
   height: 400px;
-  fill: #77afff;
+  fill: #3688ff;
 }
 
 #react-blob h2 {
