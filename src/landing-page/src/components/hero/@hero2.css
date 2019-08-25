@@ -114,7 +114,7 @@
   z-index: 1;
   position: absolute;
   right: var(--col-five);
-  bottom: 10%;
+  top: 50vh;
 }
 
 #django-blob svg {
@@ -138,7 +138,7 @@
 #graphql-blob {
   position: absolute;
   right: var(--col-two);
-  bottom: 10%;
+  top: 30vh;
 }
 
 #graphql-blob svg {
@@ -162,7 +162,7 @@
 #react-blob {
   position: absolute;
   right: var(--col-three);
-  top: 10%;
+  top: 10vh;
 }
 
 #react-blob svg {
