@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { morphing } from 'primitivo-svg'
 
 var animateParameters = {
@@ -38,10 +38,18 @@ var pathsParameters = {
 }
 
 function Blobs(props) {
-  const djangoBlob = morphing(animateParameters, pathsParameters)
-  console.log('django blob', djangoBlob)
-  const graphqlBlob = morphing(animateParameters, pathsParameters)
-  const reactBlob = morphing(animateParameters, pathsParameters)
+  const djangoBlob = useMemo(
+    () => morphing(animateParameters, pathsParameters),
+    [animateParameters, pathsParameters]
+  )
+  const graphqlBlob = useMemo(
+    () => morphing(animateParameters, pathsParameters),
+    [animateParameters, pathsParameters]
+  )
+  const reactBlob = useMemo(
+    () => morphing(animateParameters, pathsParameters),
+    [animateParameters, pathsParameters]
+  )
   return (
     <div id="blobs">
       <div id="django-blob">
