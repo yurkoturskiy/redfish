@@ -17,20 +17,22 @@ var pathsParameters = {
   centerY: 100,
   rotate: 0,
   numOfGroups: 2,
-  incircle: true,
   groups: [
     {
       type: 'radial',
+      incircle: true,
       distance: [0.6, 1],
       round: [0.6, 1],
     },
     {
       type: 'radial',
+      incircle: true,
       distance: [0.6, 1],
       round: [0.7, 1],
     },
     {
       type: 'radial',
+      incircle: true,
       distance: [0.6, 1],
       round: [0.7, 1],
     },
