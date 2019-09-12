@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { morphing } from 'primitivo-svg'
 
 var animateParameters = {
-  numOfKeyPaths: 20,
+  numOfKeyPaths: 3,
   loop: true,
 }
 
@@ -60,9 +60,12 @@ function Blobs(props) {
           <path>
             <animate
               attributeName="d"
-              dur="200000ms"
+              dur="38000ms"
               repeatCount="indefinite"
               values={djangoBlob.dValues}
+              calcMode="spline"
+              keyTimes="0; 0.25; 0.5; 0.75; 1"
+              keySplines=".25,0,.75,1;.25,0,.75,1;.25,0,.75,1;.25,0,.75,1"
             />
           </path>
         </svg>
@@ -73,9 +76,12 @@ function Blobs(props) {
           <path>
             <animate
               attributeName="d"
-              dur="200000ms"
+              dur="40000ms"
               repeatCount="indefinite"
               values={graphqlBlob.dValues}
+              calcMode="spline"
+              keyTimes="0; 0.25; 0.5; 0.75; 1"
+              keySplines=".25,0,.75,1;.25,0,.75,1;.25,0,.75,1;.25,0,.75,1"
             />
           </path>
         </svg>
@@ -86,9 +92,12 @@ function Blobs(props) {
           <path>
             <animate
               attributeName="d"
-              dur="200000ms"
+              dur="42000ms"
               repeatCount="indefinite"
               values={reactBlob.dValues}
+              calcMode="spline"
+              keyTimes="0; 0.25; 0.5; 0.75; 1"
+              keySplines=".25,0,.75,1;.25,0,.75,1;.25,0,.75,1;.25,0,.75,1"
             />
           </path>
         </svg>
