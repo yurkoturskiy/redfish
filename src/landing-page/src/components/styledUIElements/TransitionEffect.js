@@ -360,7 +360,7 @@ function TransitionEffect(props) {
           values={phasesOutput.dValues}
         />
       </path>
-      <path d={endShape.dValues} fill="#22D163">
+      <path d={endShape.dValues} fill="#3688FF">
         <animate
           calcMode="spline"
           keyTimes={ts.keyTimes}
@@ -372,7 +372,7 @@ function TransitionEffect(props) {
           values={phasesOutput.dValues}
         />
       </path>
-      <path d={endShape.dValues} fill="#3688FF">
+      <path d={endShape.dValues} fill="#22D163">
         <animate
           calcMode="spline"
           keyTimes={ts.keyTimes}
@@ -380,18 +380,6 @@ function TransitionEffect(props) {
           attributeName="d"
           dur="1s"
           begin="40ms"
-          repeatCount="1"
-          values={phasesOutput.dValues}
-        />
-      </path>
-      <path d={endShape.dValues} fill="#2B352F">
-        <animate
-          calcMode="spline"
-          keyTimes={ts.keyTimes}
-          keySplines={ts.keySplines}
-          attributeName="d"
-          dur="1s"
-          begin="80ms"
           repeatCount="1"
           values={phasesOutput.dValues}
         />
