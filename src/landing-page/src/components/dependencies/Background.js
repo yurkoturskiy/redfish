@@ -7,15 +7,15 @@ const paths = () => {
     loop: true,
   }
   var set = []
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 4; i++) {
     let x = i * 55
     let y = i * 40
     let width = 1920 - i * (1920 / 10)
-    let height = 1440 - i * (1440 / 10)
+    let height = 1280 - i * (1280 / 10)
     let centerX = width / 2
     let centerY = height / 2
     let pathsParams = {
-      numOfSegments: 4,
+      numOfSegments: 3,
       depth: 0,
       x,
       y,
