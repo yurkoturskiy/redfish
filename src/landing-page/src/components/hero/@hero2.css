@@ -120,16 +120,39 @@
 #django-blob svg {
   width: 400px;
   height: 400px;
+}
+
+#django-blob .blob {
   fill: #22d163;
 }
 
-#django-blob h2 {
-  z-index: 2;
-  left: 128px;
+#django-blob .glare {
+  fill: #5a2222;
+}
 
+#django-blob .blob .glare {
+  z-index: 2;
+  position: absolute;
+  fill: white;
+  left: 80px;
+  top: 80px;
+  width: 75px;
+  height: 75px;
+  opacity: 1;
+}
+
+#django-blob text {
+  z-index: 3;
+  fill: white;
+  opacity: 1;
+  font-size: 0.5rem;
+  font-weight: 400;
   position: absolute;
   padding: auto;
-  line-height: 400px;
+}
+
+.blob {
+  mix-blend-mode: multiply;
 }
 
 /****************/
@@ -144,16 +167,21 @@
 #graphql-blob svg {
   width: 600px;
   height: 600px;
+}
+
+#graphql-blob .blob {
   fill: #ff546c;
 }
 
-#graphql-blob h2 {
-  z-index: 2;
-  left: 128px;
-  bottom: 128px;
+#graphql-blob .glare {
+  fill: yellow;
+}
 
-  position: absolute;
-  padding: auto;
+#graphql-blob text {
+  fill: #6d111e;
+  font-size: 0.75rem;
+  letter-spacing: 0.05rem;
+  font-weight: 300;
 }
 
 /****************/
@@ -171,11 +199,16 @@
   fill: #3688ff;
 }
 
-#react-blob h2 {
-  z-index: 2;
-  left: 128px;
+#react-blob .blob {
+  fill: #3688ff;
+}
 
-  position: absolute;
-  padding: auto;
-  line-height: 400px;
+#react-blob .glare {
+  fill: red;
+}
+
+#react-blob text {
+  fill: black;
+  font-size: 1rem;
+  font-weight: normal;
 }
