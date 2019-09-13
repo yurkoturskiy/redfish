@@ -4,6 +4,7 @@
 .docs .content {
   display: inline-block;
   width: 768px;
+  background-color: white;
 }
 
 .docs .sections {

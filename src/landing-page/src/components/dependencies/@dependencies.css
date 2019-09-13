@@ -5,10 +5,20 @@
 */
 
 .dependencies-wrapper {
-  position: relative;
-  margin: 72px auto 0 auto;
-  width: 856px;
+  /*outline: 1px solid green;*/
   background-color: white;
+}
+
+.dependencies-wrapper .background {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto 0 auto;
+  height: 1440px;
+  /*outline: 1px solid red;*/
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 65vh;
 }
 
 .dependencies-wrapper #dependencies-header {
@@ -25,7 +35,10 @@
 }
 
 .dependencies-wrapper .content {
-  margin: 20px;
+  /*outline: 1px solid pink;*/
+  margin: 0 auto 0 auto;
+  padding: 384px 0 256px 0;
+  width: 856px;
 }
 
 .dependencies-wrapper .section {
@@ -78,28 +91,16 @@
   border-radius: 14px;
   transition: box-shadow 0.2s;
   cursor: pointer;
+  box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);
 
   background: #ffffff;
   /* Redfish Blue */
   box-sizing: border-box;
 }
 
-/* Set border and shadow */
-.cardsWrapper#react-cards .card {
-  box-shadow: inset 0px 0px 0px 3px var(--blue),
-    0px 1px 3px rgba(56, 71, 94, 0.57);
-}
-.cardsWrapper#react-cards .card:hover {
-  box-shadow: inset 0px 0px 0px 3px var(--blue),
-    0px 1px 4px rgba(56, 71, 94, 0.57), 0px 4px 12px rgba(255, 74, 100, 0.22);
-}
-.cardsWrapper#django-cards .card {
-  box-shadow: inset 0px 0px 0px 3px var(--green),
-    0px 1px 3px rgba(56, 71, 94, 0.57);
-}
-.cardsWrapper#django-cards .card:hover {
-  box-shadow: inset 0px 0px 0px 3px var(--green),
-    0px 1px 4px rgba(56, 71, 94, 0.57), 0px 4px 12px rgba(255, 74, 100, 0.22);
+.cardsWrapper .card:hover {
+  box-shadow: 0px 1px 4px rgba(56, 71, 94, 0.57),
+    0px 4px 12px rgba(255, 74, 100, 0.22);
 }
 
 .card .icon {

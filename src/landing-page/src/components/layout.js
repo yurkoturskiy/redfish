@@ -7,7 +7,7 @@ import HeaderContainer from './header/HeaderContainer'
 // Local styles
 import './@global-styles.css'
 import './tutorials/@tutorials.css'
-import './hero/@hero.css'
+import './hero/@hero2.css'
 import './styledUIElements/@ui-elements.css'
 import './header/@header.css'
 import './dependencies/@dependencies.css'

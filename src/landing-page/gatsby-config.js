@@ -38,6 +38,7 @@ module.exports = {
     author: `@guandjoy`,
   },
   plugins: [
+    `gatsby-plugin-transition-link`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

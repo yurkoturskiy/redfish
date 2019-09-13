@@ -1,6 +1,6 @@
 import React from 'react'
 import { navigate } from 'gatsby'
-import Button from '../../../styledUIElements/Button'
+import Button from '@material/react-button'
 
 function TutorialsBtn(props) {
   const scrollToTutorials = e => {
@@ -21,7 +21,11 @@ function TutorialsBtn(props) {
       behavior: 'smooth',
     })
   }
-  return <Button onClick={e => navigate('/docs')}>Tutorials</Button>
+  return (
+    <Button className="material-button" onClick={e => navigate('/docs')}>
+      Tutorials
+    </Button>
+  )
 }
 
 export default TutorialsBtn

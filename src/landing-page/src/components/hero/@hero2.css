@@ -1,0 +1,212 @@
+.hero-container {
+  height: 70vh;
+  max-height: 100vh;
+  min-height: 480px;
+  background-color: white;
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+}
+
+/*
+***********************
+*** Content wrapper ***
+***********************
+*/
+
+.hero-container .content {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  top: 30vh;
+  left: calc(var(--col-two) - var(--gutter));
+}
+
+@media screen and (max-width: 1280px) and (min-width: 961px) {
+  .hero-container .content {
+    left: calc(var(--col-one) - var(--gutter));
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .hero-container .content {
+    top: 24vh;
+    left: var(--col-zero);
+  }
+}
+
+.content .header {
+  margin: 0;
+  margin-left: var(--gutter);
+  margin-right: var(--gutter);
+
+  /* text */
+  font-style: normal;
+  font-weight: black;
+  font-size: 5rem;
+  line-height: 72px;
+}
+
+.mdc-button {
+  text-transform: none;
+}
+
+.content .material-button {
+  background-color: transparent;
+  font-size: 1.25rem;
+  font-weight: normal;
+  height: 48px;
+  color: black;
+  --mdc-theme-primary: black;
+  text-transform: capitalize;
+  letter-spacing: 0;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: var(--gutter);
+  cursor: pointer;
+}
+
+.material-button .mdc-button__icon {
+  z-index: 0;
+  fill: var(--green-two);
+  padding-bottom: 2px;
+}
+
+#briefly-about {
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+
+.content .material-button svg {
+  fill: white;
+}
+
+.content .buttons-wrapper {
+  display: flex;
+
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.content .simple-button {
+  background-color: transparent;
+  font-size: 1.25rem;
+  border: none;
+  margin: 8px var(--gutter) 8px var(--gutter);
+  padding-left: 0;
+}
+
+.content .simple-button:hover {
+  cursor: pointer;
+}
+
+/**********
+/* Blobs */
+#blobs h2 {
+  font-size: 0.75rem;
+  color: var(--green-eight);
+}
+
+/* Django blob */
+
+#django-blob {
+  z-index: 1;
+  position: absolute;
+  right: var(--col-five);
+  top: 50vh;
+}
+
+#django-blob svg {
+  width: 400px;
+  height: 400px;
+}
+
+#django-blob .blob {
+  fill: #22d163;
+}
+
+#django-blob .glare {
+  fill: #5a2222;
+}
+
+#django-blob .blob .glare {
+  z-index: 2;
+  position: absolute;
+  fill: white;
+  left: 80px;
+  top: 80px;
+  width: 75px;
+  height: 75px;
+  opacity: 1;
+}
+
+#django-blob text {
+  z-index: 3;
+  fill: white;
+  opacity: 1;
+  font-size: 0.5rem;
+  font-weight: 400;
+  position: absolute;
+  padding: auto;
+}
+
+.blob {
+  mix-blend-mode: multiply;
+}
+
+/****************/
+/* GraphQL blob */
+
+#graphql-blob {
+  position: absolute;
+  right: var(--col-two);
+  top: 30vh;
+}
+
+#graphql-blob svg {
+  width: 600px;
+  height: 600px;
+}
+
+#graphql-blob .blob {
+  fill: #ff546c;
+}
+
+#graphql-blob .glare {
+  fill: yellow;
+}
+
+#graphql-blob text {
+  fill: #6d111e;
+  font-size: 0.75rem;
+  letter-spacing: 0.05rem;
+  font-weight: 300;
+}
+
+/****************/
+/* ReactJS blob */
+
+#react-blob {
+  position: absolute;
+  right: var(--col-three);
+  top: 10vh;
+}
+
+#react-blob svg {
+  width: 400px;
+  height: 400px;
+  fill: #3688ff;
+}
+
+#react-blob .blob {
+  fill: #3688ff;
+}
+
+#react-blob .glare {
+  fill: red;
+}
+
+#react-blob text {
+  fill: black;
+  font-size: 1rem;
+  font-weight: normal;
+}

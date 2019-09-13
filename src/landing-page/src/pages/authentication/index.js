@@ -12,15 +12,17 @@ import PasswordResetConfirmFormContainer from '../../components/authentication/P
 const AuthenticationIndex = () => {
   return (
     <Layout>
-      <div className="authentication-container">
-        <Router>
-          <Navigator path="authentication/navigate" />
-          <AuthenticationContainer path="authentication" />
-          <LoginFormContainer path="authentication/login" />
-          <RegistrationFormContainer path="authentication/signup" />
-          <PasswordResetFormContainer path="authentication/password-reset" />
-          <PasswordResetConfirmFormContainer path="authentication/password-reset/confirm/:uid/:token" />
-        </Router>
+      <div className="authentication-page">
+        <div className="authentication-container">
+          <Router>
+            <Navigator path="authentication/navigate" />
+            <AuthenticationContainer path="authentication" />
+            <LoginFormContainer path="authentication/login" />
+            <RegistrationFormContainer path="authentication/signup" />
+            <PasswordResetFormContainer path="authentication/password-reset" />
+            <PasswordResetConfirmFormContainer path="authentication/password-reset/confirm/:uid/:token" />
+          </Router>
+        </div>
       </div>
     </Layout>
   )
