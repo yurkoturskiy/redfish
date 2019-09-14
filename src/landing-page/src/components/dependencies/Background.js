@@ -8,12 +8,12 @@ const paths = () => {
   }
   var set = []
   for (let i = 0; i < 4; i++) {
-    let x = i * 55
-    let y = i * 40
-    let width = 1920 - i * (1920 / 10)
-    let height = 1280 - i * (1280 / 10)
-    let centerX = width / 2
-    let centerY = height / 2
+    let x = i * 100
+    let y = i * 50
+    let width = 1920 - i * (1920 / 9)
+    let height = 1280 - i * (1280 / 9)
+    let centerX = width / 2 + i * 100
+    let centerY = height / 2 + i * 100
     let pathsParams = {
       numOfSegments: 3,
       depth: 0,
@@ -59,8 +59,8 @@ var pathsSVG = a.map((path, index) => {
   return (
     <path
       key={`bg-svg-path-${index}`}
-      stroke={index === a.length - 1 ? '#1D79FF' : 'black'}
-      strokeWidth="1"
+      stroke="black"
+      strokeWidth="4"
       fill="#1D79FF"
       fillOpacity={index === a.length - 1 ? '0' : '0'}
     >

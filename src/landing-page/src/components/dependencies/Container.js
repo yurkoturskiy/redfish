@@ -8,6 +8,8 @@ import {
   GrapheneIcon,
 } from './icons'
 import Background from './Background'
+import ReactDepEffect from './ReactDepEffect'
+import DjangoDepEffect from './DjangoDepEffect'
 
 function DependenciesContainer() {
   return (
@@ -15,7 +17,8 @@ function DependenciesContainer() {
       <Background />
       <div className="content">
         <div className="section" id="react-section">
-          <h3 id="">ReactJS</h3>
+          <h3>ReactJS Dependencies</h3>
+          <ReactDepEffect />
         </div>
         <div className="cardsWrapper" id="react-cards">
           <div className="card">
@@ -40,7 +43,8 @@ function DependenciesContainer() {
           </div>
         </div>
         <div className="section" id="django-section">
-          <h3>Django</h3>
+          <h3>Django Dependencies</h3>
+          <DjangoDepEffect />
         </div>
         <div className="cardsWrapper" id="django-cards">
           <div className="card">
