@@ -52,9 +52,9 @@
 
 .content .material-button {
   background-color: transparent;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: normal;
-  height: 48px;
+  height: 44px;
   color: black;
   --mdc-theme-primary: black;
   text-transform: capitalize;
@@ -77,7 +77,7 @@
 }
 
 .content .material-button svg {
-  fill: white;
+  fill: var(--green-eight);
 }
 
 .content .buttons-wrapper {
