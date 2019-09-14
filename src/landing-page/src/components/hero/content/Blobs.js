@@ -98,9 +98,9 @@ function Blobs(props) {
             />
           </path>
           <path id="django-glare" className="glare" d={djangoGlare.d} />
-          <text>
-            <textPath side="left" startOffset="0" href="#django-glare">
-              Django
+          <text rotate="180">
+            <textPath startOffset="85" href="#django-glare">
+              ognajD
             </textPath>
           </text>
         </svg>
