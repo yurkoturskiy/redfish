@@ -65,6 +65,11 @@
   cursor: pointer;
 }
 
+.material-button a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .material-button .mdc-button__icon {
   z-index: 0;
   fill: var(--green-two);

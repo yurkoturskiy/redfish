@@ -25,26 +25,30 @@ function GoToAppBtn(props) {
   }, [clickPos, isActive])
 
   return (
-    <TransitionLink
-      to="/authentication/"
-      onClick={e => handleClick(e)}
-      exit={{
-        trigger: ({ exit }) => {
-          console.log('exit', exit)
-        },
-        delay: 1.6,
-      }}
-      entry={{
-        trigger: () => {
-          console.log('entry')
-        },
-      }}
-    >
+    <React.Fragment>
       {isActive && clickPos && (
         <TransitionEffect centerX={clickPos.x} centerY={clickPos.y} />
       )}
-      <Button className="material-button">Go to app</Button>
-    </TransitionLink>
+      <Button className="material-button">
+        <TransitionLink
+          to="/authentication/"
+          onClick={e => handleClick(e)}
+          exit={{
+            trigger: ({ exit }) => {
+              console.log('exit', exit)
+            },
+            delay: 1.6,
+          }}
+          entry={{
+            trigger: () => {
+              console.log('entry')
+            },
+          }}
+        >
+          Go to app
+        </TransitionLink>
+      </Button>
+    </React.Fragment>
   )
 }
 
