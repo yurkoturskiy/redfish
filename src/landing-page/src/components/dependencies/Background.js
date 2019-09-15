@@ -3,7 +3,7 @@ import { morphing, path } from 'primitivo-svg'
 
 const paths = () => {
   var morphingParams = {
-    numOfKeyPaths: 3,
+    numOfKeyPaths: 2,
     loop: true,
   }
   var set = []
@@ -59,15 +59,17 @@ var pathsSVG = a.map((path, index) => {
   return (
     <path
       key={`bg-svg-path-${index}`}
-      stroke="black"
+      stroke="#344239"
       strokeWidth="4"
-      fill="#1D79FF"
-      fillOpacity={index === a.length - 1 ? '0' : '0'}
+      fillOpacity="0"
     >
       <animate
         attributeName="d"
         repeatCount="indefinite"
-        dur="60s"
+        calcMode="spline"
+        keyTimes="0; 0.5; 1"
+        keySplines=".25, 0, .75, 1; .25, 0, .75, 1;"
+        dur="36s"
         values={path}
       />
     </path>
