@@ -61,6 +61,7 @@
   display: inline-block;
   z-index: 2;
   position: relative;
+  background-color: rgba(255, 255, 255, 0.2);
   margin: 48px 16px 0 32px;
   font-weight: normal;
   font-size: 1.5rem;
