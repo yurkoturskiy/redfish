@@ -7,7 +7,7 @@
 .authentication-page {
   height: 100vh;
 
-  background-color: var(--green);
+  background-color: white;
 }
 
 .authentication-container {
@@ -15,7 +15,7 @@
   position: absolute;
   top: 20%;
   left: 50%;
-  background-color: var(--green);
+  background-color: white;
   transform: translate(-50%);
   outline: 1px solid lightgrey;
 }

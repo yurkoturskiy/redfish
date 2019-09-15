@@ -32,7 +32,7 @@ function GoToAppBtn(props) {
         trigger: ({ exit }) => {
           console.log('exit', exit)
         },
-        delay: 1,
+        delay: 1.6,
       }}
       entry={{
         trigger: () => {
