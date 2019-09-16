@@ -25,8 +25,6 @@ function Layout(props) {
   useEffect(() => {
     setOpacity('1')
   }, [])
-  console.log('opacity', opacity)
-  console.log('props', props)
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
