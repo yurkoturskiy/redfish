@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
@@ -20,7 +20,13 @@ import '@material/react-text-field/dist/text-field.css'
 import '@material/react-button/dist/button.css'
 import '@material/react-checkbox/dist/checkbox.css'
 
-function Layout({ children }) {
+function Layout(props) {
+  const [opacity, setOpacity] = useState('0')
+  useEffect(() => {
+    setOpacity('1')
+  }, [])
+  console.log('opacity', opacity)
+  console.log('props', props)
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -33,7 +39,9 @@ function Layout({ children }) {
   return (
     <React.Fragment>
       <HeaderContainer siteTitle={data.site.siteMetadata.title} />
-      <div>{children}</div>
+      <div className="layout" style={{ opacity: opacity }}>
+        {props.children}
+      </div>
     </React.Fragment>
   )
 }
