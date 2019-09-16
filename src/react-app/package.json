@@ -35,7 +35,8 @@
     "react-scripts": "^2.1.8",
     "react-transition-group": "^4.2.1",
     "react-universal-dnd-layout": "0.1.0-beta.0",
-    "zxcvbn": "^4.4.2"
+    "zxcvbn": "^4.4.2",
+    "primitivo-svg": "latest"
   },
   "scripts": {
     "start": "HOST=0.0.0.0 craco start",
