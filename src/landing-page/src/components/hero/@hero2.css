@@ -46,6 +46,12 @@
   line-height: 72px;
 }
 
+.button-wrapper {
+  margin-left: var(--gutter);
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
 .mdc-button {
   text-transform: none;
 }
@@ -59,13 +65,10 @@
   --mdc-theme-primary: black;
   text-transform: capitalize;
   letter-spacing: 0;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: var(--gutter);
   cursor: pointer;
 }
 
-.material-button a {
+.button-wrapper a {
   text-decoration: none;
   color: inherit;
 }
