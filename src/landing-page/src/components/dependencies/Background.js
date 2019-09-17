@@ -3,17 +3,17 @@ import { morphing, path } from 'primitivo-svg'
 
 const paths = () => {
   var morphingParams = {
-    numOfKeyPaths: 3,
+    numOfKeyPaths: 2,
     loop: true,
   }
   var set = []
   for (let i = 0; i < 4; i++) {
-    let x = i * 55
-    let y = i * 40
-    let width = 1920 - i * (1920 / 10)
-    let height = 1280 - i * (1280 / 10)
-    let centerX = width / 2
-    let centerY = height / 2
+    let x = i * 100
+    let y = i * 50
+    let width = 1920 - i * (1920 / 9)
+    let height = 1280 - i * (1280 / 9)
+    let centerX = width / 2 + i * 100
+    let centerY = height / 2 + i * 100
     let pathsParams = {
       numOfSegments: 3,
       depth: 0,
@@ -59,15 +59,17 @@ var pathsSVG = a.map((path, index) => {
   return (
     <path
       key={`bg-svg-path-${index}`}
-      stroke={index === a.length - 1 ? '#1D79FF' : 'black'}
-      strokeWidth="1"
-      fill="#1D79FF"
-      fillOpacity={index === a.length - 1 ? '0' : '0'}
+      stroke="#344239"
+      strokeWidth="4"
+      fillOpacity="0"
     >
       <animate
         attributeName="d"
         repeatCount="indefinite"
-        dur="60s"
+        calcMode="spline"
+        keyTimes="0; 0.5; 1"
+        keySplines=".25, 0, .75, 1; .25, 0, .75, 1;"
+        dur="36s"
         values={path}
       />
     </path>

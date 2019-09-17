@@ -25,26 +25,37 @@ function GoToAppBtn(props) {
   }, [clickPos, isActive])
 
   return (
-    <TransitionLink
-      to="/authentication/"
-      onClick={e => handleClick(e)}
-      exit={{
-        trigger: ({ exit }) => {
-          console.log('exit', exit)
-        },
-        delay: 1,
-      }}
-      entry={{
-        trigger: () => {
-          console.log('entry')
-        },
-      }}
-    >
+    <div className="button-wrapper">
       {isActive && clickPos && (
         <TransitionEffect centerX={clickPos.x} centerY={clickPos.y} />
       )}
-      <Button className="material-button">Go to app</Button>
-    </TransitionLink>
+      <TransitionLink
+        to="/authentication/"
+        onClick={e => handleClick(e)}
+        exit={{
+          trigger: ({ exit, e }) => {
+            console.log('exit', exit)
+          },
+          length: 2,
+        }}
+        entry={{
+          delay: 0.5,
+          zIndex: 8,
+          trigger: props => {
+            console.log('props', props)
+            console.log('styles', props.node.style.opacity)
+            props.node.style.opacity = '0'
+            props.node.style.transition = 'opacity 0.6s'
+            setTimeout(() => {
+              props.node.style.opacity = '1'
+            }, 100)
+          },
+          state: { thisis: 'ololo' },
+        }}
+      >
+        <Button className="material-button">Go to app</Button>
+      </TransitionLink>
+    </div>
   )
 }
 

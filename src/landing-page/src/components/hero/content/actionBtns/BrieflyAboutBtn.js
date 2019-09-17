@@ -8,7 +8,7 @@ function BrieflyAboutBtn({ setDialog }) {
   return (
     <Button
       id="briefly-about"
-      raised={true}
+      outlined={true}
       className="material-button"
       icon={leftIcon}
       onClick={() => setDialog(true)}

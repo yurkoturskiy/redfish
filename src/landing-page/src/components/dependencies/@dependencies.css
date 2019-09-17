@@ -18,7 +18,7 @@
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
-  top: 65vh;
+  top: 70vh;
 }
 
 .dependencies-wrapper #dependencies-header {
@@ -42,7 +42,7 @@
 }
 
 .dependencies-wrapper .section {
-  margin: 0 0 0 12px;
+  position: relative;
   padding: 0;
 }
 
@@ -59,17 +59,32 @@
 
 .section h3 {
   display: inline-block;
-  margin: 12px 0 0 12px;
-  font-weight: bold;
-  font-size: 18px;
+  z-index: 2;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 48px 16px 0 32px;
+  font-weight: normal;
+  font-size: 1.5rem;
   line-height: 21px;
 }
 
 .section#react-section h3 {
-  color: var(--blue);
+  color: var(--green-eight);
 }
 .section#django-section h3 {
-  color: var(--green);
+  color: var(--green-eight);
+}
+
+#react-dep-ring {
+  position: absolute;
+  top: -12px;
+  left: -28px;
+}
+
+#django-dep-ring {
+  position: absolute;
+  top: -12px;
+  left: -28px;
 }
 
 /*************/
@@ -83,6 +98,7 @@
 }
 
 .cardsWrapper .card {
+  z-index: 2;
   position: relative;
   margin: 12px;
   width: 384px;

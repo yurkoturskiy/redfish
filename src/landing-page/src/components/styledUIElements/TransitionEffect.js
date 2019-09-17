@@ -349,37 +349,47 @@ function TransitionEffect(props) {
       height={window.innerHeight}
       className="transition-effect"
     >
-      <path d={endShape.dValues} fill="#FF546C">
+      <path
+        d={endShape.dValues}
+        strokeWidth="32"
+        stroke="#3688FF"
+        fillOpacity="0"
+      >
         <animate
           calcMode="spline"
           keyTimes={ts.keyTimes}
           keySplines={ts.keySplines}
           attributeName="d"
-          dur="1s"
+          dur="1500ms"
           repeatCount="1"
           values={phasesOutput.dValues}
         />
       </path>
-      <path d={endShape.dValues} fill="#3688FF">
+      <path
+        d={endShape.dValues}
+        strokeWidth="32"
+        fillOpacity="0"
+        stroke="#22D163"
+      >
         <animate
           calcMode="spline"
           keyTimes={ts.keyTimes}
           keySplines={ts.keySplines}
           attributeName="d"
-          dur="1s"
-          begin="20ms"
+          dur="1500ms"
+          begin="100ms"
           repeatCount="1"
           values={phasesOutput.dValues}
         />
       </path>
-      <path d={endShape.dValues} fill="#22D163">
+      <path d={endShape.dValues} strokeWidth="32" fill="white" stroke="#FF546C">
         <animate
           calcMode="spline"
           keyTimes={ts.keyTimes}
           keySplines={ts.keySplines}
           attributeName="d"
-          dur="1s"
-          begin="40ms"
+          dur="1500ms"
+          begin="200ms"
           repeatCount="1"
           values={phasesOutput.dValues}
         />
