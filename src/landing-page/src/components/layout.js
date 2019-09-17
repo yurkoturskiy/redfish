@@ -20,11 +20,7 @@ import '@material/react-text-field/dist/text-field.css'
 import '@material/react-button/dist/button.css'
 import '@material/react-checkbox/dist/checkbox.css'
 
-function Layout(props) {
-  const [opacity, setOpacity] = useState('0')
-  useEffect(() => {
-    setOpacity('1')
-  }, [])
+function Layout({ children }) {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -37,9 +33,7 @@ function Layout(props) {
   return (
     <React.Fragment>
       <HeaderContainer siteTitle={data.site.siteMetadata.title} />
-      <div className="layout" style={{ opacity: opacity }}>
-        {props.children}
-      </div>
+      <div>{children}</div>
     </React.Fragment>
   )
 }

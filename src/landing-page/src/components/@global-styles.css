@@ -64,7 +64,3 @@ body {
   padding: 0;
   color: var(--green-eight);
 }
-
-.layout {
-  transition: opacity 0.6s;
-}
