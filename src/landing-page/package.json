@@ -41,6 +41,7 @@
     "gatsby-transformer-remark": "^2.6.7",
     "gatsby-transformer-sharp": "^2.2.4",
     "graphql-tag": "^2.10.1",
+    "primitivo-svg": "0.1.0-beta.0",
     "prism-themes": "^1.1.0",
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",
