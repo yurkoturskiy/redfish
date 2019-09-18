@@ -6,8 +6,6 @@
 
 .authentication-page {
   height: 100vh;
-
-  background-color: white;
 }
 
 .authentication-container {
@@ -68,4 +66,3 @@
   display: block;
   margin: 8px auto 8px auto;
 }
-

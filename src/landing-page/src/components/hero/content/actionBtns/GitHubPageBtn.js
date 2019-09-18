@@ -3,15 +3,11 @@ import Button from '@material/react-button'
 
 function GitHubPageBtn(props) {
   return (
-    <Button
-      className="material-button"
-      onClick={() =>
-        window.open('https://github.com/guandjoy/Redfish', '_blank')
-      }
-      romb="true"
-    >
-      GitHub
-    </Button>
+    <a href="https://github.com/guandjoy/Redfish">
+      <Button className="material-button" romb="true">
+        GitHub
+      </Button>
+    </a>
   )
 }
 

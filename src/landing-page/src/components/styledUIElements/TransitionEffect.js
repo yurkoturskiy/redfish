@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { morphing, spacing, path, phases, randomRange } from 'primitivo-svg'
 
 const phaseOneRatio = 3
@@ -343,6 +344,12 @@ function TransitionEffect(props) {
 
   const endShape = path({ ...baseParameters, groups: endGroupsParameters })
 
+  const [endPathIsActive, setEndPathIsActive] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setEndPathIsActive(true), 1500)
+  }, [])
+
   return (
     <svg
       width={window.innerWidth}
@@ -350,7 +357,7 @@ function TransitionEffect(props) {
       className="transition-effect"
     >
       <path
-        d={endShape.dValues}
+        d={endPathIsActive && endShape.d}
         strokeWidth="32"
         stroke="#3688FF"
         fillOpacity="0"
@@ -366,7 +373,7 @@ function TransitionEffect(props) {
         />
       </path>
       <path
-        d={endShape.dValues}
+        d={endPathIsActive && endShape.d}
         strokeWidth="32"
         fillOpacity="0"
         stroke="#22D163"
@@ -377,25 +384,49 @@ function TransitionEffect(props) {
           keySplines={ts.keySplines}
           attributeName="d"
           dur="1500ms"
-          begin="100ms"
+          begin="110ms"
           repeatCount="1"
           values={phasesOutput.dValues}
         />
       </path>
-      <path d={endShape.dValues} strokeWidth="32" fill="white" stroke="#FF546C">
+
+      <path
+        d={endPathIsActive && endShape.d}
+        strokeWidth="64"
+        fill="white"
+        stroke="#FF546C"
+      >
         <animate
           calcMode="spline"
           keyTimes={ts.keyTimes}
           keySplines={ts.keySplines}
           attributeName="d"
           dur="1500ms"
-          begin="200ms"
+          begin="250ms"
+          repeatCount="1"
+          values={phasesOutput.dValues}
+        />
+      </path>
+
+      <path d={endPathIsActive && endShape.d} fill="white">
+        <animate
+          calcMode="spline"
+          keyTimes={ts.keyTimes}
+          keySplines={ts.keySplines}
+          attributeName="d"
+          dur="1500ms"
+          begin="250ms"
           repeatCount="1"
           values={phasesOutput.dValues}
         />
       </path>
     </svg>
   )
+}
+
+TransitionEffect.propTypes = {
+  centerX: PropTypes.number,
+  centerY: PropTypes.number,
 }
 
 export default TransitionEffect

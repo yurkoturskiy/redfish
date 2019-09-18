@@ -10,6 +10,7 @@
 .docs .sections {
   display: inline-block;
   vertical-align: top;
+  background-color: white;
 }
 
 .gatsby-highlight-code-line {
