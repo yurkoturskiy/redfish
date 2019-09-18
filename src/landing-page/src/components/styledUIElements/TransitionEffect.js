@@ -343,6 +343,12 @@ function TransitionEffect(props) {
 
   const endShape = path({ ...baseParameters, groups: endGroupsParameters })
 
+  const [endPathIsActive, setEndPathIsActive] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setEndPathIsActive(true), 1000)
+  }, [])
+
   return (
     <svg
       width={window.innerWidth}
@@ -350,7 +356,7 @@ function TransitionEffect(props) {
       className="transition-effect"
     >
       <path
-        d={endShape.dValues}
+        d={endPathIsActive && endShape.d}
         strokeWidth="32"
         stroke="#3688FF"
         fillOpacity="0"
@@ -366,7 +372,7 @@ function TransitionEffect(props) {
         />
       </path>
       <path
-        d={endShape.dValues}
+        d={endPathIsActive && endShape.d}
         strokeWidth="32"
         fillOpacity="0"
         stroke="#22D163"
@@ -382,7 +388,13 @@ function TransitionEffect(props) {
           values={phasesOutput.dValues}
         />
       </path>
-      <path d={endShape.dValues} strokeWidth="32" fill="white" stroke="#FF546C">
+
+      <path
+        d={endPathIsActive && endShape.d}
+        strokeWidth="32"
+        fill="white"
+        stroke="#FF546C"
+      >
         <animate
           calcMode="spline"
           keyTimes={ts.keyTimes}
