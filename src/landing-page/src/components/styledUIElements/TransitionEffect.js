@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { morphing, spacing, path, phases, randomRange } from 'primitivo-svg'
 
 const phaseOneRatio = 3
@@ -346,7 +347,7 @@ function TransitionEffect(props) {
   const [endPathIsActive, setEndPathIsActive] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setEndPathIsActive(true), 1000)
+    setTimeout(() => setEndPathIsActive(true), 1500)
   }, [])
 
   return (
@@ -383,7 +384,7 @@ function TransitionEffect(props) {
           keySplines={ts.keySplines}
           attributeName="d"
           dur="1500ms"
-          begin="100ms"
+          begin="110ms"
           repeatCount="1"
           values={phasesOutput.dValues}
         />
@@ -391,7 +392,7 @@ function TransitionEffect(props) {
 
       <path
         d={endPathIsActive && endShape.d}
-        strokeWidth="32"
+        strokeWidth="64"
         fill="white"
         stroke="#FF546C"
       >
@@ -401,13 +402,31 @@ function TransitionEffect(props) {
           keySplines={ts.keySplines}
           attributeName="d"
           dur="1500ms"
-          begin="200ms"
+          begin="250ms"
+          repeatCount="1"
+          values={phasesOutput.dValues}
+        />
+      </path>
+
+      <path d={endPathIsActive && endShape.d} fill="white">
+        <animate
+          calcMode="spline"
+          keyTimes={ts.keyTimes}
+          keySplines={ts.keySplines}
+          attributeName="d"
+          dur="1500ms"
+          begin="250ms"
           repeatCount="1"
           values={phasesOutput.dValues}
         />
       </path>
     </svg>
   )
+}
+
+TransitionEffect.propTypes = {
+  centerX: PropTypes.number,
+  centerY: PropTypes.number,
 }
 
 export default TransitionEffect
