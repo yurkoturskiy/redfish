@@ -16,10 +16,13 @@ function Layout({ children }) {
     }
   `)
   return (
-    <div className="docs">
-      <SideBar />
-      {children}
-    </div>
+    <React.Fragment>
+      <HeaderContainer siteTitle={data.site.siteMetadata.title} />
+      <div className="docs">
+        <SideBar />
+        {children}
+      </div>
+    </React.Fragment>
   )
 }
 
