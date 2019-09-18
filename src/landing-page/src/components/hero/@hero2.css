@@ -2,7 +2,6 @@
   height: 70vh;
   max-height: 100vh;
   min-height: 480px;
-  background-color: white;
   padding-left: var(--grid-margin);
   padding-right: var(--grid-margin);
 }
