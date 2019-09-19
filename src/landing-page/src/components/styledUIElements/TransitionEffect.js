@@ -347,7 +347,7 @@ function TransitionEffect(props) {
   const [endPathIsActive, setEndPathIsActive] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setEndPathIsActive(true), 1500)
+    setTimeout(() => setEndPathIsActive(true), 1400)
   }, [])
 
   return (
