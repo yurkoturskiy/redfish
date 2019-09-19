@@ -31,9 +31,9 @@ function PrimitivoTransitionLink(props) {
       )}
       <TransitionLink
         to={props.to}
-        onClick={e => handleClick(e)}
         exit={{
           trigger: ({ exit, e }) => {
+            handleClick(e)
             setTimeout(() => {
               setIsActive(false)
               setClickPos(false)
@@ -42,7 +42,7 @@ function PrimitivoTransitionLink(props) {
           length: 1.7,
         }}
         entry={{
-          delay: 0.6,
+          delay: 1,
           zIndex: 8,
           trigger: props => {
             console.log('props', props)
