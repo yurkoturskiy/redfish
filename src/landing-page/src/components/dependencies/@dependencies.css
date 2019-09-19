@@ -6,7 +6,6 @@
 
 .dependencies-wrapper {
   /*outline: 1px solid green;*/
-  background-color: white;
 }
 
 .dependencies-wrapper .background {
@@ -37,7 +36,7 @@
 .dependencies-wrapper .content {
   /*outline: 1px solid pink;*/
   margin: 0 auto 0 auto;
-  padding: 384px 0 256px 0;
+  padding: 98px 0 256px 0;
   width: 856px;
 }
 
