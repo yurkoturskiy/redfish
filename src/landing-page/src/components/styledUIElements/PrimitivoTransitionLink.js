@@ -14,16 +14,6 @@ function PrimitivoTransitionLink(props) {
     setIsActive(true)
   }
 
-  useEffect(() => {
-    if (clickPos && !isActive) {
-      setIsActive(true)
-      // setTimeout(() => {
-      //   setIsActive(false)
-      //   setClickPos(undefined)
-      // }, 2200)
-    }
-  }, [clickPos, isActive])
-
   return (
     <div className="button-wrapper">
       {isActive && clickPos && (
@@ -34,10 +24,6 @@ function PrimitivoTransitionLink(props) {
         exit={{
           trigger: ({ exit, e }) => {
             handleClick(e)
-            setTimeout(() => {
-              setIsActive(false)
-              setClickPos(false)
-            }, 1800)
           },
           length: 1.7,
         }}
