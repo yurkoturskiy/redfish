@@ -1,5 +1,6 @@
 .hero-container {
-  height: 70vh;
+  position: relative;
+  height: 100vh;
   max-height: 100vh;
   min-height: 480px;
   padding-left: var(--grid-margin);
@@ -108,45 +109,27 @@
 
 /**********
 /* Blobs */
-#blobs h2 {
-  font-size: 0.75rem;
-  color: var(--green-eight);
-}
 
-/* Django blob */
+#blobs-svg {
+  position: absolute;
+  bottom: 0vh;
+  right: var(--col-two);
+  width: 50vw;
+  max-height: 100vh;
+  min-width: 600px;
+  /*outline: 1px solid pink;*/
+}
 
 #django-blob {
-  z-index: 1;
-  position: absolute;
-  right: var(--col-five);
-  top: 50vh;
-}
-
-#django-blob svg {
-  width: 400px;
-  height: 400px;
-}
-
-#django-blob .blob {
   fill: #22d163;
+  mix-blend-mode: multiply;
 }
 
-#django-blob .glare {
+#django-glare {
   fill: #5a2222;
 }
 
-#django-blob .blob .glare {
-  z-index: 2;
-  position: absolute;
-  fill: white;
-  left: 80px;
-  top: 80px;
-  width: 75px;
-  height: 75px;
-  opacity: 1;
-}
-
-#django-blob text {
+#django-text {
   z-index: 3;
   fill: white;
   opacity: 1;
@@ -157,33 +140,19 @@
   padding: auto;
 }
 
-.blob {
-  mix-blend-mode: multiply;
-}
-
 /****************/
 /* GraphQL blob */
 
 #graphql-blob {
-  position: absolute;
-  right: var(--col-two);
-  top: 30vh;
-}
-
-#graphql-blob svg {
-  width: 600px;
-  height: 600px;
-}
-
-#graphql-blob .blob {
   fill: #ff546c;
+  mix-blend-mode: multiply;
 }
 
-#graphql-blob .glare {
+#graphql-glare {
   fill: yellow;
 }
 
-#graphql-blob text {
+#graphql-text {
   fill: #6d111e;
   font-size: 0.75rem;
   letter-spacing: 0.05rem;
@@ -194,27 +163,32 @@
 /* ReactJS blob */
 
 #react-blob {
-  position: absolute;
-  right: var(--col-three);
-  top: 10vh;
-}
-
-#react-blob svg {
-  width: 400px;
-  height: 400px;
   fill: #3688ff;
+  mix-blend-mode: multiply;
 }
 
-#react-blob .blob {
-  fill: #3688ff;
-}
-
-#react-blob .glare {
+#react-glare {
   fill: red;
 }
 
-#react-blob text {
+#reactjs-text {
   fill: black;
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: normal;
+}
+
+@media screen and (max-width: 1280px) and (min-width: 961px) {
+  #blobs-svg {
+    right: 0;
+    width: 100%;
+    /*outline: 1px solid pink;*/
+  }
+}
+
+@media screen and (max-width: 960px) {
+  #blobs-svg {
+    left: 0;
+    width: 100vw;
+    /*outline: 1px solid pink;*/
+  }
 }
