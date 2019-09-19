@@ -100,13 +100,13 @@ var glarePathParams = (x, y, width, height) => ({
 })
 
 const djangoBlobPathParams = pathsParameters(20, 220, 180, 180)
-const djangoGlarePathParams = glarePathParams(50, 250, 50, 50)
+const djangoGlarePathParams = glarePathParams(50, 250, 46, 46)
 
 const graphqlBlobPathParams = pathsParameters(120, 120, 300, 300)
-const graphqlGlarePathParams = glarePathParams(190, 190, 60, 60)
+const graphqlGlarePathParams = glarePathParams(190, 190, 70, 70)
 
 const reactBlobPathParams = pathsParameters(150, 40, 200, 200)
-const reactGlarePathParams = glarePathParams(220, 70, 45, 45)
+const reactGlarePathParams = glarePathParams(210, 75, 45, 45)
 
 function Blobs(props) {
   // django
@@ -161,7 +161,7 @@ function Blobs(props) {
       </path>
       <path id="django-glare" d={djangoGlare.d} />
       <text id="django-text" rotate="180">
-        <textPath startOffset="85" href="#django-glare">
+        <textPath startOffset="70" href="#django-glare">
           ognajD
         </textPath>
       </text>
@@ -178,7 +178,7 @@ function Blobs(props) {
       </path>
       <path id="graphql-glare" d={graphqlGlare.d} />
       <text id="graphql-text" rotate="180">
-        <textPath startOffset="105" href="#graphql-glare">
+        <textPath startOffset="115" href="#graphql-glare">
           LQhparG
         </textPath>
       </text>
