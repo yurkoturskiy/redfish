@@ -357,6 +357,7 @@ function TransitionEffect(props) {
       className="transition-effect"
     >
       <path
+        id="transition-stroke-one"
         d={endPathIsActive && endShape.d}
         strokeWidth="32"
         stroke="#3688FF"
@@ -373,6 +374,7 @@ function TransitionEffect(props) {
         />
       </path>
       <path
+        id="transition-stroke-two"
         d={endPathIsActive && endShape.d}
         strokeWidth="32"
         fillOpacity="0"
@@ -391,6 +393,7 @@ function TransitionEffect(props) {
       </path>
 
       <path
+        id="transition-stroke-three"
         d={endPathIsActive && endShape.d}
         strokeWidth="64"
         fill="white"
