@@ -4,13 +4,11 @@
 .docs .content {
   display: inline-block;
   width: 768px;
-  background-color: white;
 }
 
 .docs .sections {
   display: inline-block;
   vertical-align: top;
-  background-color: white;
 }
 
 .gatsby-highlight-code-line {
