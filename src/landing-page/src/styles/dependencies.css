@@ -86,6 +86,14 @@
   left: -28px;
 }
 
+/******************/
+/*** Background ***/
+/******************/
+
+.dependencies-circles {
+  mix-blend-mode: multiply;
+}
+
 /*************/
 /*** Cards ***/
 /*************/

@@ -7,7 +7,7 @@ const paths = () => {
     loop: true,
   }
   var set = []
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 3; i++) {
     let x = i * 100
     let y = i * 50
     let width = 1920 - i * (1920 / 9)
@@ -15,8 +15,8 @@ const paths = () => {
     let centerX = width / 2 + i * 100
     let centerY = height / 2 + i * 100
     let pathsParams = {
-      numOfSegments: 3,
-      depth: 0,
+      numOfSegments: 4,
+      depth: 1,
       x,
       y,
       width,
@@ -24,27 +24,27 @@ const paths = () => {
       centerX,
       centerY,
       rotate: 0,
-      numOfGroups: 3,
+      numOfGroups: 1,
       groups: [
         {
           type: 'radial',
           incircle: true,
-          distance: [0.8, 1],
-          round: [0.6, 1],
+          distance: [0.7, 1.2],
+          round: 1,
           lengthBasedRound: true,
         },
         {
           type: 'radial',
           incircle: true,
           distance: [0.8, 1],
-          round: [0.6, 1],
+          round: 1,
           lengthBasedRound: false,
         },
         {
           type: 'radial',
           incircle: true,
           distance: [0.8, 1],
-          round: [0.6, 1],
+          round: 1,
           lengthBasedRound: false,
         },
       ],
@@ -54,14 +54,24 @@ const paths = () => {
   return set
 }
 
+const colors = [
+  '#3688ff',
+  '#ff546c',
+  '#22d163',
+  '#3688ff',
+  '#ff546c',
+  '#22d163',
+]
+
 var a = paths()
 var pathsSVG = a.map((path, index) => {
   return (
     <path
+      className="dependencies-circles"
       key={`bg-svg-path-${index}`}
-      stroke="#344239"
-      strokeWidth="4"
-      fillOpacity="0"
+      stroke={colors[index]}
+      strokeWidth="12"
+      fill="transparent"
     >
       <animate
         attributeName="d"
