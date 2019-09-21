@@ -34,6 +34,12 @@
   }
 }
 
+/*
+**************
+*** Header ***
+**************
+*/
+
 .content .header {
   margin: 0;
   margin-left: var(--gutter);
@@ -45,6 +51,28 @@
   font-size: 5rem;
   line-height: 72px;
 }
+
+/* Smaller text size for phones */
+@media screen and (max-width: 960px) and (min-width: 360px) {
+  .content .header {
+    font-size: 4rem;
+    line-height: 3.7rem;
+  }
+}
+
+/* Smaller-smaller text-size for small phones */
+@media screen and (max-width: 359px) {
+  .content .header {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+  }
+}
+
+/*
+***************
+*** Buttons ***
+***************
+*/
 
 .button-wrapper {
   margin-left: var(--gutter);
@@ -107,6 +135,45 @@
   cursor: pointer;
 }
 
+/*
+********************
+*** Video Dialog ***
+********************
+*/
+
+.content .video-dialog {
+}
+
+.content .video-dialog .iframe-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 560px;
+  height: 315px;
+  margin: auto;
+  z-index: 6;
+}
+
+.content .video-dialog iframe {
+  /* Inherit size from dialog */
+  width: inherit;
+  height: inherit;
+}
+
+.content .video-dialog .background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.6;
+  z-index: 5;
+  overflow: hidden;
+}
+
 /**********
 /* Blobs */
 
@@ -126,7 +193,9 @@
 }
 
 #django-glare {
-  fill: #5a2222;
+  fill: transparent;
+  stroke: #3688ff;
+  stroke-width: 4px;
 }
 
 #django-text {
@@ -135,7 +204,7 @@
   opacity: 1;
   font-size: 0.75rem;
   letter-spacing: 0.07rem;
-  font-weight: 300;
+  font-weight: normal;
   position: absolute;
   padding: auto;
 }
@@ -149,14 +218,16 @@
 }
 
 #graphql-glare {
-  fill: yellow;
+  fill: transparent;
+  stroke: #22d163;
+  stroke-width: 4px;
 }
 
 #graphql-text {
   fill: #6d111e;
   font-size: 1rem;
-  letter-spacing: 0.05rem;
-  font-weight: 300;
+  letter-spacing: 0.08rem;
+  font-weight: normal;
 }
 
 /****************/
@@ -168,11 +239,13 @@
 }
 
 #react-glare {
-  fill: red;
+  fill: transparent;
+  stroke: #ff546c;
+  stroke-width: 4px;
 }
 
 #reactjs-text {
-  fill: black;
+  fill: #6d111e;
   font-size: 0.75rem;
   font-weight: normal;
 }
