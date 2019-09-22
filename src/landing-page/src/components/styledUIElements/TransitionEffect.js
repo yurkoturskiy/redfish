@@ -358,7 +358,7 @@ function TransitionEffect(props) {
     >
       <path
         id="transition-stroke-one"
-        d={endPathIsActive && endShape.d}
+        d={endPathIsActive ? endShape.d : undefined}
         strokeWidth="32"
         stroke="#3688FF"
         fillOpacity="0"
@@ -375,7 +375,7 @@ function TransitionEffect(props) {
       </path>
       <path
         id="transition-stroke-two"
-        d={endPathIsActive && endShape.d}
+        d={endPathIsActive ? endShape.d : undefined}
         strokeWidth="32"
         fillOpacity="0"
         stroke="#22D163"
@@ -394,7 +394,7 @@ function TransitionEffect(props) {
 
       <path
         id="transition-stroke-three"
-        d={endPathIsActive && endShape.d}
+        d={endPathIsActive ? endShape.d : undefined}
         strokeWidth="64"
         fill="white"
         stroke="#FF546C"
@@ -411,7 +411,7 @@ function TransitionEffect(props) {
         />
       </path>
 
-      <path d={endPathIsActive && endShape.d} fill="white">
+      <path d={endPathIsActive ? endShape.d : undefined} fill="white">
         <animate
           calcMode="spline"
           keyTimes={ts.keyTimes}
