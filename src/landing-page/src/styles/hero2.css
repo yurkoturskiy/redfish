@@ -74,14 +74,15 @@
 ***************
 */
 
-.button-wrapper {
+.action-buttons-wrapper {
   margin-left: var(--gutter);
   margin-top: 2px;
   margin-bottom: 2px;
 }
 
-.mdc-button {
-  text-transform: none;
+.action-buttons-wrapper a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .content .material-button {
@@ -96,9 +97,11 @@
   cursor: pointer;
 }
 
-.button-wrapper a {
-  text-decoration: none;
-  color: inherit;
+@media screen and (max-width: 960px) {
+  .content .material-button {
+    font-size: 0.875rem;
+    height: 36px;
+  }
 }
 
 .material-button .mdc-button__icon {
@@ -107,13 +110,13 @@
   padding-bottom: 2px;
 }
 
+.content .material-button svg {
+  fill: var(--green-eight);
+}
+
 #briefly-about {
   margin-top: 36px;
   margin-bottom: 24px;
-}
-
-.content .material-button svg {
-  fill: var(--green-eight);
 }
 
 .content .buttons-wrapper {
@@ -121,18 +124,6 @@
 
   flex-direction: column;
   align-items: flex-start;
-}
-
-.content .simple-button {
-  background-color: transparent;
-  font-size: 1.25rem;
-  border: none;
-  margin: 8px var(--gutter) 8px var(--gutter);
-  padding-left: 0;
-}
-
-.content .simple-button:hover {
-  cursor: pointer;
 }
 
 /*
