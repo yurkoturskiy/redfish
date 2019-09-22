@@ -15,7 +15,7 @@ function PrimitivoTransitionLink(props) {
   }
 
   return (
-    <div className="button-wrapper">
+    <React.Fragment>
       {isActive && clickPos && (
         <TransitionEffect centerX={clickPos.x} centerY={clickPos.y} />
       )}
@@ -29,7 +29,6 @@ function PrimitivoTransitionLink(props) {
         }}
         entry={{
           delay: 1,
-          zIndex: 8,
           trigger: props => {
             props.node.style.opacity = '0'
             props.node.style.transition = 'opacity 0.6s'
@@ -41,7 +40,7 @@ function PrimitivoTransitionLink(props) {
       >
         {props.children}
       </TransitionLink>
-    </div>
+    </React.Fragment>
   )
 }
 

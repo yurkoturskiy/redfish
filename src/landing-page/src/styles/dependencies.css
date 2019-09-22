@@ -58,7 +58,7 @@
 
 .section h3 {
   display: inline-block;
-  z-index: 2;
+  z-index: 1;
   position: relative;
   background-color: rgba(255, 255, 255, 0.2);
   margin: 48px 16px 0 32px;
@@ -105,7 +105,7 @@
 }
 
 .cardsWrapper .card {
-  z-index: 2;
+  z-index: 1;
   position: relative;
   margin: 12px;
   width: 384px;

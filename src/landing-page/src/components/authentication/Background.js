@@ -41,11 +41,6 @@ const getPathParam = (width, height) => ({
   ],
 })
 
-var particles = []
-for (let i = 0; i < 10; i++) {
-  particles.push(<Particle key={i} />)
-}
-
 function Background() {
   const pathParam = useMemo(
     () => getPathParam(window.innerWidth, window.innerHeight),
@@ -61,8 +56,6 @@ function Background() {
         <filter id="blurMe" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="1.6" />
         </filter>
-        {particles}
-
         <path id="auth-blob-one">
           <animate
             id="path-animation"
