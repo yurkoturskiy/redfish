@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react'
 import { path, morphing, randomRange } from 'primitivo-svg'
 
+import Particle from '../styledUIElements/Particle'
+
 const width = window.innerWidth
 const height = window.innerHeight
 
@@ -44,6 +46,11 @@ const pathParam = {
 
 const getPath = () => path(pathParam).d
 
+var particles = []
+for (let i = 0; i < 10; i++) {
+  particles.push(<Particle key={i} />)
+}
+
 function Background() {
   const one = useMemo(() => morphing(animParams, pathParam), [
     animParams,
@@ -58,11 +65,18 @@ function Background() {
     animParams,
     pathParam,
   ])
+
   return (
     <div className="background">
-      <svg width={window.innerWidth} height={window.innerHeight}>
+      <svg>
+        <filter id="blurMe" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="1.6" />
+        </filter>
+        {particles}
+
         <path id="auth-blob-one">
           <animate
+            id="path-animation"
             attributeName="d"
             calcMode="spline"
             keyTimes="0; 0.25; 0.5; 0.75; 1"
