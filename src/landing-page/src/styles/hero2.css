@@ -7,6 +7,12 @@
   padding-right: var(--grid-margin);
 }
 
+@media screen and (max-width: 1366px) and (min-width: 961px) and (orientation: landscape) {
+  .hero-container {
+    max-height: 880px;
+  }
+}
+
 @media screen and (max-width: 960px) and (min-width: 426px) {
   .hero-container {
     max-height: 880px;
@@ -198,8 +204,11 @@
   overflow: hidden;
 }
 
-/**********
-/* Blobs */
+/*
+*************
+*** Blobs ***
+*************
+*/
 
 #blobs-svg {
   position: absolute;
@@ -208,7 +217,7 @@
   width: 50%;
   max-width: 100vw;
   max-height: 100%;
-  min-width: 70vh;
+  min-width: 720px;
   /*outline: 1px solid pink;*/
 }
 
@@ -217,7 +226,7 @@
     left: 128px;
     width: 100%;
     max-width: 880px;
-    min-width: 70vh;
+    min-width: 640px;
     /*outline: 1px solid pink;*/
   }
 }
