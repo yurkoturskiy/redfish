@@ -177,3 +177,15 @@ select {
   left: 0;
   top: 0;
 }
+
+#transition-stroke-one {
+  mix-blend-mode: multiply;
+}
+
+#transition-stroke-two {
+  mix-blend-mode: multiply;
+}
+
+#transition-stroke-three {
+  mix-blend-mode: multiply;
+}

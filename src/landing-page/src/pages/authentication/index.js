@@ -8,11 +8,13 @@ import LoginFormContainer from '../../components/authentication/LoginFormContain
 import RegistrationFormContainer from '../../components/authentication/RegistrationFormContainer'
 import PasswordResetFormContainer from '../../components/authentication/PasswordResetFormContainer'
 import PasswordResetConfirmFormContainer from '../../components/authentication/PasswordResetConfirmFormContainer'
+import Background from '../../components/authentication/Background'
 
 const AuthenticationIndex = () => {
   return (
     <Layout>
       <div className="authentication-page">
+        <Background />
         <div className="authentication-container">
           <Router>
             <Navigator path="authentication/navigate" />
