@@ -39,39 +39,6 @@ const pathsParameters = (x, y, width, height) => ({
   ],
 })
 
-// var pathsParameters = {
-//   numOfSegments: 3,
-//   depth: 0,
-//   x: 0,
-//   y: 0,
-//   width: 200,
-//   height: 200,
-//   centerX: 100,
-//   centerY: 100,
-//   rotate: 0,
-//   numOfGroups: 2,
-//   groups: [
-//     {
-//       type: 'radial',
-//       incircle: true,
-//       distance: [0.8, 1],
-//       round: [0.6, 1],
-//     },
-//     {
-//       type: 'radial',
-//       incircle: true,
-//       distance: [0.8, 1],
-//       round: [0.7, 1],
-//     },
-//     {
-//       type: 'radial',
-//       incircle: true,
-//       distance: [0.8, 1],
-//       round: [0.7, 1],
-//     },
-//   ],
-// }
-
 var glarePathParams = (x, y, width, height) => ({
   numOfSegments: 3,
   depth: 0,
@@ -151,7 +118,7 @@ function Blobs(props) {
       <path id="django-blob">
         <animate
           attributeName="d"
-          dur="38000ms"
+          dur="19000ms"
           repeatCount="indefinite"
           values={djangoBlob.dValues}
           calcMode="spline"
@@ -168,7 +135,7 @@ function Blobs(props) {
       <path id="graphql-blob">
         <animate
           attributeName="d"
-          dur="40000ms"
+          dur="20000ms"
           repeatCount="indefinite"
           values={graphqlBlob.dValues}
           calcMode="spline"
@@ -185,7 +152,7 @@ function Blobs(props) {
       <path id="react-blob">
         <animate
           attributeName="d"
-          dur="42000ms"
+          dur="21000ms"
           repeatCount="indefinite"
           values={reactBlob.dValues}
           calcMode="spline"
