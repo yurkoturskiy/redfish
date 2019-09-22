@@ -222,6 +222,12 @@
   /*outline: 1px solid pink;*/
 }
 
+@media screen and (max-width: 1640px) and (min-width: 1025px) {
+  #blobs-svg {
+    right: var(--col-one);
+  }
+}
+
 @media screen and (max-width: 1024px) and (min-width: 961px) {
   #blobs-svg {
     left: 128px;
