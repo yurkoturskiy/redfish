@@ -3,15 +3,12 @@ import { path, morphing, randomRange } from 'primitivo-svg'
 
 import Particle from '../styledUIElements/Particle'
 
-const width = window.innerWidth
-const height = window.innerHeight
-
 const animParams = {
   numOfKeyPaths: 3,
   loop: true,
 }
 
-const pathParam = {
+const getPathParam = (width, height) => ({
   numOfSegments: 3,
   depth: 0,
   x: width / 2 - 375,
@@ -42,9 +39,7 @@ const pathParam = {
       round: 1,
     },
   ],
-}
-
-const getPath = () => path(pathParam).d
+})
 
 var particles = []
 for (let i = 0; i < 10; i++) {
@@ -52,19 +47,13 @@ for (let i = 0; i < 10; i++) {
 }
 
 function Background() {
-  const one = useMemo(() => morphing(animParams, pathParam), [
-    animParams,
-    pathParam,
-  ])
-  console.log('one', one)
-  const two = useMemo(() => morphing(animParams, pathParam), [
-    animParams,
-    pathParam,
-  ])
-  const three = useMemo(() => morphing(animParams, pathParam), [
-    animParams,
-    pathParam,
-  ])
+  const pathParam = useMemo(
+    () => getPathParam(window.innerWidth, window.innerHeight),
+    []
+  )
+  const one = useMemo(() => morphing(animParams, pathParam), [])
+  const two = useMemo(() => morphing(animParams, pathParam), [])
+  const three = useMemo(() => morphing(animParams, pathParam), [])
 
   return (
     <div className="background">
