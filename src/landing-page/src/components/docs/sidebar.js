@@ -49,14 +49,14 @@ export default function SideBar(props) {
     if (!sections[sectionOrder])
       sections[sectionOrder] = { name: section, items: [] }
     let item = (
-      <Link to={edge.node.frontmatter.path}>
+      <Link to={edge.node.frontmatter.path} key={path}>
         <li className="link">{edge.node.frontmatter.title}</li>
       </Link>
     )
     !unlisted && sections[sectionOrder].items.push(item)
   })
   sections = sections.map(section => (
-    <SectionWrapper name={section.name}>
+    <SectionWrapper name={section.name} key={section.name}>
       <ul className="links">{section.items}</ul>
     </SectionWrapper>
   ))
