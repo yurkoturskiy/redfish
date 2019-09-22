@@ -122,6 +122,7 @@
 .action-buttons-wrapper a {
   text-decoration: none;
   color: inherit;
+  margin: 2px 0 2px 0;
 }
 
 .content .material-button {
