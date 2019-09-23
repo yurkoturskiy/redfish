@@ -213,6 +213,7 @@
 
 #blobs-svg {
   position: absolute;
+  z-index: 1;
   bottom: 0;
   right: var(--col-two);
   width: 50%;
