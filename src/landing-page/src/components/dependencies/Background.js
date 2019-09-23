@@ -29,7 +29,7 @@ const paths = () => {
         {
           type: 'radial',
           incircle: true,
-          distance: [0.7, 1.2],
+          distance: [0.7, 1],
           round: 1,
           lengthBasedRound: true,
         },

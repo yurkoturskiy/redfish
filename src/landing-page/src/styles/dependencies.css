@@ -5,6 +5,7 @@
 */
 
 .dependencies-wrapper {
+  position: relative;
   /*outline: 1px solid green;*/
 }
 
@@ -17,7 +18,7 @@
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
-  top: 70vh;
+  top: -240px;
 }
 
 .dependencies-wrapper #dependencies-header {
