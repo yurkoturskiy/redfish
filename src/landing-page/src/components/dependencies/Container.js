@@ -38,8 +38,8 @@ function DependenciesContainer() {
           </div>
           <div className="card">
             <LinariaIcon className="icon" />
-            <h4 className="purpose">CSS in JS</h4>
-            <h2 className="name">Linaria</h2>
+            <h4 className="purpose">SVG effects</h4>
+            <h2 className="name">Primitivo-SVG</h2>
           </div>
         </div>
         <div className="section" id="django-section">
