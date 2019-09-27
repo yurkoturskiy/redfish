@@ -33,7 +33,7 @@ const blob = path(shapePathParams)
 
 function ReactDepEffect(props) {
   return (
-    <svg width="660" height="500" id="react-dep-ring">
+    <svg width="148" height="148" id="react-dep-ring">
       <path d={blob.d} stroke="#1D79FF" strokeWidth="10" fillOpacity="0" />
     </svg>
   )
