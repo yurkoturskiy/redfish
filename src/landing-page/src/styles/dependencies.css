@@ -48,15 +48,6 @@
 
 /* Section */
 
-.section .bullet {
-  display: inline-block;
-  margin-left: 4px;
-  margin-bottom: 1px;
-  height: 12px;
-  width: 12px;
-  border-radius: 6px;
-}
-
 .section h3 {
   display: inline-block;
   z-index: 1;
