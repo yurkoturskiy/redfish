@@ -89,7 +89,7 @@ var pathsSVG = a.map((path, index) => {
 function Background() {
   return (
     <svg
-      viewBox="0 0 1920 1440"
+      viewBox="0 0 1920 1280"
       preserveAspectRatio="xMidYMid slice"
       className="background"
     >
