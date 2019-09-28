@@ -12,8 +12,6 @@
 }
 
 .dependencies-container .background {
-  /*width: 100%;*/
-  /*max-width: 1920px;*/
   margin: 0 auto 0 auto;
   height: calc(100% + 240px);
   /*outline: 1px solid red;*/
@@ -200,7 +198,7 @@
   }
 
   .card {
-    flex-basis: calc(50vw - 36px);
+    flex-basis: calc(50vw - 24px);
     height: 88px;
     border-radius: 8px;
   }
@@ -234,7 +232,7 @@
     height: 690px;
   }
   .card {
-    flex-basis: calc(50vw - 36px);
+    flex-basis: calc(50vw - 24px);
     height: 68px;
     border-radius: 8px;
   }
