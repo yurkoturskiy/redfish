@@ -1,6 +1,5 @@
 import React from 'react'
 import TransitionEffectButton from '../styledUIElements/TransitionEffectButton'
-import TutorialsBtn from '../hero/content/actionBtns/TutorialsBtn'
 
 function TutorialsContainer() {
   return (
