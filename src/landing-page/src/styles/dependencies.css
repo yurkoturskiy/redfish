@@ -88,7 +88,6 @@
   display: inline-block;
   margin: 12px;
   flex-basis: 386px;
-  /*width: 384px;*/
   height: 128px;
   background-color: white;
   border-radius: 14px;
@@ -185,7 +184,7 @@
 
 @media screen and (max-width: 767px) {
   .dependencies-header {
-    flex-basis: calc(100vw - 36px);
+    flex-basis: calc(100vw - var(--gutter) - 12px);
   }
   .card {
     margin: 6px;
