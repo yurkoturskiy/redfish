@@ -20,6 +20,7 @@ function PrimitivoTransitionLink(props) {
         <TransitionEffect centerX={clickPos.x} centerY={clickPos.y} />
       )}
       <TransitionLink
+        {...props}
         to={props.to}
         exit={{
           trigger: ({ exit, e }) => {

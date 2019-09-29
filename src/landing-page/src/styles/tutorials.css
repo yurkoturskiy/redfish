@@ -6,61 +6,90 @@
 
 .tutorials-container {
   position: relative;
-  background-color: white;
-  margin-top: 64px;
+}
+
+.tutorials-container .background {
+  position: absolute;
+  width: 100%;
+  height: 800px;
+  top: -320px;
+  /*outline: 1px solid red;*/
+}
+
+.tutorials-content {
+  margin: 0 var(--gutter) 0 var(--gutter);
   display: flex;
-  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
-.tutorials-container #tutorials-header {
-  margin: 0;
+.tutorials-content h2 {
+  z-index: 2;
+  margin: 0 auto 12px auto;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 2rem;
+  line-height: auto;
   text-align: center;
-
-  color: rgba(255, 74, 100, 0.68);
-
-  text-shadow: 0px 1px 24px rgba(255, 74, 100, 0.4),
-    0px 0px 8px rgba(151, 82, 92, 0.17);
 }
 
-.tutorial-container .content {
-  margin: 0 auto 0 auto;
-}
-
-.tutorials-container .element {
-  width: calc(100% - var(--gutter) * 2);
+.tutorials-content .element {
+  z-index: 2;
+  width: 100%;
   max-width: 408px;
   height: 64px;
-  margin: 32px auto 32px auto;
+  line-height: 64px;
+  margin: 8px auto 8px auto;
   background: #ffffff;
-  border: 1px solid var(--red);
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 8px;
+  box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);
   transition: box-shadow 0.2s;
 }
 
-.tutorials-container .element:hover {
-  border: 1px solid var(--red);
-  box-shadow: 0px 2px 8px rgba(29, 179, 85, 0.7),
-    0px 1px 1px rgba(41, 57, 47, 0.5);
+.tutorials-content .element:hover {
+  box-shadow: 0px 1px 4px rgba(56, 71, 94, 0.57),
+    0px 4px 12px rgba(255, 74, 100, 0.22);
 }
 
-.tutorials-container .element span {
+.tutorials-content .element span {
   font-weight: 300;
-  font-size: 20px;
-  line-height: 64px;
+  font-size: 1.25rem;
+  /*line-height: 62px;*/
   padding-left: 20px;
   display: inline-block;
   /* Green 8 */
   color: #344239;
 }
 
-.tutorials-container .element span strong {
+.tutorials-content .element span strong {
   font-weight: bold;
-  font-size: 24px;
+  font-size: 1.5rem;
+  /*line-height: 64px;*/
   padding-right: 18px;
+}
+
+#tutorials-view-more-button {
+  margin-top: 16px;
+}
+
+@media screen and (max-width: 579px) {
+  .tutorials-content h2 {
+    font-size: 1.6rem;
+  }
+  .tutorials-content .element {
+    height: 56px;
+    line-height: 54px;
+  }
+  .tutorials-content .element span {
+    font-size: 1rem;
+    padding-left: 16px;
+  }
+  .tutorials-content .element span strong {
+    font-size: 1.25rem;
+    padding-right: 12px;
+  }
+  #tutorials-view-more-button {
+    margin-top: 12px;
+  }
 }

@@ -31,8 +31,8 @@ const blob = path(shapePathParams)
 
 function DjangoDepEffect(props) {
   return (
-    <svg width="850" height="500" id="django-dep-ring">
-      <path d={blob.d} stroke="#22D163" strokeWidth="10" fillOpacity="0" />
+    <svg width="148" height="148" id="django-dep-ring">
+      <path d={blob.d} stroke="#22D163" strokeWidth="10" fill="transparent" />
     </svg>
   )
 }

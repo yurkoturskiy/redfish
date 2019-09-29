@@ -119,41 +119,6 @@
   margin-bottom: 2px;
 }
 
-.action-buttons-wrapper a {
-  text-decoration: none;
-  color: inherit;
-  margin: 2px 0 2px 0;
-}
-
-.content .material-button {
-  background-color: transparent;
-  font-size: 1rem;
-  font-weight: normal;
-  height: 44px;
-  color: black;
-  --mdc-theme-primary: black;
-  text-transform: capitalize;
-  letter-spacing: 0;
-  cursor: pointer;
-}
-
-@media screen and (max-width: 960px) {
-  .content .material-button {
-    font-size: 0.875rem;
-    height: 36px;
-  }
-}
-
-.material-button .mdc-button__icon {
-  z-index: 0;
-  fill: var(--green-two);
-  padding-bottom: 2px;
-}
-
-.content .material-button svg {
-  fill: var(--green-eight);
-}
-
 #briefly-about {
   margin-top: 36px;
   margin-bottom: 24px;
@@ -213,6 +178,7 @@
 
 #blobs-svg {
   position: absolute;
+  z-index: 1;
   bottom: 0;
   right: var(--col-two);
   width: 50%;

@@ -8,9 +8,8 @@ import Header from './content/Header'
 //  ** Action buttons
 import ActionBtnsWrapper from './content/ActionBtnsWrapper'
 import BrieflyAboutBtn from './content/actionBtns/BrieflyAboutBtn'
-import GitHubPageBtn from './content/actionBtns/GitHubPageBtn'
-import GoToAppBtn from './content/actionBtns/GoToAppBtn'
-import TutorialsBtn from './content/actionBtns/TutorialsBtn'
+import TransitionEffectButton from '../styledUIElements/TransitionEffectButton'
+import ExternalLinkButton from '../styledUIElements/ExternalLinkButton'
 //  ** Others
 
 const HeroContainer = () => {
@@ -24,9 +23,15 @@ const HeroContainer = () => {
         <ActionBtnsWrapper>
           <BrieflyAboutBtn setDialog={setDialog} />
           <div className="buttons-wrapper">
-            <GoToAppBtn />
-            <TutorialsBtn />
-            <GitHubPageBtn />
+            <TransitionEffectButton to="/authentication/">
+              Go To App
+            </TransitionEffectButton>
+            <TransitionEffectButton to="/docs/">
+              Tutorials
+            </TransitionEffectButton>
+            <ExternalLinkButton to="https://github.com/guandjoy/Redfish">
+              GitHub
+            </ExternalLinkButton>
           </div>
         </ActionBtnsWrapper>
       </ContentWrapper>

@@ -6,6 +6,7 @@ import HeaderContainer from './header/HeaderContainer'
 
 // Local styles
 import '../styles/global-styles.css'
+import '../styles/buttons.css'
 import '../styles/tutorials.css'
 import '../styles/hero2.css'
 import '../styles/ui-elements.css'
