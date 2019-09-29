@@ -40,29 +40,6 @@ const colors = [
   '#22d163',
 ]
 
-// var a = paths()
-// var pathsSVG = a.map((path, index) => {
-//   return (
-//     <path
-//       className="dependencies-circles"
-//       key={`bg-svg-path-${index}`}
-//       stroke={colors[index]}
-//       strokeWidth="12"
-//       fill="transparent"
-//     >
-//       <animate
-//         attributeName="d"
-//         repeatCount="indefinite"
-//         calcMode="spline"
-//         keyTimes="0; 0.5; 1"
-//         keySplines=".25, 0, .75, 1; .25, 0, .75, 1;"
-//         dur="36s"
-//         values={path}
-//       />
-//     </path>
-//   )
-// })
-
 function Background() {
   return (
     <svg width={window.innerWidth} height={window.innerHeight}>
