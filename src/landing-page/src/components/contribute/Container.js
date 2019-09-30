@@ -12,8 +12,12 @@ function ContributeContainer() {
         feel free to participate.
       </p>
       <div className="icons">
-        <TwitterIcon id="twitter-footer" className="icon" />
-        <GitHubIcon id="github-footer" className="icon" />
+        <a href="https://twitter.com/guandjoy">
+          <GitHubIcon id="github-icon" className="icon" />
+        </a>
+        <a href="https://github.com/guandjoy/redfish">
+          <TwitterIcon id="twitter-icon" className="icon" />
+        </a>
       </div>
     </div>
   )
