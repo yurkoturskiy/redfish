@@ -1,21 +1,7 @@
 .footer-wrapper {
   position: relative;
-  height: 92px;
   padding: 0;
   margin-top: 92px;
-}
-
-.footer-wrapper .content {
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  align-items: flex-end;
-  width: 100%;
-  max-width: 960px;
-  left: 0;
-  right: 0;
-  bottom: 64px;
-  margin: 0 auto 0 auto;
 }
 
 .footer-wrapper .footer-pattern {
