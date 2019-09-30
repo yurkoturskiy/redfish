@@ -18,10 +18,7 @@
   font-size: 24px;
   line-height: 28px;
   text-align: center;
-
-  color: rgba(29, 121, 255, 0.69);
-
-  text-shadow: 0px 4px 24px rgba(29, 121, 255, 0.32);
+  color: var(--green-eight);
 }
 
 .contribute-container p {
@@ -29,9 +26,21 @@
   font-size: 18px;
   line-height: 21px;
   text-align: center;
-
-  color: #444444;
+  color: var(--green-eight);
 }
 
-#send-email {
+.contribute-container .icons {
+  margin: 24px auto 24px auto;
+  z-index: 2;
+  text-align: center;
+}
+
+.contribute-container .icon {
+  fill: var(--green-eight);
+  margin: 0 12px 0 12px;
+  width: 36px;
+}
+
+.contribute-container .icon:hover {
+  fill: var(--red);
 }

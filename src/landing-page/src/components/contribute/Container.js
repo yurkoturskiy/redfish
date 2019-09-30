@@ -1,5 +1,8 @@
 import React from 'react'
 
+import TwitterIcon from '../styledUIElements/TwitterIcon'
+import GitHubIcon from '../styledUIElements/GitHubIcon'
+
 function ContributeContainer() {
   return (
     <div className="contribute-container">
@@ -8,6 +11,14 @@ function ContributeContainer() {
         Redfish is belong to open source community. We have what to improve, so
         feel free to participate.
       </p>
+      <div className="icons">
+        <a href="https://twitter.com/guandjoy">
+          <GitHubIcon id="github-icon" className="icon" />
+        </a>
+        <a href="https://github.com/guandjoy/redfish">
+          <TwitterIcon id="twitter-icon" className="icon" />
+        </a>
+      </div>
     </div>
   )
 }
