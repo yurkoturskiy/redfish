@@ -10,18 +10,21 @@
   flex-direction: column;
   width: calc(100% - var(--gutter) * 2);
   max-width: 560px;
-  margin: 85px auto 0 auto;
+  margin: 64px auto 0 auto;
 }
 
 .contribute-container #contribute-header {
   font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
+  z-index: 2;
+  font-size: 2rem;
+  line-height: auto;
+  margin: 0 auto 12px auto;
   text-align: center;
   color: var(--green-eight);
 }
 
 .contribute-container p {
+  z-index: 2;
   font-weight: normal;
   font-size: 18px;
   line-height: 21px;
@@ -30,7 +33,7 @@
 }
 
 .contribute-container .icons {
-  margin: 24px auto 24px auto;
+  margin: 16px auto 24px auto;
   z-index: 2;
   text-align: center;
 }
