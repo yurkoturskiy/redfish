@@ -127,9 +127,13 @@ function Blobs(props) {
         />
       </path>
       <path id="django-glare" d={djangoGlare.d} />
-      <text id="django-text" rotate="180">
-        <textPath startOffset="70" href="#django-glare">
-          ognajD
+      <text id="django-text">
+        <textPath
+          startOffset="10"
+          href="#django-glare"
+          xlinkHref="#django-glare"
+        >
+          Django
         </textPath>
       </text>
       <path id="graphql-blob">
@@ -145,7 +149,11 @@ function Blobs(props) {
       </path>
       <path id="graphql-glare" d={graphqlGlare.d} />
       <text id="graphql-text" rotate="180">
-        <textPath startOffset="115" href="#graphql-glare">
+        <textPath
+          startOffset="115"
+          href="#graphql-glare"
+          xlinkHref="#graphql-glare"
+        >
           LQhparG
         </textPath>
       </text>
@@ -162,7 +170,7 @@ function Blobs(props) {
       </path>
       <path id="react-glare" d={reactGlare.d} />
       <text id="reactjs-text">
-        <textPath startOffset="20" href="#react-glare">
+        <textPath startOffset="20" href="#react-glare" xlinkHref="#react-glare">
           ReactJS
         </textPath>
       </text>
