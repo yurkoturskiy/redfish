@@ -6,15 +6,7 @@
 
 .tutorials-container {
   position: relative;
-  outline: 1px solid green;
-}
-
-.tutorials-container .background {
-  position: absolute;
-  width: 100%;
-  height: 1080px;
-  top: -420px;
-  outline: 1px solid red;
+  /*outline: 1px solid green;*/
 }
 
 .tutorials-content {
