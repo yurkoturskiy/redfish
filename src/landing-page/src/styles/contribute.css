@@ -35,3 +35,21 @@
 
 #send-email {
 }
+
+.contribute-container .icons {
+  z-index: 2;
+  text-align: center;
+}
+
+.contribute-container .icon {
+  fill: var(--red);
+  margin: 0 12px 22px 12px;
+}
+
+.contribute-container .icon:hover {
+  fill: var(--green-eight);
+}
+
+#twitter-footer {
+  margin-bottom: 26px;
+}
