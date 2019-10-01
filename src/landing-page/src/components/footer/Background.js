@@ -2,23 +2,34 @@ import React from 'react'
 import Particle from '../styledUIElements/Particle'
 
 function Background() {
+  var sceneWidth = window.innerWidth > 1440 ? 1440 : window.innerWidth
+  var sceneHeight = 1300
+
   const maxSide =
     window.innerWidth >= window.innerHeight
       ? window.innerWidth
       : window.innerHeight
 
-  var numOfParticles = Math.floor(maxSide / 60)
+  var numOfParticles = Math.floor(sceneWidth / 50)
   numOfParticles = numOfParticles < 10 ? 10 : numOfParticles
   const particles = []
   for (let i = 0; i < numOfParticles; i++) {
-    particles[i] = <Particle key={`particle-num-${i}`} />
+    particles[i] = (
+      <Particle
+        key={`particle-num-${i}`}
+        sceneWidth={sceneWidth}
+        sceneHeight={sceneHeight}
+      />
+    )
   }
 
   return (
     <svg
       preserveAspectRatio="xMidYMid slice"
       className="background"
-      viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}
+      width={sceneWidth}
+      height={sceneHeight}
+      viewBox={`0 0 ${sceneWidth} ${sceneHeight}`}
     >
       {particles}
     </svg>
