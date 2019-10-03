@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Field } from 'formik'
-import { navigate } from 'gatsby'
 // Local components
 import FormikMaterialTextField from '../../styledUIElements/FormikMaterialTextField'
 import Button from '@material/react-button'
@@ -71,7 +70,7 @@ class RegistrationForm extends React.Component {
             type="button"
             className="form-button"
             disabled={isSubmitting}
-            onClick={() => navigate('/authentication/login')}
+            onClick={() => this.props.setRoute('login')}
           >
             Login
           </Button>

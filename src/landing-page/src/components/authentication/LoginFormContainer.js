@@ -64,6 +64,7 @@ function LoginFormContainer(props) {
             touched={touched}
             isSubmitting={isSubmitting}
             errors={errors}
+            setRoute={props.setRoute}
           />
         )}
       </Formik>

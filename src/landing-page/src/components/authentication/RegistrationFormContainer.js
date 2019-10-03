@@ -86,6 +86,7 @@ function RegistrationFormContainer(props) {
               onChange={handleChange}
               passwordOnChange={passwordStrengthValidation}
               passwordHelperText={passwordStrengthScore}
+              setRoute={props.setRoute}
             />
           )}
         </Formik>

@@ -51,20 +51,15 @@ class LoginForm extends React.Component {
           <span className="non-fields-error">
             {status && status.non_field_errors}
           </span>
-          <div>
-            <Link
-              className="reset-password"
-              to={'/authentication/password-reset'}
-            >
-              Forget password?
-            </Link>
+          <div onClick={() => this.props.setRoute('password-reset')}>
+            Forget password?
           </div>
           <div>
             <Button
               type="button"
               className="form-button"
               disabled={isSubmitting}
-              onClick={() => navigate('/authentication/signup')}
+              onClick={() => this.props.setRoute('signup')}
             >
               Sign up
             </Button>
