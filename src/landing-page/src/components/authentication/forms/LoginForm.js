@@ -52,8 +52,6 @@ class LoginForm extends React.Component {
             {status && status.non_field_errors}
           </span>
           <div>
-            <Checkbox nativeControlId="guest-checkbox" />
-            <label htmlFor="guest-checkbox">guest user</label>
             <Link
               className="reset-password"
               to={'/authentication/password-reset'}
