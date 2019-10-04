@@ -111,6 +111,10 @@
 }
 
 .authentication-page .background svg {
-  width: 100%;
-  height: 100vh;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto 0 auto;
+  width: 800px;
+  height: 800px;
 }

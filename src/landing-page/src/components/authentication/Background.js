@@ -11,8 +11,8 @@ const animParams = {
 const getPathParam = (width, height) => ({
   numOfSegments: 3,
   depth: 0,
-  x: width / 2 - 375,
-  y: height / 2 - 400,
+  x: 25,
+  y: 25,
   width: 750,
   height: 750,
   centerX: 375,
@@ -53,9 +53,6 @@ function Background() {
   return (
     <div className="background">
       <svg>
-        <filter id="blurMe" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="1.6" />
-        </filter>
         <path id="auth-blob-one">
           <animate
             id="path-animation"
