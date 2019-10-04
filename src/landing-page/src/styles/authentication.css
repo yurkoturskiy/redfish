@@ -9,6 +9,7 @@
 }
 
 .authentication-container {
+  text-align: center;
   width: 512px;
   position: absolute;
   top: 50%;
@@ -51,6 +52,10 @@
   margin: 8px auto 8px auto;
 }
 
+.facebook-button.densed {
+  width: 48px;
+}
+
 .github-button {
   position: relative;
   border: 0px solid white;
@@ -63,6 +68,10 @@
   font-size: 1rem;
   display: block;
   margin: 8px auto 8px auto;
+}
+
+.github-button.densed {
+  width: 48px;
 }
 
 #auth-blob-one {

@@ -11,8 +11,12 @@ const AUTH_WITH_FACEBOOK = gql`
   }
 `
 
-const Button = ({ children, triggerLogin, ...props }) => (
-  <button className="facebook-button" onClick={() => triggerLogin()} {...props}>
+const Button = ({ children, triggerLogin, densed, ...props }) => (
+  <button
+    className={`facebook-button ${densed && 'densed'}`}
+    onClick={() => triggerLogin()}
+    {...props}
+  >
     {children}
   </button>
 )
@@ -60,6 +64,7 @@ function AuthWithFacebook(props) {
         appId="432672034191065"
         onLoginSuccess={onLoginSuccess}
         onLoginFailure={onLoginFailure}
+        densed={props.densed}
       >
         {props.children}
       </SocialButton>
