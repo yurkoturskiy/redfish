@@ -38,6 +38,12 @@
   margin: 8px auto 8px auto;
 }
 
+.authentication-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .facebook-button {
   position: relative;
   border: 0px solid white;
