@@ -10,11 +10,17 @@
 
 .authentication-container {
   text-align: center;
-  width: 512px;
+  width: 400px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -70%);
+}
+
+.form-card {
+  box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);
+  background-color: white;
+  border-radius: 8px;
 }
 
 .authentication .header {
