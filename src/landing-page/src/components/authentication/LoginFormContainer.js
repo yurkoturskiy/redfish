@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Formik } from 'formik'
+import Button from '@material/react-button'
 // Components
 import LoginForm from './forms/LoginForm'
 import AuthWithFacebook from './AuthWithFacebook'
@@ -54,25 +55,33 @@ function LoginFormContainer(props) {
 
   return (
     <React.Fragment>
-      <Formik
-        initialValues={{ username: undefined, password: undefined }}
-        onSubmit={handleSubmit}
-      >
-        {({ status, touched, isSubmitting, errors }) => (
-          <LoginForm
-            status={status}
-            touched={touched}
-            isSubmitting={isSubmitting}
-            errors={errors}
-            setRoute={props.setRoute}
-          />
-        )}
-      </Formik>
-      <div>or</div>
-      <div>
-        <p>Continue with: </p>
-        <AuthWithFacebook>Sign in with Facebook</AuthWithFacebook>
-        <AuthWithGitHub>Sign in with GitHub</AuthWithGitHub>
+      <div className="form-card">
+        <Formik
+          initialValues={{ username: undefined, password: undefined }}
+          onSubmit={handleSubmit}
+        >
+          {({ status, touched, isSubmitting, errors }) => (
+            <LoginForm
+              status={status}
+              touched={touched}
+              isSubmitting={isSubmitting}
+              errors={errors}
+              setRoute={props.setRoute}
+            />
+          )}
+        </Formik>
+      </div>
+      <div className="authentication-footer">
+        <Button
+          type="button"
+          className="material-button"
+          outlined={true}
+          onClick={() => props.setRoute('signup')}
+        >
+          Create account
+        </Button>
+        <AuthWithFacebook densed={true} />
+        <AuthWithGitHub densed={true} />
       </div>
     </React.Fragment>
   )

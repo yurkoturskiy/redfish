@@ -6,18 +6,30 @@ import AuthWithGitHub from './AuthWithGitHub'
 
 function StartForm(props) {
   return (
-    <React.Fragment>
+    <div className="form-card">
       <h5 className="header">Authorize to continue, please</h5>
       <AuthWithFacebook>Continue with Facebook</AuthWithFacebook>
       <AuthWithGitHub>Continue with GitHub</AuthWithGitHub>
       <div className="separator">
-        <p>Or via email</p>
+        <p>r use email</p>
       </div>
       <div className="buttonsWrapper">
-        <Button onClick={() => props.setRoute('login')}>Log in</Button>
-        <Button onClick={() => props.setRoute('signup')}>Sign up</Button>
+        <Button
+          className="material-button"
+          outlined={true}
+          onClick={() => props.setRoute('login')}
+        >
+          Log in
+        </Button>
+        <Button
+          className="material-button"
+          outlined={true}
+          onClick={() => props.setRoute('signup')}
+        >
+          Sign up
+        </Button>
       </div>
-    </React.Fragment>
+    </div>
   )
 }
 

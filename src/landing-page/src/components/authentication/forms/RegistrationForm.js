@@ -66,18 +66,12 @@ class RegistrationForm extends React.Component {
           <span className="non-fields-error">
             {status && status.non_field_errors}
           </span>
-          <Button
-            type="button"
-            className="form-button"
-            disabled={isSubmitting}
-            onClick={() => this.props.setRoute('login')}
-          >
-            Login
-          </Button>
+
           <Button
             unelevated
             type="submit"
-            className="form-button"
+            className="material-button"
+            solid={true}
             disabled={isSubmitting}
           >
             Submit

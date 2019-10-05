@@ -3,6 +3,7 @@ import { Formik } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import zxcvbn from 'zxcvbn'
+import Button from '@material/react-button'
 // Components
 import RegistrationForm from './forms/RegistrationForm'
 import AuthWithFacebook from './AuthWithFacebook'
@@ -69,32 +70,40 @@ function RegistrationFormContainer(props) {
   } else {
     return (
       <React.Fragment>
-        <Formik
-          initialValues={{
-            username: undefined,
-            email: undefined,
-            password1: undefined,
-          }}
-          onSubmit={handleSubmit}
-        >
-          {({ status, touched, isSubmitting, errors, handleChange }) => (
-            <RegistrationForm
-              status={status}
-              touched={touched}
-              isSubmitting={isSubmitting}
-              errors={errors}
-              onChange={handleChange}
-              passwordOnChange={passwordStrengthValidation}
-              passwordHelperText={passwordStrengthScore}
-              setRoute={props.setRoute}
-            />
-          )}
-        </Formik>
-        <div>or</div>
-        <div>
-          <p>Continue with: </p>
-          <AuthWithFacebook>Sign in with Facebook</AuthWithFacebook>
-          <AuthWithGitHub>Sign in with GitHub</AuthWithGitHub>
+        <div className="form-card">
+          <Formik
+            initialValues={{
+              username: undefined,
+              email: undefined,
+              password1: undefined,
+            }}
+            onSubmit={handleSubmit}
+          >
+            {({ status, touched, isSubmitting, errors, handleChange }) => (
+              <RegistrationForm
+                status={status}
+                touched={touched}
+                isSubmitting={isSubmitting}
+                errors={errors}
+                onChange={handleChange}
+                passwordOnChange={passwordStrengthValidation}
+                passwordHelperText={passwordStrengthScore}
+                setRoute={props.setRoute}
+              />
+            )}
+          </Formik>
+        </div>
+        <div className="authentication-footer">
+          <Button
+            type="button"
+            className="material-button"
+            outlined={true}
+            onClick={() => props.setRoute('login')}
+          >
+            Login
+          </Button>
+          <AuthWithFacebook densed={true} />
+          <AuthWithGitHub densed={true} />
         </div>
       </React.Fragment>
     )
