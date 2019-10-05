@@ -8,15 +8,15 @@ function getRandomInt(max) {
 
 const colors = ['#3688ff', '#ff546c', '#22d163']
 
-function Particle() {
+function Particle({ sceneHeight, sceneWidth }) {
   const getPathParams = () => {
     let maxSide =
       window.innerWidth >= window.innerHeight
         ? window.innerWidth
         : window.innerHeight
     let maxSize = maxSide / 20
-    let x = randomRange(0, window.innerWidth)
-    let y = randomRange(maxSize, window.innerHeight)
+    let x = randomRange(maxSize, sceneWidth - maxSize)
+    let y = randomRange(maxSize, sceneHeight)
     let width = randomRange(20, maxSize)
     let height = randomRange(20, maxSize)
     return {
@@ -49,6 +49,7 @@ function Particle() {
     <path
       d={pathDescription}
       fill="transparent"
+      vectorEffect="non-scaling-stroke"
       strokeWidth="4px"
       stroke={colors[pathFillColorIndex]}
       opacity=".8"

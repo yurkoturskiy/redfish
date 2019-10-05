@@ -30,9 +30,23 @@ class PasswordResetForm extends React.Component {
           type="email"
           component={FormikMaterialTextField}
         />
-        <Button type="submit" className="form-button" disabled={isSubmitting}>
+        <Button
+          type="button"
+          className="material-button"
+          onClick={() => this.props.setRoute('login')}
+        >
+          go back
+        </Button>
+        <Button
+          unelevated
+          type="submit"
+          className="material-button"
+          solid={true}
+          disabled={isSubmitting}
+        >
           Reset password
         </Button>
+
         <span>{status && status.non_field_errors}</span>
       </Form>
     )

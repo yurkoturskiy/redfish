@@ -1,11 +1,9 @@
 import React from 'react'
 import TransitionEffectButton from '../styledUIElements/TransitionEffectButton'
-import Background from './Background'
 
 function TutorialsContainer() {
   return (
     <div className="tutorials-container">
-      <Background />
       <div className="tutorials-content">
         <h2>Tutorials</h2>
         <div className="element">

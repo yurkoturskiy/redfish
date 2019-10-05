@@ -50,8 +50,8 @@ function AuthWithGitHub(props) {
         onSuccess={responseGitHub}
         onFailure={onFailure}
         redirectUri=""
-        buttonText={props.children}
-        className="github-button"
+        buttonText={props.children || ''}
+        className={`github-button ${props.densed && 'densed'}`}
       />
     </div>
   )
