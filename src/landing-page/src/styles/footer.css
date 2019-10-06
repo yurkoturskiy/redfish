@@ -1,0 +1,27 @@
+.footer-wrapper {
+  position: relative;
+  padding: 0;
+  margin-top: 92px;
+}
+
+.footer-wrapper .background {
+  position: absolute;
+  z-index: 1;
+  margin: 0 auto 0 auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /*outline: 1px solid red;*/
+}
+
+.footer-wrapper .footer-pattern {
+  position: absolute;
+  bottom: 0;
+  height: 64px;
+}
+
+.footer-wrapper .logo {
+  z-index: 2;
+  margin-left: var(--gutter);
+  margin-bottom: 16px;
+}

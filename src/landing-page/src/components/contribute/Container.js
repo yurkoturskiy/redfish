@@ -1,5 +1,7 @@
 import React from 'react'
-import Button from '../styledUIElements/Button'
+
+import TwitterIcon from '../styledUIElements/TwitterIcon'
+import GitHubIcon from '../styledUIElements/GitHubIcon'
 
 function ContributeContainer() {
   return (
@@ -9,7 +11,14 @@ function ContributeContainer() {
         Redfish is belong to open source community. We have what to improve, so
         feel free to participate.
       </p>
-      <Button id="send-email">Send email</Button>
+      <div className="icons">
+        <a href="https://github.com/guandjoy/redfish">
+          <GitHubIcon id="github-icon" className="icon" />
+        </a>
+        <a href="https://twitter.com/guandjoy">
+          <TwitterIcon id="twitter-icon" className="icon" />
+        </a>
+      </div>
     </div>
   )
 }

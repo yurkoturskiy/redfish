@@ -38,6 +38,7 @@ module.exports = {
     author: `@guandjoy`,
   },
   plugins: [
+    `gatsby-plugin-transition-link`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
@@ -132,7 +133,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-create-client-paths`,
       options: {
-        prefixes: [`/confirm-email/*`, `/authentication/*`],
+        prefixes: [`/confirm-email/*`],
       },
     },
     `gatsby-transformer-remark`,

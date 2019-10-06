@@ -1,0 +1,137 @@
+/*
+**************************************************
+***************** Authentication *****************
+**************************************************
+*/
+
+.authentication-page {
+  height: 100vh;
+}
+
+.authentication-container {
+  text-align: center;
+  width: 320px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto 0 auto;
+  transform: translate(0, -70%);
+}
+
+.form-card {
+  padding: 4px 0 24px 0;
+  box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);
+  background-color: white;
+  border-radius: 8px;
+}
+
+.authentication .header {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #aaaeb8;
+  text-align: center;
+  margin: 0px;
+  padding: 16px 0 8px 0;
+}
+
+.authentication .separator {
+  display: block;
+  margin: 8px auto 8px auto;
+  text-align: center;
+}
+
+.authentication .buttonsWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 8px auto 8px auto;
+}
+
+.authentication-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.authentication-footer * {
+  margin: 12px;
+}
+
+/* Social buttons */
+
+.facebook-button {
+  position: relative;
+  border: 0px solid white;
+  background: #4267b2;
+  border-radius: 5px;
+  color: white;
+  height: 48px;
+  text-align: center;
+  width: 300px;
+  font-size: 1rem;
+  display: block;
+  margin: 8px auto 8px auto;
+}
+
+.facebook-button.densed {
+  width: 48px;
+  margin: 0;
+}
+
+.github-button {
+  position: relative;
+  border: 0px solid white;
+  background: #333333;
+  border-radius: 5px;
+  color: white;
+  height: 48px;
+  text-align: center;
+  width: 300px;
+  font-size: 1rem;
+  display: block;
+  margin: 8px auto 8px auto;
+}
+
+.github-button.densed {
+  width: 48px;
+  margin: 0;
+}
+
+#auth-blob-one {
+  stroke: #22d163;
+  stroke-width: 22px;
+  fill: transparent;
+  mix-blend-mode: multiply;
+}
+
+#auth-blob-two {
+  stroke: #ff546c;
+  stroke-width: 22px;
+  fill: transparent;
+  mix-blend-mode: multiply;
+}
+
+#auth-blob-three {
+  stroke: #3688ff;
+  stroke-width: 22px;
+  fill: transparent;
+  mix-blend-mode: multiply;
+}
+
+/*
+******************
+*** Background ***
+******************
+*/
+
+.authentication-page .background {
+}
+
+.authentication-page .background svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto 0 auto;
+  width: 800px;
+  height: 800px;
+}

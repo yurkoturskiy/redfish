@@ -23,7 +23,7 @@
   position: relative;
   display: inline-block;
   top: calc(var(--grid-margin) + var(--gutter));
-  left: var(--col-two);
+  left: var(--col-three);
 }
 
 .header-container .logo svg {
@@ -44,6 +44,12 @@
 
 /* Adaptivity */
 
+@media screen and (max-width: 2400px) and (min-width: 1281px) {
+  .header-container .logo {
+    left: var(--col-two);
+  }
+}
+
 @media screen and (max-width: 1280px) and (min-width: 961px) {
   .header-container .logo {
     left: var(--col-one);
@@ -56,15 +62,15 @@
   }
 }
 
-@media screen and (max-width: 359px) {
+@media screen and (max-width: 360px) {
   .header-container .logo svg {
-    height: 29px;
-    width: 24px;
+    height: 48px;
+    width: 40px;
   }
 
   .header-container .logo span {
-    font-size: 12px;
-    line-height: 14px;
-    margin: 8px 0 7px 6px;
+    font-size: 15px;
+    line-height: 17.5px;
+    margin: 15.8px 5px 15px 10px;
   }
 }

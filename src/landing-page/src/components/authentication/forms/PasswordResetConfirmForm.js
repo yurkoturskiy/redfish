@@ -36,7 +36,12 @@ class PasswordResetConfirmForm extends React.Component {
           tralingIconOnClick={this.switchPasswordVisibility}
           component={FormikMaterialTextField}
         />
-        <Button type="submit" className="form-button" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          className="material-button"
+          solid={true}
+          disabled={isSubmitting}
+        >
           Set new password
         </Button>
         <span>{status && status.non_field_errors}</span>

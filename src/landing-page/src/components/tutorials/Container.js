@@ -1,11 +1,11 @@
 import React from 'react'
-import Button from '../styledUIElements/Button'
+import TransitionEffectButton from '../styledUIElements/TransitionEffectButton'
 
 function TutorialsContainer() {
   return (
     <div className="tutorials-container">
-      <h2 id="tutorials-header">Tutorials</h2>
-      <div className="content">
+      <div className="tutorials-content">
+        <h2>Tutorials</h2>
         <div className="element">
           <span>
             <strong>01</strong>Install
@@ -26,8 +26,10 @@ function TutorialsContainer() {
             <strong>04</strong>Deploy server on DigitalOcean
           </span>
         </div>
+        <TransitionEffectButton id="tutorials-view-more-button" to="/docs/">
+          View More
+        </TransitionEffectButton>
       </div>
-      <Button>View on YouTube</Button>
     </div>
   )
 }

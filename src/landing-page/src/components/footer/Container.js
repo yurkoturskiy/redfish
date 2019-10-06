@@ -1,18 +1,12 @@
 import React from 'react'
 // Local components
 import FooterPattern from '../../images/FooterPattern'
-import TwitterIcon from '../../images/TwitterIcon'
-import GitHubIcon from '../../images/GitHubIcon'
+import Background from './Background'
 
 function FooterContainer(props) {
   return (
     <div className="footer-wrapper">
-      <div className="content">
-        <div className="icons">
-          <TwitterIcon id="twitter-footer" className="icon" />
-          <GitHubIcon id="github-footer" className="icon" />
-        </div>
-      </div>
+      <Background />
       <FooterPattern className="footer-pattern" />
     </div>
   )

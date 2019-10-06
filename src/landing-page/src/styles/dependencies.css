@@ -1,0 +1,297 @@
+/*
+************************************************
+***************** Dependencies *****************
+************************************************
+*/
+
+.dependencies-container {
+  position: relative;
+  margin: 0 auto 0 auto;
+  height: 940px;
+  /*outline: 1px solid green;*/
+}
+
+.dependencies-container .background {
+  margin: 0 auto 0 auto;
+  height: calc(100% + 240px);
+  /*outline: 1px solid red;*/
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: -240px;
+}
+
+.dependencies-container #dependencies-header {
+  margin: 0;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+
+  color: rgba(255, 74, 100, 0.68);
+
+  text-shadow: 0px 1px 24px rgba(255, 74, 100, 0.4),
+    0px 0px 8px rgba(151, 82, 92, 0.17);
+}
+
+.dependencies-container .content {
+  /*outline: 1px solid pink;*/
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto 0 auto;
+}
+
+.dependencies-header {
+  position: relative;
+  flex-basis: 796px;
+  padding: 0;
+}
+
+/* Section */
+
+.dependencies-header h3 {
+  display: inline-block;
+  z-index: 2;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 48px 16px 0 16px;
+  font-weight: normal;
+  font-size: 1.5rem;
+  line-height: 21px;
+  color: var(--green-eight);
+}
+
+#react-dep-ring,
+#django-dep-ring {
+  position: absolute;
+  top: -12px;
+  left: -48px;
+}
+
+/******************/
+/*** Background ***/
+/******************/
+
+.dependencies-circles {
+  mix-blend-mode: multiply;
+}
+
+/*************/
+/*** Cards ***/
+/*************/
+
+.card {
+  z-index: 2;
+  position: relative;
+  display: inline-block;
+  margin: 12px;
+  flex-basis: 386px;
+  height: 128px;
+  background-color: white;
+  border-radius: 14px;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+  box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);
+
+  background: #ffffff;
+  /* Redfish Blue */
+  box-sizing: border-box;
+}
+
+.card:hover {
+  box-shadow: 0px 1px 4px rgba(56, 71, 94, 0.57),
+    0px 4px 12px rgba(255, 74, 100, 0.22);
+}
+
+.card .icon {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 64px;
+  height: 64px;
+}
+.card .purpose {
+  position: absolute;
+  top: 38px;
+  left: 112px;
+  margin: 0;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  /* identical to box height */
+
+  color: #555555;
+}
+.card .name {
+  position: absolute;
+  left: 112px;
+  bottom: 36px;
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #555555;
+}
+
+/* Adaptivity */
+
+@media screen and (max-width: 900px) {
+  .dependencies-header h3 {
+    font-size: 1.25rem;
+  }
+  .dependencies-container .content {
+    margin: 12px;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 800px) {
+  .dependencies-container {
+    height: 840px;
+  }
+  .dependencies-header {
+    flex-basis: 720px;
+  }
+  .card {
+    flex-basis: 348px;
+    height: 112px;
+  }
+
+  .card .icon {
+    top: 24px;
+    left: 24px;
+  }
+
+  .card .purpose {
+    top: 34px;
+    left: 104px;
+
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .card .name {
+    bottom: 32px;
+    left: 104px;
+
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .dependencies-header {
+    flex-basis: 100%;
+  }
+  .card {
+    margin: 6px;
+  }
+}
+
+@media screen and (max-width: 800px) and (min-width: 580px) {
+  .dependencies-container {
+    height: 780px;
+  }
+
+  .card {
+    flex-basis: calc(50% - 12px);
+    height: 88px;
+    border-radius: 8px;
+  }
+
+  .card .icon {
+    height: 48px;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+  }
+
+  .card .purpose {
+    top: 24px;
+    left: 80px;
+
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .card .name {
+    bottom: 26px;
+    left: 80px;
+
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+@media screen and (max-width: 579px) and (min-width: 481px) {
+  .dependencies-container {
+    height: 690px;
+  }
+  .card {
+    flex-basis: calc(50% - 12px);
+    height: 68px;
+    border-radius: 8px;
+  }
+
+  .card .icon {
+    height: 36px;
+    width: 36px;
+    top: 16px;
+    left: 16px;
+  }
+
+  .card .purpose {
+    top: 18px;
+    left: 64px;
+
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .card .name {
+    bottom: 16px;
+    left: 64px;
+
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dependencies-container {
+    height: 880px;
+  }
+  .card {
+    flex-basis: 100%;
+    height: 68px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+  }
+
+  .card .icon {
+    height: 36px;
+    width: 36px;
+    top: 16px;
+    left: 16px;
+  }
+
+  .card .purpose {
+    top: 18px;
+    left: 64px;
+
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .card .name {
+    bottom: 16px;
+    left: 64px;
+
+    font-size: 14px;
+    line-height: 16px;
+  }
+}

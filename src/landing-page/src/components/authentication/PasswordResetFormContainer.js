@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Formik } from 'formik'
+import Button from '@material/react-button'
 // Components
 import PasswordResetForm from './forms/PasswordResetForm'
+import AuthWithFacebook from './AuthWithFacebook'
+import AuthWithGitHub from './AuthWithGitHub'
 
 const PASSWORD_RESET = gql`
   mutation passwordReset($email: String = "") {
@@ -13,7 +16,7 @@ const PASSWORD_RESET = gql`
   }
 `
 
-function PasswordResetFormContainer() {
+function PasswordResetFormContainer(props) {
   const [passwordReset] = useMutation(PASSWORD_RESET)
   const [requestIsSucceed, setRequestIsSucceed] = useState(false)
 
@@ -46,16 +49,33 @@ function PasswordResetFormContainer() {
     return <h3>Check your email</h3>
   } else {
     return (
-      <Formik initialValues={{ email: undefined }} onSubmit={handleSubmit}>
-        {({ status, touched, isSubmitting, errors }) => (
-          <PasswordResetForm
-            status={status}
-            touched={touched}
-            isSubmitting={isSubmitting}
-            errors={errors}
-          />
-        )}
-      </Formik>
+      <React.Fragment>
+        <div className="form-card">
+          <Formik initialValues={{ email: undefined }} onSubmit={handleSubmit}>
+            {({ status, touched, isSubmitting, errors }) => (
+              <PasswordResetForm
+                status={status}
+                touched={touched}
+                isSubmitting={isSubmitting}
+                errors={errors}
+                setRoute={props.setRoute}
+              />
+            )}
+          </Formik>
+        </div>
+        <div className="authentication-footer">
+          <Button
+            type="button"
+            className="material-button"
+            outlined={true}
+            onClick={() => props.setRoute('signup')}
+          >
+            Sign up
+          </Button>
+          <AuthWithFacebook densed={true} />
+          <AuthWithGitHub densed={true} />
+        </div>
+      </React.Fragment>
     )
   }
 }

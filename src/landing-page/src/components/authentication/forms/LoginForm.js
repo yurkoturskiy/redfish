@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
     const { status, isSubmitting } = this.props
     return (
       <Form>
-        <h3>Welcome back!</h3>
+        <h3>Login to continue</h3>
         <Field
           id="username"
           label="username or email"
@@ -52,28 +52,19 @@ class LoginForm extends React.Component {
             {status && status.non_field_errors}
           </span>
           <div>
-            <Checkbox nativeControlId="guest-checkbox" />
-            <label htmlFor="guest-checkbox">guest user</label>
-            <Link
-              className="reset-password"
-              to={'/authentication/password-reset'}
-            >
-              Forget password?
-            </Link>
-          </div>
-          <div>
             <Button
               type="button"
-              className="form-button"
+              className="material-button"
               disabled={isSubmitting}
-              onClick={() => navigate('/authentication/signup')}
+              onClick={() => this.props.setRoute('password-reset')}
             >
-              Sign up
+              Reset password
             </Button>
             <Button
               unelevated
               type="submit"
-              className="form-button"
+              className="material-button"
+              solid={true}
               disabled={isSubmitting}
             >
               Submit

@@ -1,0 +1,88 @@
+/*
+*********************************************
+***************** Tutorials *****************
+*********************************************
+*/
+
+.tutorials-container {
+  position: relative;
+  /*outline: 1px solid green;*/
+}
+
+.tutorials-content {
+  margin: 0 var(--gutter) 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.tutorials-content h2 {
+  z-index: 2;
+  margin: 0 auto 12px auto;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: auto;
+  text-align: center;
+}
+
+.tutorials-content .element {
+  z-index: 2;
+  width: 100%;
+  max-width: 408px;
+  height: 64px;
+  line-height: 64px;
+  margin: 8px auto 8px auto;
+  background: #ffffff;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);
+  transition: box-shadow 0.2s;
+}
+
+.tutorials-content .element:hover {
+  box-shadow: 0px 1px 4px rgba(56, 71, 94, 0.57),
+    0px 4px 12px rgba(255, 74, 100, 0.22);
+}
+
+.tutorials-content .element span {
+  font-weight: 300;
+  font-size: 1.25rem;
+  /*line-height: 62px;*/
+  padding-left: 20px;
+  display: inline-block;
+  /* Green 8 */
+  color: #344239;
+}
+
+.tutorials-content .element span strong {
+  font-weight: bold;
+  font-size: 1.5rem;
+  /*line-height: 64px;*/
+  padding-right: 18px;
+}
+
+#tutorials-view-more-button {
+  margin-top: 16px;
+}
+
+@media screen and (max-width: 579px) {
+  .tutorials-content h2 {
+    font-size: 1.6rem;
+  }
+  .tutorials-content .element {
+    height: 56px;
+    line-height: 54px;
+  }
+  .tutorials-content .element span {
+    font-size: 1rem;
+    padding-left: 16px;
+  }
+  .tutorials-content .element span strong {
+    font-size: 1.25rem;
+    padding-right: 12px;
+  }
+  #tutorials-view-more-button {
+    margin-top: 12px;
+  }
+}

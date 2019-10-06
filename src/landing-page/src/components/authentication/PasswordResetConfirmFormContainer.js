@@ -65,19 +65,21 @@ function PasswordResetConfirmFormContainer(props) {
     return <h1>password reset is succeed</h1>
   } else {
     return (
-      <Formik
-        initialValues={{ new_password1: undefined }}
-        onSubmit={handleSubmit}
-      >
-        {({ status, touched, isSubmitting, errors }) => (
-          <PasswordResetConfirmForm
-            status={status}
-            touched={touched}
-            isSubmitting={isSubmitting}
-            errors={errors}
-          />
-        )}
-      </Formik>
+      <div>
+        <Formik
+          initialValues={{ new_password1: undefined }}
+          onSubmit={handleSubmit}
+        >
+          {({ status, touched, isSubmitting, errors }) => (
+            <PasswordResetConfirmForm
+              status={status}
+              touched={touched}
+              isSubmitting={isSubmitting}
+              errors={errors}
+            />
+          )}
+        </Formik>
+      </div>
     )
   }
 }
