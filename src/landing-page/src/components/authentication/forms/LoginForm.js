@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
     const { status, isSubmitting } = this.props
     return (
       <Form>
-        <h3>Welcome back!</h3>
+        <h3>Login to continue</h3>
         <Field
           id="username"
           label="username or email"
