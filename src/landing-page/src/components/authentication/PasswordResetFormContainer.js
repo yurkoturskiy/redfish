@@ -70,7 +70,7 @@ function PasswordResetFormContainer(props) {
             outlined={true}
             onClick={() => props.setRoute('signup')}
           >
-            Create account
+            Sign up
           </Button>
           <AuthWithFacebook densed={true} />
           <AuthWithGitHub densed={true} />
