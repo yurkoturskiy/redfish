@@ -20,14 +20,14 @@
 }
 
 .form-card {
-  padding: 4px 0 24px 0;
+  padding: 4px 36px 24px 36px;
   box-shadow: 0px 1px 3px rgba(56, 71, 94, 0.57);
   background-color: white;
   border-radius: 8px;
 }
 
 .authentication .header {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 300;
   color: #aaaeb8;
   text-align: center;
@@ -53,48 +53,50 @@
   justify-content: center;
 }
 
-.authentication-footer * {
+.authentication-footer > * {
   margin: 12px;
 }
 
 /* Social buttons */
 
-.facebook-button {
-  position: relative;
-  border: 0px solid white;
-  background: #4267b2;
-  border-radius: 5px;
-  color: white;
-  height: 48px;
-  text-align: center;
-  width: 300px;
-  font-size: 1rem;
-  display: block;
-  margin: 8px auto 8px auto;
-}
-
-.facebook-button.densed {
-  width: 48px;
-  margin: 0;
-}
-
+.facebook-button,
 .github-button {
   position: relative;
   border: 0px solid white;
-  background: #333333;
   border-radius: 5px;
-  color: white;
-  height: 48px;
   text-align: center;
-  width: 300px;
+  height: 44px;
+  color: white;
+  width: 100%;
   font-size: 1rem;
   display: block;
   margin: 8px auto 8px auto;
 }
 
+.facebook-button.densed,
 .github-button.densed {
-  width: 48px;
+  width: 44px;
   margin: 0;
+}
+
+@media screen and (max-width: 960px) {
+  .facebook-button,
+  .github-button {
+    height: 36px;
+  }
+  .facebook-button.densed,
+  .github-button.densed {
+    width: 36px;
+    margin: 0;
+  }
+}
+
+.facebook-button {
+  background: #4267b2;
+}
+
+.github-button {
+  background: #333333;
 }
 
 #auth-blob-one {

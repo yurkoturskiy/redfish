@@ -64,7 +64,7 @@ class LoginForm extends React.Component {
               unelevated
               type="submit"
               className="material-button"
-              solid={true}
+              solid={'true'}
               disabled={isSubmitting}
             >
               Submit
