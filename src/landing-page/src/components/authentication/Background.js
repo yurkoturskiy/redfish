@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react'
 import { path, morphing, randomRange } from 'primitivo-svg'
 
-import Particle from '../styledUIElements/Particle'
-
 const animParams = {
   numOfKeyPaths: 3,
   loop: true,

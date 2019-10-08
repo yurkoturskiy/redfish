@@ -2,7 +2,7 @@ import React from 'react'
 import Particle from '../styledUIElements/Particle'
 
 function Background() {
-  var sceneWidth = window.innerWidth > 1440 ? 1440 : window.innerWidth
+  var sceneWidth = window.innerWidth > 1280 ? 1280 : window.innerWidth
   var sceneHeight = 1300
 
   const maxSide =

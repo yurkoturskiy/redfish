@@ -41,7 +41,7 @@ class PasswordResetForm extends React.Component {
           unelevated
           type="submit"
           className="material-button"
-          solid={true}
+          solid={'true'}
           disabled={isSubmitting}
         >
           Reset password

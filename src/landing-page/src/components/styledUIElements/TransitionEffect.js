@@ -345,9 +345,10 @@ function TransitionEffect(props) {
   const endShape = path({ ...baseParameters, groups: endGroupsParameters })
 
   const [endPathIsActive, setEndPathIsActive] = useState(false)
+  const [duration, setDuration] = useState(1000)
 
   useEffect(() => {
-    setTimeout(() => setEndPathIsActive(true), 1400)
+    setTimeout(() => setEndPathIsActive(true), (duration / 10) * 8)
   }, [])
 
   return (
@@ -368,7 +369,7 @@ function TransitionEffect(props) {
           keyTimes={ts.keyTimes}
           keySplines={ts.keySplines}
           attributeName="d"
-          dur="1500ms"
+          dur={`${duration}ms`}
           repeatCount="1"
           values={phasesOutput.dValues}
         />
@@ -385,7 +386,7 @@ function TransitionEffect(props) {
           keyTimes={ts.keyTimes}
           keySplines={ts.keySplines}
           attributeName="d"
-          dur="1500ms"
+          dur={`${duration}ms`}
           begin="110ms"
           repeatCount="1"
           values={phasesOutput.dValues}
@@ -404,7 +405,7 @@ function TransitionEffect(props) {
           keyTimes={ts.keyTimes}
           keySplines={ts.keySplines}
           attributeName="d"
-          dur="1500ms"
+          dur={`${duration}ms`}
           begin="250ms"
           repeatCount="1"
           values={phasesOutput.dValues}
@@ -417,7 +418,7 @@ function TransitionEffect(props) {
           keyTimes={ts.keyTimes}
           keySplines={ts.keySplines}
           attributeName="d"
-          dur="1500ms"
+          dur={`${duration}ms`}
           begin="250ms"
           repeatCount="1"
           values={phasesOutput.dValues}
