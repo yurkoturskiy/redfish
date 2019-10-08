@@ -29,7 +29,7 @@ function PrimitivoTransitionLink(props) {
           length: 1.7,
         }}
         entry={{
-          delay: 1,
+          delay: 0.6,
           trigger: props => {
             props.node.style.opacity = '0'
             props.node.style.transition = 'opacity 0.6s'

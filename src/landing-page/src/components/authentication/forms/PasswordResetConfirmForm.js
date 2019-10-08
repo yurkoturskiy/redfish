@@ -39,7 +39,7 @@ class PasswordResetConfirmForm extends React.Component {
         <Button
           type="submit"
           className="material-button"
-          solid={true}
+          solid={'true'}
           disabled={isSubmitting}
         >
           Set new password
