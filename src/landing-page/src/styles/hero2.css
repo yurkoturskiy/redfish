@@ -255,14 +255,13 @@
 
 #graphql-glare {
   fill: transparent;
-  stroke: #22d163;
+  stroke: white;
   stroke-width: 4px;
 }
 
 #graphql-text {
   fill: #6d111e;
   font-size: 1rem;
-  letter-spacing: 0.08rem;
   font-weight: normal;
 }
 
