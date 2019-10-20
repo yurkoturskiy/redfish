@@ -16,6 +16,10 @@ button.material-button {
   cursor: pointer;
 }
 
+button.mdc-button--outlined.mdc-button:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
 @media screen and (max-width: 960px) {
   button.material-button {
     font-size: 0.875rem;

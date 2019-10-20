@@ -29,7 +29,7 @@ class RegistrationForm extends React.Component {
     } = this.props
     return (
       <Form>
-        <h3>Sign Up</h3>
+        <h3 className="form-header">Sign Up</h3>
         <Field
           id="username"
           label="Username"
@@ -63,19 +63,22 @@ class RegistrationForm extends React.Component {
           helperText={passwordHelperText}
         />
         <div className="subform-container">
-          <span className="non-fields-error">
-            {status && status.non_field_errors}
-          </span>
-
-          <Button
-            unelevated
-            type="submit"
-            className="material-button"
-            solid={'true'}
-            disabled={isSubmitting}
-          >
-            Submit
-          </Button>
+          {status && status.non_field_errors && (
+            <div className="non-fields-error">
+              <span>{status.non_field_errors}</span>
+            </div>
+          )}
+          <div className="form-buttons-wrapper">
+            <Button
+              unelevated
+              type="submit"
+              className="material-button"
+              solid={'true'}
+              disabled={isSubmitting}
+            >
+              Submit
+            </Button>
+          </div>
         </div>
       </Form>
     )
