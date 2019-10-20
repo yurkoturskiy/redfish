@@ -15,7 +15,7 @@
 
 .contribute-container #contribute-header {
   font-weight: bold;
-  z-index: 2;
+  z-index: 1;
   font-size: 2rem;
   line-height: auto;
   margin: 0 auto 12px auto;
@@ -24,7 +24,7 @@
 }
 
 .contribute-container p {
-  z-index: 2;
+  z-index: 1;
   font-weight: normal;
   font-size: 18px;
   line-height: 21px;
@@ -34,7 +34,7 @@
 
 .contribute-container .icons {
   margin: 16px auto 24px auto;
-  z-index: 2;
+  z-index: 1;
   text-align: center;
 }
 

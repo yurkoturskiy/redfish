@@ -6,8 +6,6 @@
 }
 
 button.material-button {
-  z-index: 2;
-  background-color: transparent;
   font-size: 1rem;
   font-weight: normal;
   height: 44px;
@@ -16,6 +14,10 @@ button.material-button {
   text-transform: capitalize;
   letter-spacing: 0;
   cursor: pointer;
+}
+
+button.mdc-button--outlined.mdc-button:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 @media screen and (max-width: 960px) {

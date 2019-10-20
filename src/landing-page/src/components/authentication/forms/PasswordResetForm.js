@@ -22,7 +22,7 @@ class PasswordResetForm extends React.Component {
     const { status, isSubmitting } = this.props
     return (
       <Form>
-        <h3>Reset password</h3>
+        <h3 className="form-header">Reset password</h3>
         <Field
           id="email"
           label="Email address"
@@ -30,24 +30,31 @@ class PasswordResetForm extends React.Component {
           type="email"
           component={FormikMaterialTextField}
         />
-        <Button
-          type="button"
-          className="material-button"
-          onClick={() => this.props.setRoute('login')}
-        >
-          go back
-        </Button>
-        <Button
-          unelevated
-          type="submit"
-          className="material-button"
-          solid={'true'}
-          disabled={isSubmitting}
-        >
-          Reset password
-        </Button>
-
-        <span>{status && status.non_field_errors}</span>
+        <div className="subform-container">
+          {status && status.non_field_errors && (
+            <div className="non-fields-error">
+              <span>{status.non_field_errors}</span>
+            </div>
+          )}
+          <div className="form-buttons-wrapper">
+            <Button
+              type="button"
+              className="material-button"
+              onClick={() => this.props.setRoute('login')}
+            >
+              go back
+            </Button>
+            <Button
+              unelevated
+              type="submit"
+              className="material-button"
+              solid={'true'}
+              disabled={isSubmitting}
+            >
+              Submit
+            </Button>
+          </div>
+        </div>
       </Form>
     )
   }

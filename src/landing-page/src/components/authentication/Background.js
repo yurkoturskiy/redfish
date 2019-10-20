@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { path, morphing, randomRange } from 'primitivo-svg'
 
 const animParams = {
@@ -11,8 +11,8 @@ const getPathParam = (width, height) => ({
   depth: 0,
   x: 25,
   y: 25,
-  width: 750,
-  height: 750,
+  width,
+  height,
   centerX: 375,
   centerY: 375,
   rotate: 0,
@@ -40,17 +40,18 @@ const getPathParam = (width, height) => ({
 })
 
 function Background() {
-  const pathParam = useMemo(
-    () => getPathParam(window.innerWidth, window.innerHeight),
-    []
-  )
+  const [width, setWidth] = useState(750)
+  const [height, setHeight] = useState(750)
+
+  const pathParam = useMemo(() => getPathParam(width, height), [])
   const one = useMemo(() => morphing(animParams, pathParam), [])
   const two = useMemo(() => morphing(animParams, pathParam), [])
   const three = useMemo(() => morphing(animParams, pathParam), [])
 
+  const viewBox = `0 0 ${width + 50} ${height + 50}`
   return (
     <div className="background">
-      <svg>
+      <svg preserveAspectRatio="xMidYMid slice" viewBox={viewBox}>
         <path id="auth-blob-one">
           <animate
             id="path-animation"
