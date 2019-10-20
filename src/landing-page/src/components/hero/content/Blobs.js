@@ -67,13 +67,13 @@ var glarePathParams = (x, y, width, height) => ({
 })
 
 const djangoBlobPathParams = pathsParameters(20, 220, 180, 180)
-const djangoGlarePathParams = glarePathParams(60, 260, 46, 46)
+const djangoGlarePathParams = glarePathParams(70, 250, 46, 46)
 
-const graphqlBlobPathParams = pathsParameters(120, 120, 300, 300)
-const graphqlGlarePathParams = glarePathParams(170, 240, 60, 60)
+const graphqlBlobPathParams = pathsParameters(120, 130, 300, 300)
+const graphqlGlarePathParams = glarePathParams(190, 220, 60, 60)
 
 const reactBlobPathParams = pathsParameters(150, 40, 200, 200)
-const reactGlarePathParams = glarePathParams(210, 110, 45, 45)
+const reactGlarePathParams = glarePathParams(210, 90, 45, 45)
 
 function Blobs(props) {
   // django
