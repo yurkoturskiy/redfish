@@ -26,7 +26,7 @@ class LoginForm extends React.Component {
     const { status, isSubmitting } = this.props
     return (
       <Form>
-        <h3>Login to continue</h3>
+        <h3 className="form-header">Login to continue</h3>
         <Field
           id="username"
           label="username or email"
@@ -48,10 +48,12 @@ class LoginForm extends React.Component {
           component={FormikMaterialTextField}
         />
         <div className="subform-container">
-          <span className="non-fields-error">
-            {status && status.non_field_errors}
-          </span>
-          <div>
+          {status && status.non_field_errors && (
+            <div className="non-fields-error">
+              <span>{status.non_field_errors}</span>
+            </div>
+          )}
+          <div className="form-buttons-wrapper">
             <Button
               type="button"
               className="material-button"

@@ -22,7 +22,7 @@ class PasswordResetConfirmForm extends React.Component {
     const { status, isSubmitting } = this.props
     return (
       <Form>
-        <h3>Enter your new password</h3>
+        <h3 className="form-header">Enter your new password</h3>
         <Field
           id="new_password1"
           label="New password"
@@ -36,15 +36,23 @@ class PasswordResetConfirmForm extends React.Component {
           tralingIconOnClick={this.switchPasswordVisibility}
           component={FormikMaterialTextField}
         />
-        <Button
-          type="submit"
-          className="material-button"
-          solid={'true'}
-          disabled={isSubmitting}
-        >
-          Set new password
-        </Button>
-        <span>{status && status.non_field_errors}</span>
+        <div className="subform-container">
+          {status && status.non_field_errors && (
+            <div className="non-fields-error">
+              <span>{status.non_field_errors}</span>
+            </div>
+          )}
+          <div className="form-buttons-wrapper">
+            <Button
+              type="submit"
+              className="material-button"
+              solid={'true'}
+              disabled={isSubmitting}
+            >
+              Submit
+            </Button>
+          </div>
+        </div>
       </Form>
     )
   }

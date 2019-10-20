@@ -26,7 +26,7 @@ function PrimitivoTransitionLink(props) {
           trigger: ({ exit, e }) => {
             handleClick(e)
           },
-          length: 1.7,
+          length: 1,
         }}
         entry={{
           delay: 0.6,
