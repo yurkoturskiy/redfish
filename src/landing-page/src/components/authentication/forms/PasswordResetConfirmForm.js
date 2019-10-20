@@ -42,7 +42,7 @@ class PasswordResetConfirmForm extends React.Component {
           solid={'true'}
           disabled={isSubmitting}
         >
-          Set new password
+          Submit
         </Button>
         <span>{status && status.non_field_errors}</span>
       </Form>
