@@ -8,8 +8,8 @@ const AuthenticationIndex = () => {
   return (
     <Layout>
       <div className="authentication-page">
-        <Background />
         <div className="authentication-container">
+          <Background />
           <AuthenticationContainer path="authentication" />
         </div>
       </div>
