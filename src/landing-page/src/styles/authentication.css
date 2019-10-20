@@ -46,11 +46,11 @@
 }
 
 .authentication .header {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 300;
-  color: #aaaeb8;
   text-align: center;
   margin: 0px;
+  margin-bottom: 12px;
   padding: 16px 0 8px 0;
 }
 
@@ -167,6 +167,20 @@
 *** Forms Styles ***
 ********************
 */
+
+.authentication-start-form {
+  margin: 0 16px 0 16px;
+  padding: 4px 28px 20px 28px;
+}
+
+.start-form-buttons-wrapper {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.start-form-buttons-wrapper button {
+  margin: 16px;
+}
 
 .form-header {
   text-align: center;
