@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "redfish-project",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
@@ -69,9 +69,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/guandjoy/redfish"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/guandjoy/redfish/issues"
   }
 }
