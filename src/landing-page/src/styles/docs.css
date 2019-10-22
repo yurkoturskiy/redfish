@@ -1,18 +1,25 @@
 .docs {
+  outline: 1px solid blue;
+  margin-top: 128px;
+  margin-left: var(--col-two);
+  margin-right: var(--col-two);
 }
 
 .docs .content {
   display: inline-block;
+  outline: 1px solid red;
   width: 768px;
 }
 
 .docs .sections {
   display: inline-block;
+  outline: 1px solid green;
   vertical-align: top;
 }
 
 .gatsby-highlight-code-line {
   background-color: #feb;
+  outline: 1px solid green;
   display: block;
   margin-right: -1em;
   margin-left: -1em;
