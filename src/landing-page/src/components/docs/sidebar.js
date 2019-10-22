@@ -1,5 +1,6 @@
 import React from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
+import TransitionLink from 'gatsby-plugin-transition-link'
 
 function SectionWrapper({ name, children }) {
   return (
@@ -49,9 +50,18 @@ export default function SideBar(props) {
     if (!sections[sectionOrder])
       sections[sectionOrder] = { name: section, items: [] }
     let item = (
-      <Link to={edge.node.frontmatter.path} key={path}>
+      <TransitionLink
+        to={edge.node.frontmatter.path}
+        key={path}
+        exit={{
+          length: 0,
+        }}
+        entry={{
+          length: 0,
+        }}
+      >
         <li className="link">{edge.node.frontmatter.title}</li>
-      </Link>
+      </TransitionLink>
     )
     !unlisted && sections[sectionOrder].items.push(item)
   })
