@@ -14,6 +14,7 @@
 .docs .sections {
   display: inline-block;
   outline: 1px solid green;
+  margin-right: var(--gutter);
   vertical-align: top;
 }
 
