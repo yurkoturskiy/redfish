@@ -3,6 +3,7 @@
   margin-top: 128px;
   margin-left: var(--col-two);
   margin-right: var(--col-two);
+  background-color: white;
 }
 
 .docs .content {
