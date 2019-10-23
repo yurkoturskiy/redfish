@@ -14,9 +14,30 @@
 
 .docs .sections {
   display: inline-block;
+  width: 256px;
   outline: 1px solid green;
   margin-right: var(--gutter);
   vertical-align: top;
+}
+
+.sections .name {
+  font-size: 1rem;
+  font-weight: normal;
+  color: grey;
+}
+
+.docs .sections .links {
+  list-style-type: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+.links a {
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 4px 0 4px 0;
+  color: black;
 }
 
 .gatsby-highlight-code-line {
