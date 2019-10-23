@@ -1,18 +1,48 @@
 .docs {
+  outline: 1px solid blue;
+  margin-top: 128px;
+  margin-left: var(--col-two);
+  margin-right: var(--col-two);
+  background-color: white;
 }
 
 .docs .content {
   display: inline-block;
+  outline: 1px solid red;
   width: 768px;
 }
 
 .docs .sections {
   display: inline-block;
+  width: 256px;
+  outline: 1px solid green;
+  margin-right: var(--gutter);
   vertical-align: top;
+}
+
+.sections .name {
+  font-size: 1rem;
+  font-weight: normal;
+  color: grey;
+}
+
+.docs .sections .links {
+  list-style-type: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+.links a {
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 4px 0 4px 0;
+  color: black;
 }
 
 .gatsby-highlight-code-line {
   background-color: #feb;
+  outline: 1px solid green;
   display: block;
   margin-right: -1em;
   margin-left: -1em;
