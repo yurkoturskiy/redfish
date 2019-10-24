@@ -50,18 +50,20 @@ export default function SideBar(props) {
     if (!sections[sectionOrder])
       sections[sectionOrder] = { name: section, items: [] }
     let item = (
-      <TransitionLink
-        to={edge.node.frontmatter.path}
-        key={path}
-        exit={{
-          length: 0,
-        }}
-        entry={{
-          length: 0,
-        }}
-      >
-        <li className="link">{edge.node.frontmatter.title}</li>
-      </TransitionLink>
+      <li className="link">
+        <TransitionLink
+          to={edge.node.frontmatter.path}
+          key={path}
+          exit={{
+            length: 0,
+          }}
+          entry={{
+            length: 0,
+          }}
+        >
+          {edge.node.frontmatter.title}
+        </TransitionLink>
+      </li>
     )
     !unlisted && sections[sectionOrder].items.push(item)
   })
