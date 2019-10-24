@@ -5,7 +5,7 @@
 */
 
 .tutorials-container {
-  z-index: 2;
+  z-index: 4;
   position: relative;
   /*outline: 1px solid green;*/
 }
