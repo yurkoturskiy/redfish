@@ -7,12 +7,12 @@ import PrimitivoTransitionLink from '../styledUIElements/PrimitivoTransitionLink
 
 function Logo() {
   return (
-    <PrimitivoTransitionLink to="/">
-      <div className="logo">
+    <div className="logo">
+      <PrimitivoTransitionLink to="/">
         <RedfishLogoSolid />
         <span>Redfish</span>
-      </div>
-    </PrimitivoTransitionLink>
+      </PrimitivoTransitionLink>
+    </div>
   )
 }
 
