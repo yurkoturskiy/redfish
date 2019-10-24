@@ -1,18 +1,73 @@
 .docs {
+  display: flex;
+  --docs-width: calc(100% - var(--side-paddings) * 2);
+  --side-bar-width: 12rem;
+  --content-width: calc(100% - 12rem - var(--gutter) - 8px);
+  flex-direction: row;
+  margin-top: 128px;
+  width: var(--docs-width);
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  /*outline: 1px solid blue;*/
 }
 
 .docs .content {
-  display: inline-block;
-  width: 768px;
+  padding-bottom: 6vh;
+  padding-right: 8px;
+  /*padding-left: 8px;*/
+  margin-left: auto;
+
+  width: var(--content-width);
+  max-width: 860px;
+  /*outline: 1px solid red;*/
 }
 
 .docs .sections {
-  display: inline-block;
-  vertical-align: top;
+  margin-top: var(--gutter);
+  /*margin-right: var(--gutter);*/
+  width: var(--side-bar-width);
+  /*vertical-align: top;*/
+  /*outline: 1px solid green;*/
+}
+
+.sections .name {
+  font-size: 1rem;
+  font-weight: normal;
+  color: grey;
+  padding: 8px 8px 8px 0;
+  margin: 0;
+}
+
+.docs .sections .links {
+  list-style-type: none;
+  text-decoration: none;
+  white-space: nowrap;
+  margin: 0;
+  padding-left: 8px;
+}
+
+.links a {
+}
+
+.links .link-wrapper {
+  padding: 8px;
+  margin: 0;
+}
+
+.links .link {
+  text-decoration: none;
+  font-size: 1rem;
+  color: black;
+}
+
+.links .link:hover {
+  color: #0f0f73;
 }
 
 .gatsby-highlight-code-line {
   background-color: #feb;
+  outline: 1px solid green;
   display: block;
   margin-right: -1em;
   margin-left: -1em;
@@ -21,6 +76,20 @@
   border-left: 0.25em solid #f99;
 }
 
+pre[class*='language-'] {
+}
+
 :not(pre) > code[class*='language-'] {
   background: green;
+}
+
+@media screen and (max-width: 960px) {
+  .docs .sections {
+    display: none;
+  }
+
+  .docs .content {
+    width: 100%;
+    padding: 0;
+  }
 }

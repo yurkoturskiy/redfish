@@ -23,13 +23,18 @@ function PrimitivoTransitionLink(props) {
         {...props}
         to={props.to}
         exit={{
-          trigger: ({ exit, e }) => {
+          trigger: ({ node, exit, e }) => {
+            node.style.position = 'absolute'
+            node.style.top = '0px'
+            node.style.left = '0px'
+
             handleClick(e)
           },
           length: 1,
         }}
         entry={{
           delay: 0.6,
+          length: 0,
           trigger: props => {
             props.node.style.opacity = '0'
             props.node.style.transition = 'opacity 0.6s'
