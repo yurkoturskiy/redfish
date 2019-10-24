@@ -1,5 +1,5 @@
 .docs {
-  outline: 1px solid blue;
+  /*outline: 1px solid blue;*/
   margin-top: 128px;
   margin-left: var(--col-two);
   margin-right: var(--col-two);
@@ -8,14 +8,14 @@
 
 .docs .content {
   display: inline-block;
-  outline: 1px solid red;
+  /*outline: 1px solid red;*/
   width: 768px;
 }
 
 .docs .sections {
   display: inline-block;
   width: 256px;
-  outline: 1px solid green;
+  /*outline: 1px solid green;*/
   margin-right: var(--gutter);
   vertical-align: top;
 }
@@ -24,20 +24,33 @@
   font-size: 1rem;
   font-weight: normal;
   color: grey;
+  padding: 8px;
+  margin: 0;
 }
 
 .docs .sections .links {
   list-style-type: none;
   text-decoration: none;
   margin: 0;
-  padding: 0;
+  padding-left: 16px;
 }
 
 .links a {
+}
+
+.links .link-wrapper {
+  padding: 8px;
+  margin: 0;
+}
+
+.links .link {
   text-decoration: none;
   font-size: 1rem;
-  padding: 4px 0 4px 0;
   color: black;
+}
+
+.links .link:hover {
+  color: blue;
 }
 
 .gatsby-highlight-code-line {
