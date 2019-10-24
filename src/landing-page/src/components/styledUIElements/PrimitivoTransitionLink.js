@@ -23,7 +23,11 @@ function PrimitivoTransitionLink(props) {
         {...props}
         to={props.to}
         exit={{
-          trigger: ({ exit, e }) => {
+          trigger: ({ node, exit, e }) => {
+            node.style.position = 'absolute'
+            node.style.top = '0px'
+            node.style.left = '0px'
+
             handleClick(e)
           },
           length: 1,
