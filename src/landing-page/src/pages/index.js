@@ -8,9 +8,9 @@ import Tutorials from '../components/tutorials/Container'
 import Contribute from '../components/contribute/Container'
 import FooterConteiner from '../components/footer/Container'
 
-const IndexPage = () => {
+const IndexPage = props => {
   return (
-    <Layout>
+    <Layout path={props.path}>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <HeroContainer />
       <Dependencies />

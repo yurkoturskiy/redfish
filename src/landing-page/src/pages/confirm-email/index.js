@@ -4,9 +4,9 @@ import { Router } from '@reach/router'
 import Layout from '../../components/layout'
 import ConfirmEmail from '../../components/ConfirmEmail'
 
-export default () => {
+export default props => {
   return (
-    <Layout>
+    <Layout path={props.path}>
       <Router>
         <ConfirmEmail path="confirm-email/:activationKey" />
       </Router>
