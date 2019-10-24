@@ -21,7 +21,7 @@ import '@material/react-text-field/dist/text-field.css'
 import '@material/react-button/dist/button.css'
 import '@material/react-checkbox/dist/checkbox.css'
 
-function Layout({ children }) {
+function Layout(props) {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -33,8 +33,11 @@ function Layout({ children }) {
   `)
   return (
     <React.Fragment>
-      <HeaderContainer siteTitle={data.site.siteMetadata.title} />
-      <div>{children}</div>
+      <HeaderContainer
+        siteTitle={data.site.siteMetadata.title}
+        path={props.path}
+      />
+      <div>{props.children}</div>
     </React.Fragment>
   )
 }

@@ -36,7 +36,6 @@ export default function SideBar(props) {
       }
     }
   `)
-  console.log('data', allMdx)
   var sections = []
   var independent = []
   allMdx.edges.forEach(edge => {
@@ -50,18 +49,21 @@ export default function SideBar(props) {
     if (!sections[sectionOrder])
       sections[sectionOrder] = { name: section, items: [] }
     let item = (
-      <TransitionLink
-        to={edge.node.frontmatter.path}
-        key={path}
-        exit={{
-          length: 0,
-        }}
-        entry={{
-          length: 0,
-        }}
-      >
-        <li className="link">{edge.node.frontmatter.title}</li>
-      </TransitionLink>
+      <li className="link-wrapper" key={path}>
+        <TransitionLink
+          className="link"
+          activeStyle={{ color: '#33e' }}
+          to={edge.node.frontmatter.path}
+          exit={{
+            length: 0,
+          }}
+          entry={{
+            length: 0,
+          }}
+        >
+          {edge.node.frontmatter.title}
+        </TransitionLink>
+      </li>
     )
     !unlisted && sections[sectionOrder].items.push(item)
   })
