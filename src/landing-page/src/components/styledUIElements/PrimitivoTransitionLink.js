@@ -27,6 +27,7 @@ function PrimitivoTransitionLink(props) {
             node.style.position = 'absolute'
             node.style.top = '0px'
             node.style.left = '0px'
+            node.style.overflow = 'hidden'
 
             handleClick(e)
           },
