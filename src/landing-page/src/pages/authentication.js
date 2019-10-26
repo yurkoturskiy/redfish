@@ -5,7 +5,6 @@ import AuthenticationContainer from '../components/authentication/Authentication
 import Background from '../components/authentication/Background'
 
 const AuthenticationIndex = props => {
-  console.log('authentication props', props)
   return (
     <Layout path={props.path}>
       <div className="authentication-page">

@@ -8,7 +8,6 @@ function LandingLogout(props) {
       window.removeEventListener('message', logoutRequestListener, false)
   }, [])
   const logoutRequestListener = e => {
-    console.log(e)
     if (e.data === 'logout') {
       console.log('logout request')
       localStorage.removeItem('token')
