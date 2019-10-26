@@ -13,7 +13,7 @@ const AUTH_WITH_FACEBOOK = gql`
 
 const Button = ({ children, triggerLogin, densed, ...props }) => (
   <button
-    className={`facebook-button ${densed && 'densed'}`}
+    className={densed ? 'facebook-button-densed' : 'facebook-button'}
     onClick={() => triggerLogin()}
     {...props}
   >
@@ -34,6 +34,7 @@ function AuthWithFacebook(props) {
   }, [accessToken, isAuth])
 
   useEffect(() => {
+    error && console.log('error', error.graphQLErrors)
     data && handleResponse()
   }, [data, error])
 
@@ -44,18 +45,19 @@ function AuthWithFacebook(props) {
     window.location.replace(process.env.GATSBY_APP_URL)
 
   const handleResponse = () => {
-    console.log(data)
+    console.log('facebook server data response', data)
     localStorage.setItem('token', data.authWithFacebook.key)
     setIsAuth(true)
     console.log('Token received and saved')
   }
 
   const onLoginSuccess = response => {
-    console.log(response)
+    console.log('facebook success response', response)
     setAccessToken(response._token.accessToken)
   }
 
-  const onLoginFailure = response => console.log(response)
+  const onLoginFailure = response =>
+    console.log('facebook failure response', response)
 
   return (
     <div>
