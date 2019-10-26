@@ -372,10 +372,6 @@ function usePhasedTransition(props) {
     rotate: 45,
     numOfGroups: props.numOfGroups,
   }
-  console.log('width', window.innerWidth)
-  console.log('height', window.innerHeight)
-  console.log('document width', document.documentElement.clientWidth)
-  console.log('document height', document.documentElement.clientHeight)
 
   const phasesOutput = phases({
     loop: false,
