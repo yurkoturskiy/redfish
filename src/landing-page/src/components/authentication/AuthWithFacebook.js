@@ -13,7 +13,7 @@ const AUTH_WITH_FACEBOOK = gql`
 
 const Button = ({ children, triggerLogin, densed, ...props }) => (
   <button
-    className={`facebook-button ${densed && 'densed'}`}
+    className={densed ? 'facebook-button-densed' : 'facebook-button'}
     onClick={() => triggerLogin()}
     {...props}
   >
