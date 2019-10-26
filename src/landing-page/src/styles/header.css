@@ -28,9 +28,6 @@
 
 .header-container .logo {
   margin-right: auto;
-  background-color: white;
-  /*top: calc(var(--grid-margin) + var(--gutter));*/
-  /*left: var(--col-three);*/
 }
 
 .header-container .logo svg {
@@ -50,7 +47,8 @@
 }
 
 .header-container .button-link {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
   margin-left: 12px;
 }
 
