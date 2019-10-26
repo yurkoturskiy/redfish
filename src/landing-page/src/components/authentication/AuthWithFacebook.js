@@ -34,7 +34,13 @@ function AuthWithFacebook(props) {
   }, [accessToken, isAuth])
 
   useEffect(() => {
-    error && console.log('error', error.graphQLErrors)
+    if (error) {
+      alert(
+        `Error message from a redfish server:\n ${error.graphQLErrors.map(
+          ({ message }, i) => `${message}\n`
+        )}`
+      )
+    }
     data && handleResponse()
   }, [data, error])
 
@@ -45,10 +51,8 @@ function AuthWithFacebook(props) {
     window.location.replace(process.env.GATSBY_APP_URL)
 
   const handleResponse = () => {
-    console.log('facebook server data response', data)
     localStorage.setItem('token', data.authWithFacebook.key)
     setIsAuth(true)
-    console.log('Token received and saved')
   }
 
   const onLoginSuccess = response => {
@@ -57,7 +61,7 @@ function AuthWithFacebook(props) {
   }
 
   const onLoginFailure = response =>
-    console.log('facebook failure response', response)
+    alert(`facebook failure response: ${response}`)
 
   return (
     <div>
@@ -70,8 +74,6 @@ function AuthWithFacebook(props) {
       >
         {props.children}
       </SocialButton>
-      {error &&
-        error.graphQLErrors.map(({ message }, i) => <h6 key={i}>{message}</h6>)}
     </div>
   )
 }
