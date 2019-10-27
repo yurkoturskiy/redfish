@@ -83,7 +83,6 @@ const App = () => (
         return (
           <div>
             <Authentication />
-            <p>spinner</p>
           </div>
         );
     }}
