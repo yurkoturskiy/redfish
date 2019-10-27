@@ -2,6 +2,13 @@ import React, { useRef, useState, useEffect } from "react";
 import { css } from "linaria";
 import Fab from "@material/react-fab";
 import MaterialIcon from "@material/react-material-icon";
+import IconButton from "@material/react-icon-button";
+import Menu, {
+  MenuList,
+  MenuListItem,
+  MenuListItemText
+} from "@material/react-menu";
+
 // local components
 import LogoutBtn from "./LogoutBtn";
 import ProfileBtn from "./ProfileBtn";
@@ -9,17 +16,15 @@ import ProfileBtn from "./ProfileBtn";
 export const menuWrapper = css`
   z-index: 2;
   position: fixed;
-  bottom: 32px;
-  left: 32px;
+  right: 32px;
+  top: 32px;
 `;
 
-export const fabWrapper = css`
+export const button = css`
   padding: 0;
   margin: 0;
-  width: 40px;
-  height: 40px;
   display: inline-block;
-  border-radius: 40px;
+  border-radius: 50%;
 `;
 
 export const menu = css`
@@ -63,13 +68,9 @@ function PreferencesBtn(props) {
   return (
     <React.Fragment>
       <div className={menuWrapper}>
-        <div className={fabWrapper} ref={fabRef}>
-          <Fab
-            mini
-            onClick={() => setStatus(!status)}
-            icon={<MaterialIcon icon="settings" />}
-          />
-        </div>
+        <IconButton className={button} onClick={() => setStatus(!status)}>
+          <MaterialIcon icon="more_vert" />
+        </IconButton>
         <div
           className={menu}
           ref={menuRef}

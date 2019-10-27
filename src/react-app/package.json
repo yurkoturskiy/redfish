@@ -6,6 +6,7 @@
     "@apollo/react-hooks": "^3.1.3",
     "@material/react-button": "^0.15.0",
     "@material/react-fab": "^0.15.0",
+    "@material/react-icon-button": "^0.15.0",
     "@material/react-material-icon": "^0.15.0",
     "@material/react-text-field": "^0.15.0",
     "apollo-boost": "^0.4.4",
