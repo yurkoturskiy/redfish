@@ -16,6 +16,7 @@ import "@material/react-text-field/dist/text-field.css";
 import "@material/react-button/dist/button.css";
 import "@material/react-material-icon/dist/material-icon.css";
 import "@material/react-fab/dist/fab.css";
+import "@material/react-icon-button/dist/icon-button.css";
 export const globals = css`
   :global() {
     @import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css");
@@ -83,7 +84,6 @@ const App = () => (
         return (
           <div>
             <Authentication />
-            <p>spinner</p>
           </div>
         );
     }}

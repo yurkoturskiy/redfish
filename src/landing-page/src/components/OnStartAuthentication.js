@@ -22,7 +22,7 @@ function OnStartAuthentication(props) {
   })
 
   if (loading) return null
-  if (data.tokenIsValid) return null
+  if (data) return null
   return <React.Fragment>{props.children}</React.Fragment>
 }
 

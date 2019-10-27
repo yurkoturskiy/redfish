@@ -26,10 +26,10 @@ export const colorOptionIcon = css`
 function ColorOption(props) {
   return (
     <Query query={ALL_COLORS}>
-      {({ loading, error, data: { allColors } }) => {
+      {({ loading, error, data }) => {
         if (loading) return <p>loading</p>;
         if (error) return <p>error</p>;
-        const colorOptions = allColors.map(color => (
+        const colorOptions = data.allColors.map(color => (
           <ColorPoint key={color} color={color} noteId={props.node.id} />
         ));
         return (

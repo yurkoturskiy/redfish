@@ -1,33 +1,47 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
+import { withApollo } from "react-apollo";
 import { css } from "linaria";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 // Context
 import { NoteNode } from "./Note";
+// Queries
+import { EDIT_NOTE } from "../../../graphql/queries";
 
 export const titleInput = css`
   display: var(--add-note-title-input-display);
   vertical-align: top;
-  padding: 16px 20px 16px 20px;
+  padding: 12px 12px 4px 12px;
   border: 0px;
   border-radius: 6px;
-  font-size: 16px;
-  height: 56px;
+  height: 38px;
   resize: none;
   width: 500px;
   background: transparent;
+
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #5c5c5c;
 `;
 
 export const contentInput = css`
   vertical-align: top;
-  padding: 16px 20px 16px 20px;
+  padding: 4px 12px 12px 12px;
   border: 0px;
   border-radius: 6px;
   width: 500px;
-  font-size: 16px;
   resize: none;
-  heigth: 56px;
+  height: 38px;
   background: transparent;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #3c3c3c;
 `;
 
 const wrapper = css`
@@ -63,6 +77,7 @@ const wrapper = css`
   .dialog-exit-active {
     opacity: 1;
     width: var(--card-width);
+    height: var(--card-height);
     max-height: var(--card-height);
     top: var(--card-pos-y);
     left: var(--card-pos-x);
@@ -128,6 +143,7 @@ function DialogWindow(props) {
   }, [props, dialogHeight, node.id]);
 
   useEffect(() => {
+    // Adjust height of the title field
     if (props.inEdit) {
       var outerHeight = parseInt(
         window.getComputedStyle(titleInputRef.current).height,
@@ -136,11 +152,12 @@ function DialogWindow(props) {
       var diff = outerHeight - titleInputRef.current.clientHeight;
       titleInputRef.current.style.height = 0;
       titleInputRef.current.style.height =
-        Math.max(56, titleInputRef.current.scrollHeight + diff) + "px";
+        Math.max(38, titleInputRef.current.scrollHeight + diff) + "px";
     }
   }, [title, titleInputRef, props.inEdit]);
 
   useEffect(() => {
+    // Adjust height of the content field
     if (props.inEdit) {
       var outerHeight = parseInt(
         window.getComputedStyle(contentInputRef.current).height,
@@ -149,13 +166,37 @@ function DialogWindow(props) {
       var diff = outerHeight - contentInputRef.current.clientHeight;
       contentInputRef.current.style.height = 0;
       contentInputRef.current.style.height =
-        Math.max(56, contentInputRef.current.scrollHeight + diff) + "px";
+        Math.max(38, contentInputRef.current.scrollHeight + diff) + "px";
     }
   }, [content, contentInputRef, props.inEdit]);
 
   const onTitleChange = event => setTitle(event.target.value);
 
   const onContentChange = event => setContent(event.target.value);
+
+  const closeEdit = () => {
+    // Send new data to the server and close dialog window
+    props.client.mutate({
+      mutation: EDIT_NOTE,
+      variables: {
+        id: node.id,
+        title,
+        content
+      },
+      optimisticResponse: {
+        updateNote: {
+          newNote: {
+            ...node,
+            title,
+            content,
+            __typename: "NoteNode"
+          },
+          __typename: "UpdateNotePayload"
+        }
+      }
+    });
+    props.setInEdit(false);
+  };
 
   return (
     <div
@@ -200,7 +241,7 @@ function DialogWindow(props) {
         </div>
       </CSSTransition>
       {props.inEdit && (
-        <div className={background} onClick={() => props.setInEdit(false)} />
+        <div className={background} onClick={() => closeEdit()} />
       )}
       {props.children}
     </div>
@@ -212,4 +253,4 @@ DialogWindow.propTypes = {
   setInEdit: PropTypes.func
 };
 
-export default DialogWindow;
+export default withApollo(DialogWindow);

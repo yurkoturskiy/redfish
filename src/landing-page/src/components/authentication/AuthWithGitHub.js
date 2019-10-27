@@ -14,26 +14,32 @@ const AUTH_WITH_GITHUB = gql`
 function AuthWithGitHub(props) {
   const [isAuth, setIsAuth] = useState()
   const [code, setCode] = useState()
-  const [authWithGitHub] = useMutation(AUTH_WITH_GITHUB)
+  const [authWithGitHub, { error, data }] = useMutation(AUTH_WITH_GITHUB)
 
   useEffect(() => {
     code && sendAuthRequest()
     isAuth && redirectToAppPage()
   }, [code, isAuth])
 
-  const sendAuthRequest = () =>
-    authWithGitHub({ variables: { code } }).then(response => {
-      handleResponse(response)
-      console.log(response)
-    })
+  useEffect(() => {
+    if (error) {
+      alert(
+        `Error message from a redfish server:\n ${error.graphQLErrors.map(
+          ({ message }, i) => `${message}\n`
+        )}`
+      )
+    }
+    data && handleResponse()
+  }, [data, error])
+
+  const sendAuthRequest = () => authWithGitHub({ variables: { code } })
 
   const redirectToAppPage = () =>
     window.location.replace(process.env.GATSBY_APP_URL)
 
-  const handleResponse = response => {
-    localStorage.setItem('token', response.data.authWithGithub.key)
+  const handleResponse = () => {
+    localStorage.setItem('token', data.authWithGithub.key)
     setIsAuth(true)
-    console.log('Token received and saved')
   }
 
   const responseGitHub = response => {
@@ -41,7 +47,7 @@ function AuthWithGitHub(props) {
     setCode(response.code)
   }
 
-  const onFailure = response => console.log('GitHub failure response', response)
+  const onFailure = response => alert(`GitHub failure response\n${response}`)
 
   return (
     <div>

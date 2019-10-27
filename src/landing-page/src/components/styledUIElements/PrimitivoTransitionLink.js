@@ -9,7 +9,6 @@ function PrimitivoTransitionLink(props) {
   const [isActive, setIsActive] = useState()
 
   const handleClick = e => {
-    console.log('click event', e)
     setClickPos({ x: e.clientX, y: e.clientY })
     setIsActive(true)
   }

@@ -62,7 +62,6 @@ function Authentication(props) {
 
   const landingIframeListener = e => {
     var payload = JSON.parse(e.data);
-    console.log(payload);
     payload.key && setToken(payload.key);
     !payload.key && refuse();
   };

@@ -121,6 +121,17 @@ export const ADD_NOTE = gql`
   ${fragments.note}
 `;
 
+export const EDIT_NOTE = gql`
+  mutation UpdateNote($id: ID!, $title: String, $content: String) {
+    updateNote(input: { id: $id, title: $title, content: $content }) {
+      newNote {
+        ...Note
+      }
+    }
+  }
+  ${fragments.note}
+`;
+
 export const DELETE_NOTES = gql`
   mutation DeleteNotes($ids: [ID]!) {
     deleteNotes(input: { ids: $ids }) {
