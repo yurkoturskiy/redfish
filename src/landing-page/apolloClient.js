@@ -8,6 +8,7 @@ import { withClientState } from 'apollo-link-state'
 const cache = new InMemoryCache()
 
 const defaultState = () => ({
+  spinner: false,
   isAuthenticated: false,
   selectedNotes: [],
 })
