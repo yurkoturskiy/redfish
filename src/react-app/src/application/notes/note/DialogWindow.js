@@ -1,9 +1,12 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
+import { withApollo } from "react-apollo";
 import { css } from "linaria";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 // Context
 import { NoteNode } from "./Note";
+// Queries
+import { EDIT_NOTE } from "../../../graphql/queries";
 
 export const titleInput = css`
   display: var(--add-note-title-input-display);
@@ -128,6 +131,7 @@ function DialogWindow(props) {
   }, [props, dialogHeight, node.id]);
 
   useEffect(() => {
+    // Adjust height of the title field
     if (props.inEdit) {
       var outerHeight = parseInt(
         window.getComputedStyle(titleInputRef.current).height,
@@ -141,6 +145,7 @@ function DialogWindow(props) {
   }, [title, titleInputRef, props.inEdit]);
 
   useEffect(() => {
+    // Adjust height of the content field
     if (props.inEdit) {
       var outerHeight = parseInt(
         window.getComputedStyle(contentInputRef.current).height,
@@ -156,6 +161,30 @@ function DialogWindow(props) {
   const onTitleChange = event => setTitle(event.target.value);
 
   const onContentChange = event => setContent(event.target.value);
+
+  const closeEdit = () => {
+    // Send new data to the server and close dialog window
+    props.client.mutate({
+      mutation: EDIT_NOTE,
+      variables: {
+        id: node.id,
+        title,
+        content
+      },
+      optimisticResponse: {
+        updateNote: {
+          newNote: {
+            ...node,
+            title,
+            content,
+            __typename: "NoteNode"
+          },
+          __typename: "UpdateNotePayload"
+        }
+      }
+    });
+    props.setInEdit(false);
+  };
 
   return (
     <div
@@ -200,7 +229,7 @@ function DialogWindow(props) {
         </div>
       </CSSTransition>
       {props.inEdit && (
-        <div className={background} onClick={() => props.setInEdit(false)} />
+        <div className={background} onClick={() => closeEdit()} />
       )}
       {props.children}
     </div>
@@ -212,4 +241,4 @@ DialogWindow.propTypes = {
   setInEdit: PropTypes.func
 };
 
-export default DialogWindow;
+export default withApollo(DialogWindow);
