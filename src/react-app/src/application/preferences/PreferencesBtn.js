@@ -3,11 +3,6 @@ import { css } from "linaria";
 import Fab from "@material/react-fab";
 import MaterialIcon from "@material/react-material-icon";
 import IconButton from "@material/react-icon-button";
-import Menu, {
-  MenuList,
-  MenuListItem,
-  MenuListItemText
-} from "@material/react-menu";
 
 // local components
 import LogoutBtn from "./LogoutBtn";
