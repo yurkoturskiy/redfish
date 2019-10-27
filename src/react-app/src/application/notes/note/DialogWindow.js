@@ -11,26 +11,37 @@ import { EDIT_NOTE } from "../../../graphql/queries";
 export const titleInput = css`
   display: var(--add-note-title-input-display);
   vertical-align: top;
-  padding: 16px 20px 16px 20px;
+  padding: 12px 12px 4px 12px;
   border: 0px;
   border-radius: 6px;
-  font-size: 16px;
-  height: 56px;
+  height: 38px;
   resize: none;
   width: 500px;
   background: transparent;
+
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #5c5c5c;
 `;
 
 export const contentInput = css`
   vertical-align: top;
-  padding: 16px 20px 16px 20px;
+  padding: 4px 12px 12px 12px;
   border: 0px;
   border-radius: 6px;
   width: 500px;
-  font-size: 16px;
   resize: none;
-  heigth: 56px;
+  height: 38px;
   background: transparent;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #3c3c3c;
 `;
 
 const wrapper = css`
@@ -66,6 +77,7 @@ const wrapper = css`
   .dialog-exit-active {
     opacity: 1;
     width: var(--card-width);
+    height: var(--card-height);
     max-height: var(--card-height);
     top: var(--card-pos-y);
     left: var(--card-pos-x);
@@ -140,7 +152,7 @@ function DialogWindow(props) {
       var diff = outerHeight - titleInputRef.current.clientHeight;
       titleInputRef.current.style.height = 0;
       titleInputRef.current.style.height =
-        Math.max(56, titleInputRef.current.scrollHeight + diff) + "px";
+        Math.max(38, titleInputRef.current.scrollHeight + diff) + "px";
     }
   }, [title, titleInputRef, props.inEdit]);
 
@@ -154,7 +166,7 @@ function DialogWindow(props) {
       var diff = outerHeight - contentInputRef.current.clientHeight;
       contentInputRef.current.style.height = 0;
       contentInputRef.current.style.height =
-        Math.max(56, contentInputRef.current.scrollHeight + diff) + "px";
+        Math.max(38, contentInputRef.current.scrollHeight + diff) + "px";
     }
   }, [content, contentInputRef, props.inEdit]);
 
