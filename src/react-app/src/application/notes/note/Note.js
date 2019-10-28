@@ -163,7 +163,7 @@ function Note(props) {
     return text === null ? "" : text.replace(regex, "$1");
   };
   var contentText = cutText(props.node.content, 500);
-  var titleText = cutText(props.node.title, 50);
+  var titleText = props.node.title;
   const switchVisibility = () => {
     setVisible(visible => !visible);
   };
