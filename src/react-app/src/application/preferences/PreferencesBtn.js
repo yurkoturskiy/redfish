@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { css } from "linaria";
-import Fab from "@material/react-fab";
 import MaterialIcon from "@material/react-material-icon";
 import IconButton from "@material/react-icon-button";
 
