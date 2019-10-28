@@ -16,7 +16,7 @@ export const titleInput = css`
   border-radius: 6px;
   height: 38px;
   resize: none;
-  width: 500px;
+  width: 100%;
   background: transparent;
 
   font-size: 1.5em;
@@ -27,12 +27,29 @@ export const titleInput = css`
   color: #5c5c5c;
 `;
 
+export const titleLabel = css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 12px 12px 4px 12px;
+  height: 38px;
+  pointer-events: none;
+
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 140%;
+  color: #5c5c5c;
+  opacity: 0.2;
+`;
+
 export const contentInput = css`
   vertical-align: top;
   padding: 4px 12px 12px 12px;
   border: 0px;
   border-radius: 6px;
-  width: 500px;
+  width: 100%;
   resize: none;
   height: 38px;
   background: transparent;
@@ -50,21 +67,21 @@ const wrapper = css`
     left: var(--card-pos-x);
     width: var(--card-width);
     height: var(--card-height);
-    max-height: var(--card-height);
+    max-height: 60vh;
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
-    margin-left: 0px;
+    transform: translate(0%, 0%);
     opacity: 1;
   }
 
   .dialog-enter-active {
     opacity: 1;
     left: 50%;
-    top: 200px;
+    top: 50%;
     width: 500px;
-    margin-left: -250px;
     height: auto;
+    max-height: 60vh;
     box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
-    transform: translateX(0);
+    transform: translate(-50%, -50%);
     transition: opacity 300ms, transform 300ms, width 300ms, height 300ms,
       left 300ms, top 300ms, margin-left 300ms, box-shadow 300ms;
   }
@@ -78,10 +95,10 @@ const wrapper = css`
     opacity: 1;
     width: var(--card-width);
     height: var(--card-height);
-    max-height: var(--card-height);
+    max-height: 60vh;
     top: var(--card-pos-y);
     left: var(--card-pos-x);
-    margin-left: 0px;
+    transform: translate(0%, 0%);
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
     transition: opacity 300ms, transform 300ms, width 300ms, height 300ms,
       left 300ms, top 300ms, margin-left 300ms, box-shadow 300ms;
@@ -90,16 +107,25 @@ const wrapper = css`
 
 const dialogWindow = css`
   position: fixed;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-right: 12px;
   height: auto;
+  max-height: 60vh;
   top: 0;
   left: 50%;
-  top: 200px;
-  margin-left: -250px;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
   z-index: 4;
   width: 500px;
+  max-width: 80%;
   border-radius: 6px;
   box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const background = css`
   position: fixed;
@@ -223,20 +249,30 @@ function DialogWindow(props) {
           id={`${node.id}-dialog`}
         >
           <form>
-            <textarea
-              className={titleInput}
-              onChange={e => onTitleChange(e)}
-              type="text"
-              value={title}
-              ref={titleInputRef}
-            />
-            <textarea
-              className={contentInput}
-              onChange={e => onContentChange(e)}
-              type="text"
-              value={content}
-              ref={contentInputRef}
-            />
+            <div>
+              {!title && (
+                <label htmlFor="dialog-window-title" className={titleLabel}>
+                  Title
+                </label>
+              )}
+              <textarea
+                id="dialog-window-title"
+                className={titleInput}
+                onChange={e => onTitleChange(e)}
+                type="text"
+                value={title}
+                ref={titleInputRef}
+              />
+            </div>
+            <div>
+              <textarea
+                className={contentInput}
+                onChange={e => onContentChange(e)}
+                type="text"
+                value={content}
+                ref={contentInputRef}
+              />
+            </div>
           </form>
         </div>
       </CSSTransition>
