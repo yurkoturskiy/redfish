@@ -14,7 +14,7 @@ export const titleInput = css`
   padding: 12px 12px 4px 12px;
   border: 0px;
   border-radius: 6px;
-  height: 38px;
+
   resize: none;
   width: 100%;
   background: transparent;
@@ -25,6 +25,10 @@ export const titleInput = css`
   font-size: 1rem;
   line-height: 140%;
   color: #5c5c5c;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const titleLabel = css`
@@ -59,6 +63,10 @@ export const contentInput = css`
   font-size: 1rem;
   line-height: 140%;
   color: #3c3c3c;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const wrapper = css`
@@ -109,7 +117,6 @@ const dialogWindow = css`
   position: fixed;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding-right: 12px;
   height: auto;
   max-height: 60vh;
   top: 0;
@@ -171,12 +178,14 @@ function DialogWindow(props) {
   useEffect(() => {
     // Adjust height of the title field
     if (props.inEdit) {
+      titleInputRef.current.style.height = "0px";
+      let fieldWidth = Math.min(500, (window.innerWidth / 100) * 80) + "px";
+      titleInputRef.current.style.width = fieldWidth;
       var outerHeight = parseInt(
         window.getComputedStyle(titleInputRef.current).height,
         10
       );
       var diff = outerHeight - titleInputRef.current.clientHeight;
-      titleInputRef.current.style.height = 0;
       titleInputRef.current.style.height =
         Math.max(38, titleInputRef.current.scrollHeight + diff) + "px";
     }
@@ -185,12 +194,15 @@ function DialogWindow(props) {
   useEffect(() => {
     // Adjust height of the content field
     if (props.inEdit) {
+      contentInputRef.current.style.height = "0px";
+      let fieldWidth = Math.min(500, (window.innerWidth / 100) * 80) + "px";
+      contentInputRef.current.style.width = fieldWidth;
       var outerHeight = parseInt(
         window.getComputedStyle(contentInputRef.current).height,
         10
       );
       var diff = outerHeight - contentInputRef.current.clientHeight;
-      contentInputRef.current.style.height = 0;
+
       contentInputRef.current.style.height =
         Math.max(38, contentInputRef.current.scrollHeight + diff) + "px";
     }
@@ -269,6 +281,7 @@ function DialogWindow(props) {
                 className={contentInput}
                 onChange={e => onContentChange(e)}
                 type="text"
+                data-adaptheight
                 value={content}
                 ref={contentInputRef}
               />
