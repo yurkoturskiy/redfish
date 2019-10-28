@@ -3,6 +3,7 @@ import * as log from "loglevel";
 import debounce from "lodash/debounce";
 import { css } from "linaria";
 import { Mutation, withApollo } from "react-apollo";
+import Button from "@material/react-button";
 // queries
 import { ALL_NOTES, ADD_NOTE, ALL_NOTES_LOADED } from "../../graphql/queries";
 
@@ -11,15 +12,32 @@ export const wrapper = css`
   z-index: 2;
   border-radius: 6px;
   top: var(--add-note-wrapper-top);
-  left: 50%;
-  margin: 0 0 0 -250px;
-  transition: top 0.4s, box-shadow 1s;
+  left: 0;
+  right: 0;
+  margin: 0 auto 0 auto;
+  max-width: var(--add-note-wrapper-max-width);
+  width: 500px;
+  transition: top 0.4s, box-shadow 1s, max-width 0.4s;
   background-color: white;
   box-shadow: var(--add-note-wrapper-box-shadow);
   padding: 0px;
 
   &:hover {
     box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  & button {
+    margin-left: auto;
+    margin-right: auto;
+    display: var(--add-note-submit-button-display);
+    font-size: 1rem;
+    font-weight: normal;
+    height: 44px;
+    color: black;
+    --mdc-theme-primary: #1d79ff;
+    text-transform: capitalize;
+    letter-spacing: 0;
+    cursor: pointer;
   }
 `;
 
@@ -31,6 +49,21 @@ export const background = css`
   width: 100vw;
   height: 100vh;
   z-index: 1;
+`;
+
+export const contentContainer = css`
+  flex-direction: column;
+  max-height: 60vh;
+  overflow-y: var(--add-note-wrapper-overflow-y);
+  border-bottom: 1px solid lightgrey;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & div {
+    position: relative;
+  }
 `;
 
 export const titleLabel = css`
@@ -53,11 +86,14 @@ export const titleInput = css`
   font-size: 16px;
   height: 56px;
   resize: none;
-  width: 500px;
+
+  width: 100%;
 `;
 
 export const contentLabel = css`
   position: absolute;
+  top: 0;
+  left: 0;
   padding: 16px 20px 16px 20px;
   line-height: 24px;
   font-size: 16px;
@@ -70,14 +106,11 @@ export const contentInput = css`
   padding: 16px 20px 16px 20px;
   border: 0px;
   border-radius: 6px;
-  width: 500px;
+
+  width: 100%;
   font-size: 16px;
   resize: none;
   height: 56px;
-`;
-
-export const submitButton = css`
-  display: var(--add-note-submit-button-display);
 `;
 
 const updateCache = (cache, { data }) => {
@@ -196,10 +229,13 @@ function AddNote(props) {
         className={wrapper}
         style={{
           "--add-note-wrapper-position": isActive ? "fixed" : "absolute",
+          "--add-note-wrapper-max-width": isActive ? "90%" : "50%",
+          "--add-note-wrapper-overflow-y": isActive ? "scroll" : "hidden",
           "--add-note-wrapper-top": isActive ? "20vh" : "20px",
           "--add-note-wrapper-box-shadow": isActive
             ? "0px 3px 26px 0px rgba(0,0,0,0.3)"
-            : "0px 1px 1px 0px rgba(0,0,0,0.2)"
+            : "0px 1px 1px 0px rgba(0,0,0,0.2)",
+          "--add-note-submit-button-display": isActive ? "block" : "none"
         }}
         onClick={() => setIsActive(true)}
       >
@@ -209,41 +245,39 @@ function AddNote(props) {
             setDeactivate(true);
           }}
         >
-          {isActive && (
-            <label className={titleLabel}>{title === "" && "Title"}</label>
-          )}
-          <textarea
-            className={titleInput}
-            style={{
-              "--add-note-title-input-display": isActive ? "block" : "none"
-            }}
-            id="title"
-            value={title}
-            type="text"
-            onChange={e => onTitleChange(e)}
-            ref={titleInputRef}
-          />
-          <label className={contentLabel}>
-            {content === "" && "Take a note..."}
-          </label>
-          <textarea
-            className={contentInput}
-            data-adaptheight
-            id="content"
-            value={content}
-            type="text"
-            onChange={e => onContentChange(e)}
-            ref={contentInputRef}
-          />
-          <button
-            type="submit"
-            className={submitButton}
-            style={{
-              "--add-note-submit-button-display": isActive ? "block" : "none"
-            }}
-          >
-            Close
-          </button>
+          <div className={contentContainer}>
+            <div>
+              {isActive && (
+                <label className={titleLabel}>{title === "" && "Title"}</label>
+              )}
+              <textarea
+                className={titleInput}
+                style={{
+                  "--add-note-title-input-display": isActive ? "block" : "none"
+                }}
+                id="title"
+                value={title}
+                type="text"
+                onChange={e => onTitleChange(e)}
+                ref={titleInputRef}
+              />
+            </div>
+            <div>
+              <label className={contentLabel}>
+                {content === "" && "Take a note..."}
+              </label>
+              <textarea
+                className={contentInput}
+                data-adaptheight
+                id="content"
+                value={content}
+                type="text"
+                onChange={e => onContentChange(e)}
+                ref={contentInputRef}
+              />
+            </div>
+          </div>
+          <Button type="submit">Save</Button>
         </form>
       </div>
       {isActive && (
