@@ -84,39 +84,95 @@
   position: relative;
   border: 0px solid white;
   border-radius: 5px;
-  text-align: center;
+  text-align: left;
+  padding-left: 68px;
   height: 44px;
   color: white;
   width: 100%;
-  font-size: 1rem;
+  font-size: 0.875rem;
   display: block;
-  margin: 8px auto 8px auto;
+  margin: 8px auto 16px auto;
+  background-size: 24px 24px;
+  background-position: 20px center;
+  background-repeat: no-repeat;
+  transition: background-color 0.2s, color 0.2s, border 0.2s,
+    background-image 0.2s;
 }
 
-.facebook-button.densed,
-.github-button.densed {
+.facebook-button-densed,
+.github-button-densed {
+  background-position: center center;
+  background-size: auto;
+  background-color: transparent;
+  border: none;
+  padding: 0;
   width: 44px;
+  height: 44px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 1px solid white;
   margin: 0;
+}
+
+.facebook-button-densed:hover,
+.github-button-densed:hover {
 }
 
 @media screen and (max-width: 960px) {
   .facebook-button,
   .github-button {
-    height: 36px;
+    height: 40px;
   }
-  .facebook-button.densed,
-  .github-button.densed {
+  .facebook-button-densed,
+  .github-button-densed {
     width: 36px;
+    height: 36px;
     margin: 0;
   }
 }
 
 .facebook-button {
-  background: #4267b2;
+  background-image: url('../images/facebook-icon-revert.svg');
+  background-color: #1877f2;
+  border: 1px solid #1877f2;
+}
+
+.facebook-button-densed {
+  background-image: url('../images/facebook-icon-revert.svg');
+  border: 1px solid #1877f2;
+}
+.facebook-button-densed:hover {
+  background-image: url('../images/facebook-icon.svg');
+  border: 1px solid white;
+}
+
+.facebook-button:hover {
+  color: #1877f2;
+  background-color: white;
+  background-image: url('../images/facebook-icon.svg');
 }
 
 .github-button {
-  background: #333333;
+  background-image: url('../images/github-icon-revert.svg');
+  background-color: #24292e;
+  border: 1px solid #24292e;
+}
+
+.github-button-densed {
+  background-image: url('../images/github-icon-revert.svg');
+  border: 1px solid #181616;
+  background-color: #181616;
+}
+.github-button-densed:hover {
+  background-image: url('../images/github-icon.svg');
+  background-color: white;
+  border: 1px solid white;
+}
+
+.github-button:hover {
+  background-image: url('../images/github-icon.svg');
+  color: #24292e;
+  background-color: white;
 }
 
 #auth-blob-one {

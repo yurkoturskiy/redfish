@@ -7,7 +7,11 @@ function LogoutBtn(props) {
     props.history.push("/logout");
     props.handleMenuClick();
   };
-  return <div onClick={logout}>Logout</div>;
+  return (
+    <div className={props.className || ""} onClick={logout}>
+      Logout
+    </div>
+  );
 }
 
 LogoutBtn.propTypes = {

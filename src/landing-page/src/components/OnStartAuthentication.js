@@ -10,15 +10,19 @@ const query = gql`
 
 function OnStartAuthentication(props) {
   const [key] = useState(localStorage.getItem('token'))
-  const { loading, data } = useQuery(query, {
-    variables: { key: key ? key : '' },
+  const { loading, error, data } = useQuery(query, {
+    variables: { key: key || '' },
   })
+
   useEffect(() => {
-    if (data.tokenIsValid) window.location.replace(process.env.GATSBY_APP_URL)
-    else localStorage.removeItem('token')
+    if (data) {
+      if (data.tokenIsValid) window.location.replace(process.env.GATSBY_APP_URL)
+      else localStorage.removeItem('token')
+    }
   })
+
   if (loading) return null
-  if (data.tokenIsValid) return null
+  if (data) return null
   return <React.Fragment>{props.children}</React.Fragment>
 }
 

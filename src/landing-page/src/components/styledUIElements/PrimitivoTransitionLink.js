@@ -9,7 +9,6 @@ function PrimitivoTransitionLink(props) {
   const [isActive, setIsActive] = useState()
 
   const handleClick = e => {
-    console.log('click event', e)
     setClickPos({ x: e.clientX, y: e.clientY })
     setIsActive(true)
   }
@@ -27,6 +26,7 @@ function PrimitivoTransitionLink(props) {
             node.style.position = 'absolute'
             node.style.top = '0px'
             node.style.left = '0px'
+            node.style.overflow = 'hidden'
 
             handleClick(e)
           },

@@ -13,7 +13,7 @@ const AUTH_WITH_FACEBOOK = gql`
 
 const Button = ({ children, triggerLogin, densed, ...props }) => (
   <button
-    className={`facebook-button ${densed && 'densed'}`}
+    className={densed ? 'facebook-button-densed' : 'facebook-button'}
     onClick={() => triggerLogin()}
     {...props}
   >
@@ -34,6 +34,13 @@ function AuthWithFacebook(props) {
   }, [accessToken, isAuth])
 
   useEffect(() => {
+    if (error) {
+      alert(
+        `Error message from a redfish server:\n ${error.graphQLErrors.map(
+          ({ message }, i) => `${message}\n`
+        )}`
+      )
+    }
     data && handleResponse()
   }, [data, error])
 
@@ -44,18 +51,17 @@ function AuthWithFacebook(props) {
     window.location.replace(process.env.GATSBY_APP_URL)
 
   const handleResponse = () => {
-    console.log(data)
     localStorage.setItem('token', data.authWithFacebook.key)
     setIsAuth(true)
-    console.log('Token received and saved')
   }
 
   const onLoginSuccess = response => {
-    console.log(response)
+    console.log('facebook success response', response)
     setAccessToken(response._token.accessToken)
   }
 
-  const onLoginFailure = response => console.log(response)
+  const onLoginFailure = response =>
+    alert(`facebook failure response: ${response}`)
 
   return (
     <div>
@@ -68,8 +74,6 @@ function AuthWithFacebook(props) {
       >
         {props.children}
       </SocialButton>
-      {error &&
-        error.graphQLErrors.map(({ message }, i) => <h6 key={i}>{message}</h6>)}
     </div>
   )
 }

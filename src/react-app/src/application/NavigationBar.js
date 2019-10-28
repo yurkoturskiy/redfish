@@ -1,16 +1,19 @@
 import React from "react";
 import { css } from "linaria";
 import Logo from "./Logo";
-import PreferencesBtn from "./preferences/PreferencesBtn";
+import LogoutButton from "./LogoutButton";
 
 export const wrapper = css`
-  height: 128px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 98px;
 `;
 
 const NavigationBar = () => (
   <div className={wrapper}>
     <Logo />
-    <PreferencesBtn />
+    <LogoutButton />
   </div>
 );
 

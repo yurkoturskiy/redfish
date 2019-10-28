@@ -9,7 +9,11 @@ function ProfileBtn(props) {
     }
     props.handleMenuClick();
   };
-  return <div onClick={redirect}>Profile</div>;
+  return (
+    <div className={props.className || ""} onClick={redirect}>
+      Profile
+    </div>
+  );
 }
 
 ProfileBtn.propTypes = {

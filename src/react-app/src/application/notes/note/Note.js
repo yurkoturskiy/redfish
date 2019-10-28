@@ -134,6 +134,13 @@ export const title = css`
 
 export const contentContainer = css`
   height: 100%;
+  max-height: 600px;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    /* Extra small */
+    max-height: 300px;
+  }
 `;
 
 export const content = css`
@@ -156,7 +163,7 @@ function Note(props) {
     return text === null ? "" : text.replace(regex, "$1");
   };
   var contentText = cutText(props.node.content, 500);
-  var titleText = cutText(props.node.title, 50);
+  var titleText = props.node.title;
   const switchVisibility = () => {
     setVisible(visible => !visible);
   };
