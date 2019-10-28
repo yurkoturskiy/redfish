@@ -156,11 +156,22 @@ function DialogWindow(props) {
   const [content, setContent] = useState(node.content);
   const contentInputRef = useRef();
   const titleInputRef = useRef();
+
+  // Set and update card's size
+  const updateCardParams = () => {
+    const element = document.getElementById(node.id);
+    setCardHeight(`${element.offsetHeight}px`);
+    setCardWidth(`${element.offsetWidth}px`);
+  };
   useEffect(() => {
     const element = document.getElementById(node.id);
     setCardHeight(`${element.offsetHeight}px`);
     setCardWidth(`${element.offsetWidth}px`);
+    window.addEventListener("resize", updateCardParams);
+    return () => window.removeEventListener("resize", updateCardParams);
   }, []);
+
+  // Set and update card's position
   useEffect(() => {
     const element = document.getElementById(node.id);
     var rect = element.getBoundingClientRect();
