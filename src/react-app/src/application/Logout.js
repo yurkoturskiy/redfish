@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { withApollo } from "react-apollo";
 // Queries
 import { LOGOUT } from "../graphql/queries";
+// Local components
+import Spinner from "./Spinner";
 
 function Logout(props) {
   /*
@@ -65,7 +67,7 @@ function Logout(props) {
 
   return (
     <React.Fragment>
-      <div>logging out</div>
+      <Spinner />
       <iframe
         style={{ visibility: "hidden" }}
         ref={iframeRef}

@@ -1,11 +1,13 @@
 // external
-import React from "react";
+import React, { useState } from "react";
 import * as log from "loglevel";
+import { css } from "linaria";
 import { Query, graphql, Mutation, withApollo } from "react-apollo";
 // local components
 import Note from "./note/Note";
 import DraggableMasonryLayout from "react-universal-dnd-layout";
 import SelectedNotesOptionsBar from "./SelectedNotesOptionsBar/Container";
+import Spinner from "../Spinner";
 // queries
 import {
   ALL_NOTES,
@@ -15,16 +17,25 @@ import {
 
 export const Cursors = React.createContext();
 
+export const headersStyles = css`
+  font-size: 0.875rem;
+  margin: 0 0 0 16px;
+  color: lightgrey;
+`;
+
 function Notes(props) {
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
   log.info("render notes");
   return (
     <Query query={NOTES_COMPONENT}>
-      {({ loading, error, data, fetchMore }) => {
-        if (loading) return <p>Loading...</p>;
+      {({ loading, error, data }) => {
+        if (loading) return null;
         if (error) {
           console.log(error);
+          props.client.writeData({ data: { isLoading: false } });
           return <p>Error :(</p>;
         }
+        props.client.writeData({ data: { isLoading: false } });
         log.info("handle allNotes data query");
         log.debug("notes component data:", data);
         const cursors = data.allNotes.edges.map(note => note.cursor);
@@ -57,8 +68,8 @@ function Notes(props) {
             allNotesLoaded
           }
         });
-        const pinnedHeader = <h3>Pinned</h3>;
-        const notPinnedHeader = <h3>Others</h3>;
+        const pinnedHeader = <h3 className={headersStyles}>Pinned</h3>;
+        const notPinnedHeader = <h3 className={headersStyles}>Others</h3>;
         return (
           <Cursors.Provider value={cursors}>
             {data.selectedNotes.length > 0 && (
@@ -153,6 +164,7 @@ function Notes(props) {
                             var oldList = props.client.readQuery({
                               query: ALL_NOTES
                             });
+                            setIsFetchingMore(true);
                             props.client
                               .query({
                                 query: ALL_NOTES,
@@ -174,7 +186,9 @@ function Notes(props) {
                                   query: ALL_NOTES,
                                   data: newList
                                 });
-                              });
+                                setIsFetchingMore(false);
+                              })
+                              .catch(() => setIsFetchingMore(false));
                           }
                         }}
                       >
@@ -185,6 +199,7 @@ function Notes(props) {
                 </React.Fragment>
               )}
             </Mutation>
+            {isFetchingMore && <Spinner type="bottom" size="middle" />}
           </Cursors.Provider>
         );
       }}

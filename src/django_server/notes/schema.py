@@ -51,7 +51,13 @@ class Query(object):
     def resolve_all_notes(self, info, **kwargs):
         # context will reference to the Django request
         if info.context.user.is_authenticated:
-            return Note.objects.filter(owner=info.context.user).exclude(Q(title=None)| Q(title=""), Q(content=None) | Q(content=""))
+            getAllNotes = lambda: Note.objects.filter(owner=info.context.user).exclude(Q(title=None)| Q(title=""), Q(content=None) | Q(content=""))
+            allNotes = getAllNotes()
+            if len(allNotes) == 0:
+                # Generate initial notes
+                Note.objects.createInitialNotes(owner=info.context.user)
+                return getAllNotes()
+            return allNotes
         else:
             return Note.objects.none()
 

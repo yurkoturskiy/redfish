@@ -8,8 +8,9 @@ import Authentication from "./Authentication";
 import Logout from "./Logout";
 import NotesContainer from "./notes/NotesContainer";
 import Profile from "./profile/Profile";
+import Spinner from "./Spinner";
 // Queries
-import { IS_AUTHENTICATED } from "../graphql/queries";
+import { APP_COMPONENT } from "../graphql/queries";
 
 // Global linaria's css styles
 import "@material/react-text-field/dist/text-field.css";
@@ -49,7 +50,11 @@ export const globals = css`
     body {
       font-family: "Roboto", sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 0 0 128px 0;
+    }
+    .masonry {
+      margin: 28px auto 0 auto;
+      max-width: 1440px;
     }
   }
 `;
@@ -67,25 +72,27 @@ const App = () => (
    *   Also it provide navigation component
    */
 
-  <Query query={IS_AUTHENTICATED}>
+  <Query query={APP_COMPONENT}>
     {({ data }) => {
-      if (data.isAuthenticated)
-        return (
-          <React.Fragment>
-            <NavigationBar />
-            <Switch>
-              <Route exact path="/" component={NotesContainer} />
-              <Route path="/profile" component={Profile} />
-              <Route path="/logout" component={Logout} />
-            </Switch>
-          </React.Fragment>
-        );
-      else
-        return (
-          <div>
-            <Authentication />
-          </div>
-        );
+      return (
+        <React.Fragment>
+          {data.isLoading && <Spinner />}
+          {data.isAuthenticated ? (
+            <React.Fragment>
+              <NavigationBar />
+              <Switch>
+                <Route exact path="/" component={NotesContainer} />
+                <Route path="/profile" component={Profile} />
+                <Route path="/logout" component={Logout} />
+              </Switch>
+            </React.Fragment>
+          ) : (
+            <div>
+              <Authentication />
+            </div>
+          )}
+        </React.Fragment>
+      );
     }}
   </Query>
 );
