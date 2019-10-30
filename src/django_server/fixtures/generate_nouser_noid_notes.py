@@ -12,8 +12,6 @@ django.setup()
 from notes.models import Note
 
 RECORDS_AMOUNT = 100 # for each user
-FILE_NAME = 'nouser_noid_notes.json'
-
 
 def create_notes():
 	sentences = lambda: randint(1, 12)
