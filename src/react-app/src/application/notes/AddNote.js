@@ -22,6 +22,17 @@ export const wrapper = css`
   box-shadow: var(--add-note-wrapper-box-shadow);
   padding: 0px;
 
+  animation-name: appearance;
+  animation-duration: 0.5s;
+  @keyframes appearance {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   &:hover {
     box-shadow: 0px 3px 26px 0px rgba(0, 0, 0, 0.3);
   }
