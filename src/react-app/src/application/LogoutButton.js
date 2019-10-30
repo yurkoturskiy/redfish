@@ -6,6 +6,10 @@ import IconButton from "@material/react-icon-button";
 
 export const logoutBtn = css`
   margin: 24px;
+  @media (max-width: 767px) {
+    /* Extra small */
+    margin: 12px;
+  }
 `;
 
 export const icon = css``;

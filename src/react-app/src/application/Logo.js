@@ -7,6 +7,13 @@ export const logo = css`
   width: 64px;
   height: 64px;
   margin: 24px;
+
+  @media (max-width: 767px) {
+    /* Extra small */
+    margin: 12px;
+    width: 64px;
+    height: 64px;
+  }
 `;
 
 function Logo(props) {
