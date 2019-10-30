@@ -1,17 +1,55 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { css } from "linaria";
+import { css, cx } from "linaria";
 import { morphing } from "primitivo-svg";
 
-export const wrapper = css`
-  z-index: 4;
+export const center = css`
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  margin: auto;
+`;
+
+export const bottom = css`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto auto 128px auto;
+  transition: transform 0.8s, margin-bottom 0.8s;
+  animation-name: appearance;
+  animation-duration: 1s;
+
+  @keyframes appearance {
+    from {
+      margin-bottom: 0;
+      transform: translateY(100%);
+    }
+    to {
+      margin-bottom: 128px;
+      transform: translateY(0);
+    }
+  }
+`;
+
+// Spinner size
+export const big = css`
   width: 128px;
   height: 128px;
-  margin: auto;
+`;
+export const middle = css`
+  width: 64px;
+  height: 64px;
+`;
+export const small = css`
+  width: 32px;
+  height: 32px;
+`;
+
+export const wrapper = css`
+  z-index: 4;
   text-align: center;
 
   & span {
@@ -123,7 +161,7 @@ function Spinner(props) {
             keySplines={keySplines}
             values={blob.dValues}
           />
-          {props.type === "fill" && (
+          {props.fillTransition && (
             <animate
               begin={props.shiftStep * i + "ms"}
               attributeName="fill"
@@ -132,7 +170,7 @@ function Spinner(props) {
               repeatCount="indefinite"
             />
           )}
-          {props.type === "stroke" && (
+          {props.strokeTransition && (
             <animate
               begin={props.shiftStep * i + "ms"}
               attributeName="stroke"
@@ -147,7 +185,7 @@ function Spinner(props) {
   }
 
   return (
-    <div className={wrapper}>
+    <div className={cx(wrapper, eval(props.type), eval(props.size))}>
       <svg viewBox={`0 0 ${width} ${height}`}>{paths}</svg>
       {props.lable && <span>{props.lable}</span>}
     </div>
@@ -155,15 +193,18 @@ function Spinner(props) {
 }
 
 Spinner.defaultProps = {
+  type: "center",
+  size: "big",
   duration: 4000,
-  shiftStep: 100,
+  shiftStep: 120,
   numOfKeyPaths: 8,
   numOfShapes: 3,
   colors: ["#3688FF", "#FF546C", "#22D163", "#3688FF"],
   contrast: 0.8,
   round: 0.6,
   numOfPathSegments: 6,
-  type: "fill",
+  fillTransition: true,
+  strokeTransition: true,
   lable: false
 };
 

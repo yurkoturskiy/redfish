@@ -199,7 +199,7 @@ function Notes(props) {
                 </React.Fragment>
               )}
             </Mutation>
-            {isFetchingMore && <Spinner />}
+            {isFetchingMore && <Spinner type="bottom" size="middle" />}
           </Cursors.Provider>
         );
       }}
