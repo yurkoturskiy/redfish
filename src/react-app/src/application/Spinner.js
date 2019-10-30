@@ -11,8 +11,20 @@ export const wrapper = css`
   left: 0;
   width: 128px;
   height: 128px;
-  margin: auto;
+  margin: var(--spinner-margin);
   text-align: center;
+
+  animation-name: spinner-appear;
+  animation-duration: 1s;
+
+  @keyframes spinner-appear {
+    from {
+      margin-bottom: -128px;
+    }
+    to {
+      margin-bottom: 24px;
+    }
+  }
 
   & span {
     font-size: 0.875rem;
@@ -26,11 +38,10 @@ export const wrapper = css`
 
   & path {
     mix-blend-mode: multiply;
-    animation-name: spinner-appear;
+    animation-name: path-appear;
     animation-duration: 1s;
   }
-
-  @keyframes spinner-appear {
+  @keyframes path-appear {
     from {
       opacity: 0;
     }
@@ -89,7 +100,13 @@ function Spinner(props) {
   const blob = useMemo(() => morphing(morphParams, pathParams), []);
 
   return (
-    <div className={wrapper}>
+    <div
+      className={wrapper}
+      style={{
+        "--spinner-margin":
+          props.type === "fetchMore" ? "auto auto 24px auto" : "auto"
+      }}
+    >
       <svg viewBox={`0 0 ${width} ${height}`}>
         {thirdPath && (
           <path fill="3688FF">
@@ -153,7 +170,6 @@ function Spinner(props) {
           </path>
         )}
       </svg>
-      <span>loading...</span>
     </div>
   );
 }

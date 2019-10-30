@@ -1,5 +1,5 @@
 // external
-import React from "react";
+import React, { useState } from "react";
 import * as log from "loglevel";
 import { css } from "linaria";
 import { Query, graphql, Mutation, withApollo } from "react-apollo";
@@ -7,6 +7,7 @@ import { Query, graphql, Mutation, withApollo } from "react-apollo";
 import Note from "./note/Note";
 import DraggableMasonryLayout from "react-universal-dnd-layout";
 import SelectedNotesOptionsBar from "./SelectedNotesOptionsBar/Container";
+import Spinner from "../Spinner";
 // queries
 import {
   ALL_NOTES,
@@ -23,6 +24,7 @@ export const headersStyles = css`
 `;
 
 function Notes(props) {
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
   log.info("render notes");
   return (
     <Query query={NOTES_COMPONENT}>
@@ -160,6 +162,7 @@ function Notes(props) {
                             var oldList = props.client.readQuery({
                               query: ALL_NOTES
                             });
+                            setIsFetchingMore(true);
                             props.client
                               .query({
                                 query: ALL_NOTES,
@@ -181,7 +184,9 @@ function Notes(props) {
                                   query: ALL_NOTES,
                                   data: newList
                                 });
-                              });
+                                setIsFetchingMore(false);
+                              })
+                              .catch(() => setIsFetchingMore(false));
                           }
                         }}
                       >
@@ -192,6 +197,7 @@ function Notes(props) {
                 </React.Fragment>
               )}
             </Mutation>
+            {isFetchingMore && <Spinner type={"fetchMore"} />}
           </Cursors.Provider>
         );
       }}
