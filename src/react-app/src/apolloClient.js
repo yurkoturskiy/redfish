@@ -15,7 +15,7 @@ const defaultState = () => ({
   numOfPinnedNotes: 0,
   numOfNotPinnedNotes: 0,
   allNotesLoaded: false,
-  spinner: true
+  isLoading: true
 });
 
 const stateLink = withClientState({

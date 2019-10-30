@@ -28,12 +28,14 @@ function Notes(props) {
   log.info("render notes");
   return (
     <Query query={NOTES_COMPONENT}>
-      {({ loading, error, data, fetchMore }) => {
-        if (loading) return <p>Loading...</p>;
+      {({ loading, error, data }) => {
+        if (loading) return null;
         if (error) {
           console.log(error);
+          props.client.writeData({ data: { isLoading: false } });
           return <p>Error :(</p>;
         }
+        props.client.writeData({ data: { isLoading: false } });
         log.info("handle allNotes data query");
         log.debug("notes component data:", data);
         const cursors = data.allNotes.edges.map(note => note.cursor);
