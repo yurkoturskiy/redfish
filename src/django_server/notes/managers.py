@@ -2,6 +2,9 @@
 from django.db import models, transaction
 from django.db.models import F, Max, Q
 from django.contrib.auth.models import User
+from random import randint
+import requests
+import json
 
 class NoteManager(models.Manager):
     """ Manager to encapsulate bits of business logic """
@@ -48,6 +51,41 @@ class NoteManager(models.Manager):
                     notes_to_update_order.update(order=F('order') - (index + 1))
             
 
+    def generateNoOwnerNotes(self, records_amount):
+        '''
+        Generate notes without owner 
+        to use them as initial notes for new users
+        '''
+        sentences = lambda: randint(1, 12)
+        url = lambda: f'https://baconipsum.com/api/?type=meat-and-filler&sentences={sentences()}&format=text'
+        for i in range(records_amount):
+            r = requests.get(url())
+            if r.status_code == 200:
+                self.create(title="", content=r.text, color="WHITE", pinned=False)
+            else:
+                print(f'{i} failed')
+
+
+    def createInitialNotes(self, **kwargs):
+        '''
+            Clone notes without owner and assign given owner
+        '''
+        def getNoOwnerNotes():
+            get_qs = lambda: self.get_queryset().filter(owner=None)
+            qs = get_qs()
+            if len(qs) == 0:
+                self.generateNoOwnerNotes(100)
+                return get_qs()
+            return qs
+
+        initial_notes = []
+
+        for i in getNoOwnerNotes():
+            i.pk = None
+            i.owner = kwargs['owner']
+            initial_notes.append(i)
+
+        self.bulk_create(initial_notes)
 
 
     def move(self, obj, new_order):
