@@ -109,7 +109,12 @@ class NoteManager(models.Manager):
 
         with transaction.atomic():
             # Get our current max order number
-            end_order = len(self.filter(owner=kwargs['owner'], pinned=False))
+            try: 
+                owner = kwargs['owner']
+            except KeyError:
+                owner = None
+
+            end_order = len(self.filter(owner=owner, pinned=False))
             instance.order = end_order
             instance.save()
             self.move(instance, 0) # move the order to 0
