@@ -1,6 +1,7 @@
 // external
 import React from "react";
 import * as log from "loglevel";
+import { css } from "linaria";
 import { Query, graphql, Mutation, withApollo } from "react-apollo";
 // local components
 import Note from "./note/Note";
@@ -14,6 +15,12 @@ import {
 } from "../../graphql/queries";
 
 export const Cursors = React.createContext();
+
+export const headersStyles = css`
+  font-size: 0.875rem;
+  margin: 0 0 0 16px;
+  color: lightgrey;
+`;
 
 function Notes(props) {
   log.info("render notes");
@@ -57,8 +64,8 @@ function Notes(props) {
             allNotesLoaded
           }
         });
-        const pinnedHeader = <h3>Pinned</h3>;
-        const notPinnedHeader = <h3>Others</h3>;
+        const pinnedHeader = <h3 className={headersStyles}>Pinned</h3>;
+        const notPinnedHeader = <h3 className={headersStyles}>Others</h3>;
         return (
           <Cursors.Provider value={cursors}>
             {data.selectedNotes.length > 0 && (
