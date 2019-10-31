@@ -73,12 +73,12 @@ function RegistrationFormContainer(props) {
       (evaluate.score === 4 && 'very unguessable')
     setPasswordStrengthScore(fieldIsEmpty ? undefined : helperText)
   }
-  if (requestIsSucceed) {
-    return <h1>Confirm your email address</h1>
-  } else {
-    return (
-      <React.Fragment>
-        <div className="form-card">
+  return (
+    <React.Fragment>
+      <div className="form-card">
+        {requestIsSucceed ? (
+          <h3 className="succeed-message">Confirm your email address</h3>
+        ) : (
           <Formik
             initialValues={{
               username: undefined,
@@ -100,22 +100,22 @@ function RegistrationFormContainer(props) {
               />
             )}
           </Formik>
-        </div>
-        <div className="authentication-footer">
-          <Button
-            type="button"
-            className="material-button"
-            outlined={true}
-            onClick={() => props.setRoute('login')}
-          >
-            Login
-          </Button>
-          <AuthWithFacebook densed={true} />
-          <AuthWithGitHub densed={true} />
-        </div>
-      </React.Fragment>
-    )
-  }
+        )}
+      </div>
+      <div className="authentication-footer">
+        <Button
+          type="button"
+          className="material-button"
+          outlined={true}
+          onClick={() => props.setRoute('login')}
+        >
+          Login
+        </Button>
+        <AuthWithFacebook densed={true} />
+        <AuthWithGitHub densed={true} />
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default RegistrationFormContainer
