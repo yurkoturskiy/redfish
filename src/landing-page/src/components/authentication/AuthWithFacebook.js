@@ -34,7 +34,7 @@ function AuthWithFacebook(props) {
   // Turn on spinner
   const client = useApolloClient()
   useEffect(() => {
-    client.writeData({ data: { sending: mutationLoading || isAuth } })
+    client.writeData({ data: { sending: mutationLoading || isAuth || false } })
   }, [mutationLoading, isAuth])
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function AuthWithFacebook(props) {
     <div>
       <SocialButton
         provider="facebook"
-        appId="432672034191065"
+        appId={process.env.GATSBY_OAUTH_FACEBOOK_CLIENT_ID}
         onLoginSuccess={onLoginSuccess}
         onLoginFailure={onLoginFailure}
         densed={props.densed}
