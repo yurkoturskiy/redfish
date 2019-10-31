@@ -6,6 +6,7 @@
   bottom: 0;
   left: 0;
   margin: auto;
+  transform: translateY(-50%);
 }
 .bottom {
   position: fixed;

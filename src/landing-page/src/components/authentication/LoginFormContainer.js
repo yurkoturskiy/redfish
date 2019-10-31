@@ -7,7 +7,6 @@ import Button from '@material/react-button'
 import LoginForm from './forms/LoginForm'
 import AuthWithFacebook from './AuthWithFacebook'
 import AuthWithGitHub from './AuthWithGitHub'
-import Spinner from '../styledUIElements/Spinner'
 
 const SUBMIT_LOGIN = gql`
   mutation login($username: String = "", $password: String = "") {
