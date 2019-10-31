@@ -224,6 +224,8 @@
 */
 
 .authentication-start-form {
+  pointer-events: var(--authentication-start-form-pointer-event);
+  opacity: var(--authentication-start-form-opacity);
   margin: 0 16px 0 16px;
   padding: 4px 28px 20px 28px;
 }

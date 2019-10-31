@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import SocialLogin from 'react-social-login'
 
@@ -25,11 +25,20 @@ const SocialButton = SocialLogin(Button)
 
 function AuthWithFacebook(props) {
   const [isAuth, setIsAuth] = useState(false)
-  const [authWithFacebook, { error, data }] = useMutation(AUTH_WITH_FACEBOOK)
+  const [
+    authWithFacebook,
+    { loading: mutationLoading, error, data },
+  ] = useMutation(AUTH_WITH_FACEBOOK)
   const [accessToken, setAccessToken] = useState()
 
+  // Turn on spinner
+  const client = useApolloClient()
   useEffect(() => {
-    accessToken && sendAuthenticationRequest()
+    client.writeData({ data: { sending: mutationLoading || isAuth } })
+  }, [mutationLoading])
+
+  useEffect(() => {
+    accessToken && !data && sendAuthenticationRequest()
     isAuth && redirectToAppPage()
   }, [accessToken, isAuth])
 
@@ -51,6 +60,7 @@ function AuthWithFacebook(props) {
     window.location.replace(process.env.GATSBY_APP_URL)
 
   const handleResponse = () => {
+    // Handle response from Redfish
     localStorage.setItem('token', data.authWithFacebook.key)
     setIsAuth(true)
   }
