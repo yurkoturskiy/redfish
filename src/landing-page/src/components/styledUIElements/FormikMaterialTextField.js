@@ -1,4 +1,5 @@
 import React from 'react'
+import MaterialIcon from '@material/react-material-icon'
 import TextField, { HelperText, Input, Icon } from '@material/react-text-field'
 
 export const FormikMaterialTextField = ({
@@ -20,19 +21,7 @@ export const FormikMaterialTextField = ({
         helperText}
     </HelperText>
   )
-  const tralingIconTag = (
-    <Icon>
-      <i
-        className="material-icons"
-        tabIndex="1"
-        role="button"
-        id="tralingIcon"
-        onClick={tralingIconOnClick}
-      >
-        {tralingIcon}
-      </i>
-    </Icon>
-  )
+
   return (
     <div className="text-field">
       <TextField
@@ -42,7 +31,10 @@ export const FormikMaterialTextField = ({
         className="input-container"
         outlined={true}
         helperText={helperTextTag}
-        trailingIcon={tralingIconTag}
+        trailingIcon={
+          tralingIcon && <MaterialIcon role="button" icon={tralingIcon} />
+        }
+        onTrailingIconSelect={tralingIconOnClick}
       >
         <Input
           isValid={!errors[field.name]}

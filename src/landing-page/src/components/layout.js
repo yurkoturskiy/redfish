@@ -21,6 +21,7 @@ import '../styles/spinner.css'
 import '@material/react-text-field/dist/text-field.css'
 import '@material/react-button/dist/button.css'
 import '@material/react-checkbox/dist/checkbox.css'
+import '@material/react-material-icon/dist/material-icon.css'
 
 function Layout(props) {
   const data = useStaticQuery(graphql`

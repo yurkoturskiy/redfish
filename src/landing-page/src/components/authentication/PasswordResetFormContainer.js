@@ -53,12 +53,12 @@ function PasswordResetFormContainer(props) {
     setRequestIsSucceed(true)
   }
 
-  if (requestIsSucceed) {
-    return <h3>Check your email</h3>
-  } else {
-    return (
-      <React.Fragment>
-        <div className="form-card">
+  return (
+    <React.Fragment>
+      <div className="form-card">
+        {requestIsSucceed ? (
+          <h3 className="succeed-message">Check your email</h3>
+        ) : (
           <Formik initialValues={{ email: undefined }} onSubmit={handleSubmit}>
             {({ status, touched, isSubmitting, errors }) => (
               <PasswordResetForm
@@ -70,22 +70,22 @@ function PasswordResetFormContainer(props) {
               />
             )}
           </Formik>
-        </div>
-        <div className="authentication-footer">
-          <Button
-            type="button"
-            className="material-button"
-            outlined={true}
-            onClick={() => props.setRoute('signup')}
-          >
-            Sign up
-          </Button>
-          <AuthWithFacebook densed={true} />
-          <AuthWithGitHub densed={true} />
-        </div>
-      </React.Fragment>
-    )
-  }
+        )}
+      </div>
+      <div className="authentication-footer">
+        <Button
+          type="button"
+          className="material-button"
+          outlined={true}
+          onClick={() => props.setRoute('signup')}
+        >
+          Sign up
+        </Button>
+        <AuthWithFacebook densed={true} />
+        <AuthWithGitHub densed={true} />
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default PasswordResetFormContainer

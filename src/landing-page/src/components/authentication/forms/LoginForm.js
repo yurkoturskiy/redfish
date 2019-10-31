@@ -17,9 +17,7 @@ class LoginForm extends React.Component {
   }
   switchPasswordVisibility() {
     this.setState({
-      passwordVisibilityCondition: this.state.passwordVisibilityCondition
-        ? false
-        : true,
+      passwordVisibilityCondition: !this.state.passwordVisibilityCondition,
     })
   }
   render() {

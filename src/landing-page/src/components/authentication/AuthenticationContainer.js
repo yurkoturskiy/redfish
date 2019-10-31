@@ -16,7 +16,7 @@ const LOCAL_STATE = gql`
   }
 `
 
-function AuthenticationContainer() {
+function AuthenticationContainer(props) {
   const [route, setRoute] = useState('start')
   const { loading, error, data } = useQuery(LOCAL_STATE)
 
@@ -51,7 +51,7 @@ function AuthenticationContainer() {
     <div>
       {data.sending && <Spinner size="middle" />}
       <div className="authentication" style={formWrapperStyle}>
-        {content}
+        {props.children || content}
       </div>
     </div>
   )
