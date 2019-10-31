@@ -7,6 +7,24 @@ export const logo = css`
   width: 64px;
   height: 64px;
   margin: 24px;
+
+  animation-name: appearance;
+  animation-duration: 0.5s;
+  @keyframes appearance {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 767px) {
+    /* Extra small */
+    margin: 12px;
+    width: 64px;
+    height: 64px;
+  }
 `;
 
 function Logo(props) {

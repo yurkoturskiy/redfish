@@ -27,14 +27,15 @@ function ColorOption(props) {
   return (
     <Query query={ALL_COLORS}>
       {({ loading, error, data }) => {
-        if (loading) return <p>loading</p>;
-        if (error) return <p>error</p>;
-        const colorOptions = data.allColors.map(color => (
-          <ColorPoint key={color} color={color} noteId={props.node.id} />
-        ));
+        var colorOptions;
+        if (data) {
+          colorOptions = data.allColors.map(color => (
+            <ColorPoint key={color} color={color} noteId={props.node.id} />
+          ));
+        }
         return (
           <div className="options-icon">
-            <ColorsBox>{colorOptions}</ColorsBox>
+            {data && <ColorsBox>{colorOptions}</ColorsBox>}
             <MaterialIcon icon="color_lens" className={colorOptionIcon} />
           </div>
         );

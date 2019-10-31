@@ -44,6 +44,7 @@ class PasswordResetConfirmForm extends React.Component {
           )}
           <div className="form-buttons-wrapper">
             <Button
+              unelevated
               type="submit"
               className="material-button"
               solid={'true'}

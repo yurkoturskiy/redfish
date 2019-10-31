@@ -30,7 +30,7 @@ class Note(models.Model):
 	content = models.TextField(blank=True, null=True)
 	color = models.CharField(max_length=6, choices=COLOR_CHOICES, default='WHITE')
 	pinned = models.BooleanField(default=False)
-	owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=False, null=False)
+	owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, blank=True, null=True)
 	created = models.DateTimeField(auto_now_add=True)
 	edited = models.DateTimeField(auto_now=True)
 	order = models.IntegerField(default=1, null=False)

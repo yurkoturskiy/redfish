@@ -110,13 +110,13 @@ class AuthWithFacebook(relay.ClientIDMutation):
             'access_token': input['access_token'],
         }
         response = requests.post(f"{SERVER_URL}/rest-auth/facebook/", data=data)
-        data = json.loads(response.text)
         if response.status_code == 200:
+            data = json.loads(response.text)
             return AuthWithFacebook(data['key'])
         elif response.status_code == 400:
             return GraphQLError(response.text)
         else:
-            return None
+            return GraphQLError(response.text)
 
 
 class AuthWithGitHub(relay.ClientIDMutation):
@@ -129,13 +129,13 @@ class AuthWithGitHub(relay.ClientIDMutation):
     def mutate_and_get_payload(cls, root, info, **input):
         data = {'code': input['code'],}
         response = requests.post(f"{SERVER_URL}/rest-auth/github/", data=data)
-        data = json.loads(response.text)
         if response.status_code == 200:
+            data = json.loads(response.text)
             return AuthWithGitHub(data['key'])
         elif response.status_code == 400:
             return GraphQLError(response.text)
         else:
-            return None
+            return GraphQLError(response.text)
 
 
 class AuthWithTwitter(relay.ClientIDMutation):

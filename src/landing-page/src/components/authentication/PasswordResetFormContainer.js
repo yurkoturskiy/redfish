@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import React, { useState, useEffect } from 'react'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Formik } from 'formik'
 import Button from '@material/react-button'
@@ -17,8 +17,16 @@ const PASSWORD_RESET = gql`
 `
 
 function PasswordResetFormContainer(props) {
-  const [passwordReset] = useMutation(PASSWORD_RESET)
+  const [passwordReset, { loading: mutationLoading }] = useMutation(
+    PASSWORD_RESET
+  )
   const [requestIsSucceed, setRequestIsSucceed] = useState(false)
+
+  // Turn on spinner
+  const client = useApolloClient()
+  useEffect(() => {
+    client.writeData({ data: { sending: mutationLoading } })
+  }, [mutationLoading])
 
   const handleSubmit = (values, { setSubmitting, setErrors, setStatus }) => {
     passwordReset({ variables: values })
@@ -45,12 +53,12 @@ function PasswordResetFormContainer(props) {
     setRequestIsSucceed(true)
   }
 
-  if (requestIsSucceed) {
-    return <h3>Check your email</h3>
-  } else {
-    return (
-      <React.Fragment>
-        <div className="form-card">
+  return (
+    <React.Fragment>
+      <div className="form-card">
+        {requestIsSucceed ? (
+          <h3 className="succeed-message">Check your email</h3>
+        ) : (
           <Formik initialValues={{ email: undefined }} onSubmit={handleSubmit}>
             {({ status, touched, isSubmitting, errors }) => (
               <PasswordResetForm
@@ -62,22 +70,22 @@ function PasswordResetFormContainer(props) {
               />
             )}
           </Formik>
-        </div>
-        <div className="authentication-footer">
-          <Button
-            type="button"
-            className="material-button"
-            outlined={true}
-            onClick={() => props.setRoute('signup')}
-          >
-            Sign up
-          </Button>
-          <AuthWithFacebook densed={true} />
-          <AuthWithGitHub densed={true} />
-        </div>
-      </React.Fragment>
-    )
-  }
+        )}
+      </div>
+      <div className="authentication-footer">
+        <Button
+          type="button"
+          className="material-button"
+          outlined={true}
+          onClick={() => props.setRoute('signup')}
+        >
+          Sign up
+        </Button>
+        <AuthWithFacebook densed={true} />
+        <AuthWithGitHub densed={true} />
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default PasswordResetFormContainer

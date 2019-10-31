@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import zxcvbn from 'zxcvbn'
 import Button from '@material/react-button'
@@ -29,9 +29,17 @@ const SUBMIT_REGISTRATION = gql`
 `
 
 function RegistrationFormContainer(props) {
-  const [submitRegistration] = useMutation(SUBMIT_REGISTRATION)
+  const [submitRegistration, { loading: mutationLoading }] = useMutation(
+    SUBMIT_REGISTRATION
+  )
   const [requestIsSucceed, setRequestIsSucceed] = useState(false)
   const [passwordStrengthScore, setPasswordStrengthScore] = useState(undefined)
+
+  // Turn on spinner
+  const client = useApolloClient()
+  useEffect(() => {
+    client.writeData({ data: { sending: mutationLoading } })
+  }, [mutationLoading])
 
   const handleSubmit = (values, { setSubmitting, setErrors, setStatus }) => {
     submitRegistration({ variables: values })
@@ -65,12 +73,12 @@ function RegistrationFormContainer(props) {
       (evaluate.score === 4 && 'very unguessable')
     setPasswordStrengthScore(fieldIsEmpty ? undefined : helperText)
   }
-  if (requestIsSucceed) {
-    return <h1>Confirm your email address</h1>
-  } else {
-    return (
-      <React.Fragment>
-        <div className="form-card">
+  return (
+    <React.Fragment>
+      <div className="form-card">
+        {requestIsSucceed ? (
+          <h3 className="succeed-message">Confirm your email address</h3>
+        ) : (
           <Formik
             initialValues={{
               username: undefined,
@@ -92,22 +100,22 @@ function RegistrationFormContainer(props) {
               />
             )}
           </Formik>
-        </div>
-        <div className="authentication-footer">
-          <Button
-            type="button"
-            className="material-button"
-            outlined={true}
-            onClick={() => props.setRoute('login')}
-          >
-            Login
-          </Button>
-          <AuthWithFacebook densed={true} />
-          <AuthWithGitHub densed={true} />
-        </div>
-      </React.Fragment>
-    )
-  }
+        )}
+      </div>
+      <div className="authentication-footer">
+        <Button
+          type="button"
+          className="material-button"
+          outlined={true}
+          onClick={() => props.setRoute('login')}
+        >
+          Login
+        </Button>
+        <AuthWithFacebook densed={true} />
+        <AuthWithGitHub densed={true} />
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default RegistrationFormContainer

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import GitHubLogin from 'react-github-login'
 
@@ -14,10 +14,19 @@ const AUTH_WITH_GITHUB = gql`
 function AuthWithGitHub(props) {
   const [isAuth, setIsAuth] = useState()
   const [code, setCode] = useState()
-  const [authWithGitHub, { error, data }] = useMutation(AUTH_WITH_GITHUB)
+  const [
+    authWithGitHub,
+    { loading: mutationLoading, error, data },
+  ] = useMutation(AUTH_WITH_GITHUB)
+
+  // Turn on spinner
+  const client = useApolloClient()
+  useEffect(() => {
+    client.writeData({ data: { sending: mutationLoading || isAuth || false } })
+  }, [mutationLoading, isAuth])
 
   useEffect(() => {
-    code && sendAuthRequest()
+    code && !data && sendAuthRequest()
     isAuth && redirectToAppPage()
   }, [code, isAuth])
 
@@ -52,7 +61,7 @@ function AuthWithGitHub(props) {
   return (
     <div>
       <GitHubLogin
-        clientId="6aee15cdc641688b6f3e"
+        clientId={process.env.GATSBY_OAUTH_GITHUB_CLIENT_ID}
         onSuccess={responseGitHub}
         onFailure={onFailure}
         redirectUri=""

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Formik } from 'formik'
 import Button from '@material/react-button'
@@ -17,8 +17,14 @@ const SUBMIT_LOGIN = gql`
 `
 
 function LoginFormContainer(props) {
-  const [submitLogin] = useMutation(SUBMIT_LOGIN)
+  const [submitLogin, { loading: mutationLoading }] = useMutation(SUBMIT_LOGIN)
   const [isAuth, setIsAuth] = useState(false)
+
+  // Turn on spinner
+  const client = useApolloClient()
+  useEffect(() => {
+    client.writeData({ data: { sending: mutationLoading || isAuth } })
+  }, [mutationLoading, isAuth])
 
   const handleSubmit = (values, { setSubmitting, setErrors, setStatus }) => {
     submitLogin({ variables: values })

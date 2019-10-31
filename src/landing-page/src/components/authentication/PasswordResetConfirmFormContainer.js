@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import React, { useState, useEffect } from 'react'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Formik } from 'formik'
+import Button from '@material/react-button'
 // Components
 import PasswordResetConfirmForm from './forms/PasswordResetConfirmForm'
+import AuthWithFacebook from './AuthWithFacebook'
+import AuthWithGitHub from './AuthWithGitHub'
 
 const PASSWORD_RESET_CONFIRM = gql`
   mutation passwordResetConfirm(
@@ -25,8 +28,16 @@ const PASSWORD_RESET_CONFIRM = gql`
 `
 
 function PasswordResetConfirmFormContainer(props) {
-  const [passwordResetConfirm] = useMutation(PASSWORD_RESET_CONFIRM)
+  const [passwordResetConfirm, { loading: mutationLoading }] = useMutation(
+    PASSWORD_RESET_CONFIRM
+  )
   const [requestIsSucceed, setRequestIsSucceed] = useState(false)
+
+  // Turn on spinner
+  const client = useApolloClient()
+  useEffect(() => {
+    client.writeData({ data: { sending: mutationLoading } })
+  }, [mutationLoading])
 
   const prepareValues = values => {
     values['uid'] = props.uid
@@ -61,27 +72,29 @@ function PasswordResetConfirmFormContainer(props) {
       })
   }
 
-  if (requestIsSucceed) {
-    return <h1>password reset is succeed</h1>
-  } else {
-    return (
-      <div>
-        <Formik
-          initialValues={{ new_password1: undefined }}
-          onSubmit={handleSubmit}
-        >
-          {({ status, touched, isSubmitting, errors }) => (
-            <PasswordResetConfirmForm
-              status={status}
-              touched={touched}
-              isSubmitting={isSubmitting}
-              errors={errors}
-            />
-          )}
-        </Formik>
+  return (
+    <React.Fragment>
+      <div className="form-card">
+        {requestIsSucceed ? (
+          <h3 className="succeed-message">Password reset is succeed</h3>
+        ) : (
+          <Formik
+            initialValues={{ new_password1: undefined }}
+            onSubmit={handleSubmit}
+          >
+            {({ status, touched, isSubmitting, errors }) => (
+              <PasswordResetConfirmForm
+                status={status}
+                touched={touched}
+                isSubmitting={isSubmitting}
+                errors={errors}
+              />
+            )}
+          </Formik>
+        )}
       </div>
-    )
-  }
+    </React.Fragment>
+  )
 }
 
 export default PasswordResetConfirmFormContainer

@@ -36,6 +36,13 @@ export const LOGOUT = gql`
   }
 `;
 
+export const APP_COMPONENT = gql`
+  query {
+    isAuthenticated @client
+    isLoading @client
+  }
+`;
+
 export const NOTES_COMPONENT = gql`
   query AllNotes($amount: Int = 20, $cursor: String) {
     selectedNotes @client
