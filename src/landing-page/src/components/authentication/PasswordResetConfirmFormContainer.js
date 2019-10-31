@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import React, { useState, useEffect } from 'react'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Formik } from 'formik'
 // Components
@@ -25,8 +25,16 @@ const PASSWORD_RESET_CONFIRM = gql`
 `
 
 function PasswordResetConfirmFormContainer(props) {
-  const [passwordResetConfirm] = useMutation(PASSWORD_RESET_CONFIRM)
+  const [passwordResetConfirm, { loading: mutationLoading }] = useMutation(
+    PASSWORD_RESET_CONFIRM
+  )
   const [requestIsSucceed, setRequestIsSucceed] = useState(false)
+
+  // Turn on spinner
+  const client = useApolloClient()
+  useEffect(() => {
+    client.writeData({ data: { sending: mutationLoading } })
+  }, [mutationLoading])
 
   const prepareValues = values => {
     values['uid'] = props.uid

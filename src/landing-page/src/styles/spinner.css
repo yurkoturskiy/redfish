@@ -1,0 +1,76 @@
+/* Spinner position */
+.center {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  transform: translateY(-50%);
+}
+.bottom {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto auto 128px auto;
+  transition: transform 0.8s, margin-bottom 0.8s;
+  animation-name: appearance;
+  animation-duration: 1s;
+
+  @keyframes appearance {
+    from {
+      margin-bottom: 0;
+      transform: translateY(100%);
+    }
+    to {
+      margin-bottom: 128px;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Spinner size */
+.wrapper.big {
+  width: 128px;
+  height: 128px;
+}
+.wrapper.middle {
+  width: 72px;
+  height: 72px;
+}
+.wrapper.small {
+  width: 32px;
+  height: 32px;
+}
+
+/* other */
+.wrapper {
+  z-index: 4;
+  text-align: center;
+}
+
+.wrapper span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  height: 16px;
+  /* outline: 1px solid red; */
+  font-size: 0.875rem;
+  color: black;
+}
+
+.wrapper svg {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper path {
+  stroke-width: 3;
+  fill: transparent;
+  mix-blend-mode: multiply;
+}

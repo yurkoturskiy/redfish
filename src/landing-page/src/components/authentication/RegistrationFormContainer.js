@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import zxcvbn from 'zxcvbn'
 import Button from '@material/react-button'
@@ -29,9 +29,17 @@ const SUBMIT_REGISTRATION = gql`
 `
 
 function RegistrationFormContainer(props) {
-  const [submitRegistration] = useMutation(SUBMIT_REGISTRATION)
+  const [submitRegistration, { loading: mutationLoading }] = useMutation(
+    SUBMIT_REGISTRATION
+  )
   const [requestIsSucceed, setRequestIsSucceed] = useState(false)
   const [passwordStrengthScore, setPasswordStrengthScore] = useState(undefined)
+
+  // Turn on spinner
+  const client = useApolloClient()
+  useEffect(() => {
+    client.writeData({ data: { sending: mutationLoading } })
+  }, [mutationLoading])
 
   const handleSubmit = (values, { setSubmitting, setErrors, setStatus }) => {
     submitRegistration({ variables: values })

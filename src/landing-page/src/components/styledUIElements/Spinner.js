@@ -4,17 +4,25 @@ import { morphing } from 'primitivo-svg'
 function Spinner(props) {
   const [width, setWidth] = useState(128)
   const [height, setHeight] = useState(128)
-  const [firstPath, setFirstPath] = useState(true)
-  const [secondPath, setSecondPath] = useState(false)
-  const [thirdPath, setThirdPath] = useState(false)
+  const [pathsVisibility, setPathVisibility] = useState([])
+
+  const durPerPath = props.duration / (props.numOfKeyPaths * 2 - 1)
+  const numOfColors = props.colors.length
+  const animateColorDuration =
+    numOfColors * durPerPath - props.shiftStep * props.numOfShapes + 'ms'
 
   useEffect(() => {
-    setTimeout(() => setSecondPath(true), 400)
-    setTimeout(() => setThirdPath(true), 800)
+    setPathVisibility(() => {
+      var proto = []
+      for (let i = 0; i < props.numOfShapes; i++) {
+        proto[i] = setTimeout(() => true, props.shiftStep * i)
+      }
+      return proto
+    })
   }, [])
 
   const morphParams = {
-    numOfKeyPaths: 4,
+    numOfKeyPaths: props.numOfKeyPaths,
     loop: true,
   }
   var keySplines = []
@@ -22,13 +30,16 @@ function Spinner(props) {
   var numOfKeyTimes = morphParams.numOfKeyPaths * 2 - 2
   var keyTimesFactor = 1 / numOfKeyTimes
   for (let i = 0; i < morphParams.numOfKeyPaths * 2 - 1; i++) {
-    keySplines[i] = '0.7, 0, 0.9, 1'
     keyTimes[i] = i * keyTimesFactor
+  }
+  for (let i = 0; i < morphParams.numOfKeyPaths * 2 - 2; i++) {
+    keySplines[i] = '0.25 0 0.75 1'
   }
   keySplines = keySplines.join(';')
   keyTimes = keyTimes.join(';')
+
   const pathParams = {
-    numOfSegments: 5,
+    numOfSegments: props.numOfPathSegments,
     depth: 0,
     x: 0,
     y: 0,
@@ -36,87 +47,88 @@ function Spinner(props) {
     height,
     centerX: width / 2,
     centerY: height / 2,
-    rotate: 0,
+    rotate: [0, 90],
     numOfGroups: 1,
     groups: [
       {
         type: 'radial',
         incircle: true,
-        round: 1,
-        distance: [0.3, 1],
+        round: props.round,
+        distance: [1 - props.contrast, 1],
       },
     ],
   }
   const blob = useMemo(() => morphing(morphParams, pathParams), [])
 
+  const animateColorValues = props.colors.join(';')
+  const animatePathDuration = props.duration + 'ms'
+  var paths = []
+  for (let i = 0; i < props.numOfShapes; i++) {
+    paths.push(
+      pathsVisibility[i] && (
+        <path key={i} fill="#3688FF" opacity="1">
+          <animate
+            begin={props.shiftStep * i + 'ms'}
+            attributeName="opacity"
+            dur="200ms"
+            repeatCount="1"
+            from="0"
+            to="1"
+          />
+          <animate
+            begin={props.shiftStep * i + 'ms'}
+            attributeName="d"
+            dur={animatePathDuration}
+            repeatCount="indefinite"
+            calcMode="linear"
+            keyTimes={keyTimes}
+            keySplines={keySplines}
+            values={blob.dValues}
+          />
+          {props.fillTransition && (
+            <animate
+              begin={props.shiftStep * i + 'ms'}
+              attributeName="fill"
+              values={animateColorValues}
+              dur={animateColorDuration}
+              repeatCount="indefinite"
+            />
+          )}
+          {props.strokeTransition && (
+            <animate
+              begin={props.shiftStep * i + 'ms'}
+              attributeName="stroke"
+              values={animateColorValues}
+              dur={animateColorDuration}
+              repeatCount="indefinite"
+            />
+          )}
+        </path>
+      )
+    )
+  }
   return (
-    <div className="spinner">
-      <svg viewBox={`0 0 ${width} ${height}`}>
-        {thirdPath && (
-          <path fill="3688FF">
-            <animate
-              begin="0.8s"
-              attributeName="d"
-              dur="8s"
-              repeatCount="indefinite"
-              calcMode="splines"
-              keyTimes={keyTimes}
-              keySplines={keySplines}
-              values={blob.dValues}
-            />
-            <animate
-              begin="0.8s"
-              attributeName="fill"
-              values="#3688FF; #FF546C; #22D163; #3688FF"
-              dur="3s"
-              repeatCount="indefinite"
-            />
-          </path>
-        )}
-        {secondPath && (
-          <path fill="#3688FF">
-            <animate
-              begin="0.4s"
-              attributeName="d"
-              dur="8s"
-              repeatCount="indefinite"
-              calcMode="splines"
-              keyTimes={keyTimes}
-              keySplines={keySplines}
-              values={blob.dValues}
-            />
-            <animate
-              begin="0.4s"
-              attributeName="fill"
-              values="#3688FF; #FF546C; #22D163; #3688FF"
-              dur="3s"
-              repeatCount="indefinite"
-            />
-          </path>
-        )}
-        {firstPath && (
-          <path fill="#3688FF">
-            <animate
-              attributeName="d"
-              dur="8s"
-              repeatCount="indefinite"
-              calcMode="splines"
-              keyTimes={keyTimes}
-              keySplines={keySplines}
-              values={blob.dValues}
-            />
-            <animate
-              attributeName="fill"
-              values="#3688FF; #FF546C; #22D163; #3688FF"
-              dur="3s"
-              repeatCount="indefinite"
-            />
-          </path>
-        )}
-      </svg>
-      <span>loading...</span>
+    <div className={`wrapper ${props.type} ${props.size}`}>
+      <svg viewBox={`0 0 ${width} ${height}`}>{paths}</svg>
+      {props.lable && <span>{props.lable}</span>}
     </div>
   )
+}
+
+Spinner.defaultProps = {
+  type: 'center',
+  size: 'big',
+  duration: 4000,
+  shiftStep: 120,
+  numOfKeyPaths: 8,
+  numOfShapes: 3,
+  colors: ['#3688FF', '#FF546C', '#22D163', '#3688FF'],
+  contrast: 0.8,
+  round: 0.6,
+  numOfPathSegments: 6,
+  fillTransition: true,
+  strokeTransition: true,
+  lable: false,
 }
 
 export default Spinner
