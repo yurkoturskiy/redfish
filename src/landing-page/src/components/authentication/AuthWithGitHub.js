@@ -22,7 +22,7 @@ function AuthWithGitHub(props) {
   // Turn on spinner
   const client = useApolloClient()
   useEffect(() => {
-    client.writeData({ data: { sending: mutationLoading || isAuth } })
+    client.writeData({ data: { sending: mutationLoading || isAuth || false } })
   }, [mutationLoading, isAuth])
 
   useEffect(() => {
@@ -61,7 +61,7 @@ function AuthWithGitHub(props) {
   return (
     <div>
       <GitHubLogin
-        clientId="6aee15cdc641688b6f3e"
+        clientId={process.env.GATSBY_OAUTH_GITHUB_CLIENT_ID}
         onSuccess={responseGitHub}
         onFailure={onFailure}
         redirectUri=""
