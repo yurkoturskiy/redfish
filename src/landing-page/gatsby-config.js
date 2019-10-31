@@ -133,7 +133,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-create-client-paths`,
       options: {
-        prefixes: [`/confirm-email/*`],
+        prefixes: [`/confirm/*`],
       },
     },
     `gatsby-transformer-remark`,
