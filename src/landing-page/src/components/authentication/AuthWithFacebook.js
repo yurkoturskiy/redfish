@@ -35,7 +35,7 @@ function AuthWithFacebook(props) {
   const client = useApolloClient()
   useEffect(() => {
     client.writeData({ data: { sending: mutationLoading || isAuth } })
-  }, [mutationLoading])
+  }, [mutationLoading, isAuth])
 
   useEffect(() => {
     accessToken && !data && sendAuthenticationRequest()
