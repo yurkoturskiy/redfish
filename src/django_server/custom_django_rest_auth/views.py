@@ -39,5 +39,5 @@ class FacebookLogin(SocialLoginView):
 
 class GithubLogin(SocialLoginView):
     adapter_class = GitHubOAuth2Adapter
-    callback_url = "http://localhost:8000/"
+    callback_url = get_current_site(None).domain
     client_class = OAuth2Client
