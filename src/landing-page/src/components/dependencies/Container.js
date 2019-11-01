@@ -6,6 +6,7 @@ import {
   CreateReactAppIcon,
   LinariaIcon,
   GrapheneIcon,
+  DjangoRestAuth,
 } from './icons'
 import Background from './Background'
 import ReactDepEffect from './ReactDepEffect'
@@ -64,7 +65,7 @@ function DependenciesContainer() {
           href="https://django-rest-auth.readthedocs.io/en/latest/#"
         >
           <div>
-            <GatsbyIcon className="icon" />
+            <DjangoRestAuth className="icon" />
             <h4 className="purpose">Authentication</h4>
             <h2 className="name">django-rest-auth</h2>
           </div>
