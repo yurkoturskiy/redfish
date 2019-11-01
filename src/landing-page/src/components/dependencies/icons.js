@@ -79,7 +79,7 @@ export const GrapheneIcon = props => (
   </svg>
 )
 
-export const DjangoRestAuth = props => (
+export const DjangoRestAuthIcon = props => (
   <svg {...props} viewBox="0 0 24 24" fill="white">
     <path fillRule="evenodd" clipRule="evenodd" d="M0 0h24v24H0z" />
     <g fillRule="evenodd" clipRule="evenodd">
@@ -88,5 +88,31 @@ export const DjangoRestAuth = props => (
         d="M9 17l3-2.94a9.34 9.34 0 00-1-.06c-2.67 0-8 1.34-8 4v2h9l-3-3zm2-5c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4M15.47 20.5L12 17l1.4-1.41 2.07 2.08 5.13-5.17 1.4 1.41z"
       />
     </g>
+  </svg>
+)
+
+export const PrimitivoSVGIcon = props => (
+  <svg viewBox="0 0 220 220" {...props}>
+    <path
+      style={{
+        mixBlendMode: 'multiply',
+      }}
+      d="M180.842 100c0 44.648-41.52 71.2-80.842 71.2-39.322 0-84.242-24.674-84.242-71.2S77.065 58.472 100 58.472c22.935 0 80.842-3.12 80.842 41.528z"
+      fill="#FB2236"
+    />
+    <path
+      style={{
+        mixBlendMode: 'multiply',
+      }}
+      d="M190.457 110c0 44.435-48.682 57.534-80.457 57.534-31.775 0-59.477-24.686-59.477-57.534S74.002 44.82 110 44.82s80.457 20.745 80.457 65.18z"
+      fill="#3688FF"
+    />
+    <path
+      style={{
+        mixBlendMode: 'multiply',
+      }}
+      d="M180.13 120c0 33.208-18.297 75.744-60.13 75.744S21.726 174.275 21.726 120 95.337 75.344 120 75.344c24.663 0 60.13 11.448 60.13 44.656z"
+      fill="#22D163"
+    />
   </svg>
 )

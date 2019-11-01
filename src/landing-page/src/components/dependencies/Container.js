@@ -6,7 +6,8 @@ import {
   CreateReactAppIcon,
   LinariaIcon,
   GrapheneIcon,
-  DjangoRestAuth,
+  DjangoRestAuthIcon,
+  PrimitivoSVGIcon,
 } from './icons'
 import Background from './Background'
 import ReactDepEffect from './ReactDepEffect'
@@ -44,7 +45,7 @@ function DependenciesContainer() {
         </a>
         <a className="card" href="https://github.com/guandjoy/primitivo-svg">
           <div>
-            <LinariaIcon className="icon" />
+            <PrimitivoSVGIcon className="icon" />
             <h4 className="purpose">SVG effects</h4>
             <h2 className="name">Primitivo-SVG</h2>
           </div>
@@ -65,7 +66,7 @@ function DependenciesContainer() {
           href="https://django-rest-auth.readthedocs.io/en/latest/#"
         >
           <div>
-            <DjangoRestAuth className="icon" />
+            <DjangoRestAuthIcon className="icon" />
             <h4 className="purpose">Authentication</h4>
             <h2 className="name">django-rest-auth</h2>
           </div>
