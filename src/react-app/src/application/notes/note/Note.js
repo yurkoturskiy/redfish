@@ -19,7 +19,12 @@ export const container = css`
   opacity: var(--opacity);
   background-color: var(--note-color);
 
-  @media (max-width: 767px) {
+  @media (max-width: 379px) {
+    /* Extra small */
+    width: 130px;
+  }
+
+  @media (min-width: 380px) and (max-width: 767px) {
     /* Extra small */
     width: 160px;
   }
