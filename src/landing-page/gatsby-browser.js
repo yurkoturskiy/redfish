@@ -8,8 +8,7 @@
 import React from 'react'
 import { ApolloProvider } from '@apollo/react-hooks'
 import apolloClient from './apolloClient'
-require('prism-themes/themes/prism-atom-dark.css')
-
+// require('prismjs/themes/prism.css')
 import OnStartAuthentication from './src/components/OnStartAuthentication'
 
 export const wrapRootElement = ({ element }) => {

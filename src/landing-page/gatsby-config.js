@@ -55,6 +55,11 @@ module.exports = {
             subsets: ['latin-ext'],
           },
           {
+            family: 'Roboto Mono',
+            variants: ['100', '300', '400', '500', '700'],
+            subsets: ['latin-ext'],
+          },
+          {
             family: 'Fira Mono',
             variants: ['400'],
           },

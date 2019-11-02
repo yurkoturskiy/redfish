@@ -72,24 +72,33 @@
   color: #0f0f73;
 }
 
-.gatsby-highlight-code-line {
-  background-color: #feb;
-  outline: 1px solid green;
-  display: block;
-  margin-right: -1em;
-  margin-left: -1em;
-  padding-right: 1em;
-  padding-left: 0.75em;
-  border-left: 0.25em solid #f99;
+/***************/
+/* code blocks */
+code {
+  font-family: 'Roboto Mono', Menlo, monospace;
 }
 
-pre[class*='language-'] {
+/* inline code */
+.language-text {
+  padding: 0 4px 0 4px;
+  background-color: rgb(246, 246, 246);
+  color: rgb(40, 42, 46);
 }
 
-:not(pre) > code[class*='language-'] {
-  background: green;
+/* block code */
+.gatsby-highlight {
+  background-color: rgb(246, 246, 246);
+  color: rgb(40, 42, 46);
+  padding: 16px;
+  line-height: 1.25rem;
+  font-size: 0.875rem;
+}
+.language-shell {
+  margin: 0;
 }
 
+/**************/
+/* Adaptivity */
 @media screen and (max-width: 960px) {
   .docs .sandwich-button {
     display: inherit;
@@ -99,12 +108,12 @@ pre[class*='language-'] {
     position: fixed;
     top: 0;
     left: 0;
-    height: calc(100% - 32px - 32px);
+    height: calc(100% - 64px);
     margin: 0;
     padding-left: var(--gutter);
     padding-right: 32px;
     padding-top: 32px;
-    padding-bottom: 32px;
+    padding-bottom: 128px;
     background-color: white;
     animation-name: appearance;
     animation-duration: 0.2s;
