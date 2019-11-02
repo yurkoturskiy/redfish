@@ -12,6 +12,13 @@
   /*outline: 1px solid blue;*/
 }
 
+.docs .sandwich-button {
+  display: none;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+}
+
 .docs .content {
   padding-bottom: 6vh;
   padding-right: 8px;
@@ -84,8 +91,34 @@ pre[class*='language-'] {
 }
 
 @media screen and (max-width: 960px) {
+  .docs .sandwich-button {
+    display: inherit;
+  }
   .docs .sections {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: calc(100% - 32px - 32px);
+    margin: 0;
+    padding-left: var(--gutter);
+    padding-right: 32px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    background-color: white;
+    animation-name: appearance;
+    animation-duration: 0.2s;
+    box-shadow: 2px 0px 5px 0px rgba(0, 0, 0, 0.4);
+
+    overflow-y: auto;
+  }
+  @keyframes appearance {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .docs .content {

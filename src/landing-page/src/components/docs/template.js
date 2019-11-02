@@ -1,14 +1,15 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
-import SideBar from './sidebar'
+import SandwichButton from './SandwichButton'
+import Menu from './Menu'
 import Layout from '../layout'
 
 export default function PageTemplate(props) {
   return (
     <Layout path={props.path}>
       <div className="docs">
-        <SideBar />
+        <Menu />
         <div className="content">
           <MDXRenderer>{props.data.mdx.body}</MDXRenderer>
         </div>

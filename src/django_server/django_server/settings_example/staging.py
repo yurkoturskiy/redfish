@@ -1,5 +1,9 @@
-import os
 from django_server.settings.common import *
+
+#URLs
+SERVER_URL = 'https://redfish-server-staging.guandjoy.now.sh'
+LANDING_URL = 'https://staging.redfish-project.gq'
+APPLICATION_URL = 'https://app.staging.redfish-project.gq' 
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ''
@@ -8,7 +12,7 @@ SECRET_KEY = ''
 DEBUG = False
 
 try:
-	ALLOWED_HOSTS = ['.now.sh', os.environ['LANDING_URL'], os.environ['APPLICATION_URL']]
+	ALLOWED_HOSTS = ['.now.sh', LANDING_URL, APPLICATION_URL]
 except:
 	ALLOWED_HOSTS = ['localhost']
 

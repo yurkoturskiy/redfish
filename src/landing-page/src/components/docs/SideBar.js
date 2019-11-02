@@ -72,5 +72,16 @@ export default function SideBar(props) {
       <ul className="links">{section.items}</ul>
     </SectionWrapper>
   ))
-  return <div className="sections">{sections}</div>
+  return (
+    <div
+      className="sections"
+      ref={props.sideBarRef}
+      style={{
+        display: props.isVisible && 'inline',
+        '--sidebar-zindex': props.isVisible ? '6' : '2',
+      }}
+    >
+      {sections}
+    </div>
+  )
 }

@@ -11,6 +11,8 @@ from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
+# URLs
+from django.conf import settings
 
 
 @api_view(['GET'])
@@ -39,5 +41,5 @@ class FacebookLogin(SocialLoginView):
 
 class GithubLogin(SocialLoginView):
     adapter_class = GitHubOAuth2Adapter
-    callback_url = get_current_site(None).domain
+    callback_url = settings.LANDING_URL
     client_class = OAuth2Client

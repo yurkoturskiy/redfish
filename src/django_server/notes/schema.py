@@ -1,6 +1,5 @@
 # cookbook/ingredients/schema.py
 import graphene
-import os
 from django.db.models import Q
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
@@ -17,7 +16,6 @@ from graphql import GraphQLError
 
 # Graphene will automatically map the Category model's fields onto the CategoryNode.
 # This is configured in the CategoryNode's Meta class (as you can see below)
-SERVER_URL = os.environ['SERVER_URL']
 
 ###########
 # Queries #
