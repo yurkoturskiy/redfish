@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 from django_server.settings.common import *
 
+# URLs
+SERVER_URL = 'http://localhost:9000'
+LANDING_URL = 'http://localhost:8000'
+APPLICATION_URL = 'http://localhost:3000'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
