@@ -5,6 +5,7 @@ import graphene
 import os
 from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
+from django.conf import settings
 
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
@@ -16,7 +17,7 @@ from graphql import GraphQLError
 
 # Graphene will automatically map the Category model's fields onto the CategoryNode.
 # This is configured in the CategoryNode's Meta class (as you can see below)
-SERVER_URL = os.environ['SERVER_URL']
+SERVER_URL = settings.SERVER_URL
 
 
 ###########
