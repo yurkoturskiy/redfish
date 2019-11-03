@@ -61,7 +61,8 @@ class NoteManager(models.Manager):
         sentences = lambda: randint(1, 12)
         url = lambda: f'https://baconipsum.com/api/?type=meat-and-filler&sentences={sentences()}&format=text'
         notes = []
-        for i in range(records_amount):
+        i = 0
+        while i < records_amount:
             r = requests.get(url())
             if r.status_code == 200:
                 note = {
@@ -71,10 +72,12 @@ class NoteManager(models.Manager):
                         "content": r.text,
                         "color": "WHITE",
                         "pinned": False,
+                        "order": i
                     }
                 }
                 notes.append(note)
                 print(f'{json.dumps(note, indent=4)}')
+                i += 1
             else:
                 print(f'{i} failed')
         
