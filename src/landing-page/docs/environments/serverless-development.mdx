@@ -104,17 +104,15 @@ AWS_SECRET_ACCESS_KEY = "G55aSpC0xUwA3/QwfV0kgkXl1w5zSgkWzvaTHOrs"
 
 ## AWS S3 bucket
 
-S3 service is the place where we collect static files. <br/>
+S3 bucket is the place to collect static files. [Create it](https://s3.console.aws.amazon.com/s3/) with the next **Block public access** configurations:
 
-- [Create S3 bucket](https://s3.console.aws.amazon.com/s3/) with next **Block public access** settings:
+- [ ] Block all public access
+- [ ] Block public access to buckets and objects granted through new access control lists (ACLs)
+- [ ] Block public access to buckets and objects granted through any access control lists (ACLs)
+- [x] Block public access to buckets and objects granted through new public bucket policies
+- [x] Block public and cross-account access to buckets and objects through any public bucket policies
 
-* [ ] Block all public access
-* [ ] Block public access to buckets and objects granted through new access control lists (ACLs)
-* [ ] Block public access to buckets and objects granted through any access control lists (ACLs)
-* [x] Block public access to buckets and objects granted through new public bucket policies
-* [x] Block public and cross-account access to buckets and objects through any public bucket policies
-
-- Copy and Paste the name of the S3 bucket to the `settings/development.py` file:
+Copy and Paste the name of the S3 bucket to the `settings/development.py` file:
 
 ```python
 # settings/development.py
