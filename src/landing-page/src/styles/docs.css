@@ -12,22 +12,14 @@
   /*outline: 1px solid blue;*/
 }
 
+/*******************/
+/* SideBar styling */
+
 .docs .sandwich-button {
   display: none;
   position: fixed;
   bottom: 32px;
   right: 32px;
-}
-
-.docs .content {
-  padding-bottom: 6vh;
-  padding-right: 8px;
-  /*padding-left: 8px;*/
-  margin-left: auto;
-
-  width: var(--content-width);
-  max-width: 860px;
-  /*outline: 1px solid red;*/
 }
 
 .docs .sections {
@@ -72,6 +64,57 @@
   color: #0f0f73;
 }
 
+/*******************/
+/* Content styling */
+
+.docs .content {
+  padding-bottom: 6vh;
+  padding-right: 8px;
+  /*padding-left: 8px;*/
+  margin-left: auto;
+
+  width: var(--content-width);
+  max-width: 860px;
+  /*outline: 1px solid red;*/
+}
+
+.docs .content a {
+  text-decoration: none;
+  color: #33e;
+}
+.docs .content a:hover {
+  color: #141496;
+}
+
+.docs .content p {
+  line-height: 1.4rem;
+}
+
+.docs .content .contains-task-list {
+  padding-left: 32px;
+}
+
+.docs .content .task-list-item {
+  list-style-type: none;
+}
+
+.docs .content li {
+  padding: 10px 0 10px 0;
+}
+
+li > h1,
+li > h2,
+li > h3,
+li > h4,
+li > h5,
+li > h6 {
+  margin: 0;
+}
+
+.docs .content li ul {
+  margin: 10px 0 0 0;
+}
+
 /***************/
 /* code blocks */
 code {
@@ -99,6 +142,7 @@ code {
 
 /**************/
 /* Adaptivity */
+
 @media screen and (max-width: 960px) {
   .docs .sandwich-button {
     display: inherit;
