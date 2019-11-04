@@ -92,7 +92,7 @@ AWS_REGION = "eu-central-1"
 - Copy **Access Key ID** and **Secret Access Key**. Paste them to the `settings/development.py` file
 
 ```python
-# development/settings.py
+# settings/development.py
 ...
 # The AWS access key to use.
 AWS_ACCESS_KEY_ID = "AKIAR2BBJGZAVGG2RF6A"
@@ -119,7 +119,7 @@ S3 service is the place where we collect static files. <br/>
 ```python
 # settings/development.py
 ...
-S3_BUCKET = "name-of-your-s3-bucket"
+S3_BUCKET = "server-development-static" # Put the name of your S3 bucket here
 ...
 ```
 
@@ -134,10 +134,10 @@ S3_BUCKET = "name-of-your-s3-bucket"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'redfish-database-1', # dbname
-        'USER': 'postgres', # master username
-        'PASSWORD': 'oWdpawvro4zPdxzVobch', # master password
-        'HOST': 'redfish-database-1.c7awambotayj.eu-central-1.rds.amazonaws.com', # Endpoint
+        'NAME': 'server_development', # dbname
+        'USER': 'username', # master username
+        'PASSWORD': 'MllVzrRbc3EvT3S', # master password
+        'HOST': 'aws-postgres-rds.c7fqrmwomayj.eu-central-1.rds.amazonaws.com', # Endpoint
         'PORT': '5432',
     }
 }
@@ -145,6 +145,12 @@ DATABASES = {
 ```
 
 ## Deploy and prepare Django server
+
+Start the virtual environment:
+
+```shell
+$ source venv/bin/activate
+```
 
 Use our script to deploy:
 
