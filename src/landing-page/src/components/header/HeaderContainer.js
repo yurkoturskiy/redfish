@@ -9,21 +9,20 @@ import ExternalLinkButton from '../styledUIElements/ExternalLinkButton'
 
 const HeaderContainer = props => {
   const { path } = props
-  console.log('path', path)
+
   return (
     <nav className="header-container">
       <Logo />
       {path !== '/' && (
         <React.Fragment>
-          <TransitionEffectButton
-            disabled={path === '/authentication/'}
-            to="/authentication/"
-          >
-            Go To App
-          </TransitionEffectButton>
-          <TransitionEffectButton disabled={path === '/docs'} to="/docs/">
-            Docs
-          </TransitionEffectButton>
+          {path.indexOf('authentication') === -1 && (
+            <TransitionEffectButton to="/authentication/">
+              Go To App
+            </TransitionEffectButton>
+          )}
+          {path.indexOf('docs') === -1 && (
+            <TransitionEffectButton to="/docs/">Docs</TransitionEffectButton>
+          )}
           <ExternalLinkButton to="https://github.com/guandjoy/Redfish">
             GitHub
           </ExternalLinkButton>
