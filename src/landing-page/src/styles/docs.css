@@ -2,7 +2,7 @@
   display: flex;
   --docs-width: calc(100% - var(--side-paddings) * 2);
   --side-bar-width: 12rem;
-  --content-width: calc(100% - 12rem - var(--gutter) - 8px);
+  --content-width: calc(100% - 12rem - var(--gutter) - 24px);
   flex-direction: row;
   margin-top: 128px;
   width: var(--docs-width);
@@ -131,6 +131,7 @@ code {
 /* block code */
 .gatsby-highlight {
   background-color: rgb(246, 246, 246);
+  overflow-x: auto;
   color: rgb(40, 42, 46);
   padding: 16px;
   line-height: 1.25rem;
