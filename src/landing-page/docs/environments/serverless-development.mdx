@@ -41,7 +41,7 @@ In the `now.json` file enter the proper name of your application:
 # now.json
 {
     ...
-    "name": "your-application-name",
+    "name": "your-app-name",
     ...
 }
 ```
@@ -51,7 +51,7 @@ Go to the `django_server.settings.development.py` file and edit `SERVER_URL` con
 ```python
 # django_server/settings/development.py
 ...
-SERVER_URL = 'https://your-application-name-development.username.now.sh'
+SERVER_URL = 'https://your-app-name-development.username.now.sh'
 ...
 ```
 
@@ -60,7 +60,7 @@ Paste the same URL to the `.env.devremote` file in the `landing-page` folder:
 ```shell
 # landing-page/.env.devremote
 ...
-GATSBY_SERVER_URL = "https://your-application-name-development.username.now.sh"
+GATSBY_SERVER_URL = "https://your-app-name-development.username.now.sh"
 ...
 ```
 
@@ -69,7 +69,7 @@ Same for `react-app`:
 ```shell
 # react-app/.env.devremote
 ...
-REACT_APP_SERVER_URL = "https://your-application-name-development.username.now.sh"
+REACT_APP_SERVER_URL = "https://your-app-name-development.username.now.sh"
 ...
 ```
 

@@ -20,9 +20,9 @@ Go to the `django_server.settings.staging.py` file and edit the URLs section con
 # django_server/settings/staging.py
 ...
 # URLs
-SERVER_URL = 'https://your-application-name-staging.username.now.sh'
-LANDING_URL = 'https://your-application-name-staging.netlify.com'
-APPLICATION_URL = 'https://your-application-name-app-staging.netlify.com'
+SERVER_URL = 'https://your-app-name-staging.username.now.sh'
+LANDING_URL = 'https://your-app-name-staging.netlify.com'
+APPLICATION_URL = 'https://your-app-name-app-staging.netlify.com'
 ...
 ```
 
@@ -32,9 +32,9 @@ Paste the same URLs to the `.env.staging` file inside of the `landing-page` fold
 # landing-page/.env.staging
 ...
 # URLs
-GATSBY_APP_URL = "https://your-application-name-app-staging.netlify.com"
-GATSBY_LANDING_URL = "https://your-application-name-staging.netlify.com"
-GATSBY_SERVER_URL = "https://your-application-name-staging.username.now.sh"
+GATSBY_APP_URL = "https://your-app-name-app-staging.netlify.com"
+GATSBY_LANDING_URL = "https://your-app-name-staging.netlify.com"
+GATSBY_SERVER_URL = "https://your-app-name-staging.username.now.sh"
 ...
 ```
 
@@ -44,8 +44,8 @@ Same for `react-app`:
 # react-app/.env.staging
 
 # URLs
-REACT_APP_SERVER_URL = "https://your-application-name-staging.username.now.sh"
-REACT_APP_LANDING_URL = "https://your-application-name-staging.netlify.com"
+REACT_APP_SERVER_URL = "https://your-app-name-staging.username.now.sh"
+REACT_APP_LANDING_URL = "https://your-app-name-staging.netlify.com"
 ...
 ```
 
@@ -159,7 +159,7 @@ We recommend using Netlify's continuous deployment service. [Sign up](https://ww
   Now set up a domain name:
 - Click on the `Domain Management` menu item;
 - From a more button of the default subdomain, pick `Edit site name`;
-- Fill the field with the name you typed previously in settings. Something like `your-application-name-staging`;
+- Fill the field with the name you typed previously in settings. Something like `your-app-name-staging`;
   And finally, go to deploys and click **_Retry deploy_**
 
 ## Deploy React app
@@ -170,7 +170,7 @@ Follow the same procedure for the `react-app` folder. Here is a brief note for y
 - Build command: `npm run build:staging`;
 - Publish directory: `src/react-app/build`;
 - The base directory `src/react-app`;
-- Set own domain or edit a default subdomain to something like: `your-application-name-staging`;
+- Set own domain or edit a default subdomain to something like: `your-app-name-staging`;
 - Don't forget to retry deployment.
 
 # That's it, your application is live!
