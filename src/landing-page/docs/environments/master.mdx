@@ -1,0 +1,48 @@
+---
+path: 'docs/environments/production'
+title: 'Production'
+order: 4
+section: 'environments'
+sectionOrder: 1
+---
+
+# Production environment
+
+The setup process of a production environment is pretty much the same as staging. Edit your settings on the development branch, merge changes to the staging, and merge staging to the master after you are sure that everything is functioning properly. Here are some important points to follow:
+
+- Django settings file is `master.py`;
+- landing-page and react-app .env files are `.env.production`;
+- git branch is `master`;
+- Server URL without env name suffix: `https://your-application-name.username.now.sh`;
+- As well as others, but in case of a server URL, that is important. So other URLs could be like this:
+  - Landing URL: `https://your-application-name.netlify.com`;
+  - React app URL: `https://your-application-name-app.netlify.com`;
+    _Remember that we recommend to use the domain you own. You can get a free one at [freenom.com](https://www.freenom.com/)_
+
+## Important Django command
+
+Deploy
+
+```python
+python now.py
+```
+
+Migrate
+
+```python
+  python -m django migrate --settings=django_server.settings.master
+```
+
+Create a superuser
+
+```python
+python -m django createsuperuser --settings=django_server.settings.master
+```
+
+Shell
+
+```python
+python -m django shell --settings=django_server.settings.master
+```
+
+Good luck! You are ready to rock the world :)
