@@ -3,8 +3,6 @@
   height: 100vh;
   max-height: 1024px;
   min-height: 480px;
-  padding-left: var(--grid-margin);
-  padding-right: var(--grid-margin);
 }
 
 @media screen and (max-width: 1366px) and (min-width: 961px) and (orientation: landscape) {
@@ -35,7 +33,7 @@
   display: inline-block;
   position: relative;
   z-index: 4;
-  top: 30%;
+  top: 26%;
   left: calc(var(--col-three) - var(--gutter));
 }
 
@@ -79,8 +77,8 @@
   /* text */
   font-style: normal;
   font-weight: black;
-  font-size: 5rem;
-  line-height: 72px;
+  font-size: 4.8rem;
+  line-height: 4.45rem;
 }
 
 /* Smaller text size for phones */
