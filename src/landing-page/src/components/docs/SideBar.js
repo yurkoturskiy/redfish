@@ -2,10 +2,10 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import TransitionLink from 'gatsby-plugin-transition-link'
 
-function SectionWrapper({ name, children }) {
+function SectionWrapper({ item, name, children }) {
   return (
     <div className="section">
-      {name && <h2 className="name">{name}</h2>}
+      {item && <h2 className="item">{item}</h2>}
       {children}
     </div>
   )
@@ -37,6 +37,7 @@ export default function SideBar(props) {
     }
   `)
   var sections = []
+  var names = []
   var independent = []
   allMdx.edges.forEach(edge => {
     const {
@@ -44,32 +45,48 @@ export default function SideBar(props) {
       title,
       section,
       sectionOrder,
+      order,
       unlisted,
     } = edge.node.frontmatter
     if (!sections[sectionOrder])
-      sections[sectionOrder] = { name: section, items: [] }
-    let item = (
-      <li className="link-wrapper" key={path}>
+      sections[sectionOrder] = { name: section, subitems: [] }
+    if (order === 0) {
+      let item = (
         <TransitionLink
           className="link"
           activeStyle={{ color: '#33e' }}
           to={edge.node.frontmatter.path}
-          exit={{
-            length: 0,
-          }}
-          entry={{
-            length: 0,
-          }}
+          exit={{ length: 0 }}
+          entry={{ length: 0 }}
         >
           {edge.node.frontmatter.title}
         </TransitionLink>
-      </li>
-    )
-    !unlisted && sections[sectionOrder].items.push(item)
+      )
+      sections[sectionOrder].item = item
+    } else {
+      let subitem = (
+        <li className="subitem" key={path}>
+          <TransitionLink
+            className="link"
+            activeStyle={{ color: '#33e' }}
+            to={edge.node.frontmatter.path}
+            exit={{
+              length: 0,
+            }}
+            entry={{
+              length: 0,
+            }}
+          >
+            {edge.node.frontmatter.title}
+          </TransitionLink>
+        </li>
+      )
+      !unlisted && sections[sectionOrder].subitems.push(subitem)
+    }
   })
   sections = sections.map(section => (
-    <SectionWrapper name={section.name} key={section.name}>
-      <ul className="links">{section.items}</ul>
+    <SectionWrapper name={section.name} item={section.item} key={section.name}>
+      <ul className="subitems">{section.subitems}</ul>
     </SectionWrapper>
   ))
   return (
