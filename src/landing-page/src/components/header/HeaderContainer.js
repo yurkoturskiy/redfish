@@ -16,12 +16,12 @@ const HeaderContainer = props => {
       {path !== '/' && (
         <React.Fragment>
           {path.indexOf('authentication') === -1 && (
-            <TransitionEffectButton to="/authentication/">
+            <TransitionEffectButton to="/authentication">
               Go To App
             </TransitionEffectButton>
           )}
           {path.indexOf('docs') === -1 && (
-            <TransitionEffectButton to="/docs/">Docs</TransitionEffectButton>
+            <TransitionEffectButton to="/docs">Docs</TransitionEffectButton>
           )}
           <ExternalLinkButton to="https://github.com/guandjoy/Redfish">
             GitHub
