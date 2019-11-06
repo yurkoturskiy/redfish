@@ -1,18 +1,16 @@
 <p align="center">
   <a href="https://redfish-project.gq/"><img src="/img/logo@2x.png" width="196" /></a>
   <h1 align="center">Redfish</h1>
-  <h3 align="center">Serverless Boilerplate Web Application</h3>
-  <h6 align="center">GatsbyJS, Create React App, GraphQL Apollo Client, Django, Graphene</h6>  
   <p align="center"><a  href="https://redfish-project.gq/">redfish-project.gq</a></p>
 </p>
 
-Redfish consist of a landing page, Google Keep clone application, and a server.
+<br/>
+
+Redfish is a Serverless Boilerplate Web Application. It consist of a landing page, Google Keep clone application, and a server. The main dependencies are GatsbyJS, Create React App, GraphQL Apollo Client, Django, Graphene, and django-rest-auth.
 
 Frontend and backend parts are hosted by [Netlify](https://netlify.com) and [ZEIT Now](https://zeit.co/) respectively. For things like database and static files we use [AWS](https://aws.amazon.com/).
 
 The API and data fetching are implemented with GraphQL. On a frontend we use [Apollo Client](https://www.apollographql.com/docs/react/) and on a back – [Graphene](https://graphene-python.org/).
-
-Authentication implemented with [django-rest-auth](https://django-rest-auth.readthedocs.io/en/latest/introduction.html)
 
 ## Topics to start:
 
