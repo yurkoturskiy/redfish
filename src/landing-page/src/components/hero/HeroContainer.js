@@ -23,11 +23,14 @@ const HeroContainer = () => {
         <ActionBtnsWrapper>
           <BrieflyAboutBtn setDialog={setDialog} />
           <div className="buttons-wrapper">
-            <TransitionEffectButton to="/authentication/">
+            <TransitionEffectButton to="/authentication">
               Go To App
             </TransitionEffectButton>
-            <TransitionEffectButton to="/docs/">
-              Tutorials
+            <TransitionEffectButton
+              style={{ justifyContent: 'flex-start' }}
+              to="/docs"
+            >
+              Docs
             </TransitionEffectButton>
             <ExternalLinkButton to="https://github.com/guandjoy/Redfish">
               GitHub
