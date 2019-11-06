@@ -25,6 +25,10 @@
   text-align: center;
 }
 
+.tutorials-content .element-wrapper {
+  width: 100%;
+}
+
 .tutorials-content .element {
   width: 100%;
   max-width: 408px;
@@ -62,7 +66,7 @@
 }
 
 #tutorials-view-more-button {
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 @media screen and (max-width: 579px) {
