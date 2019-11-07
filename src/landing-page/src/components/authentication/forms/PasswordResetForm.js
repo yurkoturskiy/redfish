@@ -3,8 +3,6 @@ import { Form, Field } from 'formik'
 import FormikMaterialTextField from '../../styledUIElements/FormikMaterialTextField'
 import Button from '@material/react-button'
 
-class PasswordResetForm extends React.Component {}
-
 function PasswordResetForm(props) {
   const [
     passwordVisibilityCondition,
