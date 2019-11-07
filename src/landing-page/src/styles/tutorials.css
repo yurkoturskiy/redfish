@@ -27,14 +27,14 @@
 
 .tutorials-content .element-wrapper {
   width: 100%;
+  max-width: 408px;
+  margin: 8px auto 8px auto;
 }
 
 .tutorials-content .element {
   width: 100%;
-  max-width: 408px;
   height: 64px;
   line-height: 64px;
-  margin: 8px auto 8px auto;
   background: #ffffff;
   box-sizing: border-box;
   cursor: pointer;
