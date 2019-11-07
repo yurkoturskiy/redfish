@@ -34,7 +34,7 @@ module.exports = {
   siteMetadata: {
     title: `Redfish`,
     siteUrl: `https://redfish-project.gq/`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    description: `Serveless Boilerplate Web Application. GatsbyJS, Create React App, GraphQL Apollo Client, Django, Python, Graphene.`,
     author: `@guandjoy`,
   },
   plugins: [
