@@ -9,18 +9,7 @@ import React from 'react'
 import { ApolloProvider } from '@apollo/react-hooks'
 import apolloClient from './apolloClient'
 // require('prismjs/themes/prism.css')
-import OnStartAuthentication from './src/components/OnStartAuthentication'
 
 export const wrapRootElement = ({ element }) => {
-  if (
-    localStorage.getItem('token') &&
-    window.location.pathname.indexOf('iframe') === -1
-  )
-    // Validate token if exist in localStorage. Except iframe's pages
-    return (
-      <ApolloProvider client={apolloClient}>
-        <OnStartAuthentication>{element}</OnStartAuthentication>
-      </ApolloProvider>
-    )
-  else return <ApolloProvider client={apolloClient}>{element}</ApolloProvider>
+  return <ApolloProvider client={apolloClient}>{element}</ApolloProvider>
 }
