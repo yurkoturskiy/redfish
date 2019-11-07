@@ -2,7 +2,7 @@
   display: flex;
   --docs-width: calc(100% - var(--side-paddings) * 2);
   --side-bar-width: 12rem;
-  --content-width: calc(100% - 12rem - var(--gutter) - 8px);
+  --content-width: calc(100% - 12rem - var(--gutter) - 24px);
   flex-direction: row;
   margin-top: 128px;
   width: var(--docs-width);
@@ -12,12 +12,61 @@
   /*outline: 1px solid blue;*/
 }
 
+/*******************/
+/* SideBar styling */
+
 .docs .sandwich-button {
   display: none;
+  z-index: 1;
   position: fixed;
   bottom: 32px;
   right: 32px;
 }
+
+.docs .sections {
+  margin-top: var(--gutter);
+  /*margin-right: var(--gutter);*/
+  width: var(--side-bar-width);
+  /*vertical-align: top;*/
+  /*outline: 1px solid green;*/
+}
+
+.sections .item {
+  font-size: 1rem;
+  font-weight: normal;
+  color: grey;
+  padding: 8px 8px 8px 0;
+  margin: 0;
+}
+
+.docs .sections .subitems {
+  list-style-type: none;
+  text-decoration: none;
+  white-space: nowrap;
+  margin: 0;
+  padding-left: 8px;
+}
+
+.subitems a {
+}
+
+.subitems .subitem {
+  padding: 8px;
+  margin: 0;
+}
+
+.docs .sections .link {
+  text-decoration: none;
+  font-size: 1rem;
+  color: black;
+}
+
+.subitems .link:hover {
+  color: #0f0f73;
+}
+
+/*******************/
+/* Content styling */
 
 .docs .content {
   padding-bottom: 6vh;
@@ -30,65 +79,71 @@
   /*outline: 1px solid red;*/
 }
 
-.docs .sections {
-  margin-top: var(--gutter);
-  /*margin-right: var(--gutter);*/
-  width: var(--side-bar-width);
-  /*vertical-align: top;*/
-  /*outline: 1px solid green;*/
+.docs .content a {
+  text-decoration: none;
+  color: #33e;
+}
+.docs .content a:hover {
+  color: #141496;
 }
 
-.sections .name {
-  font-size: 1rem;
-  font-weight: normal;
-  color: grey;
-  padding: 8px 8px 8px 0;
-  margin: 0;
+.docs .content p {
+  line-height: 1.4rem;
 }
 
-.docs .sections .links {
+.docs .content .contains-task-list {
+  padding-left: 32px;
+}
+
+.docs .content .task-list-item {
   list-style-type: none;
-  text-decoration: none;
-  white-space: nowrap;
+}
+
+.docs .content li {
+  padding: 10px 0 10px 0;
+}
+
+li > h1,
+li > h2,
+li > h3,
+li > h4,
+li > h5,
+li > h6 {
   margin: 0;
-  padding-left: 8px;
 }
 
-.links a {
+.docs .content li ul {
+  margin: 10px 0 0 0;
 }
 
-.links .link-wrapper {
-  padding: 8px;
+/***************/
+/* code blocks */
+code {
+  font-family: 'Roboto Mono', Menlo, monospace;
+}
+
+/* inline code */
+.language-text {
+  padding: 0 4px 0 4px;
+  background-color: rgb(246, 246, 246);
+  color: rgb(40, 42, 46);
+}
+
+/* block code */
+.gatsby-highlight {
+  background-color: rgb(246, 246, 246);
+  overflow-x: auto;
+  color: rgb(40, 42, 46);
+  padding: 16px;
+  line-height: 1.25rem;
+  font-size: 0.875rem;
+}
+.language-shell {
   margin: 0;
 }
 
-.links .link {
-  text-decoration: none;
-  font-size: 1rem;
-  color: black;
-}
-
-.links .link:hover {
-  color: #0f0f73;
-}
-
-.gatsby-highlight-code-line {
-  background-color: #feb;
-  outline: 1px solid green;
-  display: block;
-  margin-right: -1em;
-  margin-left: -1em;
-  padding-right: 1em;
-  padding-left: 0.75em;
-  border-left: 0.25em solid #f99;
-}
-
-pre[class*='language-'] {
-}
-
-:not(pre) > code[class*='language-'] {
-  background: green;
-}
+/**************/
+/* Adaptivity */
 
 @media screen and (max-width: 960px) {
   .docs .sandwich-button {
@@ -99,12 +154,12 @@ pre[class*='language-'] {
     position: fixed;
     top: 0;
     left: 0;
-    height: calc(100% - 32px - 32px);
+    height: calc(100% - 64px);
     margin: 0;
     padding-left: var(--gutter);
     padding-right: 32px;
     padding-top: 32px;
-    padding-bottom: 32px;
+    padding-bottom: 128px;
     background-color: white;
     animation-name: appearance;
     animation-duration: 0.2s;

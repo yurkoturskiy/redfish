@@ -5,7 +5,9 @@ import PrimitivoTransitionLink from './PrimitivoTransitionLink'
 function TransitionEffectButton(props) {
   return (
     <PrimitivoTransitionLink className="button-link" {...props}>
-      <Button className="material-button">{props.children}</Button>
+      <Button {...props} className="material-button">
+        {props.children}
+      </Button>
     </PrimitivoTransitionLink>
   )
 }

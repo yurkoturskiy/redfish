@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import Button from '@material/react-button'
 // Local components
 import StartForm from './StartForm'
 import LoginFormContainer from './LoginFormContainer'

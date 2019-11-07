@@ -1,0 +1,169 @@
+---
+path: 'docs/environments/local-development'
+title: 'Local development'
+order: 1
+section: 'environments'
+sectionOrder: 1
+---
+
+# Local development
+
+In this section, we start with the base. We are going to set up a local development environment with a GitHub public repository, so you could share your code with the community and keep sensitive data safe. To start, you need to have `python3.6`, `npm`, and `git`.
+
+## Getting started
+
+Fork the [repo](https://github.com/guandjoy/redfish) and change the repository name to your own. Then clone it locally:
+
+```shell
+$ git clone git@github.com:username/your-app-name.git
+$ cd your-app-name
+```
+
+## Django server
+
+Install, create, and start a virtual environment to work with a Django server:
+
+```shell
+$ python3.6 -m pip install virtualenv
+...
+$ cd src/django_server/
+$ virtualenv -p python3.6 venv
+...
+$ source venv/bin/activate
+```
+
+Install dependencies:
+
+```shell
+$ pip install -r requirements.txt
+```
+
+Prepare settings. Duplicate and rename `settings_example` folder as `settings` withing the `django_server` app folder:
+
+```shell
+$ cp -r django_server/settings_example django_server/settings
+```
+
+Generate `SECRET_KEY`:
+
+```shell
+$ python redfish/generate_secret_key.py
+Paste the next string to the settings.py SECRET_KEY constant
+kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@
+```
+
+Copy and paste it to the `SECRET_KEY` constant inside of the `settings/common.py` file:
+
+```python
+# settings/common.py
+SECRET_KEY = 'kpvmoz93s_3*rs7i*$t5-g%x5df7!vr(7=$ie2$6pj%!5=e*8@'
+```
+
+Create a Google mail app password and set up an SMTP server:
+
+- Go to google app passwords: https://myaccount.google.com/apppasswords. _Make sure you turned on 2-step verification. Google restricts app passwords for users who don't._
+- Select app: `mail`;
+- Select device: `Other (custom name)`;
+- Fill the name, e.g., `redfish-django-server`;
+- Press `Generate` button;
+- Copy and paste the `password` to the `settings/common.py` file and provide your `GMail email`:
+
+```python
+# settings/common.py
+...
+EMAIL_HOST_USER = 'example@gmail.com'
+EMAIL_HOST_PASSWORD = 'vcnstblmegxxkvkf'
+...
+```
+
+Apply migrations:
+
+```shell
+$ python manage.py migrate --run-syncdb
+```
+
+Create a superuser:
+
+```shell
+$ python manage.py createsuperuser
+Provide username and password
+```
+
+## Install React App dependencies
+
+```shell
+$ cd ../react-app/
+$ npm install
+```
+
+## And Landing Page dependencies as well
+
+```shell
+$ cd ../landing-page/
+$ npm install
+```
+
+## Start development servers
+
+We have three development servers here: **Django, Create React App, and GatsbyJS**. You can start them withing 3 console windows, or, as we highly recommend, withing [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md).
+
+- ### Start with terminal windows
+
+Prepare 3 terminal instances and start `django_server` in first:
+
+```shell
+$ cd src/django_server/
+$ python manage.py runserver 0.0.0.0:9000
+```
+
+Start `react-app` development server in second:
+
+```shell
+$ cd src/react-app/
+$ npm start
+```
+
+And `landing-page` development server in third:
+
+```shell
+$ cd src/landing-page/
+$ gatsby develop
+```
+
+- ### Start with [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md) [alternative and preferable way].
+
+We already made a python script, which creates tmux windows and starts Django, CRA, and GatsbyJS development servers.
+_Note: Make sure that the location of your virtual environment is `/src/django_server/venv` folder_
+
+Execute the `tmux.devlocal.py` script withing the root directory:
+
+```shell
+$ python tmux.devlocal.py
+```
+
+Read [tmux man](http://man.openbsd.org/OpenBSD-current/man1/tmux.1). Some basics to play with it:
+
+- `ctrl+b` `w` - navigate through windows using `up` and `down` arrow keys;
+- `ctrl+b` `d` - minimize tmux and save session;
+- `$ tmux a` - back to tmux after minimize it;
+- `ctrl+d` - terminate tmux and session;
+- `ctrl+b` `[` - scroll through the content. Use `up` and `down` arrow keys and `esc` to exit mode;
+- `ctrl+b` `c` - create new window.
+
+## Change site's domain and display name
+
+Redfish sends emails for users, and there is should be a proper link. So please do the next:
+
+- Log in to the Django admin: http://localhost:9000/admin
+- Go to `Sites` and edit the first instance
+- Domain name set to `http://localhost:8000` and Display name to `localhost:8000.`
+- Click save
+
+## You are ready to develop locally!
+
+Available endpoints for you:
+
+- http://localhost:8000/ - landing page
+- http://localhost:3000/ - application
+- http://localhost:9000/graphql - IDE for exploring GraphQL
+- http://localhost:9000/admin - Django admin
