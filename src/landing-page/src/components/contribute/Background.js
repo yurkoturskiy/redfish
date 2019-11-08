@@ -1,49 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { morphing, path } from 'primitivo-svg'
-
-const pathOneParams = {
-  numOfSegments: 4,
-  depth: 0,
-  x: 0,
-  y: 0,
-  width: window.innerWidth,
-  height: window.innerHeight,
-  centerX: 100,
-  centerY: 100,
-  rotate: 0,
-  numOfGroups: 2,
-  groups: [
-    {
-      type: 'radial',
-      distance: 1,
-      round: 0,
-      incircle: true,
-    },
-    {
-      type: 'radial',
-      distance: 1,
-      round: 0,
-      incircle: true,
-    },
-  ],
-}
-
-const pathOne = path(pathOneParams).d
-console.log(pathOne)
-
-const colors = [
-  '#3688ff',
-  '#ff546c',
-  '#22d163',
-  '#3688ff',
-  '#ff546c',
-  '#22d163',
-]
+import useWindow from '../hooks/useWindow'
 
 function Background() {
+  const [windowWidth, windowHeight] = useWindow()
+  const [pathDescription, setPathDescription] = useState()
+
+  useEffect(() => {
+    const pathParams = {
+      numOfSegments: 4,
+      depth: 0,
+      x: 0,
+      y: 0,
+      width: window.innerWidth,
+      height: window.innerHeight,
+      centerX: 100,
+      centerY: 100,
+      rotate: 0,
+      numOfGroups: 2,
+      groups: [
+        {
+          type: 'radial',
+          distance: 1,
+          round: 0,
+          incircle: true,
+        },
+        {
+          type: 'radial',
+          distance: 1,
+          round: 0,
+          incircle: true,
+        },
+      ],
+    }
+    setPathDescription(path(pathParams).d)
+  })
+
   return (
-    <svg width={window.innerWidth} height={window.innerHeight}>
-      <path fill="red" d={pathOne} />
+    <svg width={windowWidth} height={windowHeight}>
+      <path fill="red" d={pathDescription} />
     </svg>
   )
 }

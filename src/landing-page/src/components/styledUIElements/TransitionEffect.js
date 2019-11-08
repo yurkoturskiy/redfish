@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { morphing, spacing, path, phases, randomRange } from 'primitivo-svg'
 // Hooks
 import usePhasedTransition from '../hooks/usePhasedTransition'
+import useWindow from '../hooks/useWindow'
 
 const endGroupsParameters = [
   {
@@ -23,12 +24,14 @@ const endGroupsParameters = [
 ]
 
 function TransitionEffect(props) {
+  const [windowWidth, windowHeight] = useWindow()
+
   const baseParameters = {
     numOfSegments: 4,
     x: 0,
     y: 0,
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: windowWidth,
+    height: windowHeight,
     centerX: props.centerX,
     centerY: props.centerY,
     rotate: 45,
@@ -53,8 +56,8 @@ function TransitionEffect(props) {
 
   return (
     <svg
-      width={window.innerWidth}
-      height={window.innerHeight}
+      width={windowWidth}
+      height={windowHeight}
       className="transition-effect"
     >
       <path

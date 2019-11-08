@@ -4,6 +4,7 @@ import { ApolloLink } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { withClientState } from 'apollo-link-state'
+import fetch from 'isomorphic-fetch'
 
 const cache = new InMemoryCache()
 
@@ -24,12 +25,14 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('token')
+  const token =
+    typeof window !== `undefined` ? window.localStorage.getItem('token') : ''
+
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Token ${localStorage.getItem('token')}` : '',
+      authorization: token,
     },
   }
 })
@@ -37,6 +40,7 @@ const authLink = setContext((_, { headers }) => {
 const apolloClient = new ApolloClient({
   link: ApolloLink.from([stateLink, authLink.concat(httpLink)]),
   cache,
+  fetch,
 })
 
 export default apolloClient

@@ -39,6 +39,7 @@
     "gatsby-transformer-remark": "^2.6.30",
     "gatsby-transformer-sharp": "^2.2.23",
     "graphql-tag": "^2.10.1",
+    "isomorphic-fetch": "^2.2.1",
     "primitivo-svg": "0.1.0-alpha.0",
     "prism-themes": "^1.2.0",
     "prismjs": "^1.16.0",
@@ -56,6 +57,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
+    "build:devremote": "GATSBY_ENV=devremote npm run build",
     "build:staging": "GATSBY_ENV=staging npm run build",
     "develop": "gatsby develop --host=0.0.0.0",
     "develop:remote": "GATSBY_ENV=devremote npm run develop",
