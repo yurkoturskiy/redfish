@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import SocialLogin from 'react-social-login'
+// Hooks
+import useBrowser from '../hooks/useBrowser'
 
 const AUTH_WITH_FACEBOOK = gql`
   mutation authWithFacebook($accessToken: String!) {
@@ -24,6 +26,8 @@ const Button = ({ children, triggerLogin, densed, ...props }) => (
 const SocialButton = SocialLogin(Button)
 
 function AuthWithFacebook(props) {
+  const isBrowser = useBrowser()
+
   const [isAuth, setIsAuth] = useState(false)
   const [
     authWithFacebook,
@@ -75,15 +79,17 @@ function AuthWithFacebook(props) {
 
   return (
     <div>
-      <SocialButton
-        provider="facebook"
-        appId={process.env.GATSBY_OAUTH_FACEBOOK_CLIENT_ID}
-        onLoginSuccess={onLoginSuccess}
-        onLoginFailure={onLoginFailure}
-        densed={props.densed}
-      >
-        {props.children}
-      </SocialButton>
+      {isBrowser && (
+        <SocialButton
+          provider="facebook"
+          appId={process.env.GATSBY_OAUTH_FACEBOOK_CLIENT_ID}
+          onLoginSuccess={onLoginSuccess}
+          onLoginFailure={onLoginFailure}
+          densed={props.densed}
+        >
+          {props.children}
+        </SocialButton>
+      )}
     </div>
   )
 }

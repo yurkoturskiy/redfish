@@ -1,6 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { path, randomRange } from 'primitivo-svg'
+// Hooks
+import useBrowser from '../hooks/useBrowser'
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max))
@@ -9,11 +11,11 @@ function getRandomInt(max) {
 const colors = ['#3688ff', '#ff546c', '#22d163']
 
 function Particle({ sceneHeight, sceneWidth }) {
+  const [pathDescription, setPathDescription] = useState()
+  const [color, setColor] = useState()
+
   const getPathParams = () => {
-    let maxSide =
-      window.innerWidth >= window.innerHeight
-        ? window.innerWidth
-        : window.innerHeight
+    let maxSide = Math.max(window.innerWidth, window.innerHeight)
     let maxSize = maxSide / 20
     let x = randomRange(maxSize, sceneWidth - maxSize)
     let y = randomRange(maxSize, sceneHeight)
@@ -40,18 +42,18 @@ function Particle({ sceneHeight, sceneWidth }) {
     }
   }
 
-  const params = useMemo(() => getPathParams(), [])
-  const pathDescription = useMemo(() => path(params).d, [])
-  const pathStrokeWidth = useMemo(() => randomRange(1, 4), [])
-  const pathBlurRate = useMemo(() => randomRange(0.2, 0.8), [])
-  const pathFillColorIndex = useMemo(() => getRandomInt(3), [])
+  useEffect(() => {
+    const params = getPathParams()
+    setPathDescription(path(params).d)
+    setColor(colors[getRandomInt(3)])
+  }, [])
   return (
     <path
       d={pathDescription}
       fill="transparent"
       vectorEffect="non-scaling-stroke"
       strokeWidth="4px"
-      stroke={colors[pathFillColorIndex]}
+      stroke={color}
       opacity=".8"
       // filter="url(#particles-blur)"
     />
