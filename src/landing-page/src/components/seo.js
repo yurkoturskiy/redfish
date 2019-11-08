@@ -55,7 +55,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:creator`,
@@ -74,7 +74,7 @@ function SEO({ description, lang, meta, keywords, title }) {
           content: metaDescription,
         },
         {
-          name: `twitter:image`,
+          name: `twitter:image:src`,
           content: `${process.env.GATSBY_LANDING_URL}${twitterImage}`,
         },
       ]
