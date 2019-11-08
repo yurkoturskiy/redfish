@@ -9,14 +9,14 @@ import {
   DjangoRestAuthIcon,
   PrimitivoSVGIcon,
 } from './icons'
-import Background from './Background'
+import StaticBackground from './StaticBackground'
 import ReactDepEffect from './ReactDepEffect'
 import DjangoDepEffect from './DjangoDepEffect'
 
 function DependenciesContainer() {
   return (
     <div className="dependencies-container">
-      <Background />
+      <StaticBackground />
       <div className="content">
         <div className="dependencies-header">
           <h3>ReactJS Dependencies</h3>
