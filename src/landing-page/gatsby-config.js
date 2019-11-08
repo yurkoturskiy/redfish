@@ -33,7 +33,7 @@ if (
 module.exports = {
   siteMetadata: {
     title: `Redfish`,
-    siteUrl: `https://redfish-project.gq/`,
+    siteUrl: process.env.GATSBY_LANDING_URL,
     description: `Serveless Boilerplate Web Application. GatsbyJS, Create React App, GraphQL Apollo Client, Django, Python, Graphene.`,
     author: `@guandjoy`,
   },
