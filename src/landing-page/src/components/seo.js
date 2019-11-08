@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import ogImage from '../images/og-1200x630.png'
 import twitterImage from '../images/twitter-1200x1200.png'
 
-function SEO({ description, lang, meta, keywords, title }) {
+function SEO({ description, lang, meta, title }) {
   const data = useStaticQuery(graphql`
     query DefaultSEOQuery {
       site {
@@ -89,16 +89,7 @@ function SEO({ description, lang, meta, keywords, title }) {
           name: `twitter:image:src`,
           content: `${process.env.GATSBY_LANDING_URL}${twitterImage}`,
         },
-      ]
-        .concat(
-          keywords.length > 0
-            ? {
-                name: `keywords`,
-                content: keywords.join(`, `),
-              }
-            : []
-        )
-        .concat(meta)}
+      ].concat(meta)}
     />
   )
 }
@@ -106,14 +97,12 @@ function SEO({ description, lang, meta, keywords, title }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  keywords: [],
 }
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.array,
-  keywords: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string.isRequired,
 }
 
