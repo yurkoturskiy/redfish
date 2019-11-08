@@ -7,30 +7,31 @@ import AuthenticationContainer from '../components/authentication/Authentication
 import Background from '../components/authentication/Background'
 
 const AuthenticationIndex = props => {
-  if (localStorage.getItem('token')) return <OnStartAuthentication />
-  else
-    return (
-      <Layout path={props.path}>
-        <SEO
-          title="Authentication"
-          keywords={[
-            `redfish`,
-            `application`,
-            `react`,
-            `gatsby`,
-            `django`,
-            `python`,
-            `graphql`,
-          ]}
-        />
-        <div className="authentication-page">
-          <div className="authentication-container">
-            <Background />
-            <AuthenticationContainer path="authentication" />
-          </div>
+  if (typeof window !== `undefined`) {
+    if (window.localStorage.getItem('token')) return <OnStartAuthentication />
+  }
+  return (
+    <Layout path={props.path}>
+      <SEO
+        title="Authentication"
+        keywords={[
+          `redfish`,
+          `application`,
+          `react`,
+          `gatsby`,
+          `django`,
+          `python`,
+          `graphql`,
+        ]}
+      />
+      <div className="authentication-page">
+        <div className="authentication-container">
+          <Background />
+          <AuthenticationContainer path="authentication" />
         </div>
-      </Layout>
-    )
+      </div>
+    </Layout>
+  )
 }
 
 export default AuthenticationIndex
