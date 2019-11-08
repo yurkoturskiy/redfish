@@ -39,7 +39,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         },
         {
           property: `og:title`,
-          content: title,
+          content: `${title} | ${data.site.siteMetadata.title}`,
         },
         {
           property: `og:description`,
@@ -52,6 +52,18 @@ function SEO({ description, lang, meta, keywords, title }) {
         {
           property: `og:image`,
           content: `${process.env.GATSBY_LANDING_URL}${ogImage}`,
+        },
+        {
+          property: `og:image:url`,
+          content: `${process.env.GATSBY_LANDING_URL}${ogImage}`,
+        },
+        {
+          property: `og:image:secure_url`,
+          content: `${process.env.GATSBY_LANDING_URL}${ogImage}`,
+        },
+        {
+          property: `og:image:type`,
+          content: `image/png`,
         },
         {
           name: `twitter:card`,
@@ -67,7 +79,7 @@ function SEO({ description, lang, meta, keywords, title }) {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: `${title} | ${data.site.siteMetadata.title}`,
         },
         {
           name: `twitter:description`,
