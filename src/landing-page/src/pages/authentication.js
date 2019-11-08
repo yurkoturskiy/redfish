@@ -12,18 +12,7 @@ const AuthenticationIndex = props => {
   }
   return (
     <Layout path={props.path}>
-      <SEO
-        title="Authentication"
-        keywords={[
-          `redfish`,
-          `application`,
-          `react`,
-          `gatsby`,
-          `django`,
-          `python`,
-          `graphql`,
-        ]}
-      />
+      <SEO title="Authentication" />
       <div className="authentication-page">
         <div className="authentication-container">
           <Background />

@@ -9,20 +9,10 @@ import TransitionLink from 'gatsby-plugin-transition-link'
 import SEO from '../seo'
 
 export default function PageTemplate(props) {
+  const { title } = props.data.mdx.frontmatter
   return (
     <Layout path={props.path}>
-      <SEO
-        title="Docs"
-        keywords={[
-          `redfish`,
-          `application`,
-          `react`,
-          `gatsby`,
-          `django`,
-          `python`,
-          `graphql`,
-        ]}
-      />
+      <SEO title={title} />
       <div className="docs">
         <Menu />
         <div className="content">
