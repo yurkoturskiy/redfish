@@ -170,7 +170,9 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: process.env.GATSBY_LANDING_URL,
-        policy: [{ userAgent: '*', disallow: '/' }],
+        policy: [
+          { userAgent: '*', disallow: process.env.GATSBY_ROBOTS_DISALLOW },
+        ],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
