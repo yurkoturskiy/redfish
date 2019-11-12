@@ -3,7 +3,7 @@ import { morphing, path } from 'primitivo-svg'
 
 var animateParameters = {
   numOfKeyPaths: 3,
-  loop: true,
+  loop: 'linear',
 }
 
 const pathsParameters = (x, y, width, height) => ({
