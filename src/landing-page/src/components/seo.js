@@ -34,6 +34,10 @@ function SEO({ description, lang, meta, title }) {
       titleTemplate={`%s | ${data.site.siteMetadata.title}`}
       meta={[
         {
+          property: `og:url`,
+          content: `${process.env.GATSBY_LANDING_URL}`,
+        },
+        {
           name: `description`,
           content: metaDescription,
         },
@@ -64,6 +68,10 @@ function SEO({ description, lang, meta, title }) {
         {
           property: `og:image:type`,
           content: `image/png`,
+        },
+        {
+          property: `fb:app_id`,
+          content: `432672034191065`,
         },
         {
           name: `twitter:card`,
