@@ -22,19 +22,32 @@ function BlobbyCloud(props) {
     })
   }, [])
 
+  const loop = 'circle'
   const morphParams = {
     numOfKeyPaths: props.numOfKeyPaths,
-    loop: true,
+    loop,
   }
   var keySplines = []
   var keyTimes = []
-  var numOfKeyTimes = morphParams.numOfKeyPaths * 2 - 2
+  var numOfKeyTimes
+  switch (loop) {
+    case 'circle':
+      numOfKeyTimes = morphParams.numOfKeyPaths
+      break
+    case 'linear':
+      numOfKeyTimes = morphParams.numOfKeyPaths * 2 - 2
+      break
+    default:
+      numOfKeyTimes = morphParams.numOfKeyPaths - 1
+  }
+  console.log('num of key paths', morphParams.numOfKeyPaths)
+  console.log('num of key times', numOfKeyTimes)
   var keyTimesFactor = 1 / numOfKeyTimes
-  for (let i = 0; i < morphParams.numOfKeyPaths * 2 - 1; i++) {
+  for (let i = 0; i <= numOfKeyTimes; i++) {
     keyTimes[i] = i * keyTimesFactor
   }
-  for (let i = 0; i < morphParams.numOfKeyPaths * 2 - 2; i++) {
-    keySplines[i] = '0.25 0 0.75 1'
+  for (let i = 0; i < numOfKeyTimes; i++) {
+    keySplines[i] = '0.5 0 0.5 1'
   }
   keySplines = keySplines.join(';')
   keyTimes = keyTimes.join(';')
@@ -70,38 +83,166 @@ function BlobbyCloud(props) {
       pathsVisibility[i] && (
         <path key={i} fill="transparent" opacity="1">
           <animate
-            begin={props.shiftStep * i + 'ms'}
+            begin={props.shiftStep / 1.5 + props.shiftStep * i + 'ms'}
             attributeName="opacity"
-            dur="300ms"
+            dur="200ms"
             repeatCount="1"
             from="0"
             to="1"
           />
           <animate
-            begin={props.shiftStep * i + 'ms'}
+            begin={props.shiftStep / 1.5 + props.shiftStep * i + 'ms'}
             attributeName="d"
             dur={animatePathDuration}
             repeatCount="indefinite"
-            calcMode="linear"
-            // keyTimes={keyTimes}
-            // keySplines={keySplines}
+            calcMode="spline"
+            keyTimes={keyTimes}
+            keySplines={keySplines}
             values={blob.dValues}
           />
           <animate
-            begin={props.shiftStep * i + 'ms'}
+            begin={props.shiftStep / 1.5 + props.shiftStep * i + 'ms'}
             attributeName={props.type}
             values={animateColorValues}
             dur={animatePathDuration}
             repeatCount="indefinite"
+            calcMode="spline"
+            keyTimes={keyTimes}
+            keySplines={keySplines}
           />
         </path>
       )
     )
   }
 
+  const circle = (
+    <circle cx="50" cy="50" r="20" fill="white">
+      <animate
+        attributeName="cx"
+        dur={animatePathDuration}
+        repeatCount="indefinite"
+        values="85; 230; 230; 85"
+        calcMode="spline"
+        keyTimes={keyTimes}
+        keySplines={keySplines}
+      />
+      <animate
+        attributeName="cy"
+        dur={animatePathDuration}
+        repeatCount="indefinite"
+        values="300; 140; 260; 300"
+        calcMode="spline"
+        keyTimes={keyTimes}
+        keySplines={keySplines}
+      />
+      <animate
+        attributeName="r"
+        dur={animatePathDuration}
+        repeatCount="indefinite"
+        values="26; 22; 32; 26"
+        calcMode="spline"
+        keyTimes={keyTimes}
+        keySplines={keySplines}
+      />
+    </circle>
+  )
+
+  const labels = (
+    <React.Fragment>
+      <text x="85" y="300" id="django-label">
+        Django
+        <animate
+          attributeName="opacity"
+          dur={animatePathDuration}
+          repeatCount="indefinite"
+          values="1; 0; 0; 1"
+          keyTimes="0; 0.2; 0.9; 1"
+        />
+        <animate
+          attributeName="x"
+          dur={animatePathDuration}
+          repeatCount="indefinite"
+          values="85; 230; 230; 85"
+          calcMode="spline"
+          keyTimes={keyTimes}
+          keySplines={keySplines}
+        />
+        <animate
+          attributeName="y"
+          dur={animatePathDuration}
+          repeatCount="indefinite"
+          values="303; 143; 263; 303"
+          calcMode="spline"
+          keyTimes={keyTimes}
+          keySplines={keySplines}
+        />
+      </text>
+      <text x="230" y="140" id="react-label">
+        React
+        <animate
+          attributeName="opacity"
+          dur={animatePathDuration}
+          repeatCount="indefinite"
+          values="0; 0; 1; 0; 0"
+          keyTimes="0; 0.15; 0.333; 0.6; 1"
+        />
+        <animate
+          attributeName="x"
+          dur={animatePathDuration}
+          repeatCount="indefinite"
+          values="85; 230; 230; 85"
+          calcMode="spline"
+          keyTimes={keyTimes}
+          keySplines={keySplines}
+        />
+        <animate
+          attributeName="y"
+          dur={animatePathDuration}
+          repeatCount="indefinite"
+          values="303; 143; 263; 303"
+          calcMode="spline"
+          keyTimes={keyTimes}
+          keySplines={keySplines}
+        />
+      </text>
+      <text x="230" y="260" id="graphql-label">
+        GraphQL
+        <animate
+          attributeName="opacity"
+          dur={animatePathDuration}
+          repeatCount="indefinite"
+          values="0; 0; 1; 0; 0"
+          keyTimes="0; 0.5; 0.666; 0.9; 1"
+        />
+        <animate
+          attributeName="x"
+          dur={animatePathDuration}
+          repeatCount="indefinite"
+          values="85; 230; 230; 85"
+          calcMode="spline"
+          keyTimes={keyTimes}
+          keySplines={keySplines}
+        />
+        <animate
+          attributeName="y"
+          dur={animatePathDuration}
+          repeatCount="indefinite"
+          values="303; 143; 263; 303"
+          calcMode="spline"
+          keyTimes={keyTimes}
+          keySplines={keySplines}
+        />
+      </text>
+    </React.Fragment>
+  )
+
   return (
     <div className="blobby-cloud">
-      <svg viewBox="0 0 420 420">{paths}</svg>
+      <svg viewBox="0 0 420 420">
+        {paths}
+        {circle}
+        {labels}
+      </svg>
     </div>
   )
 }
@@ -111,13 +252,12 @@ BlobbyCloud.defaultProps = {
   y: [220, 40, 130],
   width: [180, 200, 300],
   height: [180, 200, 300],
-  duration: 4000,
-  shiftStep: 200,
+  duration: 5000,
+  shiftStep: 236,
   numOfKeyPaths: 3,
-  numOfShapes: 3,
-  // colors: ['#3688FF', '#FF546C', '#22D163'],
-  colors: ['#22D163', '#3688FF', '#FF546C'],
-  contrast: 0.3,
+  numOfShapes: 5,
+  colors: ['#22D163', '#3688FF', '#FF546C', '#22D163'],
+  contrast: 0.4,
   round: 1,
   numOfPathSegments: 6,
   type: 'fill',
