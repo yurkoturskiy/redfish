@@ -118,7 +118,7 @@ function Blobs(props) {
       <path id="django-blob">
         <animate
           attributeName="d"
-          dur="19000ms"
+          dur="14000ms"
           repeatCount="indefinite"
           values={djangoBlob.dValues}
           calcMode="spline"
@@ -139,7 +139,7 @@ function Blobs(props) {
       <path id="graphql-blob">
         <animate
           attributeName="d"
-          dur="20000ms"
+          dur="15000ms"
           repeatCount="indefinite"
           values={graphqlBlob.dValues}
           calcMode="spline"
@@ -160,7 +160,7 @@ function Blobs(props) {
       <path id="react-blob">
         <animate
           attributeName="d"
-          dur="21000ms"
+          dur="16000ms"
           repeatCount="indefinite"
           values={reactBlob.dValues}
           calcMode="spline"
