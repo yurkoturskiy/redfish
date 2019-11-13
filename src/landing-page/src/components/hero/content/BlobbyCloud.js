@@ -40,8 +40,7 @@ function BlobbyCloud(props) {
     default:
       numOfKeyTimes = morphParams.numOfKeyPaths - 1
   }
-  console.log('num of key paths', morphParams.numOfKeyPaths)
-  console.log('num of key times', numOfKeyTimes)
+
   var keyTimesFactor = 1 / numOfKeyTimes
   for (let i = 0; i <= numOfKeyTimes; i++) {
     keyTimes[i] = i * keyTimesFactor
