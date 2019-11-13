@@ -20,19 +20,30 @@ function Spinner(props) {
       return proto
     })
   }, [])
-
+  const loop = 'circle'
   const morphParams = {
     numOfKeyPaths: props.numOfKeyPaths,
-    loop: true,
+    loop,
   }
   var keySplines = []
   var keyTimes = []
-  var numOfKeyTimes = morphParams.numOfKeyPaths * 2 - 2
+  var numOfKeyTimes
+  switch (loop) {
+    case 'circle':
+      numOfKeyTimes = morphParams.numOfKeyPaths
+      break
+    case 'linear':
+      numOfKeyTimes = morphParams.numOfKeyPaths * 2 - 2
+      break
+    default:
+      numOfKeyTimes = morphParams.numOfKeyPaths - 1
+  }
+
   var keyTimesFactor = 1 / numOfKeyTimes
-  for (let i = 0; i < morphParams.numOfKeyPaths * 2 - 1; i++) {
+  for (let i = 0; i <= numOfKeyTimes; i++) {
     keyTimes[i] = i * keyTimesFactor
   }
-  for (let i = 0; i < morphParams.numOfKeyPaths * 2 - 2; i++) {
+  for (let i = 0; i < numOfKeyTimes; i++) {
     keySplines[i] = '0.25 0 0.75 1'
   }
   keySplines = keySplines.join(';')
@@ -120,7 +131,7 @@ Spinner.defaultProps = {
   size: 'big',
   duration: 4000,
   shiftStep: 120,
-  numOfKeyPaths: 8,
+  numOfKeyPaths: 15,
   numOfShapes: 3,
   colors: ['#3688FF', '#FF546C', '#22D163', '#3688FF'],
   contrast: 0.8,
