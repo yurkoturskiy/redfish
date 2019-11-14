@@ -89,28 +89,6 @@ class AddNote(relay.ClientIDMutation):
             return GraphQLError("You are not authenticated. Please login first")
 
 
-class UpdateNotesColor(relay.ClientIDMutation):
-    class Input:
-        id = graphene.ID(required=True)
-        new_color = graphene.String(required=True)
-
-    new_color = graphene.String()
-
-    @classmethod
-    def mutate_and_get_payload(cls, root, info, **input):
-        if info.context.user.is_authenticated:
-            local_id = from_global_id(input['id'])[1]
-            try:
-                note = Note.objects.get(id=local_id, owner=info.context.user)
-            except Note.DoesNotExist:
-                return None
-            note.color = input['new_color']
-            note.save()
-            return UpdateNotesColor(input['new_color'])
-        else:
-            return GraphQLError("You are not authenticated. Please login first")
-
-
 class UpdateNote(relay.ClientIDMutation):
     class Input:
         id = graphene.ID(required=True)
@@ -230,7 +208,6 @@ class ReorderNote(relay.ClientIDMutation):
 
 class Mutation(ObjectType):
     add_note = AddNote.Field()
-    update_notes_color = UpdateNotesColor.Field()
     update_note = UpdateNote.Field()
     delete_notes = DeleteNotes.Field()
     switch_pin_notes = SwitchPinNotes.Field()
