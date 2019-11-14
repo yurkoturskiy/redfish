@@ -3,7 +3,7 @@ import { path, morphing, randomRange } from 'primitivo-svg'
 
 const animParams = {
   numOfKeyPaths: 3,
-  loop: true,
+  loop: 'linear',
 }
 
 const getPathParam = (width, height) => ({

@@ -130,45 +130,6 @@
 }
 
 /*
-********************
-*** Video Dialog ***
-********************
-*/
-
-.content .video-dialog {
-}
-
-.content .video-dialog .iframe-wrapper {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 560px;
-  height: 315px;
-  margin: auto;
-  z-index: 6;
-}
-
-.content .video-dialog iframe {
-  /* Inherit size from dialog */
-  width: inherit;
-  height: inherit;
-}
-
-.content .video-dialog .background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: black;
-  opacity: 0.6;
-  z-index: 5;
-  overflow: hidden;
-}
-
-/*
 *************
 *** Blobs ***
 *************

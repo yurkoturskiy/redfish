@@ -188,14 +188,6 @@ export const UPDATE_NOTE = gql`
   }
 `;
 
-export const UPDATE_NOTES_COLOR = gql`
-  mutation updateNotesColor($id: ID!, $newColor: String!) {
-    updateNotesColor(input: { id: $id, newColor: $newColor }) {
-      newColor
-    }
-  }
-`;
-
 export const SWITCH_PIN_NOTES = gql`
   mutation switchPinNotes($ids: [ID]!, $action: String!) {
     switchPinNotes(input: { ids: $ids, action: $action }) {

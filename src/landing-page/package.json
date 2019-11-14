@@ -40,7 +40,7 @@
     "gatsby-transformer-sharp": "^2.2.23",
     "graphql-tag": "^2.10.1",
     "isomorphic-fetch": "^2.2.1",
-    "primitivo-svg": "0.1.0-alpha.0",
+    "primitivo-svg": "0.1.0-alpha.1",
     "prism-themes": "^1.2.0",
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",

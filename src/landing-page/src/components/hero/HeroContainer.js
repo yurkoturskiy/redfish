@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // Local components
 //  * Content
 import Blobs from './content/Blobs'
@@ -14,6 +14,13 @@ import ExternalLinkButton from '../styledUIElements/ExternalLinkButton'
 
 const HeroContainer = () => {
   const [dialog, setDialog] = useState(false)
+  useEffect(() => {
+    if (dialog) {
+      document.body.classList.add('video-dialog')
+    } else {
+      document.body.classList.remove('video-dialog')
+    }
+  }, [dialog])
   return (
     <div className="hero-container">
       <Blobs />

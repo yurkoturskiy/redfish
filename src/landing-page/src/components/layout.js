@@ -17,6 +17,8 @@ import '../styles/authentication.css'
 import '../styles/footer.css'
 import '../styles/docs.css'
 import '../styles/spinner.css'
+import '../styles/blobby-cloud.css'
+import '../styles/video-dialog.css'
 // External styles
 import '@material/react-text-field/dist/text-field.css'
 import '@material/react-button/dist/button.css'
