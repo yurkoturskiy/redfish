@@ -2,6 +2,7 @@
 from django.db import models, transaction
 from django.db.models import F, Max, Q
 from django.contrib.auth.models import User
+from django.core import serializers
 from random import randint
 import requests
 import json
@@ -51,19 +52,61 @@ class NoteManager(models.Manager):
                     notes_to_update_order.update(order=F('order') - (index + 1))
             
 
-    def generateNoOwnerNotes(self, records_amount):
+    def generateInitialNotesFile(self, records_amount):
         '''
         Generate notes without owner 
-        to use them as initial notes for new users
+        to use them as initial notes for a new users.
         '''
+        FILE_NAME = "./fixtures/initial_notes.json"
         sentences = lambda: randint(1, 12)
         url = lambda: f'https://baconipsum.com/api/?type=meat-and-filler&sentences={sentences()}&format=text'
-        for i in range(records_amount):
+        notes = []
+        i = 0
+        while i < records_amount:
             r = requests.get(url())
             if r.status_code == 200:
-                self.create(title="", content=r.text, color="WHITE", pinned=False)
+                note = {
+                "model": "notes.note", # APP_NAME.MODEL_NAME
+                "fields": {
+                        "title": "",
+                        "content": r.text,
+                        "color": "WHITE",
+                        "pinned": False,
+                        "order": i
+                    }
+                }
+                notes.append(note)
+                print(f'{json.dumps(note, indent=4)}')
+                i += 1
             else:
                 print(f'{i} failed')
+        
+        with open(FILE_NAME, 'w') as file:
+            file.write(json.dumps(notes, indent=4))
+
+
+    def createNoOwnerNotesFromFile(self):
+        '''
+        Retrieve initial notes from 'initial_notes.json' file
+        located in same directory
+        '''
+        get_qs = lambda: self.get_queryset().filter(owner=None)
+        if len(get_qs()) == 0:
+            try:
+                with open('./fixtures/initial_notes.json', 'r') as initial_notes_file:
+                    json_obj = initial_notes_file.read()
+                    initial_notes = []
+                    for note in serializers.deserialize("json", json_obj):
+                        initial_notes.append(note.object)
+                    initial_notes = self.bulk_create(initial_notes)
+                    print("initial notes", initial_notes)
+                    return initial_notes
+            except FileNotFoundError:
+                print("There is no initial_notes.json file. Create it with `generateInitialNotesFile` manager")
+                return False
+        else:
+            print("There is already some initial notes without owner")  
+            return False
 
 
     def createInitialNotes(self, **kwargs):
@@ -74,7 +117,8 @@ class NoteManager(models.Manager):
             get_qs = lambda: self.get_queryset().filter(owner=None)
             qs = get_qs()
             if len(qs) == 0:
-                self.generateNoOwnerNotes(100)
+                initial_notes = self.createNoOwnerNotesFromFile()
+                if initial_notes is False: return False
                 return get_qs()
             return qs
 

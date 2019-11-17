@@ -1,0 +1,77 @@
+.blobby-cloud {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: var(--col-two);
+  width: 50%;
+  max-width: 100vw;
+  max-height: 100%;
+  min-width: 720px;
+}
+
+@media screen and (max-width: 1640px) and (min-width: 1025px) {
+  .blobby-cloud {
+    right: var(--col-one);
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 961px) {
+  .blobby-cloud {
+    left: 280px;
+    width: 100%;
+    max-width: 880px;
+    min-width: 640px;
+    /*outline: 1px solid pink;*/
+  }
+}
+
+@media screen and (max-width: 960px) and (min-width: 768px) {
+  .blobby-cloud {
+    left: 196px;
+    width: 100%;
+    max-width: 880px;
+    min-width: 640px;
+    /*outline: 1px solid pink;*/
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 360px) {
+  .blobby-cloud {
+    left: 10vw;
+    width: 100%;
+    min-width: 500px;
+    /*outline: 1px solid pink;*/
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .blobby-cloud {
+    left: 7vw;
+    min-width: 470px;
+    /*outline: 1px solid pink;*/
+  }
+}
+
+.blobby-cloud path {
+  /*stroke-width: 20px;*/
+  /*mix-blend-mode: multiply;*/
+}
+
+.blobby-cloud text {
+  fill: var(--green-eight);
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-anchor: middle;
+}
+
+/*#django-label {
+  fill: #3688ff;
+}
+#react-label {
+  fill: #ff546c;
+}
+#graphql-label {
+  fill: #22d163;
+}
+*/

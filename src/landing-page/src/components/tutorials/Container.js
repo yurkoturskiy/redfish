@@ -1,33 +1,44 @@
 import React from 'react'
 import TransitionEffectButton from '../styledUIElements/TransitionEffectButton'
+import PrimitivoTransitionLink from '../styledUIElements/PrimitivoTransitionLink'
 
 function TutorialsContainer() {
   return (
     <div className="tutorials-container">
       <div className="tutorials-content">
         <h2>Tutorials</h2>
-        <div className="element">
-          <span>
-            <strong>01</strong>Install
-          </span>
-        </div>
-        <div className="element">
-          <span>
-            <strong>02</strong>Walkthrough
-          </span>
-        </div>
-        <div className="element">
-          <span>
-            <strong>03</strong>Deploy landing on Netlify
-          </span>
-        </div>
-        <div className="element">
-          <span>
-            <strong>04</strong>Deploy server on DigitalOcean
-          </span>
-        </div>
-        <TransitionEffectButton id="tutorials-view-more-button" to="/docs/">
-          View More
+        <PrimitivoTransitionLink
+          to="/docs/environments"
+          className="element-wrapper"
+        >
+          <div className="element">
+            <span>
+              <strong>01</strong>Setup Environments
+            </span>
+          </div>
+        </PrimitivoTransitionLink>
+        <PrimitivoTransitionLink
+          to="/docs/landing-page"
+          className="element-wrapper"
+        >
+          <div className="element">
+            <span>
+              <strong>02</strong>Landing page overview
+            </span>
+          </div>
+        </PrimitivoTransitionLink>
+        <PrimitivoTransitionLink
+          to="/docs/application"
+          className="element-wrapper"
+        >
+          <div className="element">
+            <span>
+              <strong>03</strong>Application overview
+            </span>
+          </div>
+        </PrimitivoTransitionLink>
+        <TransitionEffectButton id="tutorials-view-more-button" to="/docs">
+          Go To Docs
         </TransitionEffectButton>
       </div>
     </div>

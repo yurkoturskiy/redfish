@@ -1,0 +1,176 @@
+---
+path: 'docs/environments/staging'
+title: 'Staging'
+order: 3
+section: 'environments'
+sectionOrder: 1
+---
+
+# Staging environment
+
+In this section, we establish a serverless staging environment. We assume that you already walked through the previous articles and have created a local and remote serverless development environment. We won't touch things like installing dependencies or ZEIT Now and AWS configurations.
+
+## Domains
+
+In this tutorial, we use a standard `your-app.netlify.com` domain, though we recommend using your custom domain and subdomains. We assume that you can create and configure them by yourself.
+
+Go to the `django_server.settings.staging.py` file and edit the URLs section constants. Remember to keep a staging suffix in the server URL.
+
+```python
+# django_server/settings/staging.py
+...
+# URLs
+SERVER_URL = 'https://your-app-name-staging.username.now.sh'
+LANDING_URL = 'https://your-app-name-staging.netlify.com'
+APPLICATION_URL = 'https://your-app-name-app-staging.netlify.com'
+...
+```
+
+Paste the same URLs to the `.env.staging` file inside of the `landing-page` folder:
+
+```shell
+# landing-page/.env.staging
+...
+# URLs
+GATSBY_APP_URL = "https://your-app-name-app-staging.netlify.com"
+GATSBY_LANDING_URL = "https://your-app-name-staging.netlify.com"
+GATSBY_SERVER_URL = "https://your-app-name-staging.username.now.sh"
+...
+```
+
+Same for `react-app`:
+
+```shell
+# react-app/.env.staging
+
+# URLs
+REACT_APP_SERVER_URL = "https://your-app-name-staging.username.now.sh"
+REACT_APP_LANDING_URL = "https://your-app-name-staging.netlify.com"
+...
+```
+
+## AWS set up
+
+Use the same setup algorithm as in the previous article. You can copy your AWS region and credentials setups from the `development.py` file unless you want to restrict access by providing different credentials.
+
+```python
+# settings/staging.py
+...
+# The AWS region to connect.
+AWS_REGION = "eu-central-1"
+
+# The AWS access key to use.
+AWS_ACCESS_KEY_ID = "AKVFR2GVEGBCY6V3BTXL"
+
+# The AWS secret access key to use.
+AWS_SECRET_ACCESS_KEY = "jJW+H59ICNLhzANevfsSJvLolo/SVRNH5K43edmP"
+...
+```
+
+## AWS S3 bucket
+
+S3 service is the place where we collect static files. <br/>
+
+- [Create S3 bucket](https://s3.console.aws.amazon.com/s3/) with settings from the previous `development` bucket. Paste the name to the `settings/development.py` file:
+
+```python
+# settings/staging.py
+...
+S3_BUCKET = "name-of-your-s3-bucket"
+...
+```
+
+## AWS RDS set up
+
+You already have a PostgreSQL server. Create a new database there for a staging environment. You can achieve that with [pgadmin](https://www.pgadmin.org/). Use settings from `development.py` settings as a base and edit `settings.staging.py` file with credentials for a database you've created.
+
+```python
+# settings/staging.py
+...
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'server_staging', # dbname
+        'USER': 'username', # master username
+        'PASSWORD': 'MllVzrRbc3EvT3S', # master password
+        'HOST': 'aws-postgres-rds.c7fqrmwomayj.eu-central-1.rds.amazonaws.com', # Endpoint
+        'PORT': '5432',
+    }
+}
+...
+```
+
+## Git branch
+
+Change your branch to the staging, merge changes you've made in the development branch, and push code.
+
+```shell
+$ git push origin development
+$ git checkout staging
+$ git merge --no-ff development
+$ git push origin staging
+```
+
+## Deploy and prepare Django server
+
+Deploy in the same way as the development environment, use our python script:
+
+```shell
+python now.py
+```
+
+Your server should be live! Go to the browser and test it with a link you specified previously.
+
+Apply migrations:
+
+```shell
+$ python -m django migrate --settings=django_server.settings.staging
+```
+
+Create a superuser:
+
+```shell
+$ python -m django createsuperuser --settings=django_server.settings.staging
+```
+
+Redfish sends emails to users, and there is should be a proper link. So please do the next:
+
+- Log in to the Django admin as a superuser
+- Go to `Sites` and edit the first instance
+- Domain name set to `https://staging.landing-page-domain.com` and Display name to `staging.landing-page-domain.com`;
+- Click save button
+
+## Deploy Landing page
+
+We recommend using Netlify's continuous deployment service. [Sign up](https://www.netlify.com/) and follow the next steps:
+
+- Click `New site from Git` button;
+- Pick GitHub;
+- Give access to all of your repositories and pick the one you need;
+- All fields in the form you see should be like this:
+  - Branch to deploy: `staging`;
+  - Build command: `npm run build:staging`;
+  - Publish directory: `src/landing-page/public`;
+- Click the `Deploy site` button;
+- Go to `Site settings`;
+- Pick `Build & deploy` menu item;
+- Click `Edit settings` in the first Build settings section;
+- Fill Base directory field with `src/landing-page` value and click `Save` button;
+  Now set up a domain name:
+- Click on the `Domain Management` menu item;
+- From a more button of the default subdomain, pick `Edit site name`;
+- Fill the field with the name you typed previously in settings. Something like `your-app-name-staging`;
+  And finally, go to deploys and click **_Retry deploy_**
+
+## Deploy React app
+
+Follow the same procedure for the `react-app` folder. Here is a brief note for you:
+
+- Branch: `staging`;
+- Build command: `npm run build:staging`;
+- Publish directory: `src/react-app/build`;
+- The base directory `src/react-app`;
+- Set own domain or edit a default subdomain to something like: `your-app-name-staging`;
+- Don't forget to retry deployment.
+
+# That's it, your application is live!

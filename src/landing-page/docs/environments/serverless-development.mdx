@@ -1,0 +1,217 @@
+---
+path: 'docs/environments/serverless-development'
+title: 'Serverless development'
+order: 2
+section: 'environments'
+sectionOrder: 1
+---
+
+# Serverless development
+
+In this section, we establish a serverless development environment. We assume that you already walked through the previous article and have created a local development environment. We won't touch things like installing dependencies here.
+
+# Git branch
+
+The name of the environment we build is `development`, so our branch, settings file, and environment variables' section should have the same name. Checkout to the development branch:
+
+```shell
+$ git checkout development
+```
+
+## ZEIT Now setup
+
+We host the Django server by ZEIT Now, a serverless platform. [Create an account](https://zeit.co/) there, if you don't have one.
+
+Install Now with npm:
+
+```shell
+$ npm install -g now
+```
+
+And login there:
+
+```shell
+$ now login
+provide your credentials
+```
+
+In the `now.json` file enter the proper name of your application:
+
+```json
+# now.json
+{
+    ...
+    "name": "your-app-name",
+    ...
+}
+```
+
+Go to the `django_server.settings.development.py` file and edit `SERVER_URL` constant. Change `...redfish-server...` to the name you previously typed at the `now.json` file and `...guandjoy...` replace with your own ZEIT Now username, which you can find in [account settings](https://zeit.co/account)
+
+```python
+# django_server/settings/development.py
+...
+SERVER_URL = 'https://your-app-name-development.username.now.sh'
+...
+```
+
+Paste the same URL to the `.env.devremote` file in the `landing-page` folder:
+
+```shell
+# landing-page/.env.devremote
+...
+GATSBY_SERVER_URL = "https://your-app-name-development.username.now.sh"
+...
+```
+
+Same for `react-app`:
+
+```shell
+# react-app/.env.devremote
+...
+REACT_APP_SERVER_URL = "https://your-app-name-development.username.now.sh"
+...
+```
+
+## AWS set up
+
+The database and static files we serve by AWS RDS and S3 respectively, so if you don't have a functioning AWS account, please create it [here](https://aws.amazon.com/). They have a Free Tier, which is enough for our needs. You can use other services as well, but we don't cover their configurations here.
+
+Go to [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html), copy and paste the value of your region into the `settings/development.py` file;
+
+```python
+# settings/development.py
+...
+# The AWS region to connect.
+AWS_REGION = "eu-central-1"
+...
+```
+
+- Go to [IAM Management Console](https://console.aws.amazon.com/iam/home?#/users) and **create a new user** with **Programmatic access**.
+- Create a group with **AmazonRDSFullAccess** and **AmazonS3FullAccess** policies. Add a created user there.
+- Copy **Access Key ID** and **Secret Access Key**. Paste them to the `settings/development.py` file
+
+```python
+# settings/development.py
+...
+# The AWS access key to use.
+AWS_ACCESS_KEY_ID = "AKVFR2GVEGBCY6V3BTXL"
+
+# The AWS secret access key to use.
+AWS_SECRET_ACCESS_KEY = "jJW+H59ICNLhzANevfsSJvLolo/SVRNH5K43edmP"
+...
+```
+
+## AWS S3 bucket
+
+S3 bucket is the place to collect static files. [Create it](https://s3.console.aws.amazon.com/s3/) with the next **Block public access** configurations:
+
+- [ ] Block all public access
+- [ ] Block public access to buckets and objects granted through new access control lists (ACLs)
+- [ ] Block public access to buckets and objects granted through any access control lists (ACLs)
+- [x] Block public access to buckets and objects granted through new public bucket policies
+- [x] Block public and cross-account access to buckets and objects through any public bucket policies
+
+Copy and Paste the name of the S3 bucket to the `settings/development.py` file:
+
+```python
+# settings/development.py
+...
+S3_BUCKET = "server-development-static" # Put the name of your S3 bucket here
+...
+```
+
+## AWS RDS set up
+
+- [Create](https://console.aws.amazon.com/rds/home) PostgreSQL database. _We recommend to set up [pgadmin](https://www.pgadmin.org/) to effectively manage your RDS instances._
+- Set `DATABASES` in the `settings/development.py` file:
+
+```python
+# settings/development.py
+...
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'server_development', # dbname
+        'USER': 'username', # master username
+        'PASSWORD': 'MllVzrRbc3EvT3S', # master password
+        'HOST': 'aws-postgres-rds.c7fqrmwomayj.eu-central-1.rds.amazonaws.com', # Endpoint
+        'PORT': '5432',
+    }
+}
+...
+```
+
+## Deploy and prepare Django server
+
+Start the virtual environment:
+
+```shell
+$ source venv/bin/activate
+```
+
+Use our script to deploy:
+
+```shell
+python now.py
+```
+
+Your server should be live! Go to the browser and test it with a link you specified previously.
+
+Apply migrations:
+
+```shell
+$ python -m django migrate --settings=django_server.settings.development
+```
+
+Create a superuser:
+
+```shell
+$ python -m django createsuperuser --settings=django_server.settings.development
+```
+
+Redfish sends emails to users, and there is should be a proper link. So please do the next:
+
+- Log in to the Django admin as a superuser
+- Go to `Sites` and edit the first instance
+- Domain name set to `http://localhost:8000` and Display name to `localhost:8000.`
+- Click save
+
+## Run frontend development servers
+
+You can run them withing 2 console windows, or, as we highly recommend, withing [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md) session.
+
+- ### Start with terminal windows
+
+Prepare 2 terminal instances and start 'landing-page' in first:
+
+```shell
+$ cd src/landing-page/
+$ gatsby develop
+```
+
+And `react-app` in second, respectively:
+
+```shell
+$ cd src/react-app/
+$ npm start
+```
+
+- ### Start with [tmux](https://github.com/tmux/tmux/blob/master/.github/README.md) [alternative and preferable way].
+
+Execute the `tmux.devremote.py` script at the root folder:
+
+```shell
+$ python tmux.devremote.py
+```
+
+Read [tmux man](http://man.openbsd.org/OpenBSD-current/man1/tmux.1). Some basics to play with it:
+
+- `ctrl+b` `w` - navigate through windows using `up` and `down` arrow keys;
+- `ctrl+b` `d` - minimize tmux and save session;
+- `$ tmux a` - back to tmux after minimize it;
+- `ctrl+d` - terminate tmux and session;
+- `ctrl+b` `[` - scroll through the content. Use `up` and `down` arrow keys and `esc` to exit mode;
+- `ctrl+b` `c` - create new window.
+
+You are ready to develop!

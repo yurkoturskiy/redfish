@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react'
 import { phases, randomRange } from 'primitivo-svg'
+// Hooks
+import useWindow from './useWindow'
 
 function usePhasedTransition(props) {
+  const [windowWidth, windowHeight] = useWindow()
   const phaseOneRatio = 3
   const phaseTwoRatio = 2
 
@@ -365,8 +368,8 @@ function usePhasedTransition(props) {
     depth: 0,
     x: 0,
     y: 0,
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: windowWidth,
+    height: windowHeight,
     centerX: props.centerX,
     centerY: props.centerY,
     rotate: 45,

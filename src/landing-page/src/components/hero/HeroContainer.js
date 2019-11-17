@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // Local components
 //  * Content
 import Blobs from './content/Blobs'
@@ -14,6 +14,13 @@ import ExternalLinkButton from '../styledUIElements/ExternalLinkButton'
 
 const HeroContainer = () => {
   const [dialog, setDialog] = useState(false)
+  useEffect(() => {
+    if (dialog) {
+      document.body.classList.add('video-dialog')
+    } else {
+      document.body.classList.remove('video-dialog')
+    }
+  }, [dialog])
   return (
     <div className="hero-container">
       <Blobs />
@@ -23,11 +30,14 @@ const HeroContainer = () => {
         <ActionBtnsWrapper>
           <BrieflyAboutBtn setDialog={setDialog} />
           <div className="buttons-wrapper">
-            <TransitionEffectButton to="/authentication/">
+            <TransitionEffectButton to="/authentication">
               Go To App
             </TransitionEffectButton>
-            <TransitionEffectButton to="/docs/">
-              Tutorials
+            <TransitionEffectButton
+              style={{ justifyContent: 'flex-start' }}
+              to="/docs"
+            >
+              Docs
             </TransitionEffectButton>
             <ExternalLinkButton to="https://github.com/guandjoy/Redfish">
               GitHub

@@ -6,22 +6,25 @@ import Button from '@material/react-button'
 import Logo from './Logo'
 import TransitionEffectButton from '../styledUIElements/TransitionEffectButton'
 import ExternalLinkButton from '../styledUIElements/ExternalLinkButton'
+// Hooks
+import useBrowser from '../hooks/useBrowser'
 
 const HeaderContainer = props => {
   const { path } = props
+  const isBrowser = useBrowser()
 
   return (
     <nav className="header-container">
       <Logo />
-      {path !== '/' && (
+      {path !== '/' && isBrowser && (
         <React.Fragment>
           {path.indexOf('authentication') === -1 && (
-            <TransitionEffectButton to="/authentication/">
+            <TransitionEffectButton to="/authentication">
               Go To App
             </TransitionEffectButton>
           )}
           {path.indexOf('docs') === -1 && (
-            <TransitionEffectButton to="/docs/">Docs</TransitionEffectButton>
+            <TransitionEffectButton to="/docs">Docs</TransitionEffectButton>
           )}
           <ExternalLinkButton to="https://github.com/guandjoy/Redfish">
             GitHub

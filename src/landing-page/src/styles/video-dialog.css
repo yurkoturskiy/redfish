@@ -1,0 +1,52 @@
+/*
+********************
+*** Video Dialog ***
+********************
+*/
+
+body.video-dialog {
+  overflow: hidden;
+}
+
+.content .video-dialog iframe {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 12;
+  --video-dialog-width: calc(100vw - var(--col-three) * 2);
+  width: var(--video-dialog-width);
+  height: calc(var(--video-dialog-width) / 100 * 55);
+}
+
+.content .video-dialog .background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.6;
+  z-index: 8;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 2400px) and (min-width: 1281px) {
+  .content .video-dialog iframe {
+    --video-dialog-width: calc(100vw - var(--col-two) * 2);
+  }
+}
+
+@media screen and (max-width: 1280px) and (min-width: 961px) {
+  .content .video-dialog iframe {
+    --video-dialog-width: calc(100vw - var(--col-one) * 2);
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .content .video-dialog iframe {
+    --video-dialog-width: calc(100vw - var(--col-zero) * 2);
+  }
+}

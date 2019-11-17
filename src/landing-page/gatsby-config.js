@@ -33,8 +33,8 @@ if (
 module.exports = {
   siteMetadata: {
     title: `Redfish`,
-    siteUrl: `https://redfish-project.gq/`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    siteUrl: process.env.GATSBY_LANDING_URL,
+    description: `Serveless Boilerplate Web Application. GatsbyJS, Create React App, GraphQL Apollo Client, Django, Python, Graphene.`,
     author: `@guandjoy`,
   },
   plugins: [
@@ -51,6 +51,11 @@ module.exports = {
         fonts: [
           {
             family: 'Roboto',
+            variants: ['100', '300', '400', '500', '700'],
+            subsets: ['latin-ext'],
+          },
+          {
+            family: 'Roboto Mono',
             variants: ['100', '300', '400', '500', '700'],
             subsets: ['latin-ext'],
           },
@@ -165,7 +170,9 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: process.env.GATSBY_LANDING_URL,
-        policy: [{ userAgent: '*', disallow: '/' }],
+        policy: [
+          { userAgent: '*', disallow: process.env.GATSBY_ROBOTS_DISALLOW },
+        ],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

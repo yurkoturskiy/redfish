@@ -11,7 +11,7 @@ import FooterConteiner from '../components/footer/Container'
 const IndexPage = props => {
   return (
     <Layout path={props.path}>
-      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+      <SEO title="Home" />
       <HeroContainer />
       <Dependencies />
       <Tutorials />
