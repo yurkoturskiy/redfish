@@ -7,7 +7,7 @@
 
 <br/>
 
-Redfish consist of a landing page, Google Keep clone application, and a server. The main dependencies are GatsbyJS, Create React App, GraphQL Apollo Client, Django, Graphene, and django-rest-auth.
+Redfish consist of the landing page, Google Keep clone application, and the server. The main dependencies are GatsbyJS, Create React App, GraphQL Apollo Client, Django, Graphene, and django-rest-auth.
 
 Frontend and backend parts are hosted by [Netlify](https://netlify.com) and [ZEIT Now](https://zeit.co/) respectively. For things like database and static files we use [AWS](https://aws.amazon.com/).
 
