@@ -8,7 +8,7 @@ function StartForm(props) {
   return (
     <div className="authentication-start-form">
       <h5 className="header">Pick the way to go</h5>
-      <AuthWithFacebook>Continue with Facebook</AuthWithFacebook>
+      {/*<AuthWithFacebook>Continue with Facebook</AuthWithFacebook>*/}
       <AuthWithGitHub>Continue with GitHub</AuthWithGitHub>
       <div className="start-form-buttons-wrapper">
         <Button
