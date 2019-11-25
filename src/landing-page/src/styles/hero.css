@@ -144,7 +144,21 @@
   max-width: 100vw;
   max-height: 100%;
   min-width: 720px;
+  animation-name: blobs-appearance;
+  animation-duration: 0.8s;
   /*outline: 1px solid pink;*/
+}
+
+@keyframes blobs-appearance {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 1640px) and (min-width: 1025px) {
