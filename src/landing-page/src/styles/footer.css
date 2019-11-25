@@ -26,3 +26,9 @@
   margin-left: var(--gutter);
   margin-bottom: 16px;
 }
+
+.footer-wrapper a {
+  margin: 4px;
+  font-size: 12px;
+  text-decoration: none;
+}
