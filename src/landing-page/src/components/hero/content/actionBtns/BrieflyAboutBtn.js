@@ -6,15 +6,18 @@ import PlayIcon from '../../../../images/PlayIcon'
 function BrieflyAboutBtn({ setDialog }) {
   const leftIcon = <PlayIcon />
   return (
-    <Button
-      id="briefly-about"
-      outlined={true}
-      className="material-button"
-      icon={leftIcon}
-      onClick={() => setDialog(true)}
-    >
-      Briefly about
-    </Button>
+    <div style={{ height: '52px' }}>
+      <Button
+        id="briefly-about"
+        outlined={true}
+        className="material-button"
+        style={{ display: 'none' }}
+        icon={leftIcon}
+        onClick={() => setDialog(true)}
+      >
+        Briefly about
+      </Button>
+    </div>
   )
 }
 
