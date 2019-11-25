@@ -5,7 +5,7 @@ import SEO from '../components/seo'
 
 const PrivacyPolicyPage = props => (
   <Layout path={props.path}>
-    <SEO title="404: Not found" />
+    <SEO title="Privacy Policy" />
     <div className="privacy-policy">
       <h2>Privacy Policy</h2>
       <p>
