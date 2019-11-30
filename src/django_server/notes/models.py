@@ -21,7 +21,7 @@ class Note(models.Model):
     	('RED', '#F28B82'),
     	('ORANGE', '#FFD34F'),
     	('YELLOW', '#FFF476'),
-    	('GREEN', '#CDFF90'),
+    	('GREEN', '#D3F096'),
     	('BLUE', '#AFCBFA'),
     	('VIOLET', '#D7AEFC'),
 	]

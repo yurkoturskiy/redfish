@@ -8,7 +8,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max))
 }
 
-const colors = ['#3688ff', '#ff546c', '#22d163']
+const colors = ['#4D8BFF', '#FF5971', '#3CC76F']
 
 function Particle({ sceneHeight, sceneWidth }) {
   const [pathDescription, setPathDescription] = useState()

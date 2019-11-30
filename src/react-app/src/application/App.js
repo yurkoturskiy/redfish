@@ -42,7 +42,7 @@ export const globals = css`
       --note-color-red: #f28b82;
       --note-color-orange: #ffd34f;
       --note-color-yellow: #fff476;
-      --note-color-green: #cdff90;
+      --note-color-green: #d3f096;
       --note-color-blue: #afcbfa;
       --note-color-violet: #d7aefc;
     }

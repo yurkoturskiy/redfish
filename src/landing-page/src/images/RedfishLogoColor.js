@@ -9,9 +9,9 @@ function RedfishLogoColor(props) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path fill="#3688FF" d="M48 6H44V50H48V6Z" />
-      <path fill="#FF546C" d="M40 0V58L10 22L40 0Z" />
-      <path fill="#22D163" d="M14 32L0 40V16L14 32Z" />
+      <path fill="#4D8BFF" d="M48 6H44V50H48V6Z" />
+      <path fill="#FF5971" d="M40 0V58L10 22L40 0Z" />
+      <path fill="#3CC76F" d="M14 32L0 40V16L14 32Z" />
     </svg>
   )
 }

@@ -77,7 +77,7 @@ function Spinner(props) {
   for (let i = 0; i < props.numOfShapes; i++) {
     paths.push(
       pathsVisibility[i] && (
-        <path key={i} fill="#3688FF" opacity="1">
+        <path key={i} fill="#4D8BFF" opacity="1">
           <animate
             begin={props.shiftStep * i + 'ms'}
             attributeName="opacity"
@@ -133,7 +133,7 @@ Spinner.defaultProps = {
   shiftStep: 120,
   numOfKeyPaths: 15,
   numOfShapes: 3,
-  colors: ['#3688FF', '#FF546C', '#22D163', '#3688FF'],
+  colors: ['#4D8BFF', '#FF5971', '#3CC76F', '#4D8BFF'],
   contrast: 0.8,
   round: 0.6,
   numOfPathSegments: 6,
