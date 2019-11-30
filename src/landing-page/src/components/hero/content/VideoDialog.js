@@ -6,7 +6,7 @@ function VideoDialog({ setDialog }) {
       <iframe
         className="video"
         title="briefly-about"
-        src="https://www.youtube.com/embed/dMhl5ESSoK8?autoplay=1"
+        src="https://www.youtube.com/embed/U4GlkqDo-wY?autoplay=1"
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
