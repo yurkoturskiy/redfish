@@ -198,13 +198,13 @@
 /* Django blob */
 
 #django-blob {
-  fill: #22d163;
+  fill: var(--green);
   mix-blend-mode: multiply;
 }
 
 #django-glare {
   fill: transparent;
-  stroke: #3688ff;
+  stroke: var(--blue);
   stroke-width: 4px;
 }
 
@@ -222,13 +222,13 @@
 /* GraphQL blob */
 
 #graphql-blob {
-  fill: #ff546c;
+  fill: var(--red);
   mix-blend-mode: multiply;
 }
 
 #graphql-glare {
   fill: transparent;
-  stroke: #22d163;
+  stroke: var(--green);
   stroke-width: 4px;
 }
 
@@ -242,13 +242,13 @@
 /* ReactJS blob */
 
 #react-blob {
-  fill: #3688ff;
+  fill: var(--blue);
   mix-blend-mode: multiply;
 }
 
 #react-glare {
   fill: transparent;
-  stroke: #ff546c;
+  stroke: var(--red);
   stroke-width: 4px;
 }
 
