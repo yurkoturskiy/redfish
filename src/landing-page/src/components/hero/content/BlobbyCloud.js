@@ -255,7 +255,7 @@ BlobbyCloud.defaultProps = {
   shiftStep: 236,
   numOfKeyPaths: 3,
   numOfShapes: 5,
-  colors: ['#22D163', '#3688FF', '#FF546C', '#22D163'],
+  colors: ['#3CC76F', '#4D8BFF', '#FF5971', '#3CC76F'],
   contrast: 0.4,
   round: 1,
   numOfPathSegments: 6,

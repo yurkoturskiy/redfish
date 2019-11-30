@@ -55,12 +55,12 @@ const paths = () => {
 }
 
 const colors = [
-  '#3688ff',
-  '#ff546c',
-  '#22d163',
-  '#3688ff',
-  '#ff546c',
-  '#22d163',
+  '#4D8BFF',
+  '#FF5971',
+  '#3CC76F',
+  '#4D8BFF',
+  '#FF5971',
+  '#3CC76F',
 ]
 
 var a = paths()

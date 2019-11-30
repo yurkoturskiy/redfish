@@ -183,21 +183,21 @@
 }
 
 #auth-blob-one {
-  stroke: #22d163;
+  stroke: var(--green);
   stroke-width: 22px;
   fill: transparent;
   mix-blend-mode: multiply;
 }
 
 #auth-blob-two {
-  stroke: #ff546c;
+  stroke: var(--red);
   stroke-width: 22px;
   fill: transparent;
   mix-blend-mode: multiply;
 }
 
 #auth-blob-three {
-  stroke: #3688ff;
+  stroke: var(--blue);
   stroke-width: 22px;
   fill: transparent;
   mix-blend-mode: multiply;
