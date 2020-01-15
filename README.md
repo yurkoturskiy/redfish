@@ -23,8 +23,6 @@ The API and data fetching are implemented with GraphQL. On a frontend we use [Ap
 
 Feel free to initiate discussion, and share own vision. We are open to suggestions. 
 
-## Donation :two_hearts:
+## Buy me a coffee :coffee:
 
 Bitcoin wallet: `19fxW81ApuCbAu2tW8WebxRQqaoje6YbhJ`
-
-Thank you a lot :penguin:
