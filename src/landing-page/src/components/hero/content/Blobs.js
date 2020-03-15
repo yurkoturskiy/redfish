@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { morphing, path } from 'primitivo-svg'
 
 var animateParameters = {
@@ -75,7 +75,18 @@ const graphqlGlarePathParams = glarePathParams(190, 220, 60, 60)
 const reactBlobPathParams = pathsParameters(150, 40, 200, 200)
 const reactGlarePathParams = glarePathParams(210, 90, 45, 45)
 
+const useOnLoadRef = callback => element => {
+  if (element) {
+    callback(element)
+  }
+}
+
 function Blobs(props) {
+  const [isLoaded, setIsLoaded] = useState(false)
+  const ref = useOnLoadRef(() => {
+    console.log('svg is loaded')
+    setIsLoaded(true)
+  })
   // django
 
   const djangoBlob = useMemo(
@@ -114,6 +125,7 @@ function Blobs(props) {
       id="blobs-svg"
       viewBox="0 0 420 420"
       preserveAspectRatio="xMaxYMid meet"
+      ref={ref}
     >
       <path id="django-blob">
         <animate
