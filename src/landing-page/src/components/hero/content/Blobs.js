@@ -127,7 +127,7 @@ function Blobs(props) {
       preserveAspectRatio="xMaxYMid meet"
       ref={ref}
     >
-      <path id="django-blob">
+      <path id="django-blob" d={djangoBlob.dValuesFrames[0]}>
         <animate
           attributeName="d"
           dur="14000ms"
@@ -148,7 +148,7 @@ function Blobs(props) {
           Django
         </textPath>
       </text>
-      <path id="graphql-blob">
+      <path id="graphql-blob" d={graphqlBlob.dValuesFrames[0]}>
         <animate
           attributeName="d"
           dur="15000ms"
@@ -169,7 +169,7 @@ function Blobs(props) {
           GraphQL
         </textPath>
       </text>
-      <path id="react-blob">
+      <path id="react-blob" d={reactBlob.dValuesFrames[0]}>
         <animate
           attributeName="d"
           dur="16000ms"
