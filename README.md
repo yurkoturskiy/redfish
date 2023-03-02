@@ -2,7 +2,7 @@
   <a href="https://redfish-project.gq/"><img src="/img/logo@2x.png" width="196" /></a>
   <h1 align="center">Redfish</h1>
   <h3 align="center">Serverless Boilerplate Web Application</h3>
-  <h6 align="center"><a  href="https://redfish-project.gq/">redfish-project.gq</a></h6>
+  <h6 align="center"><a  href="https://redfish-landing.netlify.app/">redfish-landing.netlify.app</a></h6>
 </p>
 
 <br/>
@@ -15,9 +15,9 @@ The API and data fetching are implemented with GraphQL. On a frontend we use [Ap
 
 ## Topics to start:
 
--   [Setup Environments](https://redfish-project.gq/docs/environments)
--   [Landing page overview](https://redfish-project.gq/docs/landing-page)
--   [Application overview](https://redfish-project.gq/docs/application)
+-   [Setup Environments](https://redfish-landing.netlify.app/docs/environments)
+-   [Landing page overview](https://redfish-landing.netlify.app/docs/landing-page)
+-   [Application overview](https://redfish-landing.netlify.app/docs/application)
 
 ## Contribute
 
